@@ -65,8 +65,8 @@ const products = [
     category: "solo",
     description: "使わない時はたためて、衣類や小物をまとめやすい。",
     recommendedFor: "寮生活・一人暮らしで収納が少ない人",
-    imageUrl: placeholderImage("折りたたみ収納", "solo"),
-    affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/risu-proshop/63567-5/"),
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/53664e39.cb170390.53664e3a.664bed07/?me_id=1313357&item_id=10002010&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Frisu-proshop%2Fcabinet%2Fimages%2Fgifu-pla%2F63567-5_01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53664e39.cb170390.53664e3a.664bed07/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frisu-proshop%2F63567-5%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/risu-proshop/63567-5/",
     searchKeyword: "収納ボックス 折りたたみ"
   },
