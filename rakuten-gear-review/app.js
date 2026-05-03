@@ -54,8 +54,8 @@ const products = [
     category: "pc-ai",
     description: "デスク下の配線をまとめて、作業場をスッキリさせられる。",
     recommendedFor: "PC周りのコードがごちゃついている人",
-    imageUrl: placeholderImage("ケーブルトレー", "pc-ai"),
-    affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/apricot-r/3605-a260/"),
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/53664af0.0b5b44f4.53664af1.1d2db78c/?me_id=1245016&item_id=10019233&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fapricot-r%2Fcabinet%2Fyjtn%2F3605-a260.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53664af0.0b5b44f4.53664af1.1d2db78c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fapricot-r%2F3605-a260%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/apricot-r/3605-a260/",
     searchKeyword: "ケーブルトレー デスク下"
   },
@@ -76,8 +76,8 @@ const products = [
     category: "training",
     description: "重量を変えられるので、自宅トレの幅が広がる。",
     recommendedFor: "家で胸・肩・腕・背中を鍛えたい人",
-    imageUrl: placeholderImage("可変式ダンベル", "training"),
-    affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/sportsmonster/flex32-2/"),
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/536650bf.d2b24514.536650c0.dc25f41b/?me_id=1389930&item_id=10000112&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsportsmonster%2Fcabinet%2Ffitness%2Fflex32-2_sl.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/536650bf.d2b24514.536650c0.dc25f41b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsportsmonster%2Fflex32-2%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/sportsmonster/flex32-2/",
     searchKeyword: "可変式ダンベル 20kg"
   },
@@ -87,8 +87,8 @@ const products = [
     category: "training",
     description: "省スペースで懸垂やぶら下がり運動ができる。",
     recommendedFor: "背中を鍛えたい人、ジムに行けない日も鍛えたい人",
-    imageUrl: placeholderImage("ドアジム", "training"),
-    affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/danimo/8265139/"),
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/53665236.0e717855.53665237.9e92ea9b/?me_id=1385432&item_id=10000026&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fdanimo%2Fcabinet%2F07640797%2Fs1009648.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53665236.0e717855.53665237.9e92ea9b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdanimo%2F8265139%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/danimo/8265139/",
     searchKeyword: "懸垂 ドアジム"
   },
@@ -98,8 +98,8 @@ const products = [
     category: "bike",
     description: "雨の日でも着替えや荷物を濡らしにくい。",
     recommendedFor: "バイク旅・キャンプツーリングをする人",
-    imageUrl: placeholderImage("防水バッグ", "bike"),
-    affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/flyingfish/60018/"),
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/536653dc.8d0dc42e.536653dd.95aafa2e/?me_id=1375910&item_id=10000121&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fflyingfish%2Fcabinet%2F06875362%2F60018-12.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/536653dc.8d0dc42e.536653dd.95aafa2e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fflyingfish%2F60018%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/flyingfish/60018/",
     searchKeyword: "バイク ツーリング 防水バッグ"
   },
@@ -109,8 +109,8 @@ const products = [
     category: "bike",
     description: "スマホナビを確認しやすくなり、長距離移動のストレスを減らせる。",
     recommendedFor: "スマホナビを使ってツーリングする人",
-    imageUrl: placeholderImage("スマホホルダー", "bike"),
-    affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/kaedear/kdr-m8s/"),
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/536b130d.7e477911.536b130e.5632e1c6/?me_id=1386879&item_id=10000019&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fkaedear%2Fcabinet%2F09011477%2F09054788%2F09900870%2Fimgrc0115547176.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/536b130d.7e477911.536b130e.5632e1c6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkaedear%2Fkdr-m8s%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/kaedear/kdr-m8s/",
     searchKeyword: "バイク スマホホルダー 防水"
   },
@@ -120,8 +120,8 @@ const products = [
     category: "disaster",
     description: "非常食・ライト・衛生用品などをまとめて準備できる。",
     recommendedFor: "一人暮らしで防災グッズをまだ揃えていない人",
-    imageUrl: placeholderImage("防災セット", "disaster"),
-    affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/relieved-life/re-l-bousai/"),
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/53665544.a5447b14.53665545.f2faf1e1/?me_id=1346140&item_id=10000003&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_gold%2Frelieved-life%2Fbousai%2Fs-set%2F01%2FS01TOP.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53665544.a5447b14.53665545.f2faf1e1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frelieved-life%2Fre-l-bousai%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/relieved-life/re-l-bousai/",
     searchKeyword: "防災セット 1人用"
   },
@@ -131,8 +131,8 @@ const products = [
     category: "disaster",
     description: "災害時に一番困りやすいトイレ問題の備えになる。",
     recommendedFor: "最低限の防災備蓄を整えたい人",
-    imageUrl: placeholderImage("簡易トイレ", "disaster"),
-    affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/torreya-shop/100000041/"),
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/536656ee.601828c8.536656ef.1bca0db8/?me_id=1322774&item_id=10000079&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ftorreya-shop%2Fcabinet%2Ftoilet%2Fimgrc0104456288.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/536656ee.601828c8.536656ef.1bca0db8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftorreya-shop%2F100000041%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/torreya-shop/100000041/",
     searchKeyword: "簡易トイレ 防災 50回"
   },
@@ -142,8 +142,8 @@ const products = [
     category: "disaster",
     description: "停電時やキャンプ、車中泊でも使いやすい明かり装備。",
     recommendedFor: "防災・アウトドア兼用で使えるライトがほしい人",
-    imageUrl: placeholderImage("LEDランタン", "disaster"),
-    affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/k-power/ur002/"),
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/53665820.0d3cdb8e.53665821.397363c3/?me_id=1317105&item_id=10000072&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fk-power%2Fcabinet%2F06552196%2F07119538%2Fimgrc0116175250.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53665820.0d3cdb8e.53665821.397363c3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fk-power%2Fur002%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/k-power/ur002/",
     searchKeyword: "LEDランタン 充電式 防災"
   }
