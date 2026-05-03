@@ -279,6 +279,120 @@ const articles = [
         ]
       }
     ]
+  },
+  {
+    id: "pc-desk-cable-cleanup",
+    title: "PC作業机の配線を片付けるデスク下装備",
+    category: "pc-ai",
+    date: "2026-05-03",
+    readTime: "5分",
+    summary: "ケーブルトレーを使って、足元のコード地帯をすっきりさせる考え方をまとめます。",
+    productIds: ["cable-tray"],
+    body: [
+      {
+        heading: "配線は床に置かないだけで変わる",
+        paragraphs: [
+          "PC周りのコードは、床に落ちているだけで掃除も作業も面倒になります。デスク下に逃がすだけで、作業場の印象はかなり変わります。",
+          "ケーブルトレーは派手な装備ではありませんが、毎日見る場所のストレスを減らしてくれます。これは地味だけど、作業効率に効く装備です。"
+        ],
+        bullets: ["電源タップを床から浮かせる", "余ったケーブルをまとめる", "掃除しやすい足元を作る"]
+      }
+    ]
+  },
+  {
+    id: "entry-home-training",
+    title: "家トレを始めるなら最初に揃えたい筋トレ装備",
+    category: "training",
+    date: "2026-05-03",
+    readTime: "6分",
+    summary: "可変式ダンベルと懸垂バーを中心に、省スペースで鍛える装備を紹介します。",
+    productIds: ["adjustable-dumbbell", "door-gym"],
+    body: [
+      {
+        heading: "家トレ装備は少数精鋭でいい",
+        paragraphs: [
+          "家トレは道具を増やしすぎると部屋が狭くなり、続ける気力も削られます。最初は可変式ダンベルと懸垂バーのように、できる種目が多い装備から選ぶのが堅いです。",
+          "元自衛官目線でも、継続できる訓練環境を作ることが一番大事です。出すのが面倒な装備は、強くても出番が減ります。"
+        ],
+        bullets: ["置き場所を先に決める", "重量を伸ばせる道具を選ぶ", "設置先の強度を確認する"]
+      }
+    ]
+  },
+  {
+    id: "solo-first-room-gear",
+    title: "一人暮らし初日にあると助かる生活装備",
+    category: "solo",
+    date: "2026-05-03",
+    readTime: "5分",
+    summary: "鍵置き場と収納ボックスから、部屋を散らかしにくくする初期装備を考えます。",
+    productIds: ["tower-key-hook", "folding-storage"],
+    body: [
+      {
+        heading: "最初に決めるのは物の住所",
+        paragraphs: [
+          "一人暮らしは、物の置き場所が決まっていないとすぐ散らかります。鍵、印鑑、衣類、日用品の住所を先に作ると、生活がかなり安定します。",
+          "収納ボックスは大きさより、使わない時に邪魔にならないかが大事です。狭い部屋では、畳める装備が強いです。"
+        ],
+        bullets: ["玄関に鍵の定位置を作る", "衣類と日用品をざっくり分ける", "床に物を置かない仕組みを作る"]
+      }
+    ]
+  },
+  {
+    id: "touring-rain-gear",
+    title: "雨の日のバイク旅で荷物を守る装備",
+    category: "bike",
+    date: "2026-05-03",
+    readTime: "6分",
+    summary: "防水ツーリングバッグとスマホホルダーで、雨天時の不安を減らす装備選び。",
+    productIds: ["waterproof-touring-bag", "bike-phone-holder"],
+    body: [
+      {
+        heading: "雨対策は出発前に終わらせる",
+        paragraphs: [
+          "バイク旅で雨に降られてから対策すると、どうしても余裕がなくなります。荷物とスマホを守る装備は、出発前から整えておくのが基本です。",
+          "防水バッグは着替えを守り、スマホホルダーはナビ確認の負担を減らします。どちらも走行中の不安を一つ消してくれる装備です。"
+        ],
+        bullets: ["バッグの容量と固定方法を見る", "スマホホルダーは固定力を優先", "雨具と荷物の取り出しやすさを確認"]
+      }
+    ]
+  },
+  {
+    id: "toilet-light-disaster",
+    title: "防災で先に用意したいトイレと明かり",
+    category: "disaster",
+    date: "2026-05-03",
+    readTime: "6分",
+    summary: "簡易トイレとLEDランタンを中心に、災害時の生活ストレスを減らす備えをまとめます。",
+    productIds: ["emergency-toilet", "led-lantern"],
+    body: [
+      {
+        heading: "水と食料の次に、トイレと明かり",
+        paragraphs: [
+          "防災というと水や食料が先に浮かびますが、断水時のトイレと停電時の明かりもかなり重要です。ここが弱いと、家の中でも一気に不安が増えます。",
+          "簡易トイレは回数分を多めに、ランタンは普段から一度使っておくのがおすすめです。本番で初めて開ける装備は、意外と手間取ります。"
+        ],
+        bullets: ["簡易トイレは家族人数と日数で考える", "ランタンは充電状態を定期確認", "置き場所は暗くても取れる場所にする"]
+      }
+    ]
+  },
+  {
+    id: "rakuten-gear-how-to-choose",
+    title: "楽天で便利グッズを選ぶときに見るポイント",
+    category: "life",
+    date: "2026-05-03",
+    readTime: "5分",
+    summary: "レビュー数、評価、サイズ、置き場所を見て、失敗しにくい装備選びをする方法。",
+    productIds: ["tower-key-hook", "cable-tray", "led-lantern"],
+    body: [
+      {
+        heading: "買う前に、レビューより先に置き場所を見る",
+        paragraphs: [
+          "楽天で便利グッズを探すと、レビューやランキングに目が行きます。ただ、最初に見るべきは自分の部屋で使えるかです。置けない装備は、どれだけ人気でも使えません。",
+          "サイズ、設置方法、使う頻度。この三つを確認してからレビューを見ると、失敗が減ります。装備選びは勢いより段取りです。"
+        ],
+        bullets: ["サイズと設置方法を確認", "レビュー件数と低評価も見る", "毎日使う導線に入るか考える"]
+      }
+    ]
   }
 ];
 
@@ -556,10 +670,11 @@ function renderCategoryButton(category) {
 function renderArticleCard(article) {
   const category = getCategory(article.category);
   const linkedProducts = getProducts(article.productIds);
+  const articleUrl = `./article/${article.id}/`;
 
   return `
     <article class="article-card">
-      <a class="article-thumb" href="#/article/${article.id}">
+      <a class="article-thumb" href="${articleUrl}">
         <span>${category.name}</span>
         <strong>${linkedProducts.length}商品</strong>
       </a>
@@ -567,7 +682,7 @@ function renderArticleCard(article) {
         <div class="article-meta">${article.date} ・ ${article.readTime}</div>
         <h3>${article.title}</h3>
         <p>${article.summary}</p>
-        <a class="button secondary" href="#/article/${article.id}">記事を読む</a>
+        <a class="button secondary" href="${articleUrl}">記事を読む</a>
       </div>
     </article>
   `;
@@ -615,7 +730,8 @@ function renderProfileBox() {
           <div class="article-meta">元自衛官 / 装備レビュー</div>
         </div>
       </div>
-      <p>元自衛官の目線で、生活・PC作業・筋トレ・バイク旅・防災に役立つ装備を紹介します。基準は「実際に使うなら、面倒が減るか」。怪しい煽りより、毎日ちゃんと役立つことを大事にします。</p>
+      <p>元自衛官の目線で、生活・PC作業・筋トレ・バイク旅・防災に役立つ装備を紹介します。基準は「実際に使うなら、面倒が減るか」。派手さより、置き場所・耐久性・毎日の使いやすさを重視します。</p>
+      <p>紹介する商品は、レビュー、価格、サイズ、使う場面を見ながら選びます。寮生活や一人暮らしの狭い部屋でも使いやすいか、防災や旅でも兼用できるかを、できるだけ現場目線で確認していきます。</p>
     </section>
   `;
 }
