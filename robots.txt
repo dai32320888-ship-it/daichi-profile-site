@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dai32320888-ship-it.github.io/daichi-profile-site/sitemap.xml
