@@ -1,0 +1,66 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "tower マグネットキーフック",
+      "url": "https://item.rakuten.co.jp/roomy/ymz19aug12h28/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "ケーブルトレー デスク下",
+      "url": "https://item.rakuten.co.jp/apricot-r/3605-a260/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "折りたたみ収納ボックス",
+      "url": "https://item.rakuten.co.jp/risu-proshop/63567-5/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "可変式ダンベル20kg",
+      "url": "https://item.rakuten.co.jp/sportsmonster/flex32-2/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "ドアジム・懸垂バー",
+      "url": "https://item.rakuten.co.jp/danimo/8265139/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "name": "防水ツーリングバッグ",
+      "url": "https://item.rakuten.co.jp/flyingfish/60018/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "name": "バイク用スマホホルダー",
+      "url": "https://item.rakuten.co.jp/kaedear/kdr-m8s/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "name": "防災セット1人用",
+      "url": "https://item.rakuten.co.jp/relieved-life/re-l-bousai/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "name": "簡易トイレ 防災用",
+      "url": "https://item.rakuten.co.jp/torreya-shop/100000041/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "name": "LEDランタン 充電式",
+      "url": "https://item.rakuten.co.jp/k-power/ur002/"
+    }
+  ]
+}

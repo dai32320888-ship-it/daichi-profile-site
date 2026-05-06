@@ -780,3 +780,134 @@ h3 {
     width: 100%;
   }
 }
+
+.article-intro {
+  margin-bottom: 8px;
+}
+
+.article-intro p {
+  margin: 14px 0 0;
+}
+
+.audience-box h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.pick-block {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: clamp(18px, 3vw, 24px);
+  background: var(--surface-soft);
+}
+
+.pick-block + .pick-block {
+  margin-top: 22px;
+}
+
+.pick-kicker {
+  margin: 0 0 8px;
+  color: var(--olive-dark);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.pick-block > h2 {
+  margin: 0 0 16px;
+  font-size: clamp(20px, 4vw, 26px);
+}
+
+.pick-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 22px);
+  align-items: start;
+}
+
+.pick-body .product-media {
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.pick-subheading {
+  margin: 18px 0 0;
+  font-size: 16px;
+  color: var(--olive-dark);
+}
+
+.pick-body ul {
+  margin-top: 10px;
+}
+
+.editor-link-hint {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px dashed var(--line);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.editor-link-hint code {
+  font-size: 11px;
+  word-break: break-all;
+}
+
+.picks-section-title {
+  margin: 28px 0 16px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: 24px;
+}
+
+.related-articles {
+  margin-top: 28px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fbfbfa;
+}
+
+.related-articles h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+
+.related-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.related-list a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.related-list a:hover {
+  border-color: var(--olive);
+  background: var(--olive-soft);
+}
+
+@media (max-width: 720px) {
+  .pick-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pick-body .product-media {
+    height: 200px;
+  }
+}
