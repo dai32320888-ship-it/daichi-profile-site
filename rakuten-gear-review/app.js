@@ -2214,6 +2214,14 @@ function getProducts(ids) {
   return (ids || []).map((id) => products.find((product) => product.id === id)).filter(Boolean);
 }
 
+function getArticleImage(article) {
+  const explicitImage = article.image || article.thumbnail || article.eyecatch;
+  const pickImage = article.picks?.find((pick) => pick.imageUrl)?.imageUrl;
+  const productImage = getProducts(article.productIds).find((product) => product.imageUrl)?.imageUrl;
+
+  return explicitImage || pickImage || productImage || placeholderImage(article.title, article.category);
+}
+
 function getProductUrl(product) {
   return product.affiliateUrl || product.rakutenProductUrl || "";
 }
@@ -2574,12 +2582,14 @@ function renderArticleCard(article) {
   const category = getCategory(article.category);
   const pickTotal = articlePickCount(article);
   const articleUrl = `./article/${article.id}/index.html`;
+  const imageUrl = getArticleImage(article);
 
   return `
     <article class="article-card">
-      <a class="article-thumb" href="${articleUrl}">
-        <span>${category.name}</span>
-        <strong>${pickTotal}ピック</strong>
+      <a class="article-thumb" href="${articleUrl}" aria-label="${escapeHtml(article.title)}">
+        <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(article.title)}" loading="lazy" />
+        <span class="article-category-badge">${category.name}</span>
+        <strong class="article-count-badge">${pickTotal}ピック</strong>
       </a>
       <div class="article-body">
         <div class="article-meta">${article.date} ・ ${article.readTime}</div>
