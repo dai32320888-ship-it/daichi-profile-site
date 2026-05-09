@@ -8,6 +8,25 @@
   { id: "car", name: "車・移動装備", description: "車載、車中泊、移動中の小さな不便を減らす装備。" }
 ];
 
+/** 記事カード用・カテゴリ共通サムネ（サイトルートからの相対。未配置時は img onerror でグラデに戻す） */
+const CATEGORY_THUMB_FILES = {
+  life: "images/thumb-life.png",
+  "pc-ai": "images/thumb-desk.png",
+  training: "images/thumb-training.png",
+  bike: "images/thumb-bike.png",
+  disaster: "images/thumb-disaster.png",
+  solo: "images/thumb-living-alone.png",
+  car: "images/thumb-car.png"
+};
+
+const SITE_URL = "https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review";
+const AUTHOR_PEN_NAME = "だるい装備レビュー編集部";
+/** X（旧Twitter）プロフィール。リンクは profile-contact で使用 */
+const CONTACT_X_URL = "https://x.com/darui_tsubushi";
+const CONTACT_X_HANDLE = "@darui_tsubushi";
+const ARTICLE_DISCLOSURE_TEXT =
+  "本ページには広告・アフィリエイトリンクが含まれます。紹介内容は、読者が比較しやすいように整理しています。";
+
 const RAKUTEN_AFFILIATE_PATH = "53663d8f.6b4c8828.53663d90.626681b4";
 
 function rakutenAffiliateUrl(rakutenProductUrl) {
@@ -164,6 +183,7 @@ const articles = [
     readTime: "6分",
     summary: "玄関、デスク、収納を整えて、毎日の小さなストレスを減らす装備を紹介します。",
     productIds: ["tower-key-hook", "cable-tray", "folding-storage"],
+    relatedArticleIds: ["heavy-household-online-stock", "dorm-solo-storage"],
     body: [
       {
         heading: "生活装備は、派手さより継続力",
@@ -267,10 +287,12 @@ const articles = [
     date: "2026-05-03",
     readTime: "7分",
     summary: "停電・断水・夜間行動に備えるための、最初に揃えたい防災装備。",
+    metaDescription:
+      "防災セット・簡易トイレ・LEDランタンなど、一人暮らしの初期備蓄と置き場所の考え方。停電や断水に備える楽天で探しやすい防災グッズの整理一覧です。",
     productIds: ["disaster-kit", "emergency-toilet", "led-lantern"],
     body: [
       {
-        heading: "防災は、普段使いできるものから",
+        heading: "しまい込みがちな防災は、普段使いから整える",
         paragraphs: [
           "防災グッズは、押し入れにしまいっぱなしだと本番で使い方を忘れます。普段から少し使っておける装備を選ぶと、いざという時に手が動きます。",
           "まずは一人用セット、トイレ、明かりです。スマホが使える、部屋が照らせる、トイレに困らない。この三つがあるだけで判断力を保ちやすくなります。"
@@ -398,6 +420,37 @@ const articles = [
         ],
         bullets: ["サイズと設置方法を確認", "レビュー件数と低評価も見る", "毎日使う導線に入るか考える"]
       }
+    ]
+  },
+  {
+    id: "heavy-household-online-stock",
+    title: "ペーパーや洗剤ほど、「店まで買いに行く」が続かない消耗品がある",
+    category: "life",
+    date: "2026-05-09",
+    readTime: "4分",
+    summary: "重めの日用品は運搬がストレスになりやすいので、送料・受け取り・まとめ買いだけ先にオンライン側で押さえておくのが地味に効きます。",
+    productIds: ["folding-storage"],
+    relatedArticleIds: ["dorm-life-useful-7", "messy-room-cleanup-7", "life-useful-goods-10"],
+    body: [
+      {
+        heading: "問題は意欲より「運ぶ手間」",
+        paragraphs: [
+          "トイレットペーパーや洗剤、飲料のケースなどは、生活に直結する一方で持ち帰りだけで疲れます。特に公共交通や徒歩比率が高い生活だと、これが地味に効きます。",
+          "ここでの目的は「どれが絶対にお得」ではなく、送料の段階、受け取り方法、まとめ買いで生活に合うかだけを押さえることです。勢いで買わず、自分の導線と相性を確認するのがポイントです。"
+        ],
+        bullets: ["送料無料ラインや配達条件だけ先に確認する", "留守が多い人は受け取り方法まで含めて見る", "倉庫代わりになる「置き場所」が部屋にあるか考える"]
+      },
+      {
+        heading: "楽天で揃える部屋側の土台は、やはり収納",
+        paragraphs: [
+          "オンライン側の条件を見る前に、届いた荷物を床上に置き続けない仕組みだけは先に作っておくと続きます。床に置いた瞬間から生活導線が詰まり始めるので、収納ボックスや定位置を決めるのは投資というより防衛です。",
+          "当サイトでは別記事で楽天の装備を細かくレビューしているので、日用品の受け取り導線だけ整えてから、リンク先の詳細を読む流れが無理がありません。"
+        ]
+      }
+    ],
+    conclusionParagraphs: [
+      "重い日用品は、買った瞬間より「持って帰る瞬間」が壁になりやすいです。オンライン条件は自分の生活形に合うかだけチェックし、部屋内は床を空けて受け止める。ここまでやると、楽天で揃える装備とも相性が良くなります。",
+      "価格・在庫・送料はリンク先の公式情報で最新を確認してください。"
     ]
   },
   {
@@ -2195,12 +2248,12 @@ const app = document.querySelector("#app");
 const menuButton = document.querySelector("#menuButton");
 const siteNav = document.querySelector("#siteNav");
 
-menuButton.addEventListener("click", () => {
-  siteNav.classList.toggle("open");
+menuButton?.addEventListener("click", () => {
+  siteNav?.classList.toggle("open");
 });
 
-siteNav.addEventListener("click", () => {
-  siteNav.classList.remove("open");
+siteNav?.addEventListener("click", () => {
+  siteNav?.classList.remove("open");
 });
 
 window.addEventListener("hashchange", renderRoute);
@@ -2244,6 +2297,88 @@ function sortArticlesNewestFirst(list) {
   return [...list].sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
 }
 
+function resolveSiteAssetUrl(pathOrUrl) {
+  if (!pathOrUrl) return "";
+  const s = String(pathOrUrl).trim();
+  if (/^https?:\/\//i.test(s)) return s;
+  const clean = s.replace(/^\.\//, "");
+  return `${SITE_URL}/${clean}`;
+}
+
+/** 記事カード：明示サムネ → カテゴリ共通画像 → 先頭商品・ピック（いずれもURL化。404時は onerror でグラデ） */
+function getArticleCardImageUrl(article) {
+  const direct = article.thumbnailImage || article.heroImage;
+  if (direct) return resolveSiteAssetUrl(direct);
+  const catFile = CATEGORY_THUMB_FILES[article.category];
+  if (catFile) return `${SITE_URL}/${catFile}`;
+  const pid = (article.productIds || [])[0];
+  if (pid) {
+    const p = products.find((x) => x.id === pid);
+    if (p?.imageUrl) return p.imageUrl;
+  }
+  if (article.picks?.[0]?.imageUrl) return article.picks[0].imageUrl;
+  return "";
+}
+
+function resolveRelatedArticleIds(article, maxRelated = 3) {
+  const out = [];
+  const seen = new Set();
+  const pushId = (id) => {
+    if (out.length >= maxRelated) return;
+    if (id === article.id) return;
+    const a = articles.find((x) => x.id === id);
+    if (!a || seen.has(id)) return;
+    seen.add(id);
+    out.push(id);
+  };
+  for (const id of article.relatedArticleIds || []) pushId(id);
+  if (out.length < maxRelated) {
+    const sameCat = sortArticlesNewestFirst(
+      articles.filter((x) => x.id !== article.id && x.category === article.category)
+    );
+    for (const a of sameCat) pushId(a.id);
+  }
+  if (out.length === 0) {
+    const anyOther = articles.find((a) => a.id !== article.id);
+    if (anyOther) pushId(anyOther.id);
+  }
+  if (out.length < maxRelated) {
+    const rest = sortArticlesNewestFirst(articles.filter((x) => x.id !== article.id && !seen.has(x.id)));
+    for (const a of rest) {
+      pushId(a.id);
+      if (out.length >= maxRelated) break;
+    }
+  }
+  return out;
+}
+
+function buildArticleTocItems(article) {
+  const items = [];
+  (article.body || []).forEach((section, i) => {
+    if (section.heading) items.push({ label: section.heading, id: `section-${i}` });
+  });
+  const picks = article.picks || [];
+  if (picks.length) {
+    const label = picks.length === 7 ? "今回ピックアップする7つ" : `今回ピックアップする${picks.length}つ`;
+    items.push({ label, id: "picks-intro" });
+    picks.forEach((pick, i) => items.push({ label: pick.name, id: `pick-${i + 1}` }));
+  }
+  return items;
+}
+
+function renderArticleToc(article) {
+  const items = buildArticleTocItems(article);
+  if (items.length < 2) return "";
+  const lis = items
+    .map((item) => `<li><a href="#${escapeHtml(item.id)}">${escapeHtml(item.label)}</a></li>`)
+    .join("");
+  return `<nav class="article-toc" aria-label="この記事の目次"><p class="article-toc__title">目次</p><ul class="article-toc__list">${lis}</ul></nav>`;
+}
+
+function renderArticlePageDisclosure() {
+  return `<p class="article-disclosure">${escapeHtml(ARTICLE_DISCLOSURE_TEXT)}</p>`;
+}
+
 function pickResolveUrl(pick) {
   if (pick.affiliateUrl) return pick.affiliateUrl;
   if (pick.rakutenProductUrl) return rakutenAffiliateUrl(pick.rakutenProductUrl);
@@ -2254,6 +2389,141 @@ function pickResolveUrl(pick) {
 function normalizeParagraphs(value) {
   if (!value) return [];
   return Array.isArray(value) ? value : [value];
+}
+
+function renderA8EmbedFragment(index) {
+  let html = "";
+  if (typeof window !== "undefined" && window.__a8?.fragmentHtml) {
+    html = window.__a8.fragmentHtml(index).trim();
+  }
+  if (!html) {
+    return `<div class="a8-ad-slot__embed-inner">
+        <p class="a8-ad-placeholder">広告データが読み込めていません。<code>a8-browser-data.js</code> を <code>index.html</code> で先に読み込み、続けて <code>npm run build</code> を実行してください。</p>
+      </div>`;
+  }
+  return `<div class="a8-ad-slot__embed-inner a8-ad-slot__embed-inner--live">${html}</div>`;
+}
+
+function renderA8MidLead(articleId) {
+  const base =
+    "この記事の商品と相性がよさそうなものを、あとで見返せるようにまとめています。";
+  if (typeof window !== "undefined" && window.__a8?.midUsesMatsukiyo?.(articleId)) {
+    return `${base}かさばる日用品は、オンライン条件も一度見ておくと手間が分散しやすいです。`;
+  }
+  return base;
+}
+
+function renderA8MidArticleSlot(article) {
+  const ix = window.__a8 ? window.__a8.midCreativeIndex(article.id) : 0;
+  return `
+    <aside class="a8-ad-slot a8-ad-slot--inline" aria-label="関連する広告リンク">
+      <div class="a8-ad-slot__head">
+        <span class="a8-ad-slot__badge" aria-hidden="true">PR</span>
+        <h2 class="a8-ad-slot__title">ついでにチェックしたい便利アイテム</h2>
+      </div>
+      <p class="a8-ad-slot__lead">${renderA8MidLead(article.id)}</p>
+      <div class="a8-ad-slot__embed">
+        ${renderA8EmbedFragment(ix)}
+      </div>
+    </aside>
+  `.trim();
+}
+
+function renderA8FootArticleSlot(article) {
+  const ix = window.__a8 ? window.__a8.footCreativeIndex(article.id) : 0;
+  return `
+    <aside class="a8-ad-slot a8-ad-slot--inline" aria-label="比較用の広告リンク">
+      <div class="a8-ad-slot__head">
+        <span class="a8-ad-slot__badge" aria-hidden="true">PR</span>
+        <h2 class="a8-ad-slot__title">買う前に比較しておきたいもの</h2>
+      </div>
+      <p class="a8-ad-slot__lead">同じジャンルの商品でも、価格・送料・レビューでかなり差が出ます。買う前に一度チェックしておくと失敗しにくいです。</p>
+      <div class="a8-ad-slot__embed">
+        ${renderA8EmbedFragment(ix)}
+      </div>
+    </aside>
+  `.trim();
+}
+
+function renderA8TopRecommendSection() {
+  const pool = window.__a8?.homeTopPool || [15];
+  const ix = window.__a8 ? window.__a8.pickCreativeIndexFromPool(pool, "home:A8:billboard") : 0;
+  const leaderClass = ix === 15 ? " a8-ad-slot--leader" : "";
+  return `
+    <section class="section a8-ad-section">
+      <div class="section-head">
+        <div>
+          <h2>だるい生活を少しラクにするおすすめ</h2>
+          <p>元自衛官目線で、日常・寮生活・デスク周り・車内で使いやすそうなものを中心に紹介します。</p>
+        </div>
+        <span class="a8-ad-slot__badge a8-ad-slot__badge--section" aria-hidden="true">PR</span>
+      </div>
+      <aside class="a8-ad-slot a8-ad-slot--wide${leaderClass}" aria-label="トップのおすすめ広告">
+        <div class="a8-ad-slot__embed a8-ad-slot__embed--top">
+          ${renderA8EmbedFragment(ix)}
+        </div>
+      </aside>
+    </section>
+  `.trim();
+}
+
+function renderA8SidebarSlot(article) {
+  const ix = window.__a8 ? window.__a8.sidebarCreativeIndex(article.id) : 0;
+  return `
+    <div class="a8-ad-slot a8-ad-slot--sidebar" role="region" aria-label="関連広告">
+      <div class="a8-ad-slot__head">
+        <span class="a8-ad-slot__badge" aria-hidden="true">広告</span>
+        <h3 class="a8-ad-slot__title a8-ad-slot__title--sm">チェックリスト用のリンク置き場</h3>
+      </div>
+      <p class="a8-ad-slot__lead a8-ad-slot__lead--sm">読み終えたあとで、価格や条件だけまとめて見たいとき向けです。</p>
+      <div class="a8-ad-slot__embed">
+        ${renderA8EmbedFragment(ix)}
+      </div>
+    </div>
+  `.trim();
+}
+
+function renderA8ArticleListSidebarSlot(categoryId, query) {
+  const seed = `${categoryId || "all"}:${query || ""}`;
+  const ix = window.__a8 ? window.__a8.sidebarCreativeIndexForList(seed) : 0;
+  return `
+    <div class="a8-ad-slot a8-ad-slot--sidebar" role="region" aria-label="関連広告">
+      <div class="a8-ad-slot__head">
+        <span class="a8-ad-slot__badge" aria-hidden="true">広告</span>
+        <h3 class="a8-ad-slot__title a8-ad-slot__title--sm">記事を見終えたあとの参考枠</h3>
+      </div>
+      <p class="a8-ad-slot__lead a8-ad-slot__lead--sm">同じ一覧から探している人が、あと一息でチェックすることがある程度の広告リンクです。</p>
+      <div class="a8-ad-slot__embed">
+        ${renderA8EmbedFragment(ix)}
+      </div>
+    </div>
+  `.trim();
+}
+
+function renderArticleBodySectionsWithMidAd(article) {
+  const sections = article.body || [];
+  if (!sections.length) return "";
+  const midAfter = Math.max(1, Math.ceil(sections.length / 2));
+  return sections
+    .map((section, idx) => {
+      const chunk = renderArticleSection(section, idx);
+      return idx + 1 === midAfter ? `${chunk}${renderA8MidArticleSlot(article)}` : chunk;
+    })
+    .join("");
+}
+
+function renderPicksSectionWithMidAd(article) {
+  const picks = article.picks || [];
+  if (!picks.length) return "";
+  const label = picks.length === 7 ? "7つ" : `${picks.length}つ`;
+  const midAfter = Math.max(1, Math.ceil(picks.length / 2));
+  const blocks = picks
+    .map((pick, i) => {
+      const block = renderPickBlock(pick, i + 1);
+      return i + 1 === midAfter ? `${block}${renderA8MidArticleSlot(article)}` : block;
+    })
+    .join("");
+  return `<h2 class="picks-section-title" id="picks-intro">今回ピックアップする${label}</h2>${blocks}`;
 }
 
 function renderArticleIntroAudience(article) {
@@ -2314,14 +2584,14 @@ function renderConclusionRelated(article) {
   const conclusion = conclusionParas.length
     ? `<div class="summary-box"><h2>まとめ</h2>${conclusionParas.map((p) => `<p>${escapeHtml(p)}</p>`).join("")}</div>`
     : "";
-  const relatedIds = article.relatedArticleIds || [];
-  const relatedItems = relatedIds
+  const relatedIds = resolveRelatedArticleIds(article);
+  const relatedCards = relatedIds
     .map((id) => articles.find((a) => a.id === id))
     .filter(Boolean)
-    .map((a) => `<li><a href="article/${escapeHtml(a.id)}/index.html">${escapeHtml(a.title)}</a></li>`)
+    .map((a) => renderArticleCard(a, { href: `./article/${a.id}/index.html` }))
     .join("");
-  const related = relatedItems
-    ? `<div class="related-articles"><h2>関連記事</h2><ul class="related-list">${relatedItems}</ul></div>`
+  const related = relatedCards
+    ? `<div class="related-articles"><h2>関連記事</h2><div class="article-grid related-article-grid">${relatedCards}</div></div>`
     : "";
   return `${conclusion}${related}`;
 }
@@ -2351,9 +2621,17 @@ function renderHome() {
   app.innerHTML = `
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">元自衛官が選ぶ装備レビュー</p>
-        <h1>元自衛官が選ぶ、暮らしをラクにする装備レビュー</h1>
-        <p class="lead">寮生活・一人暮らし・車・バイク・デスク周り・防災・日用品で役立つアイテムを、元自衛官目線でわかりやすく紹介します。</p>
+        <p class="eyebrow">元自衛官目線の装備レビュー</p>
+        <h1>暮らしをラクにする装備レビュー</h1>
+        <p class="lead">元自衛官の目線で、楽天市場で探しやすい生活用品・防災グッズ・車載アイテム・デスク周り用品を整理して紹介します。</p>
+        <div class="hero-site-summary" aria-label="このサイトの案内">
+          <p><strong>テーマ</strong>　日用品・防災・車内・デスク周りなど、生活導線に効く装備の整理とレビューです。</p>
+          <p><strong>向いている人</strong>　一人暮らし・寮生活、防災の備え、車・バイク利用、在宅で作業環境を整えたい人。</p>
+          <p><strong>読みもの</strong>　カテゴリ別の記事と、記事内・末尾で商品を比較しやすい形にしたメモです。</p>
+        </div>
+        <ul class="trust-badges" aria-label="主なテーマ">
+          <li>防災</li><li>整頓</li><li>車内</li><li>一人暮らし</li><li>生活改善</li>
+        </ul>
         <p class="ad-notice">当サイトはアフィリエイト広告を利用しています。</p>
         <div class="hero-actions">
           <a class="button" href="#/articles">記事を読む</a>
@@ -2384,27 +2662,28 @@ function renderHome() {
         ${categories.map(renderCategoryButton).join("")}
       </div>
     </section>
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <h2>まず見てほしい商品</h2>
-          <p>クリックしやすい商品カードに整理しました。気になるものは楽天で価格を確認できます。</p>
-        </div>
-      </div>
-      <div class="product-grid">
-        ${products.slice(0, 6).map(renderProductCard).join("")}
-      </div>
-    </section>
+    ${renderA8TopRecommendSection()}
     <section class="section">
       <div class="section-head">
         <div>
           <h2>新着記事</h2>
           <p>装備選びの考え方と、記事内で紹介している商品をまとめています。</p>
         </div>
-        <a class="button secondary" href="#/articles">記事一覧へ</a>
+        <a class="button secondary button--inline-sm" href="#/articles">記事一覧へ</a>
       </div>
       <div class="article-grid">
         ${sortArticlesNewestFirst(articles).slice(0, 6).map(renderArticleCard).join("")}
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>まず見てほしい商品</h2>
+          <p>気になるものは、楽天市場の商品ページで価格・レビュー・在庫を確認できます。</p>
+        </div>
+      </div>
+      <div class="product-grid">
+        ${products.slice(0, 6).map(renderProductCard).join("")}
       </div>
     </section>
     ${renderProfileBox()}
@@ -2459,6 +2738,15 @@ function renderArticleList({ categoryId = "", query = "" } = {}) {
         ${filteredProducts.map(renderProductCard).join("")}
       </div>
     </section>
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>あわせて見ておくと気楽になることがあります</h2>
+          <p>リンクにはサイト運営のためのアフィリエイトが含まれる場合があります。自分で確認できる状態だけ確保しておく用途です。</p>
+        </div>
+      </div>
+      ${renderA8ArticleListSidebarSlot(categoryId, normalized)}
+    </section>
   `;
 
   document.querySelector("#searchForm").addEventListener("submit", (event) => {
@@ -2484,10 +2772,8 @@ function renderArticle(id) {
     ? []
     : products.filter((product) => product.category === article.category && !productIds.includes(product.id));
 
-  const bodySections = (article.body || []).map(renderArticleSection).join("");
-  const picksSection = hasPicks
-    ? `<h2 class="picks-section-title">今回ピックアップする${article.picks.length}つ</h2>${article.picks.map((pick, i) => renderPickBlock(pick, i + 1)).join("")}`
-    : "";
+  const bodySections = renderArticleBodySectionsWithMidAd(article);
+  const picksSection = hasPicks ? renderPicksSectionWithMidAd(article) : "";
   const catalogSummary = hasPicks
     ? ""
     : `
@@ -2524,15 +2810,19 @@ function renderArticle(id) {
           <p class="ad-notice">当サイトはアフィリエイト広告を利用しています。</p>
         </header>
         <div class="article-content">
+          ${renderArticlePageDisclosure()}
           ${renderArticleIntroAudience(article)}
+          ${renderArticleToc(article)}
           ${bodySections}
           ${picksSection}
           ${catalogSummary}
+          ${renderA8FootArticleSlot(article)}
           ${renderConclusionRelated(article)}
         </div>
       </article>
       <aside class="sidebar">
         ${renderProfileBox()}
+        ${renderA8SidebarSlot(article)}
         <div class="profile-box">
           <h3>同じカテゴリの記事</h3>
           <p>${category.description}</p>
@@ -2548,9 +2838,9 @@ function renderArticle(id) {
 function renderProfilePage() {
   app.innerHTML = `
     <section class="page-hero">
-      <p class="eyebrow">プロフィール</p>
-      <h1>元自衛官の視点で、使える装備だけを紹介します。</h1>
-      <p class="lead">狭い部屋、寮生活、訓練後の疲れ、長距離移動。そんな現場感をベースに、楽天で探せる便利グッズをレビューします。</p>
+      <p class="eyebrow">運営について</p>
+      <h1>暮らしをラクにする装備レビュー</h1>
+      <p class="lead">元自衛官の運営者が、生活・防災・車内・デスク周りで実際に使いやすいかを基準に、楽天市場の商品を整理して紹介しています。</p>
       <p class="ad-notice">当サイトはアフィリエイト広告を利用しています。</p>
     </section>
     <section class="section">
@@ -2559,12 +2849,13 @@ function renderProfilePage() {
   `;
 }
 
-function renderArticleSection(section) {
+function renderArticleSection(section, index) {
+  const id = `section-${index}`;
   return `
-    <section class="article-section">
-      <h2>${section.heading}</h2>
-      ${section.paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}
-      ${section.bullets ? `<ul>${section.bullets.map((item) => `<li>${item}</li>`).join("")}</ul>` : ""}
+    <section class="article-section" id="${id}">
+      <h2>${escapeHtml(section.heading)}</h2>
+      ${section.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
+      ${section.bullets ? `<ul>${section.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : ""}
     </section>
   `;
 }
@@ -2578,24 +2869,34 @@ function renderCategoryButton(category) {
   `;
 }
 
-function renderArticleCard(article) {
+const ARTICLE_THUMB_ONERROR =
+  "this.onerror=null;var p=this.closest('.article-thumb');this.remove();if(p)p.classList.remove('article-thumb--photo');";
+
+function renderArticleCard(article, options = {}) {
   const category = getCategory(article.category);
   const pickTotal = articlePickCount(article);
-  const articleUrl = `./article/${article.id}/index.html`;
-  const imageUrl = getArticleImage(article);
+  const articleUrl = options.href ?? `./article/${article.id}/index.html`;
+  const thumbUrl = getArticleCardImageUrl(article);
+  const thumbClass = thumbUrl ? "article-thumb article-thumb--photo" : "article-thumb";
+  const altText = `${article.title}（${category.name}）`;
+  const thumbImg = thumbUrl
+    ? `<img src="${escapeHtml(thumbUrl)}" alt="${escapeHtml(altText)}" width="640" height="360" loading="lazy" decoding="async" onerror="${ARTICLE_THUMB_ONERROR}" />`
+    : "";
 
   return `
     <article class="article-card">
-      <a class="article-thumb" href="${articleUrl}" aria-label="${escapeHtml(article.title)}">
-        <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(article.title)}" loading="lazy" />
-        <span class="article-category-badge">${category.name}</span>
-        <strong class="article-count-badge">${pickTotal}ピック</strong>
+      <a class="${thumbClass}" href="${escapeHtml(articleUrl)}" aria-label="${escapeHtml(article.title)}">
+        ${thumbImg}
+        <span class="article-thumb__meta">
+          <span>${escapeHtml(category.name)}</span>
+          <strong>${pickTotal}ピック</strong>
+        </span>
       </a>
       <div class="article-body">
-        <div class="article-meta">${article.date} ・ ${article.readTime}</div>
-        <h3>${article.title}</h3>
-        <p>${article.summary}</p>
-        <a class="button secondary" href="${articleUrl}">記事を読む</a>
+        <div class="article-meta">${escapeHtml(article.date)} ・ ${escapeHtml(article.readTime)}</div>
+        <h3>${escapeHtml(article.title)}</h3>
+        <p>${escapeHtml(article.summary)}</p>
+        <a class="button secondary button--inline-sm" href="${escapeHtml(articleUrl)}">記事を読む</a>
       </div>
     </article>
   `;
@@ -2639,12 +2940,14 @@ function renderProfileBox() {
       <div class="profile-head">
         <div class="avatar">元</div>
         <div>
-          <h3>運営者プロフィール</h3>
-          <div class="article-meta">元自衛官 / 装備レビュー</div>
+          <h3>運営者・${escapeHtml(AUTHOR_PEN_NAME)}</h3>
+          <div class="article-meta">元自衛官の経験を、装備選びの基準にしています</div>
         </div>
       </div>
-      <p>元自衛官の目線で、生活・PC作業・筋トレ・バイク旅・防災に役立つ装備を紹介します。基準は「実際に使うなら、面倒が減るか」。派手さより、置き場所・耐久性・毎日の使いやすさを重視します。</p>
-      <p>紹介する商品は、レビュー、価格、サイズ、使う場面を見ながら選びます。寮生活や一人暮らしの狭い部屋でも使いやすいか、防災や旅でも兼用できるかを、できるだけ現場目線で確認していきます。</p>
+      <p>このサイトは、元自衛官の運営者が、生活・防災・車内・デスク周りで「実際に使いやすそうか」を重視して商品を整理するレビューサイトです。高すぎる物や見た目だけの商品ではなく、日常でラクになるか、備えとして役立つかを基準に紹介しています。</p>
+      <p><strong>このサイトの目的：</strong>楽天市場で迷いやすいカテゴリを、用途・置き場所・頻度で分けて、比較しやすい形にまとめることです。</p>
+      <p><strong>読者への約束：</strong>価格・在庫・レビューは必ず商品ページで確かめてくださいとお伝えします。PRやアフィリエイトの利用も、記事冒頭・広告枠で明示します。</p>
+      <p class="profile-contact">更新情報・誤記のご指摘：<a href="${escapeHtml(CONTACT_X_URL)}" target="_blank" rel="me noopener noreferrer">${escapeHtml(CONTACT_X_HANDLE)}</a>（X）</p>
     </section>
   `;
 }

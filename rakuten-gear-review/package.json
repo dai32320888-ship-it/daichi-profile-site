@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "node scripts/build-static.js",
+    "build": "node scripts/build-a8-browser-data.js && node scripts/build-static.js",
     "dev": "node server.js"
   }
 }

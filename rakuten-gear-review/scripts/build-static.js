@@ -1,6 +1,7 @@
 ﻿const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
+const { midArticleSlot, footArticleSlot, sidebarSlot } = require("./a8-ad-slots");
 
 const root = path.resolve(__dirname, "..");
 const siteUrl = "https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review";
@@ -29,7 +30,85 @@ vm.runInContext(
   sandbox
 );
 
-const { categories, products, articles, placeholderImage, rakutenAffiliateUrl, rakutenSearchAffiliateUrl, getCategory } = sandbox.__DATA__;
+const { categories, products, articles, placeholderImage, rakutenAffiliateUrl, rakutenSearchAffiliateUrl, getCategory } =
+  sandbox.__DATA__;
+
+const AUTHOR_PEN_NAME = "だるい装備レビュー編集部";
+const CONTACT_X_URL = "https://x.com/darui_tsubushi";
+const CONTACT_X_HANDLE = "@darui_tsubushi";
+const ARTICLE_DISCLOSURE_TEXT =
+  "本ページには広告・アフィリエイトリンクが含まれます。紹介内容は、読者が比較しやすいように整理しています。";
+
+function resolveRelatedArticleIds(article, maxRelated = 3) {
+  const out = [];
+  const seen = new Set();
+  const pushId = (id) => {
+    if (out.length >= maxRelated) return;
+    if (id === article.id) return;
+    const a = articles.find((x) => x.id === id);
+    if (!a || seen.has(id)) return;
+    seen.add(id);
+    out.push(id);
+  };
+  for (const id of article.relatedArticleIds || []) pushId(id);
+  if (out.length < maxRelated) {
+    const sameCat = [...articles]
+      .filter((x) => x.id !== article.id && x.category === article.category)
+      .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+    for (const a of sameCat) pushId(a.id);
+  }
+  if (out.length === 0) {
+    const anyOther = articles.find((a) => a.id !== article.id);
+    if (anyOther) pushId(anyOther.id);
+  }
+  if (out.length < maxRelated) {
+    const rest = [...articles]
+      .filter((x) => x.id !== article.id && !seen.has(x.id))
+      .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+    for (const a of rest) {
+      pushId(a.id);
+      if (out.length >= maxRelated) break;
+    }
+  }
+  return out;
+}
+
+function buildArticleTocItems(article) {
+  const items = [];
+  (article.body || []).forEach((section, i) => {
+    if (section.heading) items.push({ label: section.heading, id: `section-${i}` });
+  });
+  const picks = article.picks || [];
+  if (picks.length) {
+    const label = picks.length === 7 ? "今回ピックアップする7つ" : `今回ピックアップする${picks.length}つ`;
+    items.push({ label, id: "picks-intro" });
+    picks.forEach((pick, i) => items.push({ label: pick.name, id: `pick-${i + 1}` }));
+  }
+  return items;
+}
+
+function renderArticleToc(article) {
+  const items = buildArticleTocItems(article);
+  if (items.length < 2) return "";
+  const lis = items.map((item) => `<li><a href="#${esc(item.id)}">${esc(item.label)}</a></li>`).join("");
+  return `<nav class="article-toc" aria-label="この記事の目次"><p class="article-toc__title">目次</p><ul class="article-toc__list">${lis}</ul></nav>`;
+}
+
+function renderStaticProfileBox() {
+  return `<section class="profile-box">
+      <div class="profile-head">
+        <div class="avatar">元</div>
+        <div>
+          <h3>運営者・${esc(AUTHOR_PEN_NAME)}</h3>
+          <div class="article-meta">元自衛官の経験を、装備選びの基準にしています</div>
+        </div>
+      </div>
+      <p>このサイトは、元自衛官の運営者が、生活・防災・車内・デスク周りで「実際に使いやすそうか」を重視して商品を整理するレビューサイトです。高すぎる物や見た目だけの商品ではなく、日常でラクになるか、備えとして役立つかを基準に紹介しています。</p>
+      <p><strong>このサイトの目的：</strong>楽天市場で迷いやすいカテゴリを、用途・置き場所・頻度で分けて、比較しやすい形にまとめることです。</p>
+      <p><strong>読者への約束：</strong>価格・在庫・レビューは必ず商品ページで確かめてくださいとお伝えします。PRやアフィリエイトの利用も、記事冒頭・広告枠で明示します。</p>
+      <p class="profile-contact">更新情報・誤記のご指摘：<a href="${esc(CONTACT_X_URL)}" target="_blank" rel="me noopener noreferrer">${esc(CONTACT_X_HANDLE)}</a>（X）</p>
+    </section>`;
+}
 
 function esc(value) {
   return String(value)
@@ -43,11 +122,78 @@ function categoryName(id) {
   return categories.find((category) => category.id === id)?.name || "";
 }
 
+const CATEGORY_THUMB_FILES = {
+  life: "images/thumb-life.png",
+  "pc-ai": "images/thumb-desk.png",
+  training: "images/thumb-training.png",
+  bike: "images/thumb-bike.png",
+  disaster: "images/thumb-disaster.png",
+  solo: "images/thumb-living-alone.png",
+  car: "images/thumb-car.png"
+};
+
+const ARTICLE_THUMB_ONERROR =
+  "this.onerror=null;var p=this.closest('.article-thumb');this.remove();if(p)p.classList.remove('article-thumb--photo');";
+
+function articlePickCountForCard(article) {
+  if (Array.isArray(article.picks) && article.picks.length) return article.picks.length;
+  return (article.productIds && article.productIds.length) || 0;
+}
+
+function resolveCardThumbUrl(article) {
+  const direct = article.thumbnailImage || article.heroImage;
+  if (direct) {
+    const s = String(direct).trim();
+    if (/^https?:\/\//i.test(s)) return s;
+    return `${siteUrl}/${s.replace(/^\.\//, "")}`;
+  }
+  const cf = CATEGORY_THUMB_FILES[article.category];
+  if (cf) return `${siteUrl}/${cf}`;
+  const pid = (article.productIds || [])[0];
+  if (pid) {
+    const p = products.find((x) => x.id === pid);
+    if (p?.imageUrl) return p.imageUrl;
+  }
+  if (article.picks?.[0]?.imageUrl) return article.picks[0].imageUrl;
+  return "";
+}
+
+function renderArticleCardHtml(article, articleHref) {
+  const cat = getCategory(article.category);
+  const catName = cat?.name || "装備";
+  const pickTotal = articlePickCountForCard(article);
+  const thumbUrl = resolveCardThumbUrl(article);
+  const thumbClass = thumbUrl ? "article-thumb article-thumb--photo" : "article-thumb";
+  const altText = `${article.title}（${catName}）`;
+  const thumbImg = thumbUrl
+    ? `<img src="${esc(thumbUrl)}" alt="${esc(altText)}" width="640" height="360" loading="lazy" decoding="async" onerror="${ARTICLE_THUMB_ONERROR}" />`
+    : "";
+  const date = article.date != null ? String(article.date) : "";
+  const readTime = article.readTime != null ? String(article.readTime) : "";
+
+  return `<article class="article-card">
+      <a class="${thumbClass}" href="${esc(articleHref)}">
+        ${thumbImg}
+        <span class="article-thumb__meta">
+          <span>${esc(catName)}</span>
+          <strong>${pickTotal}ピック</strong>
+        </span>
+      </a>
+      <div class="article-body">
+        <div class="article-meta">${esc(date)} ・ 読了目安 ${esc(readTime)}</div>
+        <h3>${esc(article.title)}</h3>
+        <p>${esc(article.summary || "")}</p>
+        <a class="button secondary button--inline-sm" href="${esc(articleHref)}">記事を読む</a>
+      </div>
+    </article>`;
+}
+
 function productUrl(product) {
   return product.affiliateUrl || product.rakutenProductUrl || "";
 }
 
-function layout({ title, description, canonical, body, structuredData }) {
+function layout({ title, description, canonical, body, structuredData, ogType = "article" }) {
+  const ogImageAbs = `${siteUrl}/images/og-default.png`;
   return `<!doctype html>
 <html lang="ja">
   <head>
@@ -56,12 +202,16 @@ function layout({ title, description, canonical, body, structuredData }) {
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}" />
     <link rel="canonical" href="${canonical}" />
-    <meta property="og:type" content="article" />
+    <meta property="og:type" content="${esc(ogType)}" />
     <meta property="og:title" content="${esc(title)}" />
     <meta property="og:description" content="${esc(description)}" />
     <meta property="og:url" content="${canonical}" />
     <meta property="og:site_name" content="元自衛官の楽天装備レビュー" />
+    <meta property="og:image" content="${ogImageAbs}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="${ogImageAbs}" />
     <link rel="stylesheet" href="../../styles.css" />
     <script type="application/ld+json">${JSON.stringify(structuredData)}</script>
   </head>
@@ -74,10 +224,13 @@ function layout({ title, description, canonical, body, structuredData }) {
           <small>暮らしをラクにする装備品レビュー</small>
         </span>
       </a>
-      <nav class="site-nav" aria-label="メインナビゲーション">
+      <button class="menu-button" id="menuButton" type="button" aria-label="メニューを開く">☰</button>
+      <nav class="site-nav" id="siteNav" aria-label="メインナビゲーション">
         <a href="../../index.html">トップ</a>
         <a href="../../index.html#/articles">記事一覧</a>
+        <a href="../../index.html#/category/training">筋トレ装備</a>
         <a href="../../index.html#/category/disaster">防災装備</a>
+        <a href="../../index.html#/profile">プロフィール</a>
       </nav>
     </header>
     <main>${body}</main>
@@ -88,6 +241,20 @@ function layout({ title, description, canonical, body, structuredData }) {
       </div>
       <a href="../../index.html">トップへ戻る</a>
     </footer>
+    <script>
+      (function () {
+        var btn = document.getElementById("menuButton");
+        var nav = document.getElementById("siteNav");
+        if (btn && nav) {
+          btn.addEventListener("click", function () {
+            nav.classList.toggle("open");
+          });
+          nav.addEventListener("click", function (e) {
+            if (e.target.tagName === "A") nav.classList.remove("open");
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
 `;
@@ -158,19 +325,46 @@ function renderPickBlock(pick, index) {
   `;
 }
 
+function renderArticleBodySectionsWithMidAd(article) {
+  const sections = article.body || [];
+  if (!sections.length) return "";
+  const midAfter = Math.max(1, Math.ceil(sections.length / 2));
+  return sections
+    .map((section, idx) => {
+      const chunk = `<section class="article-section" id="section-${idx}"><h2>${esc(section.heading)}</h2>${section.paragraphs.map((p) => `<p>${esc(p)}</p>`).join("")}${section.bullets ? `<ul>${section.bullets.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>` : ""}</section>`;
+      const bridge = idx + 1 === midAfter ? midArticleSlot(article) : "";
+      return chunk + bridge;
+    })
+    .join("");
+}
+
+function renderPicksSectionWithMidAd(article) {
+  const picks = article.picks || [];
+  if (!picks.length) return "";
+  const label = picks.length === 7 ? "7つ" : `${picks.length}つ`;
+  const midAfter = Math.max(1, Math.ceil(picks.length / 2));
+  const blocks = picks
+    .map((pick, i) => {
+      const block = renderPickBlock(pick, i + 1);
+      return i + 1 === midAfter ? `${block}${midArticleSlot(article)}` : block;
+    })
+    .join("");
+  return `<h2 class="picks-section-title" id="picks-intro">今回ピックアップする${label}</h2>${blocks}`;
+}
+
 function renderConclusionRelated(article) {
   const conclusionParas = normalizeParagraphs(article.conclusionParagraphs);
   const conclusion = conclusionParas.length
     ? `<div class="summary-box"><h2>まとめ</h2>${conclusionParas.map((p) => `<p>${esc(p)}</p>`).join("")}</div>`
     : "";
-  const relatedIds = article.relatedArticleIds || [];
-  const relatedItems = relatedIds
+  const relatedIds = resolveRelatedArticleIds(article);
+  const relatedCards = relatedIds
     .map((id) => articles.find((a) => a.id === id))
     .filter(Boolean)
-    .map((a) => `<li><a href="../${esc(a.id)}/index.html">${esc(a.title)}</a></li>`)
+    .map((a) => renderArticleCardHtml(a, `../${a.id}/index.html`))
     .join("");
-  const related = relatedItems
-    ? `<div class="related-articles"><h2>関連記事</h2><ul class="related-list">${relatedItems}</ul></div>`
+  const related = relatedCards
+    ? `<div class="related-articles"><h2>関連記事</h2><div class="article-grid related-article-grid">${relatedCards}</div></div>`
     : "";
   return `${conclusion}${related}`;
 }
@@ -203,15 +397,9 @@ function renderArticle(article) {
     ? []
     : products.filter((product) => product.category === article.category && !productIds.includes(product.id));
   const canonical = `${siteUrl}/article/${article.id}/`;
-  const bodySections = (article.body || [])
-    .map(
-      (section) =>
-        `<section class="article-section"><h2>${esc(section.heading)}</h2>${section.paragraphs.map((p) => `<p>${esc(p)}</p>`).join("")}${section.bullets ? `<ul>${section.bullets.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>` : ""}</section>`
-    )
-    .join("");
-  const picksSection = hasPicks
-    ? `<h2 class="picks-section-title">今回ピックアップする7つ</h2>${article.picks.map((pick, i) => renderPickBlock(pick, i + 1)).join("")}`
-    : "";
+  const metaDesc = article.metaDescription || article.summary;
+  const bodySections = renderArticleBodySectionsWithMidAd(article);
+  const picksSection = hasPicks ? renderPicksSectionWithMidAd(article) : "";
   const catalogSummary = hasPicks
     ? ""
     : `
@@ -232,6 +420,9 @@ function renderArticle(article) {
             : ""
         }
       `;
+  const cat = getCategory(article.category);
+  const catDesc = cat?.description || "";
+  const catLabel = cat?.name || "";
   const body = `<div class="article-layout">
     <article class="article-main">
       <header class="article-hero">
@@ -242,30 +433,44 @@ function renderArticle(article) {
         <p class="ad-notice">当サイトはアフィリエイト広告を利用しています。</p>
       </header>
       <div class="article-content">
+        <p class="article-disclosure">${esc(ARTICLE_DISCLOSURE_TEXT)}</p>
         ${renderArticleIntroAudience(article)}
+        ${renderArticleToc(article)}
         ${bodySections}
         ${picksSection}
         ${catalogSummary}
+        ${footArticleSlot(article)}
         ${renderConclusionRelated(article)}
       </div>
     </article>
+    <aside class="sidebar">
+      ${renderStaticProfileBox()}
+      ${sidebarSlot(article)}
+      <div class="profile-box">
+        <h3>同じカテゴリの記事</h3>
+        <p>${esc(catDesc)}</p>
+        <div class="section-actions">
+          <a class="button secondary button--inline-sm" href="../../index.html#/category/${esc(article.category)}">${esc(catLabel)}を見る</a>
+        </div>
+      </div>
+    </aside>
   </div>`;
 
   fs.writeFileSync(
     path.join(dir, "index.html"),
     layout({
       title: `${article.title} | 元自衛官の楽天装備レビュー`,
-      description: article.summary,
+      description: metaDesc,
       canonical,
       body,
       structuredData: {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         headline: article.title,
-        description: article.summary,
+        description: metaDesc,
         datePublished: article.date,
         dateModified: article.date,
-        author: { "@type": "Person", name: "元自衛官の楽天装備レビュー" },
+        author: { "@type": "Person", name: AUTHOR_PEN_NAME, url: `${siteUrl}/` },
         mainEntityOfPage: canonical
       }
     }),
