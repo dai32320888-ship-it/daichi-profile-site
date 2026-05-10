@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="Solo living gear placeholder">
+  <rect width="1200" height="750" fill="#f3f2ec"/>
+  <rect x="118" y="118" width="964" height="514" rx="28" fill="#ffffff"/>
+  <rect x="178" y="420" width="844" height="34" rx="17" fill="#263325" opacity=".18"/>
+  <rect x="225" y="242" width="234" height="258" rx="22" fill="#5a654b"/>
+  <path d="M225 316h234M225 392h234" stroke="#f3f2ec" stroke-width="12" opacity=".75"/>
+  <rect x="532" y="285" width="218" height="190" rx="24" fill="#c6b98b"/>
+  <path d="M562 336h158M562 382h108" stroke="#263325" stroke-width="14" stroke-linecap="round" opacity=".42"/>
+  <rect x="818" y="238" width="126" height="270" rx="18" fill="#263325"/>
+  <circle cx="912" cy="373" r="13" fill="#c6b98b"/>
+</svg>

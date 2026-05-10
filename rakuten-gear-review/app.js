@@ -5,7 +5,8 @@
   { id: "bike", name: "バイク旅装備", description: "雨、積載、ナビの不安を減らすツーリング装備。" },
   { id: "disaster", name: "防災装備", description: "普段使いしながら、災害時にも役立つ備え。" },
   { id: "solo", name: "一人暮らし準備", description: "寮生活やワンルームで生活導線を整える初期装備。" },
-  { id: "car", name: "車・移動装備", description: "車載、車中泊、移動中の小さな不便を減らす装備。" }
+  { id: "car", name: "車・移動装備", description: "車載、車中泊、移動中の小さな不便を減らす装備。" },
+  { id: "game", name: "ゲーム機・周辺", description: "家庭用ゲーム機の条件確認など、検討段階の読み込みメモとして。" }
 ];
 
 /** 記事カード用・カテゴリ共通サムネ（サイトルートからの相対。未配置時は img onerror でグラデに戻す） */
@@ -16,7 +17,10 @@ const CATEGORY_THUMB_FILES = {
   bike: "images/thumb-bike.png",
   disaster: "images/thumb-disaster.png",
   solo: "images/thumb-living-alone.png",
-  car: "images/thumb-car.png"
+  car: "images/thumb-car.png",
+  game: "images/thumb-life.png",
+  /** 睡眠・寝具寄せの一覧用。防災・来客・移動睡眠の記事は防災装備サムネに寄せる。 */
+  sleep: "images/thumb-disaster.png"
 };
 
 const SITE_URL = "https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review";
@@ -2241,6 +2245,154 @@ const articles = [
       "disaster-helpful-gear-7",
       "car-useful-gear-7"
     ]
+  },
+  {
+    id: "nintendo-switch-2-rakuten-jp-model",
+    title: "Nintendo Switch 2は楽天で買える？価格・注意点・買う前に確認したいポイントまとめ",
+    category: "game",
+    date: "2026-05-09",
+    readTime: "8分",
+    summary:
+      "Switch 2を楽天で買えるか、日本語・国内専用の見方や価格・在庫・送料まで、買う前のチェックリストとして整理しました。押し売りなし。※PR・アフィリエイト含む",
+    metaDescription:
+      "Switch 2を楽天で買えるか、日本語・国内専用の意味や価格・在庫の見方を解説。販売元・送料の確認まで。※PR・アフィリエイト含む",
+    productIds: [],
+    hideProductCatalog: true,
+    thumbnailImage:
+      "https://hbb.afl.rakuten.co.jp/hgb/53990074.84a6a168.53990075.cf856a83/?me_id=1213310&item_id=21617106&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fbook%2Fcabinet%2F3024%2F4902370553024.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    introParagraphs: [
+      "「発売は気になるけど、まだ決めきれない」「楽天にあるかだけ知りたい」でも大丈夫です。ここではSwitch 2（日本語・国内専用）を検討するときに、商品ページ側で順番に見ておけるポイントを並べました。読みやすさ優先なので、最終判断は自分のタイミングで大丈夫です。"
+    ],
+    forAudience: [
+      "Switch 2が気になっている人",
+      "買うか迷っている人",
+      "楽天で価格・在庫を確認したい人"
+    ],
+    body: [
+      {
+        heading: "Nintendo Switch 2（日本語・国内専用）とは？",
+        paragraphs: [
+          "商品ページには「日本語・国内専用」と載っていることがありますが、名前のとおり「日本での販売・利用前提の案内」として読んでおくのが無難です。自分のゲーム環境やアカウント運用が国内向けでまとめたいときの、出発点のひとつになります。",
+          "仕様・アクセサリ互換・タイトル側の環境説明などは発売前後に更新されやすいので、この記事は「最初の整理」だけに留めています。迷ったときは、このあと載せるウィジェットのリンク先だけ開いてでも、現在の説明文を確認すると安心です。"
+        ]
+      },
+      {
+        heading: "楽天で購入を検討するメリット（万人向けではない）",
+        paragraphs: [
+          "楽天市場はレビューの閲覧、ショップの説明粒度、ときどき実施される施策などを比べやすくするのが向いています。一方でチャネルは他にもあるので、「楽天で買うのがベスト」とは書きません。自分が重視する条件が見えやすければ、その窓口として活用する形で大丈夫です。"
+        ]
+      },
+      {
+        heading: "注意点①：日本語・国内専用モデルであること",
+        paragraphs: [
+          "並行輸入や転売の見え方など、サイト上の運用によっては細部が異なることがあります。利用シーンによっては追加の確認が必要になるので、この記事だけですべてを保証することはできません。"
+        ]
+      },
+      {
+        heading: "注意点②：価格と在庫は変わりやすい",
+        bullets: ["価格は変動する場合があります。", "在庫がある場合は早めの確認がおすすめ（無理して急ぐ、というより混乱しにくいタイミングを取るという意味です）。"],
+        paragraphs: []
+      },
+      {
+        heading: "注意点③：販売元、送料、発送予定をページで読む",
+        paragraphs: [
+          "同じ名前の本体でもショップが違えば見せ方や条件が変わります。送料込／別配送、発売日〜出荷目安、返品・評価の傾向は、決済の直前にもう一度見直すだけで体感の安心感がだいぶ変わります。"
+        ]
+      },
+      {
+        heading: "楽天市場での商品ウィジェット（コードは変更なし）",
+        paragraphs: [
+          "次のウィジェットは楽天側の埋め込みコードを変更せず載せています。表示がある時点より、ページの現在表示が優先ですので、ウィジェット表示だけで最終決めしないでください。",
+          "ウィジェットのあとにもう一歩進むなら、楽天で価格と在庫を確認するのも自然です。"
+        ],
+        rawHtml: `<table border="0" cellpadding="0" cellspacing="0"><tr><td><div style="border:1px solid #95a5a6;border-radius:.75rem;background-color:#FFFFFF;width:504px;margin:0px;padding:5px;text-align:center;overflow:hidden;"><table><tr><td style="width:240px"><a href="https://hb.afl.rakuten.co.jp/ichiba/53990074.84a6a168.53990075.cf856a83/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hgb/53990074.84a6a168.53990075.cf856a83/?me_id=1213310&item_id=21617106&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fbook%2Fcabinet%2F3024%2F4902370553024.jpg%3F_ex%3D240x240&s=240x240&t=picttext" border="0" style="margin:2px" alt="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]" title="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]"></a></td><td style="vertical-align:top;width:248px;display: block;"><p style="font-size:12px;line-height:1.4em;text-align:left;margin:0px;padding:2px 6px;word-wrap:break-word"><a href="https://hb.afl.rakuten.co.jp/ichiba/53990074.84a6a168.53990075.cf856a83/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">Nintendo Switch 2（日本語・国内専用）</a><br><span >価格：49,979円（税込、送料無料)</span> <span style="color:#BBB">(2026/5/9時点)</span></p><div style="margin:10px;"><a href="https://hb.afl.rakuten.co.jp/ichiba/53990074.84a6a168.53990075.cf856a83/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://static.affiliate.rakuten.co.jp/makelink/rl.svg" style="float:left;max-height:27px;width:auto;margin-top:0" ></a><a href="https://hb.afl.rakuten.co.jp/ichiba/53990074.84a6a168.53990075.cf856a83/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><div style="float:right;width:41%;height:27px;background-color:#bf0000;color:#fff!important;font-size:12px;font-weight:500;line-height:27px;margin-left:1px;padding: 0 12px;border-radius:16px;cursor:pointer;text-align:center;"> 楽天で購入 </div></a></div></td></tr></table></div><br><p style="color:#000000;font-size:12px;line-height:1.4em;margin:5px;word-wrap:break-word"></p></td></tr></table>`
+      },
+      {
+        heading: "どんな人に向きやすいか",
+        bullets: [
+          "国内向けのアカウント環境やソフト環境でまとめたいと考えている人",
+          "大型の本体は情報を一度整理してから、時間をかけて判断したい人",
+          "まず楽天での表示と条件だけメモっておければ十分という人"
+        ],
+        paragraphs: []
+      },
+      {
+        heading: "よくある不安（Q&A）",
+        paragraphs: [
+          "Q. アフィリエイトリンクは信用して大丈夫？／A. 広告リンクです。店舗の評価・レビューの傾向・返品条件など、自分の許容できる条件かページで読み取れるかが大事です。",
+          "Q. 「国内専用」と海外転送などは両立できる？／A. 環境によっては制約があります。転送サービスまで含めると個別差が出るので、公式・販売元・利用規約の記述を自分の前提で読み込んでください。この記事では断定できません。",
+          "Q. 価格表示が自分のときとずれるように見える。／A. 変動があります。ウィジェット表示とページ再読込の両方で、今の自分の画面上の条件を確認するのが安全です。"
+        ]
+      }
+    ],
+    conclusionParagraphs: [
+      "Switch 2は注目機なので、「今」「まだ」のどちらの立ち位置でも自然です。そのうえで次の確認だけしておけば十分なときもあります。迷っているときほど情報が散らばりやすいので、落ち着いて楽天で価格と在庫を確認しておくだけでも状況は整理されやすいです。ゆっくり決める時間を取ってください。"
+    ],
+    relatedArticleIds: ["rakuten-gear-how-to-choose", "heavy-household-online-stock", "solo-man-first-kit"]
+  },
+  {
+    id: "stainless-ice-pack-decori-rakuten",
+    title: "ステンレス製アイスパック（保冷剤）は楽天でどう見る？価格・クーポン・買う前の確認ポイント",
+    category: "life",
+    date: "2026-05-09",
+    readTime: "7分",
+    summary:
+      "ステンレス製の強力保冷・アイスパックを楽天で探すときの見方です。キャンプ・お弁当・熱中症対策の一例として。価格は変わるのでページで確認を。※PR・アフィリエイト含む",
+    metaDescription:
+      "ステンレス・アイスパックを楽天で探すときの見方。クーポン・送料・在庫・仕様のチェック。※PR・アフィリエイト含む",
+    productIds: [],
+    hideProductCatalog: true,
+    thumbnailImage:
+      "https://hbb.afl.rakuten.co.jp/hgb/5399caa6.fca975ac.5399caa7.d5127436/?me_id=1431235&item_id=10000319&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fdecori%2Fcabinet%2F12282578%2Fimgrc0096993936.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    introParagraphs: [
+      "※本記事には広告・アフィリエイトリンクが含みます。",
+      "ステンレス製の「いわゆる強めの冷やし」を探していると、名前に保冷・アイスパック・クーラーと並ぶタイプがあります。売り文句だけでなく、自分が何を優先しているかで選びやすさが変わるので、この記事では押し売りより確認項目を並べました。"
+    ],
+    forAudience: [
+      "キャンプ・アウトドアや釣りの荷物が増えやすい人",
+      "お弁当・小型クーラーを冷やしたい方向けに検討したい人",
+      "楽天での価格帯やクーポン表記を一度整理したい人"
+    ],
+    body: [
+      {
+        heading: "ステンレス製アイスパック（強力保冷寄せ）とは？",
+        paragraphs: [
+          "商品説明側では長時間・冷蔵冷凍対応・再利用など「用途を広げるキーワード」が並びがちです。実環境では外気温・直射日光・収納方法で体感は変わるので、この記事では体感の断定はしません。「どの説明があると自分は安心できるか」を軸に商品ページへ進んでください。"
+        ]
+      },
+      {
+        heading: "楽天で見るときのメリット",
+        paragraphs: [
+          "ショップのレビューや質問への返答、セット内容や寸法といった細部まで、一度に並べやすいのがウィンドウショッピングとしての強みです。クーポンや期間限定表示が付くときもありますが、適用条件はページで読み込むほうが安全です。"
+        ]
+      },
+      {
+        heading: "買う前に確認したいこと",
+        bullets: [
+          "価格は変動する場合があります（ウィジェット表示よりリンク先ページを優先）。",
+          "在庫・発送・返品・送料の欄までスクロールして確認するのが無難です。",
+          "「熱中症対策」などの文言は自分の環境と照らしすぎない（医療的な効果まで期待しない）。"
+        ],
+        paragraphs: []
+      },
+      {
+        heading: "楽天市場の商品ウィジェット（コード変更なし）",
+        paragraphs: [
+          "以下はいただいた楽天アフィリエイト用HTMLです。リンク・画像・属性は変更していません。表示価格・クーポン文言はタイミングで変わることがあるので、その都度ページを確認してください。"
+        ],
+        rawHtml: `<table border="0" cellpadding="0" cellspacing="0"><tr><td><div style="border:1px solid #95a5a6;border-radius:.75rem;background-color:#FFFFFF;width:504px;margin:0px;padding:5px;text-align:center;overflow:hidden;"><table><tr><td style="width:240px"><a href="https://hb.afl.rakuten.co.jp/ichiba/5399caa6.fca975ac.5399caa7.d5127436/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hgb/5399caa6.fca975ac.5399caa7.d5127436/?me_id=1431235&item_id=10000319&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fdecori%2Fcabinet%2F12282578%2Fimgrc0096993936.jpg%3F_ex%3D240x240&s=240x240&t=picttext" border="0" style="margin:2px" alt="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]" title="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]"></a></td><td style="vertical-align:top;width:248px;display: block;"><p style="font-size:12px;line-height:1.4em;text-align:left;margin:0px;padding:2px 6px;word-wrap:break-word"><a href="https://hb.afl.rakuten.co.jp/ichiba/5399caa6.fca975ac.5399caa7.d5127436/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">＼残り500名様限定！65％OFFクーポンまもなく終了！／＼全店対象！60％OFF 9日20時〜2時間限定／保冷剤 ステンレス 長時間 強力保冷 クーラーボックス 小型 長持ち 繰り返し使える 冷蔵冷凍対応 熱中症対策 スピード冷凍 ステンレス製アイスパック お弁当 釣り アウトドア</a><br><span >価格：2,960円～（税込、送料無料)</span> <span style="color:#BBB">(2026/5/9時点)</span></p><div style="margin:10px;"><a href="https://hb.afl.rakuten.co.jp/ichiba/5399caa6.fca975ac.5399caa7.d5127436/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://static.affiliate.rakuten.co.jp/makelink/rl.svg" style="float:left;max-height:27px;width:auto;margin-top:0" ></a><a href="https://hb.afl.rakuten.co.jp/ichiba/5399caa6.fca975ac.5399caa7.d5127436/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><div style="float:right;width:41%;height:27px;background-color:#bf0000;color:#fff!important;font-size:12px;font-weight:500;line-height:27px;margin-left:1px;padding: 0 12px;border-radius:16px;cursor:pointer;text-align:center;"> 楽天で購入 </div></a></div></td></tr></table></div><br><p style="color:#000000;font-size:12px;line-height:1.4em;margin:5px;word-wrap:break-word"></p></td></tr></table>`
+      },
+      {
+        heading: "迷ったときの次の一手",
+        paragraphs: [
+          "ウィジェットの「楽天で購入」から開いて、自分の許容できる条件だけチェックリスト化するのでも十分です。在庫がある場合は早めの確認がおすすめ、というだけでなく、クーポン終了タイミングは焦りポイントになりやすいので、無理のない範囲で大丈夫です。"
+        ]
+      }
+    ],
+    conclusionParagraphs: [
+      "強い冷やしは環境との相性が大きく、体感は読者のみなさんでバランスが変わります。断言は避けましたが、そのうえでも「自分が何を防ぎたいか」だけは文章にしてから買うと失敗談が減りやすいです。気になったら一度だけページを開いて、今日の自分の気持ちで判断してください。"
+    ],
+    relatedArticleIds: ["car-useful-gear-7", "travel-light-packing-7", "disaster-helpful-gear-7"]
   }
 ];
 
@@ -2265,14 +2417,6 @@ function getCategory(id) {
 
 function getProducts(ids) {
   return (ids || []).map((id) => products.find((product) => product.id === id)).filter(Boolean);
-}
-
-function getArticleImage(article) {
-  const explicitImage = article.image || article.thumbnail || article.eyecatch;
-  const pickImage = article.picks?.find((pick) => pick.imageUrl)?.imageUrl;
-  const productImage = getProducts(article.productIds).find((product) => product.imageUrl)?.imageUrl;
-
-  return explicitImage || pickImage || productImage || placeholderImage(article.title, article.category);
 }
 
 function getProductUrl(product) {
@@ -2305,19 +2449,70 @@ function resolveSiteAssetUrl(pathOrUrl) {
   return `${SITE_URL}/${clean}`;
 }
 
-/** 記事カード：明示サムネ → カテゴリ共通画像 → 先頭商品・ピック（いずれもURL化。404時は onerror でグラデ） */
-function getArticleCardImageUrl(article) {
-  const direct = article.thumbnailImage || article.heroImage;
-  if (direct) return resolveSiteAssetUrl(direct);
-  const catFile = CATEGORY_THUMB_FILES[article.category];
-  if (catFile) return `${SITE_URL}/${catFile}`;
-  const pid = (article.productIds || [])[0];
-  if (pid) {
-    const p = products.find((x) => x.id === pid);
-    if (p?.imageUrl) return p.imageUrl;
+/** URL に thumbDebug=1 があるときだけサムネ決定を console に出す */
+function thumbDebugEnabled() {
+  if (typeof window === "undefined") return false;
+  try {
+    return /(?:^|[?&])thumbDebug=1(?:&|$)/.test(window.location.search || "");
+  } catch {
+    return false;
   }
-  if (article.picks?.[0]?.imageUrl) return article.picks[0].imageUrl;
+}
+
+/**
+ * 一覧用サムネのテーマ。title / id / summary のキーワードを優先し、category 誤りを補正しやすくする。
+ * 当たらない場合は空文字（呼び出し側で article.category を使う）。
+ */
+function inferArticleCardThumbCategoryId(article) {
+  const text = `${article.id || ""} ${article.title || ""} ${article.summary || ""}`;
+  const rules = [
+    [/寝袋|寝泊まり|マットレス|眠れる|シュラフ|ヌーカ|寝具|枕(?!台)/, "sleep"],
+    [/保冷剤|アイスパック|クーラーボックス.*小型|強力保冷|冷蔵冷凍対応|スピード冷凍|熱中症対策|アウトドア.*アイス|釣り.*保冷/, "life"],
+    [/防災|災害|非常用|停電|備蓄|震災|災害時/, "disaster"],
+    [/ニンテンドー|Switch|任天堂|ゲーム機/, "game"],
+    [/バイク|ツーリング|ライダー|原付|二輪/, "bike"],
+    [/車に積|車内|車載|ドライブ|カー用品|自動車|車・移動/, "car"],
+    [/デスク|パソコン|PC周り|PC・|作業環境|ガジェット|ケーブルトレ|配線.*整理/, "pc-ai"],
+    [/筋トレ|ダンベル|懸垂|トレーニング|家トレ|ワークアウト/, "training"],
+    [/一人暮らし|寮生活|ワンルーム|単身赴任/, "solo"]
+  ];
+  for (const [re, catId] of rules) {
+    if (re.test(text)) return catId;
+  }
   return "";
+}
+
+function logArticleCardThumbDebug(article, imageUrl, note) {
+  if (!thumbDebugEnabled()) return;
+  const inferred = inferArticleCardThumbCategoryId(article);
+  console.log("[article-card-thumb]", {
+    title: article.title,
+    slug: article.id,
+    category: article.category,
+    inferredKeywordCategory: inferred || "(なし)",
+    note,
+    finalImageUrl: imageUrl || "(空・プレースホルダー)"
+  });
+}
+
+/**
+ * 記事一覧カードの画像 URL。
+ * ① thumbnailImage ② thumbnail ③ heroImage ④ キーワード or category に対応した共通サムネ ⑤ 空（グラデ枠）
+ * ※楽天商品の先頭ピック画像はテーマと一致しないことが多いため一覧では使わない。
+ */
+function getArticleCardImageUrl(article) {
+  const direct = article.thumbnailImage || article.thumbnail || article.heroImage;
+  if (direct) {
+    const url = resolveSiteAssetUrl(direct);
+    logArticleCardThumbDebug(article, url, "explicit(thumbnailImage|thumbnail|heroImage)");
+    return url;
+  }
+  const inferred = inferArticleCardThumbCategoryId(article);
+  const catKey = inferred || article.category;
+  const catFile = CATEGORY_THUMB_FILES[catKey];
+  const url = catFile ? `${SITE_URL}/${catFile}` : "";
+  logArticleCardThumbDebug(article, url, `category-thumb(key=${catKey}, inferred=${Boolean(inferred)})`);
+  return url;
 }
 
 function resolveRelatedArticleIds(article, maxRelated = 3) {
@@ -2774,9 +2969,10 @@ function renderArticle(id) {
 
   const bodySections = renderArticleBodySectionsWithMidAd(article);
   const picksSection = hasPicks ? renderPicksSectionWithMidAd(article) : "";
-  const catalogSummary = hasPicks
-    ? ""
-    : `
+  const catalogSummary =
+    hasPicks || article.hideProductCatalog
+      ? ""
+      : `
           <div class="summary-box">
             <h2>この記事で紹介した商品まとめ</h2>
             <p>気になる装備は、価格・レビュー・在庫を楽天で確認してから選んでください。</p>
@@ -2851,11 +3047,15 @@ function renderProfilePage() {
 
 function renderArticleSection(section, index) {
   const id = `section-${index}`;
+  const paras = section.paragraphs || [];
+  const rawHtml =
+    typeof section.rawHtml === "string" ? section.rawHtml : typeof section.embedHtml === "string" ? section.embedHtml : "";
   return `
     <section class="article-section" id="${id}">
-      <h2>${escapeHtml(section.heading)}</h2>
-      ${section.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
-      ${section.bullets ? `<ul>${section.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : ""}
+      ${section.heading ? `<h2>${escapeHtml(section.heading)}</h2>` : ""}
+      ${paras.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
+      ${section.bullets?.length ? `<ul>${section.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : ""}
+      ${rawHtml ? `<div class="article-embed">${rawHtml}</div>` : ""}
     </section>
   `;
 }
@@ -2885,7 +3085,7 @@ function renderArticleCard(article, options = {}) {
 
   return `
     <article class="article-card">
-      <a class="${thumbClass}" href="${escapeHtml(articleUrl)}" aria-label="${escapeHtml(article.title)}">
+      <a class="${thumbClass}" href="${escapeHtml(articleUrl)}">
         ${thumbImg}
         <span class="article-thumb__meta">
           <span>${escapeHtml(category.name)}</span>
@@ -2951,4 +3151,3 @@ function renderProfileBox() {
     </section>
   `;
 }
-

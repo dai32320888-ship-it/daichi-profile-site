@@ -450,16 +450,6 @@ h3 {
   min-height: 100%;
   flex-direction: column;
   overflow: hidden;
-  transition:
-    border-color 0.18s ease,
-    box-shadow 0.18s ease,
-    transform 0.18s ease;
-}
-
-.article-card:hover {
-  border-color: rgba(89, 98, 70, 0.5);
-  box-shadow: 0 20px 44px rgba(16, 18, 20, 0.11);
-  transform: translateY(-3px);
 }
 
 .article-thumb {
@@ -485,6 +475,9 @@ h3 {
   align-items: stretch;
   justify-content: stretch;
   background: var(--surface-soft);
+  /* 親の幅に合わせて枠を固定（絶対配置の画像だけでは高さが不安定になり、カード間でずれやすい） */
+  aspect-ratio: 16 / 9;
+  min-height: 0;
 }
 
 .article-thumb--photo img {
@@ -492,13 +485,9 @@ h3 {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   z-index: 0;
-  transition: transform 0.35s ease;
-}
-
-.article-card:hover .article-thumb--photo img {
-  transform: scale(1.045);
 }
 
 .article-thumb__meta {
@@ -515,16 +504,12 @@ h3 {
 .article-thumb__meta span,
 .article-thumb__meta strong {
   display: inline-flex;
-  align-items: center;
-  min-height: 30px;
   padding: 5px 10px;
   border: 1px solid rgba(255, 255, 255, 0.34);
   border-radius: 999px;
-  background: rgba(16, 18, 20, 0.5);
-  color: #fff;
+  background: rgba(16, 18, 20, 0.36);
   font-size: 12px;
   font-weight: 900;
-  backdrop-filter: blur(8px);
 }
 
 .article-thumb--photo .article-thumb__meta {
@@ -540,24 +525,8 @@ h3 {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 11px;
-  padding: 18px;
-}
-
-.article-body h3 {
-  display: -webkit-box;
-  min-height: 3.75em;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  font-size: 19px;
-}
-
-.article-body p {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  gap: 12px;
+  padding: 20px;
 }
 
 .article-body p,
@@ -692,6 +661,14 @@ h3 {
   padding: 16px 18px 16px 34px;
   border-radius: 10px;
   background: var(--olive-soft);
+}
+
+/* 記事本文に埋め込んだ楽天ウィジェット等（固定幅 table のはみ出しは横スクロールで吸収） */
+.article-embed {
+  max-width: 100%;
+  margin-top: 18px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .summary-box {
