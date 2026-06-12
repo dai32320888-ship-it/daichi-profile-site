@@ -1,4 +1,4 @@
-﻿const fs = require("fs");
+const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 const { midArticleSlot, footArticleSlot, sidebarSlot } = require("./a8-ad-slots");
@@ -220,7 +220,7 @@ function layout({ title, description, canonical, body, structuredData, ogType = 
     <footer class="site-footer">
       <div>
         <strong>元自衛官の楽天装備レビュー</strong>
-        <p>当サイトはアフィリエイト広告を利用しています。価格・在庫・レビューはリンク先の楽天市場で最新情報をご確認ください。</p>
+        <p>※当サイトでは楽天アフィリエイトを利用しています。商品リンクから購入されると、運営者に報酬が発生する場合があります。価格・在庫・レビューはリンク先の楽天市場で最新情報をご確認ください。</p>
       </div>
       <a href="../../index.html">トップへ戻る</a>
     </footer>
@@ -312,44 +312,35 @@ function layoutHome({ title, description, canonical, body, structuredData }) {
 `;
 }
 
-function normalizeParagraphs(value) {
-  if (!value) return [];
-  return Array.isArray(value) ? value : [value];
+function renderProduct(product) {
+  const url = productUrl(product);
+  const media = product.imageUrl
+    ? `<img src="${product.imageUrl}" alt="${esc(product.name)}" loading="lazy" />`
+    : `<div class="product-image-pending"><span>画像準備中</span><small>楽天の商品ページで画像を確認できます</small></div>`;
+  return `<article class="product-card">
+    <a class="product-media" href="${esc(url)}" target="_blank" rel="nofollow sponsored noopener noreferrer">
+      ${media}
+    </a>
+    <div class="product-content">
+      <div class="product-category">${esc(categoryName(product.category))}</div>
+      <h3>${esc(product.name)}</h3>
+      <p class="product-tagline">${esc(productTagline(product))}</p>
+      <p>${esc(productIntro(product))}</p>
+      <dl>
+        <div><dt>おすすめする人</dt><dd>${esc(product.recommendedFor)}</dd></div>
+        <div><dt>注意点</dt><dd>${esc(productCaution(product))}</dd></div>
+      </dl>
+      <a class="button rakuten" href="${esc(url)}" target="_blank" rel="nofollow sponsored noopener noreferrer">楽天で価格を見る</a>
+    </div>
+  </article>`;
 }
 
-function pickResolveUrl(pick) {
-  if (pick.affiliateUrl) return pick.affiliateUrl;
-  if (pick.rakutenProductUrl) return rakutenAffiliateUrl(pick.rakutenProductUrl);
-  if (pick.rakutenSearchKeyword) return rakutenSearchAffiliateUrl(pick.rakutenSearchKeyword);
-  return "";
-}
-
-function renderArticleIntroAudience(article) {
-  const intro = normalizeParagraphs(article.introParagraphs)
-    .map((p) => `<p>${esc(p)}</p>`)
-    .join("");
-  const audience = article.forAudience?.length
-    ? `<div class="summary-box audience-box"><h2>この記事はこんな人向け</h2><ul>${article.forAudience.map((t) => `<li>${esc(t)}</li>`).join("")}</ul></div>`
-    : "";
-  const introBlock = intro ? `<div class="article-intro">${intro}</div>` : "";
-  return `${introBlock}${audience}`;
-}
-
-function renderPickBlock(pick, index) {
-  const url = pickResolveUrl(pick);
-  const cat = getCategory(pick.category);
-  const catName = cat?.name || "装備";
-  const imgSrc = pick.imageUrl || placeholderImage(pick.imageLabel || pick.name, pick.category);
-  const btn = url
-    ? `<a class="button rakuten" href="${esc(url)}" target="_blank" rel="nofollow sponsored noopener noreferrer">楽天で見る</a>`
-    : `<button class="button disabled" type="button" disabled>リンク準備中</button>`;
-  const mediaOpen = url
-    ? `<a class="product-media" href="${esc(url)}" target="_blank" rel="nofollow sponsored noopener noreferrer" aria-label="${esc(pick.name)}">`
-    : `<div class="product-media" role="img" aria-label="${esc(pick.name)}">`;
-  const mediaClose = url ? "</a>" : "</div>";
-  const intros = normalizeParagraphs(pick.intro)
-    .map((p) => `<p>${esc(p)}</p>`)
-    .join("");
+function renderPick(pick) {
+  const url = pickUrl(pick);
+  const image = pick.imageUrl
+    ? `<img src="${esc(pick.imageUrl)}" alt="${esc(pick.name)}" loading="lazy" />`
+    : `<div class="product-image-pending"><span>${esc(pick.imageLabel || pick.name)}</span></div>`;
+  const intros = Array.isArray(pick.intro) ? pick.intro : pick.intro ? [pick.intro] : [];
   const scenes = pick.scenes?.length
     ? `<h3 class="pick-subheading">こんな場面で使える</h3><ul>${pick.scenes.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>`
     : "";
@@ -444,7 +435,20 @@ function renderProduct(product) {
       </dl>
       <a class="button rakuten" href="${esc(url)}" target="_blank" rel="nofollow sponsored noopener noreferrer">楽天で見る</a>
     </div>
-  </article>`;
+  </section>`;
+}
+
+function renderBodySection(section) {
+  const paras = section.paragraphs || [];
+  const bullets = section.bullets || [];
+  const rawHtml =
+    typeof section.rawHtml === "string" ? section.rawHtml : typeof section.embedHtml === "string" ? section.embedHtml : "";
+  return `<section class="article-section">
+    ${section.heading ? `<h2>${esc(section.heading)}</h2>` : ""}
+    ${paras.map((p) => `<p>${esc(p)}</p>`).join("")}
+    ${bullets.length ? `<ul>${bullets.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>` : ""}
+    ${rawHtml ? `<div class="article-embed">${rawHtml}</div>` : ""}
+  </section>`;
 }
 
 function renderArticle(article) {
@@ -469,17 +473,6 @@ function renderArticle(article) {
           <p>気になる装備は、価格・レビュー・在庫を楽天で確認してから選んでください。</p>
         </div>
         <div class="product-grid compact">${articleProducts.map(renderProduct).join("")}</div>
-        ${
-          sameCategoryProducts.length
-            ? `
-              <div class="summary-box">
-                <h2>同カテゴリの商品</h2>
-                <p>${esc(categoryName(article.category))}でほかにチェックしたい装備です。</p>
-              </div>
-              <div class="product-grid compact">${sameCategoryProducts.map(renderProduct).join("")}</div>
-            `
-            : ""
-        }
       `;
   const cat = getCategory(article.category);
   const catDesc = cat?.description || "";
@@ -491,7 +484,7 @@ function renderArticle(article) {
         <h1>${esc(article.title)}</h1>
         <p class="lead">${esc(article.summary)}</p>
         <p class="article-meta">${esc(article.date)} ・ 読了目安 ${esc(article.readTime)}</p>
-        <p class="ad-notice">当サイトはアフィリエイト広告を利用しています。</p>
+        <p class="ad-notice">※当サイトでは楽天アフィリエイトを利用しています。</p>
       </header>
       <div class="article-content">
         <p class="article-disclosure">${esc(ARTICLE_DISCLOSURE_TEXT)}</p>
@@ -635,7 +628,7 @@ const urls = [`${SITEMAP_BASE_URL}/`, ...articles.map((article) => `${SITEMAP_BA
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
-  .map((url) => `  <url>\n    <loc>${url}</loc>\n    <lastmod>2026-05-04</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${url.endsWith("/rakuten-gear-review/") ? "1.0" : "0.8"}</priority>\n  </url>`)
+  .map((url) => `  <url>\n    <loc>${url}</loc>\n    <lastmod>2026-05-03</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${url.endsWith("/rakuten-gear-review/") ? "1.0" : "0.8"}</priority>\n  </url>`)
   .join("\n")}
 </urlset>
 `;
@@ -658,4 +651,3 @@ const itemList = {
 
 fs.writeFileSync(path.join(root, "structured-data.json"), JSON.stringify(itemList, null, 2), "utf8");
 console.log(`Generated ${articles.length} article pages and sitemap.xml`);
-

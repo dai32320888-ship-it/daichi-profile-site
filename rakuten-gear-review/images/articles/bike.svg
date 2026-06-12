@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="Bike touring gear placeholder">
+  <rect width="1200" height="750" fill="#edf0e7"/>
+  <path d="M0 544h1200v206H0z" fill="#202522"/>
+  <path d="M192 552h816" stroke="#c6b98b" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="318" cy="522" r="88" fill="#101214"/>
+  <circle cx="858" cy="522" r="88" fill="#101214"/>
+  <circle cx="318" cy="522" r="42" fill="#667154"/>
+  <circle cx="858" cy="522" r="42" fill="#667154"/>
+  <path d="M318 522l166-164h210l164 164M484 358l-62-106h142l58 106" fill="none" stroke="#4d5842" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="638" y="240" width="170" height="112" rx="20" fill="#263325"/>
+  <path d="M742 240l72-76" stroke="#263325" stroke-width="26" stroke-linecap="round"/>
+</svg>

@@ -696,6 +696,37 @@ a.product-media:focus-visible img {
   background: var(--surface);
 }
 
+.article-main-visual,
+.article-section-visual {
+  overflow: hidden;
+  margin: 0 0 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft);
+}
+
+.article-main-visual img,
+.article-section-visual img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  object-position: center;
+}
+
+.article-main-visual figcaption {
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.article-section-visual {
+  margin-top: 16px;
+  margin-bottom: 18px;
+}
+
 .article-section + .article-section {
   margin-top: 34px;
   padding-top: 30px;
@@ -962,20 +993,76 @@ a.product-media:focus-visible img {
   margin-top: 10px;
 }
 
-.editor-link-hint {
-  margin: 14px 0 0;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px dashed var(--line);
-  background: rgba(255, 255, 255, 0.85);
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.55;
+.product-link-card {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid rgba(191, 0, 0, 0.2);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(16, 18, 20, 0.05);
 }
 
-.editor-link-hint code {
-  font-size: 11px;
-  word-break: break-all;
+.product-link-card:hover {
+  border-color: #bf0000;
+  transform: translateY(-1px);
+}
+
+.product-link-card__image {
+  display: grid;
+  width: 78px;
+  height: 78px;
+  overflow: hidden;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-soft);
+}
+
+.product-link-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+}
+
+.product-link-card__text {
+  min-width: 0;
+}
+
+.product-link-card__text strong,
+.product-link-card__text small {
+  display: block;
+}
+
+.product-link-card__text strong {
+  color: var(--black);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.product-link-card__text small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.product-link-card__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #bf0000;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  white-space: nowrap;
 }
 
 .picks-section-title {

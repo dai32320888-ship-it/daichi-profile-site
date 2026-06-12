@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="Car gear placeholder">
+  <rect width="1200" height="750" fill="#edf0eb"/>
+  <path d="M0 534h1200v216H0z" fill="#2b302b"/>
+  <rect x="156" y="220" width="888" height="294" rx="42" fill="#f8f8f3"/>
+  <path d="M250 220h700l-96-126H346z" fill="#516047"/>
+  <rect x="380" y="122" width="185" height="98" rx="12" fill="#d8ded0"/>
+  <rect x="633" y="122" width="185" height="98" rx="12" fill="#d8ded0"/>
+  <circle cx="344" cy="518" r="78" fill="#101214"/>
+  <circle cx="856" cy="518" r="78" fill="#101214"/>
+  <circle cx="344" cy="518" r="34" fill="#c6b98b"/>
+  <circle cx="856" cy="518" r="34" fill="#c6b98b"/>
+  <rect x="742" y="292" width="170" height="116" rx="18" fill="#6a7358"/>
+</svg>

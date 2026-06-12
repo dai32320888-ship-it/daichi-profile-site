@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="Disaster gear placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f1e6"/>
+      <stop offset="1" stop-color="#cfd4c4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <rect x="95" y="112" width="1010" height="526" rx="28" fill="#ffffff" opacity=".62"/>
+  <rect x="168" y="248" width="292" height="242" rx="24" fill="#4d5a42"/>
+  <rect x="205" y="287" width="218" height="34" rx="17" fill="#c8bb8f"/>
+  <rect x="235" y="348" width="158" height="104" rx="18" fill="#263325"/>
+  <circle cx="675" cy="367" r="112" fill="#263325"/>
+  <circle cx="675" cy="367" r="70" fill="#f4f1e6"/>
+  <rect x="820" y="286" width="146" height="186" rx="22" fill="#5f6a4c"/>
+  <rect x="852" y="318" width="82" height="16" rx="8" fill="#e8e1c7"/>
+  <path d="M120 626h960" stroke="#263325" stroke-width="18" stroke-linecap="round" opacity=".88"/>
+</svg>
