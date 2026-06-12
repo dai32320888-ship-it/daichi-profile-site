@@ -44,6 +44,21 @@ function productUrl(product) {
   return product.affiliateUrl || product.rakutenProductUrl || "";
 }
 
+function rakutenAffiliateUrl(rakutenProductUrl) {
+  return `https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=${encodeURIComponent(rakutenProductUrl)}&link_type=hybrid_url`;
+}
+
+function rakutenSearchAffiliateUrl(keyword) {
+  return rakutenAffiliateUrl(`https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword)}/`);
+}
+
+function pickUrl(pick) {
+  if (pick.affiliateUrl) return pick.affiliateUrl;
+  if (pick.rakutenProductUrl) return rakutenAffiliateUrl(pick.rakutenProductUrl);
+  if (pick.rakutenSearchKeyword) return rakutenSearchAffiliateUrl(pick.rakutenSearchKeyword);
+  return "";
+}
+
 function productTagline(product) {
   return product.tagline || product.description;
 }
@@ -126,15 +141,66 @@ function renderProduct(product) {
   </article>`;
 }
 
+function renderPick(pick) {
+  const url = pickUrl(pick);
+  const image = pick.imageUrl
+    ? `<img src="${esc(pick.imageUrl)}" alt="${esc(pick.name)}" loading="lazy" />`
+    : `<div class="product-image-pending"><span>${esc(pick.imageLabel || pick.name)}</span></div>`;
+  const intros = Array.isArray(pick.intro) ? pick.intro : pick.intro ? [pick.intro] : [];
+  const scenes = pick.scenes?.length
+    ? `<h3 class="pick-subheading">こんな場面で使える</h3><ul>${pick.scenes.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>`
+    : "";
+  const caution = pick.caution?.length
+    ? `<h3 class="pick-subheading">注意点</h3><ul>${pick.caution.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>`
+    : "";
+  const linkCard = url
+    ? `<a class="product-link-card" href="${esc(url)}" target="_blank" rel="nofollow sponsored noopener noreferrer">
+        <span class="product-link-card__image">${image}</span>
+        <span class="product-link-card__text"><strong>${esc(pick.name)}</strong><small>画像つきリンクで楽天の商品ページを確認</small></span>
+        <span class="product-link-card__button">楽天で見る</span>
+      </a>`
+    : "";
+  const media = url
+    ? `<a class="product-media" href="${esc(url)}" target="_blank" rel="nofollow sponsored noopener noreferrer">${image}</a>`
+    : `<div class="product-media">${image}</div>`;
+  return `<section class="pick-block article-section">
+    <h2>${esc(pick.name)}</h2>
+    <div class="pick-layout">
+      ${media}
+      <div class="pick-body">
+        ${intros.map((p) => `<p>${esc(p)}</p>`).join("")}
+        ${scenes}
+        ${caution}
+        ${linkCard}
+      </div>
+    </div>
+  </section>`;
+}
+
+function renderBodySection(section) {
+  const paras = section.paragraphs || [];
+  const bullets = section.bullets || [];
+  const rawHtml =
+    typeof section.rawHtml === "string" ? section.rawHtml : typeof section.embedHtml === "string" ? section.embedHtml : "";
+  return `<section class="article-section">
+    ${section.heading ? `<h2>${esc(section.heading)}</h2>` : ""}
+    ${paras.map((p) => `<p>${esc(p)}</p>`).join("")}
+    ${bullets.length ? `<ul>${bullets.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>` : ""}
+    ${rawHtml ? `<div class="article-embed">${rawHtml}</div>` : ""}
+  </section>`;
+}
+
 function renderArticle(article) {
   const dir = path.join(root, "article", article.id);
   fs.mkdirSync(dir, { recursive: true });
-  const articleProducts = article.productIds.map((id) => products.find((product) => product.id === id)).filter(Boolean);
+  const articleProducts = (article.productIds || []).map((id) => products.find((product) => product.id === id)).filter(Boolean);
+  const articlePicks = article.picks || [];
   const canonical = `${siteUrl}/article/${article.id}/`;
   const articleContent = article.customHtml || `
-        ${article.body
-          .map((section) => `<section class="article-section"><h2>${esc(section.heading)}</h2>${section.paragraphs.map((p) => `<p>${esc(p)}</p>`).join("")}${section.bullets ? `<ul>${section.bullets.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>` : ""}</section>`)
+        ${(article.body || [])
+          .map(renderBodySection)
           .join("")}
+        ${articlePicks.length ? `<h2 class="picks-section-title">今回ピックアップする${articlePicks.length}つ</h2>${articlePicks.map(renderPick).join("")}` : ""}
         <div class="summary-box">
           <h2>この記事で紹介した商品まとめ</h2>
           <p>気になる装備は、価格・レビュー・在庫を楽天で確認してから選んでください。</p>

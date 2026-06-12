@@ -31,7 +31,54 @@ const CONTACT_X_HANDLE = "@darui_tsubushi";
 const ARTICLE_DISCLOSURE_TEXT =
   "本ページには広告・アフィリエイトリンクが含まれます。紹介内容は、読者が比較しやすいように整理しています。";
 
-const RAKUTEN_AFFILIATE_PATH = "53663d8f.6b4c8828.53663d90.626681b4";
+const STARTER_ROUTES = [
+  {
+    label: "まず生活を整える",
+    title: "一人暮らし・寮生活の初期装備",
+    description: "収納、鍵、日用品の置き場から整えると、部屋が荒れにくくなります。",
+    href: "#/category/solo"
+  },
+  {
+    label: "備えを増やす",
+    title: "普段使いできる防災装備",
+    description: "非常時だけの道具ではなく、日常でも使えるライト・トイレ・寝具を優先します。",
+    href: "#/category/disaster"
+  },
+  {
+    label: "移動をラクにする",
+    title: "車・バイクに積む小物",
+    description: "雨、充電、収納の不安を減らすと、移動中の疲れがかなり変わります。",
+    href: "#/category/car"
+  }
+];
+
+const EDITORIAL_POLICY = [
+  {
+    title: "置き場所が決まるか",
+    description: "買ったあとに床や机を圧迫しないか。収納・車載・防災品はまず置き場所を見ます。"
+  },
+  {
+    title: "疲れていても使えるか",
+    description: "面倒な手順が多い道具は続きません。出す、戻す、片付ける動作が少ないものを重視します。"
+  },
+  {
+    title: "複数の場面で使えるか",
+    description: "日常、防災、移動で兼用できる装備は眠りにくく、買った後の満足度も上がりやすいです。"
+  },
+  {
+    title: "楽天で比較しやすいか",
+    description: "価格、送料、レビュー、在庫を商品ページで確認しやすいジャンルを中心に整理します。"
+  }
+];
+
+const BUYER_CHECKLIST = [
+  "サイズと置き場所をメジャーで確認する",
+  "レビューは低評価から見て、壊れ方や不満点を先に読む",
+  "送料、納期、返品条件を商品ページで確認する",
+  "同じ用途の商品を2つ以上見比べてから決める"
+];
+
+const RAKUTEN_AFFILIATE_PATH = "54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d";
 
 function rakutenAffiliateUrl(rakutenProductUrl) {
   return `https://hb.afl.rakuten.co.jp/ichiba/${RAKUTEN_AFFILIATE_PATH}/?pc=${encodeURIComponent(rakutenProductUrl)}&link_type=hybrid_url`;
@@ -72,8 +119,8 @@ const products = [
     category: "life",
     description: "玄関に鍵の定位置を作れて、朝の鍵探しを減らせる。",
     recommendedFor: "鍵・印鑑・小物をよく探す人",
-    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/53663d8f.6b4c8828.53663d90.626681b4/?me_id=1227333&item_id=10014772&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Froomy%2Fcabinet%2F500cart_all%2F500cart_11g%2Fp5-4%2Fymz1082-mv01c-0_gt01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Froomy%2Fymz19aug12h28%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1227333&item_id=10014772&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Froomy%2Fcabinet%2F500cart_all%2F500cart_11g%2Fp5-4%2Fymz1082-mv01c-0_gt01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Froomy%2Fymz19aug12h28%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/roomy/ymz19aug12h28/",
     searchKeyword: "tower キーフック"
   },
@@ -83,8 +130,8 @@ const products = [
     category: "pc-ai",
     description: "デスク下の配線をまとめて、作業場をスッキリさせられる。",
     recommendedFor: "PC周りのコードがごちゃついている人",
-    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/53664af0.0b5b44f4.53664af1.1d2db78c/?me_id=1245016&item_id=10019233&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fapricot-r%2Fcabinet%2Fyjtn%2F3605-a260.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53664af0.0b5b44f4.53664af1.1d2db78c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fapricot-r%2F3605-a260%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1245016&item_id=10019233&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fapricot-r%2Fcabinet%2Fyjtn%2F3605-a260.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fapricot-r%2F3605-a260%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/apricot-r/3605-a260/",
     searchKeyword: "ケーブルトレー デスク下"
   },
@@ -94,8 +141,8 @@ const products = [
     category: "solo",
     description: "使わない時はたためて、衣類や小物をまとめやすい。",
     recommendedFor: "寮生活・一人暮らしで収納が少ない人",
-    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/53664e39.cb170390.53664e3a.664bed07/?me_id=1313357&item_id=10002010&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Frisu-proshop%2Fcabinet%2Fimages%2Fgifu-pla%2F63567-5_01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53664e39.cb170390.53664e3a.664bed07/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frisu-proshop%2F63567-5%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1313357&item_id=10002010&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Frisu-proshop%2Fcabinet%2Fimages%2Fgifu-pla%2F63567-5_01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frisu-proshop%2F63567-5%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/risu-proshop/63567-5/",
     searchKeyword: "収納ボックス 折りたたみ"
   },
@@ -105,8 +152,8 @@ const products = [
     category: "training",
     description: "重量を変えられるので、自宅トレの幅が広がる。",
     recommendedFor: "家で胸・肩・腕・背中を鍛えたい人",
-    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/536650bf.d2b24514.536650c0.dc25f41b/?me_id=1389930&item_id=10000112&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsportsmonster%2Fcabinet%2Ffitness%2Fflex32-2_sl.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/536650bf.d2b24514.536650c0.dc25f41b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsportsmonster%2Fflex32-2%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1389930&item_id=10000112&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsportsmonster%2Fcabinet%2Ffitness%2Fflex32-2_sl.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsportsmonster%2Fflex32-2%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/sportsmonster/flex32-2/",
     searchKeyword: "可変式ダンベル 20kg"
   },
@@ -116,8 +163,8 @@ const products = [
     category: "training",
     description: "省スペースで懸垂やぶら下がり運動ができる。",
     recommendedFor: "背中を鍛えたい人、ジムに行けない日も鍛えたい人",
-    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/53665236.0e717855.53665237.9e92ea9b/?me_id=1385432&item_id=10000026&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fdanimo%2Fcabinet%2F07640797%2Fs1009648.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53665236.0e717855.53665237.9e92ea9b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdanimo%2F8265139%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1385432&item_id=10000026&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fdanimo%2Fcabinet%2F07640797%2Fs1009648.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdanimo%2F8265139%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/danimo/8265139/",
     searchKeyword: "懸垂 ドアジム"
   },
@@ -127,8 +174,8 @@ const products = [
     category: "bike",
     description: "雨の日でも着替えや荷物を濡らしにくい。",
     recommendedFor: "バイク旅・キャンプツーリングをする人",
-    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/536653dc.8d0dc42e.536653dd.95aafa2e/?me_id=1375910&item_id=10000121&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fflyingfish%2Fcabinet%2F06875362%2F60018-12.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/536653dc.8d0dc42e.536653dd.95aafa2e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fflyingfish%2F60018%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1375910&item_id=10000121&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fflyingfish%2Fcabinet%2F06875362%2F60018-12.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fflyingfish%2F60018%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/flyingfish/60018/",
     searchKeyword: "バイク ツーリング 防水バッグ"
   },
@@ -138,8 +185,8 @@ const products = [
     category: "bike",
     description: "スマホナビを確認しやすくなり、長距離移動のストレスを減らせる。",
     recommendedFor: "スマホナビを使ってツーリングする人",
-    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/536b130d.7e477911.536b130e.5632e1c6/?me_id=1386879&item_id=10000019&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fkaedear%2Fcabinet%2F09011477%2F09054788%2F09900870%2Fimgrc0115547176.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/536b130d.7e477911.536b130e.5632e1c6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkaedear%2Fkdr-m8s%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1386879&item_id=10000019&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fkaedear%2Fcabinet%2F09011477%2F09054788%2F09900870%2Fimgrc0115547176.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkaedear%2Fkdr-m8s%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/kaedear/kdr-m8s/",
     searchKeyword: "バイク スマホホルダー 防水"
   },
@@ -149,8 +196,8 @@ const products = [
     category: "disaster",
     description: "非常食・ライト・衛生用品などをまとめて準備できる。",
     recommendedFor: "一人暮らしで防災グッズをまだ揃えていない人",
-    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/53665544.a5447b14.53665545.f2faf1e1/?me_id=1346140&item_id=10000003&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_gold%2Frelieved-life%2Fbousai%2Fs-set%2F01%2FS01TOP.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53665544.a5447b14.53665545.f2faf1e1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frelieved-life%2Fre-l-bousai%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1346140&item_id=10000003&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_gold%2Frelieved-life%2Fbousai%2Fs-set%2F01%2FS01TOP.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frelieved-life%2Fre-l-bousai%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/relieved-life/re-l-bousai/",
     searchKeyword: "防災セット 1人用"
   },
@@ -160,8 +207,8 @@ const products = [
     category: "disaster",
     description: "災害時に一番困りやすいトイレ問題の備えになる。",
     recommendedFor: "最低限の防災備蓄を整えたい人",
-    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/536656ee.601828c8.536656ef.1bca0db8/?me_id=1322774&item_id=10000079&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ftorreya-shop%2Fcabinet%2Ftoilet%2Fimgrc0104456288.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/536656ee.601828c8.536656ef.1bca0db8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftorreya-shop%2F100000041%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1322774&item_id=10000079&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ftorreya-shop%2Fcabinet%2Ftoilet%2Fimgrc0104456288.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftorreya-shop%2F100000041%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/torreya-shop/100000041/",
     searchKeyword: "簡易トイレ 防災 50回"
   },
@@ -171,8 +218,8 @@ const products = [
     category: "disaster",
     description: "停電時やキャンプ、車中泊でも使いやすい明かり装備。",
     recommendedFor: "防災・アウトドア兼用で使えるライトがほしい人",
-    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/53665820.0d3cdb8e.53665821.397363c3/?me_id=1317105&item_id=10000072&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fk-power%2Fcabinet%2F06552196%2F07119538%2Fimgrc0116175250.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53665820.0d3cdb8e.53665821.397363c3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fk-power%2Fur002%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
+    imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1317105&item_id=10000072&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fk-power%2Fcabinet%2F06552196%2F07119538%2Fimgrc0116175250.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+    affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fk-power%2Fur002%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     rakutenProductUrl: "https://item.rakuten.co.jp/k-power/ur002/",
     searchKeyword: "LEDランタン 充電式 防災"
   }
@@ -493,8 +540,8 @@ const articles = [
           "サイズは置き場を測ってから。高さがギリギリだと出し入れが面倒になります"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/auc-kaei-trading/zk-snb02-all/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536db246.ec31c6b1.536db247.84c3708d/?me_id=1281364&item_id=10000740&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fauc-kaei-trading%2Fcabinet%2Fzk-snb02%2Fsnb02-2026.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536db246.ec31c6b1.536db247.84c3708d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-kaei-trading%2Fzk-snb02-all%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1281364&item_id=10000740&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fauc-kaei-trading%2Fcabinet%2Fzk-snb02%2Fsnb02-2026.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-kaei-trading%2Fzk-snb02-all%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "マグネット式の小物フック（鍵・工具）",
@@ -513,8 +560,8 @@ const articles = [
           "磁石が弱い扉だと落ちます。取り付け面の材質は商品説明で確認してください"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/cozytime/ysgg/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536db416.7a67d6db.536db417.b9e70075/?me_id=1411649&item_id=10000261&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcozytime%2Fcabinet%2Fimgrc0097051541.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536db416.7a67d6db.536db417.b9e70075/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcozytime%2Fysgg%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1411649&item_id=10000261&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcozytime%2Fcabinet%2Fimgrc0097051541.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcozytime%2Fysgg%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "一括スイッチ付きの電源タップ",
@@ -533,8 +580,8 @@ const articles = [
           "定格を超えないように。ヒーター類と同系統に詰め込みすぎないのが安全側です"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/kzsuccsess/k00xxoze0g/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536db568.24acaef3.536db569.ac811fa8/?me_id=1437896&item_id=10016188&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fkzsuccsess%2Fcabinet%2Fsyouhingazoupic%2Fsystempic197%2Fk00xxoze0g1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536db568.24acaef3.536db569.ac811fa8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkzsuccsess%2Fk00xxoze0g%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1437896&item_id=10016188&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fkzsuccsess%2Fcabinet%2Fsyouhingazoupic%2Fsystempic197%2Fk00xxoze0g1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkzsuccsess%2Fk00xxoze0g%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "詰め替えボトル（シャンプー・洗剤）",
@@ -553,8 +600,8 @@ const articles = [
           "材質によっては滑るので、置き方は商品の注意書きを優先してください"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/yamayuu/yj-1538-set/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536db601.986d8c19.536db602.941205ae/?me_id=1243032&item_id=10021211&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fyamayuu%2Fcabinet%2F01023319%2Fbathgoods%2F10648094%2Fyj-1538-set_sam01y.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536db601.986d8c19.536db602.941205ae/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fyamayuu%2Fyj-1538-set%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1243032&item_id=10021211&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fyamayuu%2Fcabinet%2F01023319%2Fbathgoods%2F10648094%2Fyj-1538-set_sam01y.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fyamayuu%2Fyj-1538-set%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "遮光カーテン（睡眠の土台）",
@@ -573,8 +620,8 @@ const articles = [
           "洗濯表示とアイロン可否は要確認。縮みで短くなると地味に悔しいです"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/riverpaddy/4jr7ziczqawt4ep77bbbobrrge-alb/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536db6fb.8cb5d236.536db6fc.521715ab/?me_id=1430732&item_id=11011359&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Friverpaddy%2Fcabinet%2F12844855%2Falb12257303_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536db6fb.8cb5d236.536db6fc.521715ab/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Friverpaddy%2F4jr7ziczqawt4ep77bbbobrrge-alb%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1430732&item_id=11011359&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Friverpaddy%2Fcabinet%2F12844855%2Falb12257303_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Friverpaddy%2F4jr7ziczqawt4ep77bbbobrrge-alb%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "スリムなゴミ箱（フタ付き）",
@@ -593,8 +640,8 @@ const articles = [
           "フタの開き方が狭いと捨てにくいので、手の大きさと相性も見てください"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/semi-style/mt-db-f170/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536db81d.b3134ff2.536db81e.008ab3b9/?me_id=1276634&item_id=10024183&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsemi-style%2Fcabinet%2Fmt-main%2Fmt05%2Fdb-f170.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536db81d.b3134ff2.536db81e.008ab3b9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsemi-style%2Fmt-db-f170%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1276634&item_id=10024183&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsemi-style%2Fcabinet%2Fmt-main%2Fmt05%2Fdb-f170.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsemi-style%2Fmt-db-f170%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "充電式の小型ヘッドライト",
@@ -613,8 +660,8 @@ const articles = [
           "高温所に置かない、子どもが触れる場所は避けるなど、リチウム系の取り扱いは説明書ベースで"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/aspla/49/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536db94e.bee63e1d.536db94f.67a46868/?me_id=1426111&item_id=10000047&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Faspla%2Fcabinet%2F10635244%2F11209931%2Fsum0114.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536db94e.bee63e1d.536db94f.67a46868/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faspla%2F49%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1426111&item_id=10000047&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Faspla%2Fcabinet%2F10635244%2F11209931%2Fsum0114.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faspla%2F49%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       }
     ],
     "conclusionParagraphs": [
@@ -662,8 +709,8 @@ const articles = [
           "運転中の操作はしない。止まってから捨てる"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/ssn/10037938/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dba5c.69727981.536dba5d.430a9a06/?me_id=1225177&item_id=10038352&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fssn%2Fcabinet%2Fseikatsu%2F10283065%2Fimgrc0120900053.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dba5c.69727981.536dba5d.430a9a06/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fssn%2F10037938%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1225177&item_id=10038352&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fssn%2Fcabinet%2Fseikatsu%2F10283065%2Fimgrc0120900053.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fssn%2F10037938%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "マイクロファイバークロス（多枚セット）",
@@ -681,8 +728,8 @@ const articles = [
           "砂が付いたまま拭くと傷の原因。先にホコリを落とす"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/masatoyo-hamono/10005126/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dc00b.b4921fab.536dc00c.60ca3504/?me_id=1240748&item_id=10005126&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmasatoyo-hamono%2Fcabinet%2F02212472%2Fimgrc0090032506.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dc00b.b4921fab.536dc00c.60ca3504/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmasatoyo-hamono%2F10005126%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1240748&item_id=10005126&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmasatoyo-hamono%2Fcabinet%2F02212472%2Fimgrc0090032506.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmasatoyo-hamono%2F10005126%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "USB充電器（急速・二口以上）",
@@ -700,8 +747,8 @@ const articles = [
           "車の取り扱い説明書でUSB/シガーの容量を確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/jism/4549550199032-45-46781-n/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dc0d8.5787db23.536dc0d9.4aee24dc/?me_id=1206032&item_id=13071860&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fjism%2Fcabinet%2F1585%2F4549550199032.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dc0d8.5787db23.536dc0d9.4aee24dc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjism%2F4549550199032-45-46781-n%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1206032&item_id=13071860&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fjism%2Fcabinet%2F1585%2F4549550199032.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjism%2F4549550199032-45-46781-n%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "折りたたみショベル（小）",
@@ -719,8 +766,8 @@ const articles = [
           "道路工事の禁止区域など法令は守る。用途はあくまで応急寄り"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/e-finds-ada/d03-10a/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dc1c8.74171d91.536dc1c9.8d0f5acd/?me_id=1389161&item_id=10006205&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fe-finds-ada%2Fcabinet%2Fd03-10a-10.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dc1c8.74171d91.536dc1c9.8d0f5acd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-finds-ada%2Fd03-10a%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1389161&item_id=10006205&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fe-finds-ada%2Fcabinet%2Fd03-10a-10.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-finds-ada%2Fd03-10a%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "救急セット（絆創膏・消毒液・包帯）",
@@ -738,8 +785,8 @@ const articles = [
           "内容物の期限は年一回チェック"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/firstaid/010010a/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dc284.c3bb3c83.536dc285.1cefe65e/?me_id=1321256&item_id=10001149&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ffirstaid%2Fcabinet%2F04802522%2Fcont-14-01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dc284.c3bb3c83.536dc285.1cefe65e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffirstaid%2F010010a%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1321256&item_id=10001149&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ffirstaid%2Fcabinet%2F04802522%2Fcont-14-01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffirstaid%2F010010a%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "消臭スプレー or ゲル（弱めの香り）",
@@ -757,8 +804,8 @@ const articles = [
           "素材によってはシミになるので、吹きかけは説明書通りに"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/cocomakai/coc762fae7a96/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dc3ba.adc323b2.536dc3bb.369ef311/?me_id=1377367&item_id=10083660&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fcocomakai%2Fcabinet%2Fonesell343%2Fcoc762fae7a96.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dc3ba.adc323b2.536dc3bb.369ef311/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcocomakai%2Fcoc762fae7a96%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1377367&item_id=10083660&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fcocomakai%2Fcabinet%2Fonesell343%2Fcoc762fae7a96.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcocomakai%2Fcoc762fae7a96%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "防水ドライバッグ（小）",
@@ -776,8 +823,8 @@ const articles = [
           "完全防水を過信しない。口の閉め方は商品ごとに確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/horiku/2bu6oyw51t/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dc519.445162bc.536dc51a.f2f02e1c/?me_id=1426399&item_id=10282982&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fhoriku%2Fcabinet%2F0815%2F2bu6oyw51t_0.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dc519.445162bc.536dc51a.f2f02e1c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhoriku%2F2bu6oyw51t%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1426399&item_id=10282982&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fhoriku%2Fcabinet%2F0815%2F2bu6oyw51t_0.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhoriku%2F2bu6oyw51t%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       }
     ],
     "conclusionParagraphs": [
@@ -825,8 +872,8 @@ const articles = [
           "取り付けトルクと干渉は毎回確認。走行中の長時間操作は避ける"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/umineko-shoji/um-smhld-001-np/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dc6fa.3497862e.536dc6fb.340aa3d8/?me_id=1317070&item_id=10009150&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_gold%2Fumineko-shoji%2Fumineko%2Fimg%2FUM-SMHLD-001-BK-XL_0.gif%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dc6fa.3497862e.536dc6fb.340aa3d8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fumineko-shoji%2Fum-smhld-001-np%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1317070&item_id=10009150&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_gold%2Fumineko-shoji%2Fumineko%2Fimg%2FUM-SMHLD-001-BK-XL_0.gif%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fumineko-shoji%2Fum-smhld-001-np%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "使い捨てレインウェア（薄手）",
@@ -844,8 +891,8 @@ const articles = [
           "長時間は蒸れやすい。あくまで応急枠と割り切る"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/heart-max/cqn-raincoat09/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dc843.9cc597aa.536dc845.477db1eb/?me_id=1398559&item_id=10003758&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fheart-max%2Fcabinet%2F10667341%2F10852528%2Fcqn-raincoat09-01-3.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dc843.9cc597aa.536dc845.477db1eb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fheart-max%2Fcqn-raincoat09%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1398559&item_id=10003758&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fheart-max%2Fcabinet%2F10667341%2F10852528%2Fcqn-raincoat09-01-3.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fheart-max%2Fcqn-raincoat09%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "ディグリーザー（チェーン洗浄）小容量",
@@ -863,8 +910,8 @@ const articles = [
           "環境注意。流す場所・廃棄は商品と地域ルールに従う"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/novolstore/fxuxtqx4ovxjtq35y42i4qadc4/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dc970.cf1c1ee4.536dc971.d83025c8/?me_id=1429226&item_id=10356620&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fnovolstore%2Fcabinet%2F10988775%2F32905961_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dc970.cf1c1ee4.536dc971.d83025c8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnovolstore%2Ffxuxtqx4ovxjtq35y42i4qadc4%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1429226&item_id=10356620&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fnovolstore%2Fcabinet%2F10988775%2F32905961_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnovolstore%2Ffxuxtqx4ovxjtq35y42i4qadc4%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "ジップタイ（長め・耐候）",
@@ -882,8 +929,8 @@ const articles = [
           "締めすぎで樹脂破損。力加減は様子見"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/marumono/1903652768309059585/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dcad9.24de84ce.536dcada.33fa5b6d/?me_id=1435568&item_id=10088436&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmarumono%2Fcabinet%2F12640229%2F12640292%2Fimgrc0134285502.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dcad9.24de84ce.536dcada.33fa5b6d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmarumono%2F1903652768309059585%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1435568&item_id=10088436&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmarumono%2Fcabinet%2F12640229%2F12640292%2Fimgrc0134285502.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmarumono%2F1903652768309059585%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "使い捨て手袋（ニトリル）",
@@ -901,8 +948,8 @@ const articles = [
           "アレルギー表示を確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/trinity-cosme/san350532x1/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dcb78.070903eb.536dcb79.eb92262f/?me_id=1398715&item_id=10000431&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftrinity-cosme%2Fcabinet%2F09165139%2F09165140%2Fimgrc0106437735.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dcb78.070903eb.536dcb79.eb92262f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftrinity-cosme%2Fsan350532x1%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1398715&item_id=10000431&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftrinity-cosme%2Fcabinet%2F09165139%2F09165140%2Fimgrc0106437735.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftrinity-cosme%2Fsan350532x1%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "小型モバイルバッテリー",
@@ -920,8 +967,8 @@ const articles = [
           "高温の車内放置は避ける"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/anker/a1645/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dcc1e.78374282.536dcc1f.829f0eec/?me_id=1294713&item_id=10001561&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fanker%2Fcabinet%2Fimages%2F09779934%2F11413859%2Fimgrc0089705577.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dcc1e.78374282.536dcc1f.829f0eec/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fanker%2Fa1645%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1294713&item_id=10001561&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fanker%2Fcabinet%2Fimages%2F09779934%2F11413859%2Fimgrc0089705577.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fanker%2Fa1645%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "緊急連絡カード（防水ケース）",
@@ -939,8 +986,8 @@ const articles = [
           "個人情報の書き方は自己責任で。見せ方は工夫してください"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/thrsparkle/b09hkcl5y9/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dccbd.ccee0747.536dccbe.7f5e8503/?me_id=1425351&item_id=10058532&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fthrsparkle%2Fcabinet%2Fhiro_0210%2Fb09hkcl5y900.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dccbd.ccee0747.536dccbe.7f5e8503/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fthrsparkle%2Fb09hkcl5y9%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1425351&item_id=10058532&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fthrsparkle%2Fcabinet%2Fhiro_0210%2Fb09hkcl5y900.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fthrsparkle%2Fb09hkcl5y9%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       }
     ],
     "conclusionParagraphs": [
@@ -987,8 +1034,8 @@ const articles = [
           "ネジ留めの机は説明書の耐荷重を確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/lifecorner/rs-dxsn-1/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dd522.8b6a3078.536dd523.65dd3c11/?me_id=1333373&item_id=10002561&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Flifecorner%2Fcabinet%2Fsh%2Fdxsn%2Fc-dxsn-b.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dd522.8b6a3078.536dd523.65dd3c11/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flifecorner%2Frs-dxsn-1%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1333373&item_id=10002561&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Flifecorner%2Fcabinet%2Fsh%2Fdxsn%2Fc-dxsn-b.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flifecorner%2Frs-dxsn-1%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "マグネットケーブルホルダー",
@@ -1006,8 +1053,8 @@ const articles = [
           "磁力が弱い机材だとダメ。金属面か要確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/maveek/mvo02115-wt5/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dd66e.89ac82e0.536dd66f.434280a1/?me_id=1405865&item_id=10000231&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmaveek%2Fcabinet%2F08692947%2Fimgrc0116951374.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dd66e.89ac82e0.536dd66f.434280a1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmaveek%2Fmvo02115-wt5%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1405865&item_id=10000231&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmaveek%2Fcabinet%2F08692947%2Fimgrc0116951374.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmaveek%2Fmvo02115-wt5%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "デスク上ラック（二段）",
@@ -1025,8 +1072,8 @@ const articles = [
           "転倒防止。設置面が狭いと危ない"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/look-it/nf-kr2-120/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dd83f.54d9a69c.536dd840.4177ad8b/?me_id=1236499&item_id=10648707&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Flook-it%2Fcabinet%2Fnf-001%2Fnf-009%2Fnf-kr2-120_r_thum.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dd83f.54d9a69c.536dd840.4177ad8b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flook-it%2Fnf-kr2-120%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1236499&item_id=10648707&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Flook-it%2Fcabinet%2Fnf-001%2Fnf-009%2Fnf-kr2-120_r_thum.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flook-it%2Fnf-kr2-120%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "引き出し付きデスクワゴン",
@@ -1044,8 +1091,8 @@ const articles = [
           "キャスターはロックできるものを"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/myhome/mhn504p475311/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dd95c.dbd69619.536dd95d.c28d7794/?me_id=1295366&item_id=10004306&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmyhome%2Fcabinet%2F09386803%2F13097042%2Fn504p475311-2.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dd95c.dbd69619.536dd95d.c28d7794/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmyhome%2Fmhn504p475311%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1295366&item_id=10004306&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmyhome%2Fcabinet%2F09386803%2F13097042%2Fn504p475311-2.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmyhome%2Fmhn504p475311%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "クリップボード＋クリアファイル",
@@ -1063,8 +1110,8 @@ const articles = [
           "厚紙は曲がる。クリップ強度は要確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/loupe-studio/akh-ltl-0124/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536ddab2.b1d10708.536ddab3.640526e8/?me_id=1201987&item_id=11444209&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Floupe-studio%2Fcabinet%2Fi-akh03%2Fakh-ltl-0124.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536ddab2.b1d10708.536ddab3.640526e8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Floupe-studio%2Fakh-ltl-0124%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1201987&item_id=11444209&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Floupe-studio%2Fcabinet%2Fi-akh03%2Fakh-ltl-0124.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Floupe-studio%2Fakh-ltl-0124%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "卓上ゴミ箱（ミニ）",
@@ -1082,8 +1129,8 @@ const articles = [
           "臭いゴミは床の大ゴミ箱へ。役割分担が大事"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/chuwacorp0618/r22006148ee7c/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536ddcec.bd5167a0.536ddced.60013c2b/?me_id=1439917&item_id=10003145&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fchuwacorp0618%2Fcabinet%2F042503%2Fr22006148ee7c_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536ddcec.bd5167a0.536ddced.60013c2b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fchuwacorp0618%2Fr22006148ee7c%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1439917&item_id=10003145&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fchuwacorp0618%2Fcabinet%2F042503%2Fr22006148ee7c_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fchuwacorp0618%2Fr22006148ee7c%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "モニタライトバー（調光）",
@@ -1101,8 +1148,8 @@ const articles = [
           "反射が気になるなら角度調整。外付けは置き場所が要る"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/benq-directshop/moniterlight_01/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536ddde4.99e2b7e0.536ddde5.ae15cc42/?me_id=1379427&item_id=10000009&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fbenq-directshop%2Fcabinet%2F07271353%2Fscreenbar-1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536ddde4.99e2b7e0.536ddde5.ae15cc42/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbenq-directshop%2Fmoniterlight_01%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1379427&item_id=10000009&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fbenq-directshop%2Fcabinet%2F07271353%2Fscreenbar-1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbenq-directshop%2Fmoniterlight_01%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       }
     ],
     "conclusionParagraphs": [
@@ -1297,8 +1344,8 @@ const articles = [
           "期限は管理。直射日光の倉庫置きは避ける"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/manekiyaneeds/30560/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e4ab7.8316a431.536e4ab8.5333e12f/?me_id=1433705&item_id=10000094&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmanekiyaneeds%2Fcabinet%2Fgoq001%2F103_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e4ab7.8316a431.536e4ab8.5333e12f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmanekiyaneeds%2F30560%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1433705&item_id=10000094&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmanekiyaneeds%2Fcabinet%2Fgoq001%2F103_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmanekiyaneeds%2F30560%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "LEDランタン（充電式）",
@@ -1316,8 +1363,8 @@ const articles = [
           "バッテリー劣化はある。定期充電を習慣化"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/tss/plrx-lt01ms/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e4c52.bee5c63b.536e4c53.5784966f/?me_id=1218452&item_id=14451492&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftss%2Fcabinet%2Fimg-29%2Fplrx-lt01ms.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e4c52.bee5c63b.536e4c53.5784966f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftss%2Fplrx-lt01ms%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1218452&item_id=14451492&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftss%2Fcabinet%2Fimg-29%2Fplrx-lt01ms.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftss%2Fplrx-lt01ms%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "手回しラジオ（スマホ充電可）",
@@ -1335,8 +1382,8 @@ const articles = [
           "手回しは重い。練習しておく"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/starlighting/radio-07004/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e4d21.fa4bc156.536e4d22.fbc20e5a/?me_id=1430065&item_id=10001146&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fstarlighting%2Fcabinet%2Fautoitem%2Fradio-07004.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e4d21.fa4bc156.536e4d22.fbc20e5a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fstarlighting%2Fradio-07004%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1430065&item_id=10001146&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fstarlighting%2Fcabinet%2Fautoitem%2Fradio-07004.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fstarlighting%2Fradio-07004%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "簡易トイレ（凝固剤タイプ）",
@@ -1354,8 +1401,8 @@ const articles = [
           "処理方法は自治体ルール確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/across-zakka/wap-100/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e4dc8.741e2d0b.536e4dc9.8cc7d5bb/?me_id=1349310&item_id=10000252&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Facross-zakka%2Fcabinet%2F07351575%2Fcompass1751248858.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e4dc8.741e2d0b.536e4dc9.8cc7d5bb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Facross-zakka%2Fwap-100%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1349310&item_id=10000252&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Facross-zakka%2Fcabinet%2F07351575%2Fcompass1751248858.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Facross-zakka%2Fwap-100%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "非常食（自分の胃に合うもの）",
@@ -1373,8 +1420,8 @@ const articles = [
           "アレルギー表示は必読"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/e-do/bou-alp12/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e4eb1.867cb8c5.536e4eb2.a7f26739/?me_id=1217939&item_id=10011750&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fe-do%2Fcabinet%2Fimg_1%2Fbou-arufa800-12.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e4eb1.867cb8c5.536e4eb2.a7f26739/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-do%2Fbou-alp12%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1217939&item_id=10011750&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fe-do%2Fcabinet%2Fimg_1%2Fbou-arufa800-12.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-do%2Fbou-alp12%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "救急セット（家庭用）",
@@ -1392,8 +1439,8 @@ const articles = [
           "薬の期限管理"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/firstaid/010005a/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536dc284.c3bb3c83.536dc285.1cefe65e/?me_id=1321256&item_id=10000004&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ffirstaid%2Fcabinet%2F04802522%2F5comp2-9-01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536dc284.c3bb3c83.536dc285.1cefe65e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffirstaid%2F010005a%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1321256&item_id=10000004&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ffirstaid%2Fcabinet%2F04802522%2F5comp2-9-01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffirstaid%2F010005a%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "モバイルバッテリー（大容量）",
@@ -1411,8 +1458,8 @@ const articles = [
           "高温放置禁止。ケーブルは純正寄りが無難"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/asmodeus/asmo20250303cdbd/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e5054.8d08b47a.536e5055.27893b4d/?me_id=1420348&item_id=10000253&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fasmodeus%2Fcabinet%2F11993821%2Fcdbd.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e5054.8d08b47a.536e5055.27893b4d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fasmodeus%2Fasmo20250303cdbd%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1420348&item_id=10000253&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fasmodeus%2Fcabinet%2F11993821%2Fcdbd.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fasmodeus%2Fasmo20250303cdbd%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       }
     ],
     "conclusionParagraphs": [
@@ -1459,8 +1506,8 @@ const articles = [
           "画像の見た目は広く写りがち"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/nbdeli/ht8519/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e5106.d3b1821d.536e5107.1eac3284/?me_id=1414479&item_id=10000017&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fnbdeli%2Fcabinet%2F10079428%2F12605151%2Fimgrc0127921964.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e5106.d3b1821d.536e5107.1eac3284/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnbdeli%2Fht8519%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1414479&item_id=10000017&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fnbdeli%2Fcabinet%2F10079428%2F12605151%2Fimgrc0127921964.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnbdeli%2Fht8519%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "チェック2：材質（プラ・金属・布）",
@@ -1478,8 +1525,8 @@ const articles = [
           "説明書の禁止事項はちゃんと読む"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/kohnan-eshop/4522831835188/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536de13f.4bee90a4.536de140.ccb802e0/?me_id=1343746&item_id=10094135&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fkohnan-eshop%2Fcabinet%2Fgoods%2F202604%2Fs1%2Fsku0117_01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536de13f.4bee90a4.536de140.ccb802e0/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkohnan-eshop%2F4522831835188%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1343746&item_id=10094135&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fkohnan-eshop%2Fcabinet%2Fgoods%2F202604%2Fs1%2Fsku0117_01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkohnan-eshop%2F4522831835188%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "チェック3：レビューの「低評価の理由」",
@@ -1611,8 +1658,8 @@ const articles = [
           "圧縮ロールは開封後の復元時間に注意"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/tansu/7519000100/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e52d9.83471535.536e52da.8af899e5/?me_id=1199397&item_id=10011910&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftansu%2Fcabinet%2Fkoukoku%2F61140237_10a.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e52d9.83471535.536e52da.8af899e5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftansu%2F7519000100%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1199397&item_id=10011910&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftansu%2Fcabinet%2Fkoukoku%2F61140237_10a.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftansu%2F7519000100%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "調理器具（フライパン1・鍋1）",
@@ -1630,8 +1677,8 @@ const articles = [
           "IH対応表記はコンロと要確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/kai/ss0332/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e53c8.3082cbf6.536e53c9.7b9dcee8/?me_id=1207985&item_id=10016025&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fkai%2Fcabinet%2Fbc%2Fgoods_2%2Fthumb%2Fss0332_logo.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e53c8.3082cbf6.536e53c9.7b9dcee8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkai%2Fss0332%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1207985&item_id=10016025&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fkai%2Fcabinet%2Fbc%2Fgoods_2%2Fthumb%2Fss0332_logo.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkai%2Fss0332%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "掃除の最低セット（ほうき・ちりとり）",
@@ -1649,8 +1696,8 @@ const articles = [
           "毛が長いタイプは保管場所が要る"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/shopmarna/w628/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e54a8.13ce3686.536e54a9.ec0127f7/?me_id=1251218&item_id=10006060&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fshopmarna%2Fcabinet%2Fitem_top%2Fw6%2Fw628.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e54a8.13ce3686.536e54a9.ec0127f7/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fshopmarna%2Fw628%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1251218&item_id=10006060&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fshopmarna%2Fcabinet%2Fitem_top%2Fw6%2Fw628.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fshopmarna%2Fw628%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "延長コード＋電球（予備）",
@@ -1668,8 +1715,8 @@ const articles = [
           "口金サイズはE17/E26など要確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/e-akari/567802/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e5532.4751c3a7.536e5533.82ff3985/?me_id=1259395&item_id=10065169&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fe-akari%2Fcabinet%2Fa%2Fimgrc0085822157.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e5532.4751c3a7.536e5533.82ff3985/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-akari%2F567802%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1259395&item_id=10065169&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fe-akari%2Fcabinet%2Fa%2Fimgrc0085822157.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-akari%2F567802%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "トイレットペーパー＆ティッシュの箱買い",
@@ -1687,8 +1734,8 @@ const articles = [
           "湿気場所はカビ注意"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/coming/jun1kyuhinrolls-recycle12rw/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e55b9.bd785323.536e55ba.6e53916b/?me_id=1269408&item_id=10000440&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fcoming%2Fcabinet%2Fdaiichimoji%2Fimgrc0096851285.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e55b9.bd785323.536e55ba.6e53916b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcoming%2Fjun1kyuhinrolls-recycle12rw%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1269408&item_id=10000440&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fcoming%2Fcabinet%2Fdaiichimoji%2Fimgrc0096851285.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcoming%2Fjun1kyuhinrolls-recycle12rw%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "洗濯用品（洗剤・ハンガー少量）",
@@ -1706,8 +1753,8 @@ const articles = [
           "重量超過で折れるハンガーに注意"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/nishida2/2019102810/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e566d.a6fa9b36.536e566e.f48ae270/?me_id=1305791&item_id=10000355&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fnishida2%2Fcabinet%2F07258509%2Fimgrc0087488523.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e566d.a6fa9b36.536e566e.f48ae270/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnishida2%2F2019102810%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1305791&item_id=10000355&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fnishida2%2Fcabinet%2F07258509%2Fimgrc0087488523.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnishida2%2F2019102810%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "救急セット（小）",
@@ -1725,8 +1772,8 @@ const articles = [
           "内容確認と期限メモ"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/torreya-shop/100000045/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536656ee.601828c8.536656ef.1bca0db8/?me_id=1322774&item_id=10000085&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftorreya-shop%2Fcabinet%2F10949533%2Fthumbnail.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536656ee.601828c8.536656ef.1bca0db8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftorreya-shop%2F100000045%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1322774&item_id=10000085&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftorreya-shop%2Fcabinet%2F10949533%2Fthumbnail.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftorreya-shop%2F100000045%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       }
     ],
     "conclusionParagraphs": [
@@ -1773,8 +1820,8 @@ const articles = [
           "骨に当てすぎない。痛みが強すぎるのはやり方のサイン"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/lively777/formroller/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e5899.ad4c1f8c.536e589a.3f53cdac/?me_id=1384136&item_id=10000143&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Flively777%2Fcabinet%2Fuyjiazhu%2F2025%2F2025top.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e5899.ad4c1f8c.536e589a.3f53cdac/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flively777%2Fformroller%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1384136&item_id=10000143&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Flively777%2Fcabinet%2Fuyjiazhu%2F2025%2F2025top.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flively777%2Fformroller%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "マッサージボール（硬め）",
@@ -1792,8 +1839,8 @@ const articles = [
           "転がって家電に当たらない場所で"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/the-perfect-sports/massageball/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e5930.033c3f0d.536e5931.09b813ab/?me_id=1377608&item_id=10000012&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fthe-perfect-sports%2Fcabinet%2Fvar%2Fmassageball%2Ftop-5.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e5930.033c3f0d.536e5931.09b813ab/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fthe-perfect-sports%2Fmassageball%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1377608&item_id=10000012&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fthe-perfect-sports%2Fcabinet%2Fvar%2Fmassageball%2Ftop-5.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fthe-perfect-sports%2Fmassageball%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "レッグケア（着圧ソックス夜用）",
@@ -1811,8 +1858,8 @@ const articles = [
           "締め付けすぎは逆効果。着用時間は商品指示"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/lifestyle-007/62367/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e5a43.9f004c24.536e5a44.0ab00e86/?me_id=1395354&item_id=10002411&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Flifestyle-007%2Fcabinet%2Fitem%2F2026%2F62367.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e5a43.9f004c24.536e5a44.0ab00e86/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flifestyle-007%2F62367%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1395354&item_id=10002411&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Flifestyle-007%2Fcabinet%2Fitem%2F2026%2F62367.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flifestyle-007%2F62367%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "スリーピングマスク",
@@ -1830,8 +1877,8 @@ const articles = [
           "締め付けが苦しいなら調整タイプへ"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/gift-bmcjapan/o20211222/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e5b2c.61bd8ece.536e5b2d.8ca4afc3/?me_id=1359848&item_id=10000150&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fgift-bmcjapan%2Fcabinet%2Feyemaskblack%2Fth.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e5b2c.61bd8ece.536e5b2d.8ca4afc3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgift-bmcjapan%2Fo20211222%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1359848&item_id=10000150&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fgift-bmcjapan%2Fcabinet%2Feyemaskblack%2Fth.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgift-bmcjapan%2Fo20211222%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "入浴剤（発汗系じゃないリラックス系）",
@@ -1849,8 +1896,8 @@ const articles = [
           "肌荒れする成分は要確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/coreplus1/saurus_recovery_spa/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e5c44.6e1a22a7.536e5c45.f5a81011/?me_id=1340644&item_id=10000036&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fcoreplus1%2Fcabinet%2F12125504%2Fimgrc0099719929.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e5c44.6e1a22a7.536e5c45.f5a81011/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcoreplus1%2Fsaurus_recovery_spa%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1340644&item_id=10000036&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fcoreplus1%2Fcabinet%2F12125504%2Fimgrc0099719929.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcoreplus1%2Fsaurus_recovery_spa%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "プロテイン（手軽にタンパク質）",
@@ -1868,8 +1915,8 @@ const articles = [
           "乳糖不耐など体質は要確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/myprotein/12202486_new/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e5d3a.d0e401d0.536e5d3b.173553e4/?me_id=1363648&item_id=10007350&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmyprotein%2Fcabinet%2Fit3%2F12202486_new_bannar.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e5d3a.d0e401d0.536e5d3b.173553e4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmyprotein%2F12202486_new%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1363648&item_id=10007350&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmyprotein%2Fcabinet%2Fit3%2F12202486_new_bannar.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmyprotein%2F12202486_new%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "ストレッチバンド（中強度）",
@@ -1887,8 +1934,8 @@ const articles = [
           "急に強く引かない。ゴム劣化も見る"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/tempostar/ts-stretchband/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e5e99.502e0020.536e5e9a.7bfd2eb2/?me_id=1406187&item_id=10000169&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftempostar%2Fcabinet%2F12625382%2F12625383%2Fts-stretch01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e5e99.502e0020.536e5e9a.7bfd2eb2/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftempostar%2Fts-stretchband%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1406187&item_id=10000169&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftempostar%2Fcabinet%2F12625382%2F12625383%2Fts-stretch01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftempostar%2Fts-stretchband%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "指圧スパイクマット（突き型・収納バッグ付）",
@@ -1907,8 +1954,8 @@ const articles = [
           "正規の Shakti Mat とは別商品の場合があります。価格・保証・材質は商品ページで要確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/bagray/shakti-yogamat001/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e9689.1e8b84e1.536e968a.797b05a6/?me_id=1315931&item_id=10012234&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fbagray%2Fcabinet%2Fimage06%2Fshakti-yogamat001n1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e9689.1e8b84e1.536e968a.797b05a6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbagray%2Fshakti-yogamat001%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1315931&item_id=10012234&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fbagray%2Fcabinet%2Fimage06%2Fshakti-yogamat001n1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbagray%2Fshakti-yogamat001%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "足つぼマット（ローラー付き・ボード型）",
@@ -1926,8 +1973,8 @@ const articles = [
           "痛みが強いときは無理しない。転倒しない平らな場所で"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/starcity/28nov24zybx010/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e974f.62b4778f.536e9750.39365a90/?me_id=1424848&item_id=10000976&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fstarcity%2Fcabinet%2Flib_img%2F202407%2F28nov24zybx01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e974f.62b4778f.536e9750.39365a90/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fstarcity%2F28nov24zybx010%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1424848&item_id=10000976&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fstarcity%2Fcabinet%2Flib_img%2F202407%2F28nov24zybx01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fstarcity%2F28nov24zybx010%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "ミニ筋膜リリースガン",
@@ -1945,8 +1992,8 @@ const articles = [
           "骨の上・首の前面・傷部位には当てない。取扱説明の時間・強さを守る"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/misaele/mini/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e98ce.a24c4377.536e98cf.c6716018/?me_id=1428611&item_id=10000063&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmisaele%2Fcabinet%2F12060845%2F12550983%2Fsjk001-55.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e98ce.a24c4377.536e98cf.c6716018/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmisaele%2Fmini%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1428611&item_id=10000063&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmisaele%2Fcabinet%2F12060845%2F12550983%2Fsjk001-55.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmisaele%2Fmini%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "ランバーサポート（背もたれクッション）",
@@ -1964,8 +2011,8 @@ const articles = [
           "厚みと椅子の相性は個人差大。返品規約は商品ページで確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/iholon/pus02-jj330-212-db060/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e9b64.39a77892.536e9b65.2b84fed3/?me_id=1438510&item_id=10002520&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fiholon%2Fcabinet%2F12752454%2Fus02-jj330-212-db.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e9b64.39a77892.536e9b65.2b84fed3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fiholon%2Fpus02-jj330-212-db060%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1438510&item_id=10002520&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fiholon%2Fcabinet%2F12752454%2Fus02-jj330-212-db.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fiholon%2Fpus02-jj330-212-db060%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "フットレスト（デスク下・足置き）",
@@ -1983,8 +2030,8 @@ const articles = [
           "高さは身長・椅子と相性あり。すべり止めや清掃のしやすさもチェック"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/sealinkshop/pctjd_1/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e9c33.4af350c7.536e9c34.3dfa38d5/?me_id=1435212&item_id=10000074&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fsealinkshop%2Fcabinet%2F12485165%2F12752376%2Fimgrc0148719163.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e9c33.4af350c7.536e9c34.3dfa38d5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsealinkshop%2Fpctjd_1%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1435212&item_id=10000074&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fsealinkshop%2Fcabinet%2F12485165%2F12752376%2Fimgrc0148719163.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsealinkshop%2Fpctjd_1%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "ホットアイマスク（レンジ温め・繰り返し）",
@@ -2002,8 +2049,8 @@ const articles = [
           "加熱時間は説明書厳守。肌が弱い・眼科受診中は医師に相談"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/ifdltd/4965337021509/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e9e09.08d08976.536e9e0a.cecc5ba9/?me_id=1314518&item_id=10006080&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fifdltd%2Fcabinet%2F08892698%2Fraku3%2F4965337021509_0n.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e9e09.08d08976.536e9e0a.cecc5ba9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fifdltd%2F4965337021509%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1314518&item_id=10006080&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fifdltd%2Fcabinet%2F08892698%2Fraku3%2F4965337021509_0n.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fifdltd%2F4965337021509%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "3Dスリープアイマスク（立体遮光）",
@@ -2021,8 +2068,8 @@ const articles = [
           "顔の形によっては隙間ができることも。ベルト調整できるかを確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/oyasumi/999-000900-20/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e9f00.cba0450f.536e9f01.99484972/?me_id=1209366&item_id=10153032&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Foyasumi%2Fcabinet%2Fm999-2%2F999-000900-20img19.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e9f00.cba0450f.536e9f01.99484972/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Foyasumi%2F999-000900-20%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1209366&item_id=10153032&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Foyasumi%2Fcabinet%2Fm999-2%2F999-000900-20img19.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Foyasumi%2F999-000900-20%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       }
     ],
     "conclusionParagraphs": [
@@ -2069,8 +2116,8 @@ const articles = [
           "防水誤認しない。別途防水袋が必要なら分ける"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/value-create/travel-pouch/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e5fca.808a149e.536e5fcb.1e590fdb/?me_id=1382613&item_id=10000010&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fvalue-create%2Fcabinet%2Ftravelpouch%2F0328_2.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e5fca.808a149e.536e5fcb.1e590fdb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fvalue-create%2Ftravel-pouch%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1382613&item_id=10000010&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fvalue-create%2Fcabinet%2Ftravelpouch%2F0328_2.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fvalue-create%2Ftravel-pouch%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "トラベルボトル（TSA注意の液体）",
@@ -2088,8 +2135,8 @@ const articles = [
           "規制は航空会社・国で変わるので都度確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/iwa-house/a018/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e60a4.a067d9c9.536e60a5.4c5092a0/?me_id=1432021&item_id=10000842&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fiwa-house%2Fcabinet%2F13014566%2F13122843%2Fimgrc0173003743top.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e60a4.a067d9c9.536e60a5.4c5092a0/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fiwa-house%2Fa018%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1432021&item_id=10000842&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fiwa-house%2Fcabinet%2F13014566%2F13122843%2Fimgrc0173003743top.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fiwa-house%2Fa018%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "マルチUSB充電器（GaN・小型）",
@@ -2107,8 +2154,8 @@ const articles = [
           "発熱・ケーブル相性はレビュー確認"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/sugarlight/gr-e9dq6adwd6/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e6180.d081ec54.536e6181.7e7e3fcb/?me_id=1426540&item_id=10185193&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fsugarlight%2Fcabinet%2Fg%2F40%2Fe9dq6adwd6-1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e6180.d081ec54.536e6181.7e7e3fcb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsugarlight%2Fgr-e9dq6adwd6%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1426540&item_id=10185193&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fsugarlight%2Fcabinet%2Fg%2F40%2Fe9dq6adwd6-1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsugarlight%2Fgr-e9dq6adwd6%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "パッカブルバッグ（折りたたみ）",
@@ -2126,8 +2173,8 @@ const articles = [
           "耐荷重は超えない"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/ace-store/32342/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e62f5.912e8903.536e62f6.f9eaded7/?me_id=1240825&item_id=10008939&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Face-store%2Fcabinet%2Fitem2024%2Facetokyo%2F32342_24aw.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e62f5.912e8903.536e62f6.f9eaded7/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Face-store%2F32342%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1240825&item_id=10008939&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Face-store%2Fcabinet%2Fitem2024%2Facetokyo%2F32342_24aw.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Face-store%2F32342%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "ネックピロー（収納小）",
@@ -2145,8 +2192,8 @@ const articles = [
           "首の長さで合う合わないがある"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/rizelife-hacks/pop6191/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e6362.e03f0f6b.536e6363.f4f6f103/?me_id=1399316&item_id=10010688&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Frizelife-hacks%2Fcabinet%2Fimage32%2Fpop6191.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e6362.e03f0f6b.536e6363.f4f6f103/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frizelife-hacks%2Fpop6191%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1399316&item_id=10010688&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Frizelife-hacks%2Fcabinet%2Fimage32%2Fpop6191.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frizelife-hacks%2Fpop6191%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "洗濯用洗剤シート／粉小分け",
@@ -2164,8 +2211,8 @@ const articles = [
           "衣類素材によっては不向き"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/tabine/wash/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e641d.617e0aa0.536e641e.a57f26ed/?me_id=1435003&item_id=10000005&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftabine%2Fcabinet%2Fwash%2Fwash-set-main-1002.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e641d.617e0aa0.536e641e.a57f26ed/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftabine%2Fwash%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1435003&item_id=10000005&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftabine%2Fcabinet%2Fwash%2Fwash-set-main-1002.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftabine%2Fwash%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       },
       {
         "name": "デジタルメモ（旅程メモでも可）",
@@ -2183,8 +2230,8 @@ const articles = [
           "紛失対策は別途"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/auc-carover/gd-bsmemo/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/536e6516.8c3b62ae.536e6517.4fc36f5d/?me_id=1332282&item_id=10008331&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fauc-carover%2Fcabinet%2Fitem%2F2023%2F08%2Fgd-bsmemo-01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/536e6516.8c3b62ae.536e6517.4fc36f5d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-carover%2Fgd-bsmemo%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1332282&item_id=10008331&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fauc-carover%2Fcabinet%2Fitem%2F2023%2F08%2Fgd-bsmemo-01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-carover%2Fgd-bsmemo%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       }
     ],
     "conclusionParagraphs": [
@@ -2233,8 +2280,8 @@ const articles = [
           "耐寒表現は商品側の謳いに準拠。断定の暖かさ表現は避け、自分の地域の冬と照合してください。"
         ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/nuuca/10000003/",
-        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/537cde8e.5bd5a5c0.537cde8f.6ea6c2b4/?me_id=1413408&item_id=10000003&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnuuca%2Fcabinet%2Fbiiino%2Fitem%2Fmain-image%2F20260325100233_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
-        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/537cde8e.5bd5a5c0.537cde8f.6ea6c2b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnuuca%2F10000003%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+        "imageUrl": "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1413408&item_id=10000003&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnuuca%2Fcabinet%2Fbiiino%2Fitem%2Fmain-image%2F20260325100233_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnuuca%2F10000003%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
       }
     ],
     "conclusionParagraphs": [
@@ -2245,6 +2292,224 @@ const articles = [
       "disaster-helpful-gear-7",
       "car-useful-gear-7"
     ]
+  },
+  {
+    id: "rakuten-ranking-stock-food-202606",
+    title: "元自衛官目線のローリングストック食品：骨取り魚・無洗米・非常食の選び方",
+    category: "life",
+    date: "2026-06-13",
+    readTime: "8分",
+    summary: "骨取り魚、無洗米、保存食を、普段の食事と災害備蓄の両方で回せるかという目線で整理します。",
+    thumbnailImage: placeholderImage("ローリングストック食品", "life"),
+    introParagraphs: [
+      "備蓄食品は、非常時だけを考えると押し入れで眠りがちです。普段の食事に混ぜて消費し、減った分だけ補充するほうが、管理もしやすく無駄が出にくいです。",
+      "この記事では、骨取り魚、無洗米、保存食、飲料水を「買って終わり」ではなく、家の中で回せる装備として見ます。元自衛官目線だと、補給品は量より管理です。"
+    ],
+    forAudience: [
+      "防災備蓄を普段の食事にも使いたい人",
+      "冷凍庫・米びつ・備蓄棚を無駄に埋めたくない人",
+      "元自衛官ブログらしい食品記事を作りたい人"
+    ],
+    body: [
+      {
+        heading: "備蓄食品は、まず保管場所でふるいにかける",
+        paragraphs: [
+          "食卓に直結する骨取り魚や米は、検索需要が強い一方で、届いてからの置き場が弱点になります。冷凍庫に入らない魚、米びつに入らない米は、安くても生活導線を乱します。",
+          "元自衛官目線で見ると、補給品は量より管理です。冷凍庫に入らない魚、米びつに入らない米は、安くても生活導線を乱します。"
+        ],
+        bullets: ["冷凍品は到着日と冷凍庫の空き容量を見る", "米は消費ペースと保管温度を先に決める", "保存食は賞味期限を見える場所で管理する"]
+      },
+      {
+        heading: "レビュー件数が多い商品ほど、低評価から読む",
+        paragraphs: [
+          "ランキング上位の商品はレビュー数が多く、良い声も悪い声も集まりやすいです。最初に低評価を読むと、味・骨残り・配送・サイズ感など、自分が許容できないポイントを早く見つけられます。",
+          "売れているから正解、ではなく、自分の家で回せるかを見る。ここが収益記事でも信用を落としにくい書き方になります。"
+        ]
+      }
+    ],
+    picks: [
+      {
+        name: "訳あり 骨取り銀さけ",
+        category: "life",
+        imageLabel: "骨取り銀さけ",
+        intro: ["ユーザーが送ってくれた楽天商品URLを、あなたのアフィリエイトIDで収益用リンクに変換したピックです。冷凍ストック・弁当・朝食に寄せて紹介しやすい食品です。"],
+        scenes: ["冷凍庫に余裕がある家庭", "弁当・朝食の魚を固定化したい人", "骨取り魚で調理の手間を減らしたい人"],
+        caution: ["価格・容量・送料は変動します", "冷凍庫の空きと到着日を必ず確認", "味や厚みはレビューで低評価も読む"],
+        rakutenProductUrl: "https://item.rakuten.co.jp/yamagoiida/10000120/",
+        imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1387193&item_id=10000148&pc=https%3A%2F%2Faffiliate.rakuten.co.jp%2Fimg%2Fdefault_image.gif",
+        affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/yamagoiida/10000120/")
+      },
+      {
+        name: "無洗米 5kg〜10kg",
+        category: "life",
+        imageLabel: "無洗米",
+        intro: ["水を多く使えない場面でも扱いやすく、普段の主食としても回しやすいカテゴリです。備蓄記事では白米そのものより、保存場所と消費ペースを一緒に書くと自然です。"],
+        scenes: ["一人暮らしの主食補充", "災害備蓄のローリングストック", "米びつに入る量だけ買いたい家庭"],
+        caution: ["精米日・保存場所・虫対策を見る", "大容量は食べ切れる量だけにする"],
+        imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1433705&item_id=10000094&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmanekiyaneeds%2Fcabinet%2Fgoq001%2F103_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        rakutenSearchKeyword: "無洗米 10kg 送料無料"
+      },
+      {
+        name: "5年保存 非常食セット",
+        category: "life",
+        imageLabel: "非常食",
+        intro: ["災害時に火や水が制限されても食べやすい保存食。普段使いではないので、記事では味よりも保管場所、食数、賞味期限管理を主役にします。"],
+        scenes: ["自宅の初期備蓄", "一人暮らしの押し入れ備蓄", "家族人数分の食数チェック"],
+        caution: ["必要食数と賞味期限を確認", "水やカトラリーも別で必要か見る"],
+        imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1349310&item_id=10000252&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Facross-zakka%2Fcabinet%2F07351575%2Fcompass1751248858.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        rakutenSearchKeyword: "非常食 セット 5年保存 おにぎり パン"
+      },
+      {
+        name: "保存水 2L ケース",
+        category: "life",
+        imageLabel: "保存水",
+        intro: ["食品備蓄の記事に水がないと片手落ちになります。米や非常食を紹介するなら、飲料水も同じ記事内で導線を置くほうが自然です。"],
+        scenes: ["寝室や玄関近くの分散備蓄", "一人暮らしの最低限備え", "ローリングストックの補充"],
+        caution: ["置き場所と持ち運びやすさを見る", "賞味期限と本数を家族人数で割って確認"],
+        imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1433705&item_id=10000094&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fmanekiyaneeds%2Fcabinet%2Fgoq001%2F103_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        rakutenSearchKeyword: "保存水 2L 5年 6本"
+      }
+    ],
+    conclusionParagraphs: [
+      "食品記事は売れ筋に寄せやすい一方で、生活導線を崩す買い方をすすめると信用が落ちます。冷凍庫、保管場所、食べ切る頻度。この三つを書いてから楽天リンクへ送ると、売る記事でもちゃんと読まれます。"
+    ],
+    relatedArticleIds: ["heavy-household-online-stock", "life-useful-goods-10", "home-disaster-kit"]
+  },
+  {
+    id: "summer-heat-ranking-gear-202606",
+    title: "夏の外作業・車載に置きたい暑さ対策装備：保冷剤・冷感タオル・遮光グッズ",
+    category: "life",
+    date: "2026-06-13",
+    readTime: "8分",
+    summary: "外作業、車移動、買い物帰りに使いやすい暑さ対策装備を、持ち運び・保冷・日差し対策で整理します。",
+    thumbnailImage: placeholderImage("夏の暑さ対策装備", "life"),
+    introParagraphs: [
+      "夏の外作業や車移動は、気合いで押すほど判断が鈍ります。日差しを避ける、冷たいものを守る、首元を冷やす。この三つを分けると、暑さ対策グッズは選びやすくなります。",
+      "元自衛官目線で見るなら、暑さ対策は段取りです。持ち出しやすいか、車に置けるか、洗いやすいか。そこまで書くと、ただの季節商品ではなく生活装備として紹介できます。"
+    ],
+    forAudience: ["夏前に売れる記事ネタを増やしたい人", "外作業・車移動・買い物帰りの暑さ対策をしたい人", "元自衛官ブログらしい夏装備記事を作りたい人"],
+    body: [
+      {
+        heading: "暑さ対策は、日差し・保冷・首元で分ける",
+        paragraphs: [
+          "暑さ対策を一つの記事に詰めるなら、カテゴリを混ぜすぎないのが大事です。日差しを避ける遮光グッズ、買い物や弁当を守る保冷剤、首元を冷やすタオルやリング。役割を分けると読者が選びやすくなります。",
+          "ランキング上位に見えるから全部すすめるのではなく、使う場面を具体化してからリンクを置く。これだけで広告感がかなり薄まります。"
+        ],
+        bullets: ["外では日差しを避ける", "移動中は飲食物や弁当を守る", "首元や手元を冷やして体感を下げる"]
+      },
+      {
+        heading: "クーポン表記は強いが、煽りすぎない",
+        paragraphs: [
+          "楽天では期間限定クーポンや割引表示が目立ちます。クリック率には効きますが、記事では条件を商品ページで確認と添えるほうが安全です。焦らせるより、確認すべき場所を教えるほうがブログの信用につながります。"
+        ]
+      }
+    ],
+    picks: [
+      {
+        name: "ステンレス製アイスパック・保冷剤",
+        category: "life",
+        imageLabel: "保冷剤",
+        intro: ["すでにブログに個別記事がある保冷系商品。弁当、クーラーバッグ、買い物帰り、キャンプまでつなげやすく、暑さ対策記事の主役にしやすいピックです。"],
+        scenes: ["弁当の保冷", "クーラーバッグ", "買い物帰りの冷凍品"],
+        caution: ["サイズと重さ、冷凍庫内の置き場所を確認", "医療的な熱中症対策として断定しない"],
+        rakutenProductUrl: "https://item.rakuten.co.jp/decori/y-342/",
+        imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1431235&item_id=10000319&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fdecori%2Fcabinet%2F12282578%2Fimgrc0096993936.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/decori/y-342/")
+      },
+      {
+        name: "冷感タオル・クールタオル",
+        category: "life",
+        imageLabel: "冷感タオル",
+        intro: ["外作業や車の積みっぱなし用品として紹介しやすいカテゴリ。濡らして使うタイプは、タオル・着替え・ビニール袋とセットで書くと元自衛官ブログらしい実用感が出ます。"],
+        scenes: ["草刈り・屋外作業", "バイクや車の休憩時", "スポーツ観戦・イベント待機"],
+        caution: ["素材、サイズ、洗濯可否を見る", "冷却効果を過度に断定しない"],
+        imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1429226&item_id=10356620&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fnovolstore%2Fcabinet%2F10988775%2F32905961_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        rakutenSearchKeyword: "冷感タオル クールタオル 大判"
+      },
+      {
+        name: "完全遮光の帽子・折りたたみ日傘",
+        category: "life",
+        imageLabel: "遮光グッズ",
+        intro: ["外で立つ時間が長い人向けの導線。通勤だけでなく、屋外待機・買い物・車に一本置く予備として書けます。"],
+        scenes: ["通勤・通学", "屋外イベント", "車に一本置く予備装備"],
+        caution: ["遮光表記、重量、収納時サイズを確認", "強風時の使い方はレビューを見る"],
+        imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1430732&item_id=11011359&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Friverpaddy%2Fcabinet%2F12844855%2Falb12257303_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        rakutenSearchKeyword: "完全遮光 帽子 日傘 折りたたみ 超軽量"
+      }
+    ],
+    conclusionParagraphs: [
+      "暑さ対策記事は、季節需要に乗りやすく収益化もしやすいジャンルです。ただし、効果の断定よりどこで使うかを書いたほうが長く読まれます。日傘、保冷剤、部屋着を役割別に並べれば、読者も選びやすくなります。"
+    ],
+    relatedArticleIds: ["stainless-ice-pack-decori-rakuten", "travel-light-packing-7", "car-useful-gear-7"]
+  },
+  {
+    id: "high-unit-price-recovery-gear-202606",
+    title: "訓練後・家トレ後の回復装備：リカバリーウェア・マット・ストレッチ用品",
+    category: "training",
+    date: "2026-06-13",
+    readTime: "8分",
+    summary: "家トレ後や立ち仕事後に使いやすい回復装備を、睡眠環境・床ケア・ストレッチの3方向で整理します。",
+    thumbnailImage: placeholderImage("訓練後の回復装備", "training"),
+    introParagraphs: [
+      "訓練や家トレのあとに大事なのは、追い込むことより戻すことです。寝る前の服、床で体を伸ばすマット、ストレッチ用の小物があると、ケアを習慣にしやすくなります。",
+      "ただし、疲労回復や健康効果は言い切りに注意が必要です。この記事では、体感の断定ではなく、寝る環境・ほぐす環境・続けやすさを整える商品として紹介します。"
+    ],
+    forAudience: ["家トレ後のケア用品を探している人", "立ち仕事や移動が多く、夜の回復環境を整えたい人", "健康効果を断定せずに自然な商品導線を作りたい人"],
+    body: [
+      {
+        heading: "回復装備は、読者の不安を先に消す",
+        paragraphs: [
+          "体に使う商品ほど、読者は本当に必要か、サイズは合うか、返品やレビューはどうかを見ます。だから記事では、いきなり購入ボタンではなく、選ぶ条件を並べるほうが自然です。",
+          "元自衛官目線で言うと、回復は訓練の一部です。道具は魔法ではありませんが、寝る環境・体をほぐす環境を整えると翌日の動きやすさにつながることがあります。"
+        ],
+        bullets: ["効果を断定せず、環境づくりとして書く", "サイズ・素材・洗濯表示を確認させる", "レビューは体型や生活リズムが近い人を読む"]
+      },
+      {
+        heading: "料率より、用途と納得感を優先する",
+        paragraphs: [
+          "料率が高くても、読者が納得しにくい商品は長く売れません。逆に用途がはっきりしていて、レビューの読みどころを説明できる商品は記事にしやすいです。",
+          "ブログでは高いけど買えではなく、買う前にここを見ろの姿勢が強いです。"
+        ]
+      }
+    ],
+    picks: [
+      {
+        name: "リカバリーウェア BAKUNE系",
+        category: "training",
+        imageLabel: "リカバリーウェア",
+        intro: ["寝る前の服として紹介しやすい高単価寄りの商品。効果断定ではなく、睡眠環境・部屋着・洗い替えの観点で紹介します。"],
+        scenes: ["筋トレ後の夜", "立ち仕事・移動が多い日", "父の日・誕生日ギフト"],
+        caution: ["サイズ、素材、洗濯、返品条件を確認", "医療的効果として断定しない"],
+        imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1240825&item_id=10008939&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Face-store%2Fcabinet%2Fitem2024%2Facetokyo%2F32342_24aw.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        rakutenSearchKeyword: "TENTIAL BAKUNE Dry メンズ リカバリーウェア"
+      },
+      {
+        name: "厚手ヨガマット・ストレッチマット",
+        category: "training",
+        imageLabel: "ストレッチマット",
+        intro: ["家トレ記事から自然につなげられる床装備。腕立て、体幹、ストレッチ、寝る前の軽いケアまで使いやすく、置き場所も説明しやすい商品です。"],
+        scenes: ["家トレ後のストレッチ", "体幹トレーニング", "寝る前の軽いケア"],
+        caution: ["厚み、幅、収納時サイズを確認", "床材との滑りやすさをレビューで見る"],
+        rakutenProductUrl: "https://item.rakuten.co.jp/bagray/shakti-yogamat001/",
+        imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1315931&item_id=10012234&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fbagray%2Fcabinet%2Fimage06%2Fshakti-yogamat001n1.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/bagray/shakti-yogamat001/")
+      },
+      {
+        name: "ストレッチバンド・チューブ",
+        category: "training",
+        imageLabel: "ストレッチバンド",
+        intro: ["肩まわり、股関節、背中の軽い可動域づくりに使いやすい小物。単価は低めでも、家トレ・リカバリー・出張先ケアの記事に広げやすい商品です。"],
+        scenes: ["肩まわりのウォームアップ", "家トレ後のクールダウン", "出張先や寮での省スペース運動"],
+        caution: ["強度、長さ、ゴム臭、収納袋の有無を見る", "痛みがある部位に無理に使わない"],
+        rakutenProductUrl: "https://item.rakuten.co.jp/tempostar/ts-stretchband/",
+        imageUrl: "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1406187&item_id=10000169&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Ftempostar%2Fcabinet%2F12625382%2F12625383%2Fts-stretch01.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+        affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/tempostar/ts-stretchband/")
+      }
+    ],
+    conclusionParagraphs: [
+      "高単価記事は、売り込みが強すぎると読者が離れます。体感を断定せず、サイズ・素材・レビュー・返品条件の読み方を添えると、広告でも信用を残しやすいです。収益を狙うなら、商品単体より買う前の不安を消す記事にしていきましょう。"
+    ],
+    relatedArticleIds: ["recovery-gear-ex-sdf", "home-training-gear", "entry-home-training"]
   },
   {
     id: "nintendo-switch-2-rakuten-jp-model",
@@ -2259,7 +2524,7 @@ const articles = [
     productIds: [],
     hideProductCatalog: true,
     thumbnailImage:
-      "https://hbb.afl.rakuten.co.jp/hgb/53990074.84a6a168.53990075.cf856a83/?me_id=1213310&item_id=21617106&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fbook%2Fcabinet%2F3024%2F4902370553024.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+      "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1213310&item_id=21617106&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fbook%2Fcabinet%2F3024%2F4902370553024.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
     introParagraphs: [
       "「発売は気になるけど、まだ決めきれない」「楽天にあるかだけ知りたい」でも大丈夫です。ここではSwitch 2（日本語・国内専用）を検討するときに、商品ページ側で順番に見ておけるポイントを並べました。読みやすさ優先なので、最終判断は自分のタイミングで大丈夫です。"
     ],
@@ -2305,7 +2570,7 @@ const articles = [
           "次のウィジェットは楽天側の埋め込みコードを変更せず載せています。表示がある時点より、ページの現在表示が優先ですので、ウィジェット表示だけで最終決めしないでください。",
           "ウィジェットのあとにもう一歩進むなら、楽天で価格と在庫を確認するのも自然です。"
         ],
-        rawHtml: `<table border="0" cellpadding="0" cellspacing="0"><tr><td><div style="border:1px solid #95a5a6;border-radius:.75rem;background-color:#FFFFFF;width:504px;margin:0px;padding:5px;text-align:center;overflow:hidden;"><table><tr><td style="width:240px"><a href="https://hb.afl.rakuten.co.jp/ichiba/53990074.84a6a168.53990075.cf856a83/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hgb/53990074.84a6a168.53990075.cf856a83/?me_id=1213310&item_id=21617106&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fbook%2Fcabinet%2F3024%2F4902370553024.jpg%3F_ex%3D240x240&s=240x240&t=picttext" border="0" style="margin:2px" alt="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]" title="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]"></a></td><td style="vertical-align:top;width:248px;display: block;"><p style="font-size:12px;line-height:1.4em;text-align:left;margin:0px;padding:2px 6px;word-wrap:break-word"><a href="https://hb.afl.rakuten.co.jp/ichiba/53990074.84a6a168.53990075.cf856a83/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">Nintendo Switch 2（日本語・国内専用）</a><br><span >価格：49,979円（税込、送料無料)</span> <span style="color:#BBB">(2026/5/9時点)</span></p><div style="margin:10px;"><a href="https://hb.afl.rakuten.co.jp/ichiba/53990074.84a6a168.53990075.cf856a83/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://static.affiliate.rakuten.co.jp/makelink/rl.svg" style="float:left;max-height:27px;width:auto;margin-top:0" ></a><a href="https://hb.afl.rakuten.co.jp/ichiba/53990074.84a6a168.53990075.cf856a83/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><div style="float:right;width:41%;height:27px;background-color:#bf0000;color:#fff!important;font-size:12px;font-weight:500;line-height:27px;margin-left:1px;padding: 0 12px;border-radius:16px;cursor:pointer;text-align:center;"> 楽天で購入 </div></a></div></td></tr></table></div><br><p style="color:#000000;font-size:12px;line-height:1.4em;margin:5px;word-wrap:break-word"></p></td></tr></table>`
+        rawHtml: `<table border="0" cellpadding="0" cellspacing="0"><tr><td><div style="border:1px solid #95a5a6;border-radius:.75rem;background-color:#FFFFFF;width:504px;margin:0px;padding:5px;text-align:center;overflow:hidden;"><table><tr><td style="width:240px"><a href="https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1213310&item_id=21617106&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fbook%2Fcabinet%2F3024%2F4902370553024.jpg%3F_ex%3D240x240&s=240x240&t=picttext" border="0" style="margin:2px" alt="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]" title="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]"></a></td><td style="vertical-align:top;width:248px;display: block;"><p style="font-size:12px;line-height:1.4em;text-align:left;margin:0px;padding:2px 6px;word-wrap:break-word"><a href="https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">Nintendo Switch 2（日本語・国内専用）</a><br><span >価格：49,979円（税込、送料無料)</span> <span style="color:#BBB">(2026/5/9時点)</span></p><div style="margin:10px;"><a href="https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://static.affiliate.rakuten.co.jp/makelink/rl.svg" style="float:left;max-height:27px;width:auto;margin-top:0" ></a><a href="https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18210481%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><div style="float:right;width:41%;height:27px;background-color:#bf0000;color:#fff!important;font-size:12px;font-weight:500;line-height:27px;margin-left:1px;padding: 0 12px;border-radius:16px;cursor:pointer;text-align:center;"> 楽天で購入 </div></a></div></td></tr></table></div><br><p style="color:#000000;font-size:12px;line-height:1.4em;margin:5px;word-wrap:break-word"></p></td></tr></table>`
       },
       {
         heading: "どんな人に向きやすいか",
@@ -2343,7 +2608,7 @@ const articles = [
     productIds: [],
     hideProductCatalog: true,
     thumbnailImage:
-      "https://hbb.afl.rakuten.co.jp/hgb/5399caa6.fca975ac.5399caa7.d5127436/?me_id=1431235&item_id=10000319&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fdecori%2Fcabinet%2F12282578%2Fimgrc0096993936.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
+      "https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1431235&item_id=10000319&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fdecori%2Fcabinet%2F12282578%2Fimgrc0096993936.jpg%3F_ex%3D240x240&s=240x240&t=picttext",
     introParagraphs: [
       "※本記事には広告・アフィリエイトリンクが含みます。",
       "ステンレス製の「いわゆる強めの冷やし」を探していると、名前に保冷・アイスパック・クーラーと並ぶタイプがあります。売り文句だけでなく、自分が何を優先しているかで選びやすさが変わるので、この記事では押し売りより確認項目を並べました。"
@@ -2380,7 +2645,7 @@ const articles = [
         paragraphs: [
           "以下はいただいた楽天アフィリエイト用HTMLです。リンク・画像・属性は変更していません。表示価格・クーポン文言はタイミングで変わることがあるので、その都度ページを確認してください。"
         ],
-        rawHtml: `<table border="0" cellpadding="0" cellspacing="0"><tr><td><div style="border:1px solid #95a5a6;border-radius:.75rem;background-color:#FFFFFF;width:504px;margin:0px;padding:5px;text-align:center;overflow:hidden;"><table><tr><td style="width:240px"><a href="https://hb.afl.rakuten.co.jp/ichiba/5399caa6.fca975ac.5399caa7.d5127436/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hgb/5399caa6.fca975ac.5399caa7.d5127436/?me_id=1431235&item_id=10000319&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fdecori%2Fcabinet%2F12282578%2Fimgrc0096993936.jpg%3F_ex%3D240x240&s=240x240&t=picttext" border="0" style="margin:2px" alt="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]" title="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]"></a></td><td style="vertical-align:top;width:248px;display: block;"><p style="font-size:12px;line-height:1.4em;text-align:left;margin:0px;padding:2px 6px;word-wrap:break-word"><a href="https://hb.afl.rakuten.co.jp/ichiba/5399caa6.fca975ac.5399caa7.d5127436/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">＼残り500名様限定！65％OFFクーポンまもなく終了！／＼全店対象！60％OFF 9日20時〜2時間限定／保冷剤 ステンレス 長時間 強力保冷 クーラーボックス 小型 長持ち 繰り返し使える 冷蔵冷凍対応 熱中症対策 スピード冷凍 ステンレス製アイスパック お弁当 釣り アウトドア</a><br><span >価格：2,960円～（税込、送料無料)</span> <span style="color:#BBB">(2026/5/9時点)</span></p><div style="margin:10px;"><a href="https://hb.afl.rakuten.co.jp/ichiba/5399caa6.fca975ac.5399caa7.d5127436/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://static.affiliate.rakuten.co.jp/makelink/rl.svg" style="float:left;max-height:27px;width:auto;margin-top:0" ></a><a href="https://hb.afl.rakuten.co.jp/ichiba/5399caa6.fca975ac.5399caa7.d5127436/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><div style="float:right;width:41%;height:27px;background-color:#bf0000;color:#fff!important;font-size:12px;font-weight:500;line-height:27px;margin-left:1px;padding: 0 12px;border-radius:16px;cursor:pointer;text-align:center;"> 楽天で購入 </div></a></div></td></tr></table></div><br><p style="color:#000000;font-size:12px;line-height:1.4em;margin:5px;word-wrap:break-word"></p></td></tr></table>`
+        rawHtml: `<table border="0" cellpadding="0" cellspacing="0"><tr><td><div style="border:1px solid #95a5a6;border-radius:.75rem;background-color:#FFFFFF;width:504px;margin:0px;padding:5px;text-align:center;overflow:hidden;"><table><tr><td style="width:240px"><a href="https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hgb/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?me_id=1431235&item_id=10000319&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%40_mall%2Fdecori%2Fcabinet%2F12282578%2Fimgrc0096993936.jpg%3F_ex%3D240x240&s=240x240&t=picttext" border="0" style="margin:2px" alt="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]" title="[商品価格に関しましては、リンクが作成された時点と現時点で情報が変更されている場合がございます。]"></a></td><td style="vertical-align:top;width:248px;display: block;"><p style="font-size:12px;line-height:1.4em;text-align:left;margin:0px;padding:2px 6px;word-wrap:break-word"><a href="https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;">＼残り500名様限定！65％OFFクーポンまもなく終了！／＼全店対象！60％OFF 9日20時〜2時間限定／保冷剤 ステンレス 長時間 強力保冷 クーラーボックス 小型 長持ち 繰り返し使える 冷蔵冷凍対応 熱中症対策 スピード冷凍 ステンレス製アイスパック お弁当 釣り アウトドア</a><br><span >価格：2,960円～（税込、送料無料)</span> <span style="color:#BBB">(2026/5/9時点)</span></p><div style="margin:10px;"><a href="https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://static.affiliate.rakuten.co.jp/makelink/rl.svg" style="float:left;max-height:27px;width:auto;margin-top:0" ></a><a href="https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F%3Fscid%3Daf_pc_bbtn&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW5wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ==" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><div style="float:right;width:41%;height:27px;background-color:#bf0000;color:#fff!important;font-size:12px;font-weight:500;line-height:27px;margin-left:1px;padding: 0 12px;border-radius:16px;cursor:pointer;text-align:center;"> 楽天で購入 </div></a></div></td></tr></table></div><br><p style="color:#000000;font-size:12px;line-height:1.4em;margin:5px;word-wrap:break-word"></p></td></tr></table>`
       },
       {
         heading: "迷ったときの次の一手",
@@ -2444,7 +2709,7 @@ function sortArticlesNewestFirst(list) {
 function resolveSiteAssetUrl(pathOrUrl) {
   if (!pathOrUrl) return "";
   const s = String(pathOrUrl).trim();
-  if (/^https?:\/\//i.test(s)) return s;
+  if (/^(https?:\/\/|data:|blob:)/i.test(s)) return s;
   const clean = s.replace(/^\.\//, "");
   return `${SITE_URL}/${clean}`;
 }
@@ -2482,6 +2747,16 @@ function inferArticleCardThumbCategoryId(article) {
   return "";
 }
 
+function articleThumbnailLabel(article) {
+  const raw = String(article.thumbnailLabel || article.title || "装備レビュー")
+    .replace(/^元自衛官が選ぶ、?/, "")
+    .replace(/^元自衛官目線の/, "")
+    .split(/[：:]/)[0]
+    .replace(/まとめ$/, "")
+    .trim();
+  return raw.length > 16 ? `${raw.slice(0, 16)}...` : raw;
+}
+
 function logArticleCardThumbDebug(article, imageUrl, note) {
   if (!thumbDebugEnabled()) return;
   const inferred = inferArticleCardThumbCategoryId(article);
@@ -2497,7 +2772,7 @@ function logArticleCardThumbDebug(article, imageUrl, note) {
 
 /**
  * 記事一覧カードの画像 URL。
- * ① thumbnailImage ② thumbnail ③ heroImage ④ キーワード or category に対応した共通サムネ ⑤ 空（グラデ枠）
+ * ① thumbnailImage ② thumbnail ③ heroImage ④ 記事タイトルから作るラベル入りサムネ。
  * ※楽天商品の先頭ピック画像はテーマと一致しないことが多いため一覧では使わない。
  */
 function getArticleCardImageUrl(article) {
@@ -2509,9 +2784,8 @@ function getArticleCardImageUrl(article) {
   }
   const inferred = inferArticleCardThumbCategoryId(article);
   const catKey = inferred || article.category;
-  const catFile = CATEGORY_THUMB_FILES[catKey];
-  const url = catFile ? `${SITE_URL}/${catFile}` : "";
-  logArticleCardThumbDebug(article, url, `category-thumb(key=${catKey}, inferred=${Boolean(inferred)})`);
+  const url = placeholderImage(articleThumbnailLabel(article), catKey);
+  logArticleCardThumbDebug(article, url, `auto-placeholder(key=${catKey}, inferred=${Boolean(inferred)})`);
   return url;
 }
 
@@ -2737,8 +3011,17 @@ function renderPickBlock(pick, index) {
   const cat = getCategory(pick.category);
   const catName = cat?.name || "装備";
   const imgSrc = pick.imageUrl || placeholderImage(pick.imageLabel || pick.name, pick.category);
-  const btn = url
-    ? `<a class="button rakuten" href="${escapeHtml(url)}" target="_blank" rel="nofollow sponsored noopener noreferrer">楽天で見る</a>`
+  const linkCard = url
+    ? `
+        <a class="product-link-card" href="${escapeHtml(url)}" target="_blank" rel="nofollow sponsored noopener noreferrer">
+          <span class="product-link-card__image"><img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(pick.name)}" loading="lazy" /></span>
+          <span class="product-link-card__text">
+            <strong>${escapeHtml(pick.name)}</strong>
+            <small>画像つきリンクで楽天の商品ページを確認</small>
+          </span>
+          <span class="product-link-card__button">楽天で見る</span>
+        </a>
+      `
     : `<button class="button disabled" type="button" disabled>リンク準備中</button>`;
   const mediaOpen = url
     ? `<a class="product-media" href="${escapeHtml(url)}" target="_blank" rel="nofollow sponsored noopener noreferrer" aria-label="${escapeHtml(pick.name)}">`
@@ -2753,7 +3036,6 @@ function renderPickBlock(pick, index) {
   const caution = pick.caution?.length
     ? `<h3 class="pick-subheading">注意点</h3><ul>${pick.caution.map((s) => `<li>${escapeHtml(s)}</li>`).join("")}</ul>`
     : "";
-  const pickIndex0 = Math.max(0, index - 1);
 
   return `
     <section class="pick-block article-section" id="pick-${index}">
@@ -2766,8 +3048,7 @@ function renderPickBlock(pick, index) {
           ${intros}
           ${scenes}
           ${caution}
-          <p class="editor-link-hint">楽天リンク差し替え：<code>app.js</code> の該当記事の <code>picks[${pickIndex0}]</code> に、<code>rakutenProductUrl</code> か <code>affiliateUrl</code> を入れてください。仮のときは <code>rakutenSearchKeyword</code>。画像は <code>imageUrl</code>。</p>
-          ${btn}
+          ${linkCard}
         </div>
       </div>
     </section>
@@ -2783,7 +3064,7 @@ function renderConclusionRelated(article) {
   const relatedCards = relatedIds
     .map((id) => articles.find((a) => a.id === id))
     .filter(Boolean)
-    .map((a) => renderArticleCard(a, { href: `./article/${a.id}/index.html` }))
+    .map((a) => renderArticleCard(a, { href: `#/article/${a.id}` }))
     .join("");
   const related = relatedCards
     ? `<div class="related-articles"><h2>関連記事</h2><div class="article-grid related-article-grid">${relatedCards}</div></div>`
@@ -2857,6 +3138,8 @@ function renderHome() {
         ${categories.map(renderCategoryButton).join("")}
       </div>
     </section>
+    ${renderStarterRoutes()}
+    ${renderEditorialPolicy()}
     ${renderA8TopRecommendSection()}
     <section class="section">
       <div class="section-head">
@@ -2881,7 +3164,74 @@ function renderHome() {
         ${products.slice(0, 6).map(renderProductCard).join("")}
       </div>
     </section>
+    ${renderBuyerChecklist()}
     ${renderProfileBox()}
+  `;
+}
+
+function renderStarterRoutes() {
+  return `
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>目的別に読み始める</h2>
+          <p>全部の記事を順番に読むより、今困っている場面から入ると選びやすくなります。</p>
+        </div>
+      </div>
+      <div class="route-grid">
+        ${STARTER_ROUTES.map(
+          (route, index) => `
+            <a class="route-card" href="${escapeHtml(route.href)}">
+              <span class="route-card__index">0${index + 1}</span>
+              <small>${escapeHtml(route.label)}</small>
+              <strong>${escapeHtml(route.title)}</strong>
+              <p>${escapeHtml(route.description)}</p>
+            </a>
+          `
+        ).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderEditorialPolicy() {
+  return `
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>元自衛官目線の選定基準</h2>
+          <p>派手なスペックより、生活導線に入って使い続けられるかを見ます。</p>
+        </div>
+        <a class="button secondary button--inline-sm" href="#/profile">運営者を見る</a>
+      </div>
+      <div class="policy-grid">
+        ${EDITORIAL_POLICY.map(
+          (item) => `
+            <article class="policy-card">
+              <h3>${escapeHtml(item.title)}</h3>
+              <p>${escapeHtml(item.description)}</p>
+            </article>
+          `
+        ).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderBuyerChecklist() {
+  return `
+    <section class="section">
+      <div class="checklist-panel">
+        <div>
+          <p class="eyebrow">買う前の最終確認</p>
+          <h2>楽天で失敗しにくくする4点チェック</h2>
+          <p>紹介リンクからそのまま買う前に、商品ページで条件を一度確認してください。道具選びは、最後の確認がかなり効きます。</p>
+        </div>
+        <ol class="checklist">
+          ${BUYER_CHECKLIST.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+        </ol>
+      </div>
+    </section>
   `;
 }
 
@@ -3007,6 +3357,7 @@ function renderArticle(id) {
         </header>
         <div class="article-content">
           ${renderArticlePageDisclosure()}
+          ${renderArticleMainVisual(article, category)}
           ${renderArticleIntroAudience(article)}
           ${renderArticleToc(article)}
           ${bodySections}
@@ -3031,6 +3382,18 @@ function renderArticle(id) {
   `;
 }
 
+function renderArticleMainVisual(article, category) {
+  const imageUrl = getArticleCardImageUrl(article);
+  if (!imageUrl) return "";
+  const label = article.thumbnailCaption || `${category.name}の記事イメージ`;
+  return `
+    <figure class="article-main-visual">
+      <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(article.title)}" loading="eager" decoding="async" />
+      <figcaption>${escapeHtml(label)}</figcaption>
+    </figure>
+  `;
+}
+
 function renderProfilePage() {
   app.innerHTML = `
     <section class="page-hero">
@@ -3050,9 +3413,13 @@ function renderArticleSection(section, index) {
   const paras = section.paragraphs || [];
   const rawHtml =
     typeof section.rawHtml === "string" ? section.rawHtml : typeof section.embedHtml === "string" ? section.embedHtml : "";
+  const sectionImage = section.imageUrl
+    ? `<figure class="article-section-visual"><img src="${escapeHtml(resolveSiteAssetUrl(section.imageUrl))}" alt="${escapeHtml(section.imageAlt || section.heading || "記事内イメージ")}" loading="lazy" decoding="async" /></figure>`
+    : "";
   return `
     <section class="article-section" id="${id}">
       ${section.heading ? `<h2>${escapeHtml(section.heading)}</h2>` : ""}
+      ${sectionImage}
       ${paras.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}
       ${section.bullets?.length ? `<ul>${section.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : ""}
       ${rawHtml ? `<div class="article-embed">${rawHtml}</div>` : ""}
@@ -3075,7 +3442,7 @@ const ARTICLE_THUMB_ONERROR =
 function renderArticleCard(article, options = {}) {
   const category = getCategory(article.category);
   const pickTotal = articlePickCount(article);
-  const articleUrl = options.href ?? `./article/${article.id}/index.html`;
+  const articleUrl = options.href ?? `#/article/${article.id}`;
   const thumbUrl = getArticleCardImageUrl(article);
   const thumbClass = thumbUrl ? "article-thumb article-thumb--photo" : "article-thumb";
   const altText = `${article.title}（${category.name}）`;
