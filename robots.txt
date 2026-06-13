@@ -1,6 +1,7 @@
 User-agent: *
-Allow: /
+Disallow: /
+Allow: /rakuten-gear-review/
+Allow: /gift-for-you/
 
-Sitemap: https://dai32320888-ship-it.github.io/daichi-profile-site/sitemap.xml
 Sitemap: https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/sitemap.xml
 Sitemap: https://dai32320888-ship-it.github.io/daichi-profile-site/gift-for-you/sitemap.xml
