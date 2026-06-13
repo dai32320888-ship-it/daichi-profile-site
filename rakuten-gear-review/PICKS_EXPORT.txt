@@ -1,0 +1,73 @@
+# 追加分70ピック: article_id<TAB>#<TAB>pick_name<TAB>rakutenSearchKeyword (app.js picks[] and same)
+# Open from: 01_アフィリエイト/元自衛官の楽天装備レビュー/PICKS_EXPORT.txt
+
+dorm-life-useful-7	#1	折りたたみ収納ボックス（衣類・日用品）	折りたたみ 収納ボックス
+dorm-life-useful-7	#2	マグネット式の小物フック（鍵・工具）	マグネット フック 強力
+dorm-life-useful-7	#3	一括スイッチ付きの電源タップ	電源タップ 一括スイッチ 雷サージ
+dorm-life-useful-7	#4	詰め替えボトル（シャンプー・洗剤）	詰め替えボトル シャンプー 壁掛け
+dorm-life-useful-7	#5	遮光カーテン（睡眠の土台）	遮光カーテン 1級 防音
+dorm-life-useful-7	#6	スリムなゴミ箱（フタ付き）	ゴミ箱 スリム ふた付き 10L
+dorm-life-useful-7	#7	充電式の小型ヘッドライト	LED ヘッドライト 充電式 軽量
+car-useful-gear-7	#1	車載ゴミ箱（クリップ式）	車 ゴミ箱 クリップ
+car-useful-gear-7	#2	マイクロファイバークロス（多枚セット）	マイクロファイバー クロス 洗車
+car-useful-gear-7	#3	USB充電器（急速・二口以上）	シガーソケット USB 急速充電
+car-useful-gear-7	#4	折りたたみショベル（小）	スコップ 折りたたみ 車載
+car-useful-gear-7	#5	救急セット（絆創膏・消毒液・包帯）	救急セット 車載 コンパクト
+car-useful-gear-7	#6	消臭スプレー or ゲル（弱めの香り）	車 消臭 スプレー
+car-useful-gear-7	#7	防水ドライバッグ（小）	防水バッグ 5L 車
+bike-small-comfort-7	#1	防水スマホポーチ（タッチ可）	防水 スマホポーチ タッチ
+bike-small-comfort-7	#2	使い捨てレインウェア（薄手）	レインコート 携帯 コンパクト
+bike-small-comfort-7	#3	ディグリーザー（チェーン洗浄）小容量	チェーン 洗浄 スプレー
+bike-small-comfort-7	#4	ジップタイ（長め・耐候）	結束バンド 耐候 黒
+bike-small-comfort-7	#5	使い捨て手袋（ニトリル）	ニトリル手袋 使い捨て
+bike-small-comfort-7	#6	小型モバイルバッテリー	モバイルバッテリー 小型 軽量
+bike-small-comfort-7	#7	緊急連絡カード（防水ケース）	防水 IDケース ネックストラップ
+desk-messy-man-organize-7	#1	ケーブルトレー（デスク下）	ケーブルトレー デスク下
+desk-messy-man-organize-7	#2	マグネットケーブルホルダー	マグネット ケーブルホルダー
+desk-messy-man-organize-7	#3	デスク上ラック（二段）	モニター上 ラック 卓上
+desk-messy-man-organize-7	#4	引き出し付きデスクワゴン	デスクワゴン 引き出し
+desk-messy-man-organize-7	#5	クリップボード＋クリアファイル	クリップボード A4 黒
+desk-messy-man-organize-7	#6	卓上ゴミ箱（ミニ）	卓上 ゴミ箱 ミニ
+desk-messy-man-organize-7	#7	モニタライトバー（調光）	モニターライト 調光
+messy-room-cleanup-7	#1	タイマー付きの掃除機（コードレス）	掃除機 コードレス 軽量
+messy-room-cleanup-7	#2	ランドリーバスケット（通気穴あり）	ランドリーバスケット スリム
+messy-room-cleanup-7	#3	粘着クリーナー（スペア多め）	コロコロ スペア 10巻
+messy-room-cleanup-7	#4	フック付きのS字フック	S字フック ゴム付き
+messy-room-cleanup-7	#5	ラベルシール（大きめ・少なめ）	ラベルシール 無地 大
+messy-room-cleanup-7	#6	ゴミ袋ストッカー	ゴミ袋 収納 マグネット
+messy-room-cleanup-7	#7	床用ウェットシート（除菌）	フローリング ウェットシート
+disaster-helpful-gear-7	#1	飲料水（長期保存用）	保存水 2L 非常用
+disaster-helpful-gear-7	#2	LEDランタン（充電式）	LEDランタン 充電式 防災
+disaster-helpful-gear-7	#3	手回しラジオ（スマホ充電可）	手回し ラジオ スマホ充電
+disaster-helpful-gear-7	#4	簡易トイレ（凝固剤タイプ）	簡易トイレ 凝固剤 50回
+disaster-helpful-gear-7	#5	非常食（自分の胃に合うもの）	非常食 5年保存 おにぎり
+disaster-helpful-gear-7	#6	救急セット（家庭用）	救急セット 家庭用
+disaster-helpful-gear-7	#7	モバイルバッテリー（大容量）	モバイルバッテリー 20000mAh
+rakuten-shopping-mistakes-less	#1	チェック1：寸法（外寸・内寸・取っ手）	巻き尺 メジャー 5m
+rakuten-shopping-mistakes-less	#2	チェック2：材質（プラ・金属・布）	収納 スチールラック
+rakuten-shopping-mistakes-less	#3	チェック3：レビューの「低評価の理由」	楽天 レビュー 見方
+rakuten-shopping-mistakes-less	#4	チェック4：送料・セット割・クーポン条件	楽天 送料 クーポン
+rakuten-shopping-mistakes-less	#5	チェック5：保証・返品・問い合わせ窓口	楽天 返品 保証
+rakuten-shopping-mistakes-less	#6	チェック6：互換性（規格・型番）	互換 品 型番 確認
+rakuten-shopping-mistakes-less	#7	チェック7：在庫と納期（急ぎのとき）	楽天 発送 即日
+solo-man-first-kit	#1	寝具セット（最低限）	布団セット シングル 圧縮
+solo-man-first-kit	#2	調理器具（フライパン1・鍋1）	フライパン 一人暮らし IH対応
+solo-man-first-kit	#3	掃除の最低セット（ほうき・ちりとり）	ほうき ちりとり セット
+solo-man-first-kit	#4	延長コード＋電球（予備）	LED電球 E26 60W相当
+solo-man-first-kit	#5	トイレットペーパー＆ティッシュの箱買い	トイレットペーパー 12ロール
+solo-man-first-kit	#6	洗濯用品（洗剤・ハンガー少量）	洗濯ハンガー スチール 10本
+solo-man-first-kit	#7	救急セット（小）	救急セット コンパクト
+recovery-gear-ex-sdf	#1	フォームローラー（ミドル密度）	フォームローラー 30cm
+recovery-gear-ex-sdf	#2	マッサージボール（硬め）	マッサージボール 筋膜
+recovery-gear-ex-sdf	#3	レッグケア（着圧ソックス夜用）	着圧ソックス 夜用 メンズ
+recovery-gear-ex-sdf	#4	スリーピングマスク	アイマスク 睡眠 遮光
+recovery-gear-ex-sdf	#5	入浴剤（発汗系じゃないリラックス系）	入浴剤 リラックス ミルク
+recovery-gear-ex-sdf	#6	プロテイン（手軽にタンパク質）	ホエイプロテイン 1kg
+recovery-gear-ex-sdf	#7	ストレッチバンド（中強度）	ストレッチバンド トレーニング
+travel-light-packing-7	#1	圧縮バッグ（衣類）	圧縮バッグ 衣類 旅行
+travel-light-packing-7	#2	トラベルボトル（TSA注意の液体）	トラベルボトル シャンプー 機内持ち込み
+travel-light-packing-7	#3	マルチUSB充電器（GaN・小型）	USB-C 充電器 GaN 65W
+travel-light-packing-7	#4	パッカブルバッグ（折りたたみ）	エコバッグ 折りたたみ 大容量
+travel-light-packing-7	#5	ネックピロー（収納小）	ネックピロー 旅行 収納
+travel-light-packing-7	#6	洗濯用洗剤シート／粉小分け	洗濯シート 旅行用
+travel-light-packing-7	#7	デジタルメモ（旅程メモでも可）	防水ノート 小型
