@@ -632,17 +632,18 @@ function writeHomeIndex() {
 writeHomeIndex();
 
 const urls = [`${SITEMAP_BASE_URL}/`, ...articles.map((article) => `${SITEMAP_BASE_URL}/article/${article.id}/`)];
+const lastmod = new Date().toISOString().slice(0, 10);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
-  .map((url) => `  <url>\n    <loc>${url}</loc>\n    <lastmod>2026-05-04</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${url.endsWith("/rakuten-gear-review/") ? "1.0" : "0.8"}</priority>\n  </url>`)
+  .map((url) => `  <url>\n    <loc>${url}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${url.endsWith("/rakuten-gear-review/") ? "1.0" : "0.8"}</priority>\n  </url>`)
   .join("\n")}
 </urlset>
 `;
 
 fs.writeFileSync(path.join(root, "sitemap.xml"), sitemap, "utf8");
 
-const robots = `User-agent: *\nAllow: /\n`;
+const robots = `User-agent: *\nAllow: /\n\nSitemap: ${SITEMAP_BASE_URL}/sitemap.xml\n`;
 fs.writeFileSync(path.join(root, "robots.txt"), robots, "utf8");
 
 const itemList = {
