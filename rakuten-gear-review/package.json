@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build-a8-browser-data.js && node scripts/build-static.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "auto:article": "node scripts/auto-rakuten-article.js --seed --max=1",
+    "auto:article:dry": "node scripts/auto-rakuten-article.js --seed --max=1 --dry-run",
+    "queue:seed": "node scripts/seed-article-queue.js"
   }
 }

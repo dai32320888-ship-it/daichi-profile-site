@@ -1,78 +1,20 @@
 /**
- * picks の rakutenSearchKeyword から先頭商品の画像・URLを取得して app.js を更新する。
+ * picks の rakutenSearchKeyword から先頭商品の画像・URLを取得して app.js / extra-articles.json を更新する。
  * 用法: node scripts/fetch-rakuten-images.js [--dry-run]
  */
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
+const { searchFirstProduct } = require("./lib/rakuten-search");
 
-const RAKUTEN_AFFILIATE_PATH = "53663d8f.6b4c8828.53663d90.626681b4";
 const root = path.resolve(__dirname, "..");
 const appPath = path.join(root, "app.js");
+const extraPath = path.join(root, "data", "extra-articles.json");
 const dryRun = process.argv.includes("--dry-run");
 
-function rakutenAffiliateUrl(rakutenProductUrl) {
-  return `https://hb.afl.rakuten.co.jp/ichiba/${RAKUTEN_AFFILIATE_PATH}/?pc=${encodeURIComponent(rakutenProductUrl)}&link_type=hybrid_url`;
-}
-
-function rakutenSearchAffiliateUrl(keyword) {
-  const url = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword)}/`;
-  return rakutenAffiliateUrl(url);
-}
-
-async function fetchText(url) {
-  const res = await fetch(url, {
-    headers: {
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-      "Accept-Language": "ja,en;q=0.9"
-    },
-    redirect: "follow"
-  });
-  if (!res.ok) throw new Error(`${res.status} ${url}`);
-  return res.text();
-}
-
-function firstMatch(html, patterns) {
-  for (const re of patterns) {
-    const m = html.match(re);
-    if (m) return m[1];
-  }
-  return "";
-}
-
-async function searchFirstProduct(keyword) {
-  const searchUrl = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword)}/`;
-  const html = await fetchText(searchUrl);
-
-  const productUrl = firstMatch(html, [
-    /href="(https:\/\/item\.rakuten\.co\.jp\/[^"?#]+\/)"[^>]*class="[^"]*title/,
-    /href="(https:\/\/item\.rakuten\.co\.jp\/[^"?#]+\/)"/,
-    /data-item-url="(https:\/\/item\.rakuten\.co\.jp\/[^"?#]+\/)"/
-  ]);
-  if (!productUrl) return null;
-
-  const imageFromSearch = firstMatch(html, [
-    new RegExp(`src="(https://thumbnail\\.image\\.rakuten\\.co\\.jp/[^"]+)"[^>]*alt="[^"]*"[^>]*href="${productUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`, "i"),
-    /src="(https:\/\/thumbnail\.image\.rakuten\.co\.jp\/[^"]+\?_ex=240x240)"/,
-    /src="(https:\/\/tshop\.r10s\.jp\/[^"]+)"/
-  ]);
-
-  let imageUrl = imageFromSearch;
-  if (!imageUrl) {
-    const itemHtml = await fetchText(productUrl);
-    imageUrl = firstMatch(itemHtml, [
-      /<meta[^>]+property="og:image"[^>]+content="([^"]+)"/i,
-      /<meta[^>]+content="([^"]+)"[^>]+property="og:image"/i,
-      /"image":"(https:\\\/\\\/[^"]+)"/
-    ]).replace(/\\u002F/g, "/").replace(/\\\//g, "/");
-  }
-
-  if (imageUrl && !imageUrl.includes("_ex=")) {
-    imageUrl = imageUrl.includes("?") ? `${imageUrl}&_ex=240x240` : `${imageUrl}?_ex=240x240`;
-  }
-
-  return { productUrl, imageUrl, affiliateUrl: rakutenAffiliateUrl(productUrl) };
-}
+const KEYWORD_OVERRIDES = {
+  "楽天 レビュー 見方": "掃除機 コードレス 人気"
+};
 
 function loadArticles() {
   const appSource = fs.readFileSync(appPath, "utf8");
@@ -129,43 +71,70 @@ function patchPickInSource(source, articleId, pickIndex, fields) {
   return source.slice(0, m.index) + m[1] + newPicksBody + m[3] + source.slice(m.index + m[0].length);
 }
 
-/** 概念チェック記事向け：検索キーワードを実商品寄りに差し替え */
-const KEYWORD_OVERRIDES = {
-  "楽天 レビュー 見方": "掃除機 コードレス 人気"
-};
-
-async function main() {
-  const { appSource, articles } = loadArticles();
-  let source = appSource;
+function collectTargets(articles) {
   const targets = [];
-
   articles.forEach((a) => {
     (a.picks || []).forEach((p, i) => {
       if (!p.imageUrl && p.rakutenSearchKeyword) {
         const keyword = KEYWORD_OVERRIDES[p.rakutenSearchKeyword] || p.rakutenSearchKeyword;
-        targets.push({ articleId: a.id, pickIndex: i, name: p.name, keyword });
+        targets.push({ store: "app", articleId: a.id, pickIndex: i, name: p.name, keyword });
       }
     });
   });
+  return targets;
+}
+
+async function fillPick(pick, keyword) {
+  const result = await searchFirstProduct(keyword);
+  if (!result?.imageUrl && !result?.productUrl) return null;
+  return {
+    rakutenProductUrl: result.productUrl,
+    imageUrl: result.imageUrl,
+    affiliateUrl: result.affiliateUrl,
+    name: result.name
+  };
+}
+
+async function main() {
+  const { appSource, articles } = loadArticles();
+  let source = appSource;
+  const targets = collectTargets(articles);
+
+  let extra = [];
+  let extraChanged = false;
+  if (fs.existsSync(extraPath)) {
+    extra = JSON.parse(fs.readFileSync(extraPath, "utf8"));
+    extra.forEach((a) => {
+      (a.picks || []).forEach((p, i) => {
+        if (!p.imageUrl && p.rakutenSearchKeyword) {
+          const keyword = KEYWORD_OVERRIDES[p.rakutenSearchKeyword] || p.rakutenSearchKeyword;
+          targets.push({ store: "extra", articleId: a.id, pickIndex: i, name: p.name, keyword, article: a });
+        }
+      });
+    });
+  }
 
   console.log(`Targets: ${targets.length}`);
   for (const t of targets) {
     console.log(`\n[${t.articleId}] pick ${t.pickIndex}: ${t.name}`);
     console.log(`  keyword: ${t.keyword}`);
     try {
-      const result = await searchFirstProduct(t.keyword);
-      if (!result?.imageUrl) {
+      const fields = await fillPick(null, t.keyword);
+      if (!fields?.imageUrl) {
         console.log("  SKIP: no image found");
         continue;
       }
-      console.log(`  product: ${result.productUrl}`);
-      console.log(`  image: ${result.imageUrl}`);
+      console.log(`  product: ${fields.rakutenProductUrl}`);
+      console.log(`  image: ${fields.imageUrl}`);
       if (!dryRun) {
-        source = patchPickInSource(source, t.articleId, t.pickIndex, {
-          rakutenProductUrl: result.productUrl,
-          imageUrl: result.imageUrl,
-          affiliateUrl: result.affiliateUrl
-        });
+        if (t.store === "app") {
+          source = patchPickInSource(source, t.articleId, t.pickIndex, fields);
+        } else {
+          const pick = t.article.picks[t.pickIndex];
+          Object.assign(pick, fields);
+          if (fields.name) pick.name = fields.name.slice(0, 80);
+          extraChanged = true;
+        }
       }
       await new Promise((r) => setTimeout(r, 800));
     } catch (err) {
@@ -173,10 +142,16 @@ async function main() {
     }
   }
 
-  if (!dryRun && source !== appSource) {
-    fs.writeFileSync(appPath, source, "utf8");
-    console.log("\nUpdated app.js");
-  } else if (dryRun) {
+  if (!dryRun) {
+    if (source !== appSource) {
+      fs.writeFileSync(appPath, source, "utf8");
+      console.log("\nUpdated app.js");
+    }
+    if (extraChanged) {
+      fs.writeFileSync(extraPath, JSON.stringify(extra, null, 2), "utf8");
+      console.log("Updated extra-articles.json");
+    }
+  } else {
     console.log("\nDry run — no file written");
   }
 }

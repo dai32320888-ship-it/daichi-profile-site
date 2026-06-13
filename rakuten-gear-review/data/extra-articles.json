@@ -10,7 +10,11 @@
       "暑さ対策は、日差し・保冷・首元の3つに分けると選びやすいです。全部を一気に揃えなくても、車に一本・玄関に一本あるだけで帰宅後の体力が違います。",
       "元自衛官目線では、派手な冷却グッズより「毎日の導線に入るか」が勝負。買ってから使わないのが一番の無駄です。"
     ],
-    "forAudience": ["外作業が多い人", "車移動が長い人", "買い物帰りの保冷を気にする人"],
+    "forAudience": [
+      "外作業が多い人",
+      "車移動が長い人",
+      "買い物帰りの保冷を気にする人"
+    ],
     "body": [
       {
         "heading": "暑さ対策は、日差し・保冷・首元で分ける",
@@ -24,32 +28,68 @@
       {
         "name": "ステンレス製アイスパック・保冷剤",
         "category": "life",
-        "intro": ["弁当、クーラーバッグ、買い物帰り、キャンプまでつなげやすい暑さ対策の主役ピックです。"],
-        "scenes": ["弁当の保冷", "クーラーバッグ", "買い物帰りの冷凍品"],
-        "caution": ["サイズと重さ、冷凍庫内の置き場所を確認"],
+        "intro": [
+          "弁当、クーラーバッグ、買い物帰り、キャンプまでつなげやすい暑さ対策の主役ピックです。"
+        ],
+        "scenes": [
+          "弁当の保冷",
+          "クーラーバッグ",
+          "買い物帰りの冷凍品"
+        ],
+        "caution": [
+          "サイズと重さ、冷凍庫内の置き場所を確認"
+        ],
         "rakutenProductUrl": "https://item.rakuten.co.jp/decori/y-342/",
         "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/54d8f2cd.fcf0ef6c.54d8f2ce.c3caff0d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdecori%2Fy-342%2F&link_type=hybrid_url",
         "imageUrl": "https://thumbnail.image.rakuten.co.jp/@mall/decori/cabinet/12282578/imgrc0096993936.jpg?_ex=240x240"
       },
       {
-        "name": "冷感タオル・クールタオル",
+        "name": "冷感ビッグタオル クール 冷感タオル バスタオルサイズ 熱中症対策 ひんやりグッズ 4色選べる 紫外線対策 日焼け防止 大きい 冷却 通勤 通学 アウトドア ス",
         "category": "life",
-        "intro": ["外作業や車の休憩時に使いやすい。濡らして使うタイプはタオル・着替え・ビニール袋とセットで書くと実用感が出ます。"],
-        "scenes": ["草刈り・屋外作業", "バイクや車の休憩時", "スポーツ観戦・イベント待機"],
-        "caution": ["素材、サイズ、洗濯可否を見る"],
-        "rakutenSearchKeyword": "冷感タオル クールタオル 大判"
+        "intro": [
+          "外作業や車の休憩時に使いやすい。濡らして使うタイプはタオル・着替え・ビニール袋とセットで書くと実用感が出ます。"
+        ],
+        "scenes": [
+          "草刈り・屋外作業",
+          "バイクや車の休憩時",
+          "スポーツ観戦・イベント待機"
+        ],
+        "caution": [
+          "素材、サイズ、洗濯可否を見る"
+        ],
+        "rakutenSearchKeyword": "冷感タオル クールタオル 大判",
+        "rakutenProductUrl": "https://item.rakuten.co.jp/e-finds-ada/f06-24a/",
+        "imageUrl": "https://tshop.r10s.jp/withbambi/cabinet/softbathmat4n/33newbiggetolwnew.jpg?fitin=275:275&_ex=240x240",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-finds-ada%2Ff06-24a%2F&link_type=hybrid_url"
       },
       {
-        "name": "完全遮光の帽子・折りたたみ日傘",
+        "name": "獲得予定ポイント",
         "category": "life",
-        "intro": ["外で立つ時間が長い人向け。通勤だけでなく、屋外待機・買い物・車に一本置く予備として書けます。"],
-        "scenes": ["通勤・通学", "屋外イベント", "車に一本置く予備装備"],
-        "caution": ["遮光表記、重量、収納時サイズを確認"],
-        "rakutenSearchKeyword": "完全遮光 帽子 日傘 折りたたみ 超軽量"
+        "intro": [
+          "外で立つ時間が長い人向け。通勤だけでなく、屋外待機・買い物・車に一本置く予備として書けます。"
+        ],
+        "scenes": [
+          "通勤・通学",
+          "屋外イベント",
+          "車に一本置く予備装備"
+        ],
+        "caution": [
+          "遮光表記、重量、収納時サイズを確認"
+        ],
+        "rakutenSearchKeyword": "完全遮光 帽子 日傘 折りたたみ 超軽量",
+        "rakutenProductUrl": "https://item.rakuten.co.jp/happiness-color/wpc-w213-compact-airy-hat/",
+        "imageUrl": "https://tshop.r10s.jp/happiness-color/cabinet/kiu/03767391/12779649/imgrc0109849536.jpg?fitin=275:275&_ex=240x240",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhappiness-color%2Fwpc-w213-compact-airy-hat%2F&link_type=hybrid_url"
       }
     ],
-    "conclusionParagraphs": ["暑さ対策は全部揃えなくていい。日差し・保冷・首元のどれが一番つらいかから1つ入れるのが続きやすいです。"],
-    "relatedArticleIds": ["car-useful-gear-7", "car-storage-charging-gear", "recovery-gear-ex-sdf"]
+    "conclusionParagraphs": [
+      "暑さ対策は全部揃えなくていい。日差し・保冷・首元のどれが一番つらいかから1つ入れるのが続きやすいです。"
+    ],
+    "relatedArticleIds": [
+      "car-useful-gear-7",
+      "car-storage-charging-gear",
+      "recovery-gear-ex-sdf"
+    ]
   },
   {
     "id": "rakuten-ranking-stock-food-202606",
@@ -62,7 +102,11 @@
       "防災食は「いざ」だけだと賞味期限切れで捨てがち。普段の食卓に回せるものを選ぶとローリングストックが続きます。",
       "元自衛官時代、備蓄は「食べられるか」より「続けられるか」でした。味が悪いと誰も食べない。地味に大事な話です。"
     ],
-    "forAudience": ["防災備蓄を始めたい人", "一人暮らしで常備食を考えている人", "賞味期限管理が苦手な人"],
+    "forAudience": [
+      "防災備蓄を始めたい人",
+      "一人暮らしで常備食を考えている人",
+      "賞味期限管理が苦手な人"
+    ],
     "body": [
       {
         "heading": "ローリングストックは「普段使いできるか」で選ぶ",
@@ -74,32 +118,71 @@
     ],
     "picks": [
       {
-        "name": "骨取り魚の缶詰・パウチ",
+        "name": "獲得予定ポイント",
         "category": "disaster",
-        "intro": ["調理不要でタンパク質が取れる。炊き込みご飯やパスタに混ぜれば日常でも消費しやすい。"],
-        "scenes": ["非常食", "忙しい日の夕食", "キャンプ・車中泊"],
-        "caution": ["アレルギー表示・塩分を確認"],
-        "rakutenSearchKeyword": "骨取り さば 缶詰 パウチ"
+        "intro": [
+          "調理不要でタンパク質が取れる。炊き込みご飯やパスタに混ぜれば日常でも消費しやすい。"
+        ],
+        "scenes": [
+          "非常食",
+          "忙しい日の夕食",
+          "キャンプ・車中泊"
+        ],
+        "caution": [
+          "アレルギー表示・塩分を確認"
+        ],
+        "rakutenSearchKeyword": "骨取り さば 缶詰 パウチ",
+        "rakutenProductUrl": "https://item.rakuten.co.jp/gochisoumarket/71672/",
+        "imageUrl": "https://tshop.r10s.jp/shopsugihara/cabinet/10945865/007-017-5.jpg?fitin=275:275&_ex=240x240",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgochisoumarket%2F71672%2F&link_type=hybrid_url"
       },
       {
-        "name": "無洗米・小分けパック",
+        "name": "獲得予定ポイント",
         "category": "disaster",
-        "intro": ["水の節約になる。一人暮らしだと5kg一括より小分けのほうが回転しやすい。"],
-        "scenes": ["日常の炊飯", "断水時の備え", "一人暮らし"],
-        "caution": ["賞味期限と保管場所（湿気）を確認"],
-        "rakutenSearchKeyword": "無洗米 小分け パック"
+        "intro": [
+          "水の節約になる。一人暮らしだと5kg一括より小分けのほうが回転しやすい。"
+        ],
+        "scenes": [
+          "日常の炊飯",
+          "断水時の備え",
+          "一人暮らし"
+        ],
+        "caution": [
+          "賞味期限と保管場所（湿気）を確認"
+        ],
+        "rakutenSearchKeyword": "無洗米 小分け パック",
+        "rakutenProductUrl": "https://item.rakuten.co.jp/r-mart-plus/t-19-001s2/",
+        "imageUrl": "https://tshop.r10s.jp/myoko-koide/cabinet/9ko-sinnkuu-m.jpg?fitin=275:275&_ex=240x240",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fr-mart-plus%2Ft-19-001s2%2F&link_type=hybrid_url"
       },
       {
-        "name": "レトルトご飯・非常食セット",
+        "name": "獲得予定ポイント",
         "category": "disaster",
-        "intro": ["電気がなくても食べられるものを最低数確保。普段の夜食にも使えるタイプが回転しやすい。"],
-        "scenes": ["停電時", "帰宅が遅い日", "防災リュックの補充"],
-        "caution": ["賞味期限の管理。買い足し日をメモする"],
-        "rakutenSearchKeyword": "レトルトご飯 非常食 セット"
+        "intro": [
+          "電気がなくても食べられるものを最低数確保。普段の夜食にも使えるタイプが回転しやすい。"
+        ],
+        "scenes": [
+          "停電時",
+          "帰宅が遅い日",
+          "防災リュックの補充"
+        ],
+        "caution": [
+          "賞味期限の管理。買い足し日をメモする"
+        ],
+        "rakutenSearchKeyword": "レトルトご飯 非常食 セット",
+        "rakutenProductUrl": "https://item.rakuten.co.jp/enetkome/1901913/",
+        "imageUrl": "https://tshop.r10s.jp/f152081-ojiya/cabinet/07617482/07617903/imgrc0088392641.jpg?fitin=275:275&_ex=240x240",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fenetkome%2F1901913%2F&link_type=hybrid_url"
       }
     ],
-    "conclusionParagraphs": ["備蓄は量より回転。普段使いできる食品から入れると、いざのときにも食べ慣れています。"],
-    "relatedArticleIds": ["home-disaster-kit", "disaster-helpful-gear-7", "heavy-household-online-stock"]
+    "conclusionParagraphs": [
+      "備蓄は量より回転。普段使いできる食品から入れると、いざのときにも食べ慣れています。"
+    ],
+    "relatedArticleIds": [
+      "home-disaster-kit",
+      "disaster-helpful-gear-7",
+      "heavy-household-online-stock"
+    ]
   },
   {
     "id": "high-unit-price-recovery-gear-202606",
@@ -112,7 +195,11 @@
       "鍛えるだけで回復しないと、翌日の動きが鈍くなります。リカバリーは贅沢じゃなく、続けるための投資です。",
       "元自衛官時代も、訓練後のケアを軽視すると故障が増えました。家トレでも同じで、回復の仕組みがあると続きます。"
     ],
-    "forAudience": ["家トレを週2以上している人", "筋肉痛が長引く人", "睡眠の質を上げたい人"],
+    "forAudience": [
+      "家トレを週2以上している人",
+      "筋肉痛が長引く人",
+      "睡眠の質を上げたい人"
+    ],
     "body": [
       {
         "heading": "回復は睡眠・血流・筋膜の3本柱",
@@ -124,32 +211,71 @@
     ],
     "picks": [
       {
-        "name": "リカバリーウェア（上下セット）",
+        "name": "獲得予定ポイント",
         "category": "training",
-        "intro": ["就寝時に着るタイプは、着替えるだけでケアのハードルが下がります。"],
-        "scenes": ["トレ後の夜", "疲れが抜けにくい日", "冬の睡眠時"],
-        "caution": ["サイズ感・素材の好みはレビューで確認"],
-        "rakutenSearchKeyword": "リカバリーウェア 上下 セット"
+        "intro": [
+          "就寝時に着るタイプは、着替えるだけでケアのハードルが下がります。"
+        ],
+        "scenes": [
+          "トレ後の夜",
+          "疲れが抜けにくい日",
+          "冬の睡眠時"
+        ],
+        "caution": [
+          "サイズ感・素材の好みはレビューで確認"
+        ],
+        "rakutenSearchKeyword": "リカバリーウェア 上下 セット",
+        "rakutenProductUrl": "https://item.rakuten.co.jp/red-jpn/1838020101/",
+        "imageUrl": "https://tshop.r10s.jp/venex-j/cabinet/08813271/08819837/8660.jpg?fitin=275:275&_ex=240x240",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fred-jpn%2F1838020101%2F&link_type=hybrid_url"
       },
       {
-        "name": "フォームローラー・ストレッチマット",
+        "name": "【セット割400円OFF】ヨガマット10mm+フォームローラー大小2つ 3in1セット 説明書・収納バッグ付き フィットネス ピラティス トレーニング 初心者 ",
         "category": "training",
-        "intro": ["筋膜リリースは地味に効く。床に敷けるマットがあると習慣化しやすい。"],
-        "scenes": ["トレ後のクールダウン", "デスクワーカーの腰", "寝る前の10分"],
-        "caution": ["初めは弱い硬さから。痛みを我慢しない"],
-        "rakutenSearchKeyword": "フォームローラー マット セット"
+        "intro": [
+          "筋膜リリースは地味に効く。床に敷けるマットがあると習慣化しやすい。"
+        ],
+        "scenes": [
+          "トレ後のクールダウン",
+          "デスクワーカーの腰",
+          "寝る前の10分"
+        ],
+        "caution": [
+          "初めは弱い硬さから。痛みを我慢しない"
+        ],
+        "rakutenSearchKeyword": "フォームローラー マット セット",
+        "rakutenProductUrl": "https://item.rakuten.co.jp/lively777/10mm-newroller/",
+        "imageUrl": "https://tshop.r10s.jp/linomirai/cabinet/07199340/07340946/imgrc0187749048.jpg?fitin=275:275&_ex=240x240",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flively777%2F10mm-newroller%2F&link_type=hybrid_url"
       },
       {
-        "name": "入浴剤・温浴アイテム",
+        "name": "獲得予定ポイント",
         "category": "training",
-        "intro": ["湯船に入る習慣がある人向け。香りより、続けられるかどうかで選ぶ。"],
-        "scenes": ["トレ後の入浴", "寒い日の温まり", "睡眠前のリラックス"],
-        "caution": ["肌質に合わない成分がないか確認"],
-        "rakutenSearchKeyword": "入浴剤 温浴 リカバリー"
+        "intro": [
+          "湯船に入る習慣がある人向け。香りより、続けられるかどうかで選ぶ。"
+        ],
+        "scenes": [
+          "トレ後の入浴",
+          "寒い日の温まり",
+          "睡眠前のリラックス"
+        ],
+        "caution": [
+          "肌質に合わない成分がないか確認"
+        ],
+        "rakutenSearchKeyword": "入浴剤 温浴 リカバリー",
+        "rakutenProductUrl": "https://item.rakuten.co.jp/hottabstore/recovery_90_tu/",
+        "imageUrl": "https://tshop.r10s.jp/coreplus1/cabinet/12125504/imgrc0099719928.jpg?fitin=275:275&_ex=240x240",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhottabstore%2Frecovery_90_tu%2F&link_type=hybrid_url"
       }
     ],
-    "conclusionParagraphs": ["回復装備は高いほどいいわけではない。続けられる1つからで十分です。"],
-    "relatedArticleIds": ["recovery-gear-ex-sdf", "home-training-gear", "entry-home-training"]
+    "conclusionParagraphs": [
+      "回復装備は高いほどいいわけではない。続けられる1つからで十分です。"
+    ],
+    "relatedArticleIds": [
+      "recovery-gear-ex-sdf",
+      "home-training-gear",
+      "entry-home-training"
+    ]
   },
   {
     "id": "car-storage-charging-gear",
@@ -162,7 +288,11 @@
       "車は移動の拠点になりがちです。ゴミ、充電器、書類が混ざると毎回ストレスになります。",
       "元自衛官目線では、車内も「定位置があるか」が整備の基本。探す時間を減らすだけで運転前の気持ちが変わります。"
     ],
-    "forAudience": ["通勤で車を使う人", "車中泊・ドライブが多い人", "車内が散らかりやすい人"],
+    "forAudience": [
+      "通勤で車を使う人",
+      "車中泊・ドライブが多い人",
+      "車内が散らかりやすい人"
+    ],
     "body": [
       {
         "heading": "車内はゴミ・充電・書類の3点を先に整える",
@@ -174,31 +304,272 @@
     ],
     "picks": [
       {
-        "name": "車用ゴミ箱・クリップ式ホルダー",
+        "name": "獲得予定ポイント",
         "category": "car",
-        "intro": ["ポケットに溜まるゴミを車内で処理できる。ドライブのたびに気分が違います。"],
-        "scenes": ["通勤", "長距離ドライブ", "ファストフードの包装紙"],
-        "caution": ["設置位置で運転の妨げにならないか確認"],
-        "rakutenSearchKeyword": "車 ゴミ箱 クリップ"
+        "intro": [
+          "ポケットに溜まるゴミを車内で処理できる。ドライブのたびに気分が違います。"
+        ],
+        "scenes": [
+          "通勤",
+          "長距離ドライブ",
+          "ファストフードの包装紙"
+        ],
+        "caution": [
+          "設置位置で運転の妨げにならないか確認"
+        ],
+        "rakutenSearchKeyword": "車 ゴミ箱 クリップ",
+        "rakutenProductUrl": "https://item.rakuten.co.jp/animestore/car-rol/",
+        "imageUrl": "https://tshop.r10s.jp/farfallajewelry/cabinet/jhj/jhj1/jhj143_01.jpg?fitin=275:275&_ex=240x240",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fanimestore%2Fcar-rol%2F&link_type=hybrid_url"
       },
       {
-        "name": "シガーソケット USB 充電器",
+        "name": "シガーソケット USB カーチャージャー 2ポート 急速 充電 車載 iphone Android タイプc アイコス など 車載充電器 シガーソケット充電器 ",
         "category": "car",
-        "intro": ["スマホとドライブレコーダーでポートが足りなくなる前に、増設しておく。"],
-        "scenes": ["ナビ利用", "長時間運転", "乗客の充電"],
-        "caution": ["出力・ポート数・発熱を確認"],
-        "rakutenSearchKeyword": "シガーソケット USB 充電器 急速"
+        "intro": [
+          "スマホとドライブレコーダーでポートが足りなくなる前に、増設しておく。"
+        ],
+        "scenes": [
+          "ナビ利用",
+          "長時間運転",
+          "乗客の充電"
+        ],
+        "caution": [
+          "出力・ポート数・発熱を確認"
+        ],
+        "rakutenSearchKeyword": "シガーソケット USB 充電器 急速",
+        "rakutenProductUrl": "https://item.rakuten.co.jp/fa-fe/f-t00073/",
+        "imageUrl": "https://tshop.r10s.jp/monovice/cabinet/09063694/11913807/000.jpg?fitin=275:275&_ex=240x240",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffa-fe%2Ff-t00073%2F&link_type=hybrid_url"
       },
       {
-        "name": "シート隙間収納・コンソールボックス",
+        "name": "獲得予定ポイント",
         "category": "car",
-        "intro": ["小物がシート下に落ちる問題を減らす。鍵・駐車券・充電器の定位置になる。"],
-        "scenes": ["毎日の通勤", "家族での移動", "小物の紛失防止"],
-        "caution": ["車種との相性をレビューで確認"],
-        "rakutenSearchKeyword": "車 シート隙間 収納 ボックス"
+        "intro": [
+          "小物がシート下に落ちる問題を減らす。鍵・駐車券・充電器の定位置になる。"
+        ],
+        "scenes": [
+          "毎日の通勤",
+          "家族での移動",
+          "小物の紛失防止"
+        ],
+        "caution": [
+          "車種との相性をレビューで確認"
+        ],
+        "rakutenSearchKeyword": "車 シート隙間 収納 ボックス",
+        "rakutenProductUrl": "https://item.rakuten.co.jp/orangejam/10000395/",
+        "imageUrl": "https://tshop.r10s.jp/pitinpocket/cabinet/12685221/imgrc0108230794.jpg?fitin=275:275&_ex=240x240",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Forangejam%2F10000395%2F&link_type=hybrid_url"
       }
     ],
-    "conclusionParagraphs": ["車内装備は増やしすぎない。ゴミ・充電・小物の3点が整えば十分戦えます。"],
-    "relatedArticleIds": ["car-useful-gear-7", "summer-heat-ranking-gear-202606", "travel-light-packing-7"]
+    "conclusionParagraphs": [
+      "車内装備は増やしすぎない。ゴミ・充電・小物の3点が整えば十分戦えます。"
+    ],
+    "relatedArticleIds": [
+      "car-useful-gear-7",
+      "summer-heat-ranking-gear-202606",
+      "travel-light-packing-7"
+    ]
+  },
+  {
+    "id": "auto-p001-マグネット-キートレー-玄関",
+    "title": "元自衛官目線で選ぶ「マグネット キートレー 玄関」：楽天で失敗しにくい選び方",
+    "category": "life",
+    "date": "2026-06-13",
+    "readTime": "9分",
+    "summary": "生活シーンで使える「マグネット キートレー 玄関」を、用途・置き場所・続けやすさの観点で整理します。",
+    "introParagraphs": [
+      "マグネット キートレー 玄関は、買う前に「どの場面で使うか」を決めておくと失敗しにくいです。元自衛官目線では、派手さより毎日の導線に入るかを優先します。",
+      "この記事では楽天市場で探しやすい候補を3つに整理しました。価格・在庫・レビューはリンク先で最新情報を確認してください。"
+    ],
+    "forAudience": [
+      "マグネット キートレー 玄関を整えたい人",
+      "生活装備に関心がある人",
+      "楽天で比較しながら選びたい人"
+    ],
+    "body": [
+      {
+        "heading": "マグネット キートレー 玄関を選ぶときの基準",
+        "paragraphs": [
+          "まず置き場所と使用頻度を決めます。毎日使わないものは、たとえ評価が高くても優先度は下がります。",
+          "次に、サイズ・重量・お手入れのしやすさを商品ページで確認します。写真だけで決めないのが鉄則です。"
+        ],
+        "bullets": [
+          "用途を1行で言えるか",
+          "毎日の導線に入るか",
+          "レビューで失敗例がないか"
+        ]
+      },
+      {
+        "heading": "楽天で比較するときのチェックリスト",
+        "paragraphs": [
+          "送料・クーポン・ポイントはタイミングで変わります。気になった商品は一度カートに入れて、総額を比較するのが確実です。",
+          "似た商品が複数あるときは、レビュー件数と星の内訳（特に低評価の理由）を読むと見極めやすくなります。"
+        ]
+      }
+    ],
+    "picks": [
+      {
+        "name": "獲得予定ポイント",
+        "category": "life",
+        "intro": [
+          "マグネット キートレー 玄関の候補1。楽天の商品ページで価格・レビュー・在庫を確認してから選んでください。"
+        ],
+        "scenes": [
+          "マグネット キートレー 玄関を整えたいとき",
+          "比較検討のたたき台",
+          "定位置づけの候補"
+        ],
+        "caution": [
+          "サイズ・素材・レビュー件数は必ず商品ページで確認",
+          "体感には個人差があります"
+        ],
+        "rakutenProductUrl": "https://item.rakuten.co.jp/kaguzaku/yj-2754/",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkaguzaku%2Fyj-2754%2F&link_type=hybrid_url",
+        "imageUrl": "https://tshop.r10s.jp/bellevie-harima/cabinet/0000/ymj/ys1/2754_s01.jpg?fitin=275:275&_ex=240x240"
+      },
+      {
+        "name": "獲得予定ポイント",
+        "category": "life",
+        "intro": [
+          "マグネット キートレー 玄関の候補2。楽天の商品ページで価格・レビュー・在庫を確認してから選んでください。"
+        ],
+        "scenes": [
+          "マグネット キートレー 玄関を整えたいとき",
+          "比較検討のたたき台",
+          "定位置づけの候補"
+        ],
+        "caution": [
+          "サイズ・素材・レビュー件数は必ず商品ページで確認",
+          "体感には個人差があります"
+        ],
+        "rakutenProductUrl": "https://item.rakuten.co.jp/kaguzaku/yj-2754/",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkaguzaku%2Fyj-2754%2F&link_type=hybrid_url",
+        "imageUrl": "https://tshop.r10s.jp/kaguzaku/cabinet/01023319k/02707641k/07856574/yj-2754_sam01k.jpg?fitin=275:275&_ex=240x240"
+      },
+      {
+        "name": "獲得予定ポイント",
+        "category": "life",
+        "intro": [
+          "マグネット キートレー 玄関の候補3。楽天の商品ページで価格・レビュー・在庫を確認してから選んでください。"
+        ],
+        "scenes": [
+          "マグネット キートレー 玄関を整えたいとき",
+          "比較検討のたたき台",
+          "定位置づけの候補"
+        ],
+        "caution": [
+          "サイズ・素材・レビュー件数は必ず商品ページで確認",
+          "体感には個人差があります"
+        ],
+        "rakutenProductUrl": "https://item.rakuten.co.jp/kaguzaku/yj-2754/",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkaguzaku%2Fyj-2754%2F&link_type=hybrid_url",
+        "imageUrl": "https://tshop.r10s.jp/kaguzaku/cabinet/01023319k/02707641k/07856574/yj-2754_sam01k.jpg?fitin=275:275&_ex=240x240"
+      }
+    ],
+    "conclusionParagraphs": [
+      "マグネット キートレー 玄関は全部一度に揃えなくて大丈夫です。候補の中で一番つらい場面に効きそうなものから1つ入れるのが続きやすいです。"
+    ],
+    "relatedArticleIds": []
+  },
+  {
+    "id": "auto-p002-耐久-充電ケーブル-短い",
+    "title": "元自衛官目線で選ぶ「耐久 充電ケーブル 短い」：楽天で失敗しにくい選び方",
+    "category": "life",
+    "date": "2026-06-13",
+    "readTime": "9分",
+    "summary": "生活シーンで使える「耐久 充電ケーブル 短い」を、用途・置き場所・続けやすさの観点で整理します。",
+    "introParagraphs": [
+      "耐久 充電ケーブル 短いは、買う前に「どの場面で使うか」を決めておくと失敗しにくいです。元自衛官目線では、派手さより毎日の導線に入るかを優先します。",
+      "この記事では楽天市場で探しやすい候補を3つに整理しました。価格・在庫・レビューはリンク先で最新情報を確認してください。"
+    ],
+    "forAudience": [
+      "耐久 充電ケーブル 短いを整えたい人",
+      "生活装備に関心がある人",
+      "楽天で比較しながら選びたい人"
+    ],
+    "body": [
+      {
+        "heading": "耐久 充電ケーブル 短いを選ぶときの基準",
+        "paragraphs": [
+          "まず置き場所と使用頻度を決めます。毎日使わないものは、たとえ評価が高くても優先度は下がります。",
+          "次に、サイズ・重量・お手入れのしやすさを商品ページで確認します。写真だけで決めないのが鉄則です。"
+        ],
+        "bullets": [
+          "用途を1行で言えるか",
+          "毎日の導線に入るか",
+          "レビューで失敗例がないか"
+        ]
+      },
+      {
+        "heading": "楽天で比較するときのチェックリスト",
+        "paragraphs": [
+          "送料・クーポン・ポイントはタイミングで変わります。気になった商品は一度カートに入れて、総額を比較するのが確実です。",
+          "似た商品が複数あるときは、レビュー件数と星の内訳（特に低評価の理由）を読むと見極めやすくなります。"
+        ]
+      }
+    ],
+    "picks": [
+      {
+        "name": "獲得予定ポイント",
+        "category": "life",
+        "intro": [
+          "耐久 充電ケーブル 短いの候補1。楽天の商品ページで価格・レビュー・在庫を確認してから選んでください。"
+        ],
+        "scenes": [
+          "耐久 充電ケーブル 短いを整えたいとき",
+          "比較検討のたたき台",
+          "定位置づけの候補"
+        ],
+        "caution": [
+          "サイズ・素材・レビュー件数は必ず商品ページで確認",
+          "体感には個人差があります"
+        ],
+        "rakutenProductUrl": "https://item.rakuten.co.jp/go-cool/x1310251/",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgo-cool%2Fx1310251%2F&link_type=hybrid_url",
+        "imageUrl": "https://tshop.r10s.jp/go-cool/cabinet/cable/x1310251/x1310251_00.jpg?fitin=275:275&_ex=240x240"
+      },
+      {
+        "name": "獲得予定ポイント",
+        "category": "life",
+        "intro": [
+          "耐久 充電ケーブル 短いの候補2。楽天の商品ページで価格・レビュー・在庫を確認してから選んでください。"
+        ],
+        "scenes": [
+          "耐久 充電ケーブル 短いを整えたいとき",
+          "比較検討のたたき台",
+          "定位置づけの候補"
+        ],
+        "caution": [
+          "サイズ・素材・レビュー件数は必ず商品ページで確認",
+          "体感には個人差があります"
+        ],
+        "rakutenProductUrl": "https://item.rakuten.co.jp/fragolatre/6000472/",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffragolatre%2F6000472%2F&link_type=hybrid_url",
+        "imageUrl": "https://tshop.r10s.jp/fragolatre/cabinet/imgrc0094788210.jpg?fitin=275:275&_ex=240x240"
+      },
+      {
+        "name": "獲得予定ポイント",
+        "category": "life",
+        "intro": [
+          "耐久 充電ケーブル 短いの候補3。楽天の商品ページで価格・レビュー・在庫を確認してから選んでください。"
+        ],
+        "scenes": [
+          "耐久 充電ケーブル 短いを整えたいとき",
+          "比較検討のたたき台",
+          "定位置づけの候補"
+        ],
+        "caution": [
+          "サイズ・素材・レビュー件数は必ず商品ページで確認",
+          "体感には個人差があります"
+        ],
+        "rakutenProductUrl": "https://item.rakuten.co.jp/attocool/cc02/",
+        "affiliateUrl": "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fattocool%2Fcc02%2F&link_type=hybrid_url",
+        "imageUrl": "https://tshop.r10s.jp/attocool/cabinet/10660546/cc-01a-2set-h.jpg?fitin=275:275&_ex=240x240"
+      }
+    ],
+    "conclusionParagraphs": [
+      "耐久 充電ケーブル 短いは全部一度に揃えなくて大丈夫です。候補の中で一番つらい場面に効きそうなものから1つ入れるのが続きやすいです。"
+    ],
+    "relatedArticleIds": []
   }
 ]
