@@ -184,26 +184,115 @@ const articles = [
     title: "元自衛官が選ぶ、生活がラクになる楽天便利グッズ10選",
     category: "life",
     date: "2026-05-03",
-    readTime: "6分",
-    summary: "玄関、デスク、収納を整えて、毎日の小さなストレスを減らす装備を紹介します。",
-    productIds: ["tower-key-hook", "cable-tray", "folding-storage"],
-    relatedArticleIds: ["heavy-household-online-stock", "dorm-solo-storage"],
+    readTime: "12分",
+    summary: "玄関、デスク、収納、キッチンまわりを整えて、毎日の小さなストレスを減らす装備を10つに絞って紹介します。",
+    hideProductCatalog: true,
+    relatedArticleIds: ["heavy-household-online-stock", "dorm-solo-storage", "messy-room-cleanup-7"],
+    introParagraphs: [
+      "便利グッズは、買った瞬間のテンションより一週間後に効いてくるかが大事です。元自衛官目線では、すぐ使える・場所を取らない・壊れにくい、この三つが揃うと生活の段取りが整います。",
+      "今回は玄関・机・収納に加え、キッチンや掃除の導線まで含めた10ピックです。全部揃えなくても、つらいところから1つ入れるのが続きやすいです。"
+    ],
+    forAudience: ["毎朝鍵や小物を探している人", "配線や収納がごちゃついている人", "一人暮らしで生活導線を整えたい人"],
     body: [
       {
         heading: "生活装備は、派手さより継続力",
         paragraphs: [
-          "便利グッズは、買った瞬間のテンションよりも一週間後に効いてくるかが大事です。これは地味だけど、毎日の小さなストレスを消してくれる装備です。",
-          "元自衛官目線で見ると、良い道具の条件は単純です。すぐ使える、場所を取らない、壊れにくい。この三つが揃うと、生活の段取りが一気に整います。"
+          "良い道具の条件は単純です。毎日の導線に入るかどうか。使わない収納は、結局ただの障害物になります。",
+          "10個並べていますが、優先順位は玄関の定位置 → 机の配線 → 収納 → キッチン小物の順がおすすめです。"
         ],
         bullets: ["鍵の定位置を作る", "配線を床から浮かせる", "収納は出し入れのしやすさを優先する"]
+      }
+    ],
+    picks: [
+      {
+        name: "tower マグネットキーフック",
+        category: "life",
+        intro: ["玄関に鍵の定位置を作れる。朝の鍵探しが減るだけで、出かける前のストレスがかなり下がります。"],
+        scenes: ["玄関の鍵・印鑑", "マスク・小物の一時置き"],
+        caution: ["マグネットが効く面か確認（木扉は不可のことが多い）"],
+        rakutenProductUrl: "https://item.rakuten.co.jp/roomy/ymz19aug12h28/",
+        affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53663d8f.6b4c8828.53663d90.626681b4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Froomy%2Fymz19aug12h28%2F&link_type=hybrid_url",
+        imageUrl: "https://thumbnail.image.rakuten.co.jp/@0_mall/roomy/cabinet/500cart_all/500cart_11g/p5-4/ymz1082-mv01c-0_gt01.jpg?_ex=240x240"
       },
       {
-        heading: "まずは玄関・机・収納を整える",
-        paragraphs: [
-          "鍵、ケーブル、日用品の置き場が決まると、部屋の散らかり方が変わります。毎日使う物ほど、定位置を決める効果は大きいです。",
-          "収納は増やすより、出し入れしやすい形を選ぶのが大事です。使いにくい収納は、結局ただの障害物になります。"
-        ]
+        name: "ケーブルトレー デスク下",
+        category: "pc-ai",
+        intro: ["デスク下の配線をまとめて、床のごちゃつきを減らせる。生活装備の中でも効き目が大きい部類です。"],
+        scenes: ["在宅デスク", "ゲーム机", "充電器の束ね"],
+        caution: ["デスク天板の裏に取り付けられるか確認"],
+        rakutenProductUrl: "https://item.rakuten.co.jp/apricot-r/3605-a260/",
+        affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53664af0.0b5b44f4.53664af1.1d2db78c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fapricot-r%2F3605-a260%2F&link_type=hybrid_url",
+        imageUrl: "https://thumbnail.image.rakuten.co.jp/@0_mall/apricot-r/cabinet/yjtn/3605-a260.jpg?_ex=240x240"
+      },
+      {
+        name: "折りたたみ収納ボックス",
+        category: "solo",
+        intro: ["使わない時はたためて、衣類や小物をまとめやすい。狭い部屋ほど、畳める収納の価値が出ます。"],
+        scenes: ["クローゼット補助", "季節物の保管", "引っ越し前の仮置き"],
+        caution: ["重い物を入れすぎない。持ち手の強度を確認"],
+        rakutenProductUrl: "https://item.rakuten.co.jp/risu-proshop/63567-5/",
+        affiliateUrl: "https://hb.afl.rakuten.co.jp/ichiba/53664e39.cb170390.53664e3a.664bed07/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frisu-proshop%2F63567-5%2F&link_type=hybrid_url",
+        imageUrl: "https://thumbnail.image.rakuten.co.jp/@0_mall/risu-proshop/cabinet/images/gifu-pla/63567-5_01.jpg?_ex=240x240"
+      },
+      {
+        name: "突っ張り棒・突っ張りラック",
+        category: "life",
+        intro: ["穴あけ不要で棚や仕切りが作れる。賃貸でも収納量を増やしやすい定番です。"],
+        scenes: ["クローゼット内の仕切り", "洗面所のタオル掛け", "キッチンのスパイス置き"],
+        caution: ["天井と床の素材、幅の許容範囲を確認"],
+        rakutenSearchKeyword: "突っ張り棒 ラック 強力"
+      },
+      {
+        name: "粘着フック・壁掛けフック",
+        category: "life",
+        intro: ["コート、バッグ、掃除用具の定位置づくりに使える。穴を開けたくない部屋向け。"],
+        scenes: ["玄関のバッグ掛け", "キッチン周りの小物", "浴室のタオル"],
+        caution: ["貼る面の素材と耐荷重を確認。剥がす時の跡もチェック"],
+        rakutenSearchKeyword: "粘着フック 強力 壁 フック"
+      },
+      {
+        name: "シンク用水切りラック",
+        category: "life",
+        intro: ["洗い物後の導線が短くなる。水切りかごと洗剤置きが一体化したタイプが使いやすいです。"],
+        scenes: ["一人暮らしのキッチン", "狭いシンク", "食器洗いの効率化"],
+        caution: ["シンクのサイズと高さの相性を確認"],
+        rakutenSearchKeyword: "シンク 水切り ラック 伸縮"
+      },
+      {
+        name: "コードレスハンディクリーナー",
+        category: "life",
+        intro: ["卓上や車内、ソファのゴミ取りに使える。大掃除より、毎日30秒の掃除が部屋の印象を変えます。"],
+        scenes: ["デスク周り", "車のシート", "ペットの毛"],
+        caution: ["吸引力・バッテリー持ち・フィルター手入れを確認"],
+        rakutenSearchKeyword: "ハンディクリーナー コードレス 強力"
+      },
+      {
+        name: "雷ガード付き電源タップ",
+        category: "life",
+        intro: ["PC・ルーター・充電器をまとめる定位置。雷サージ対応かどうかは商品ページで確認を。"],
+        scenes: ["デスク下の配線整理", "テレビ周り", "ゲーム機の電源"],
+        caution: ["コンセント数・コード長・定格容量を確認"],
+        rakutenSearchKeyword: "電源タップ 雷ガード コンセント 6口"
+      },
+      {
+        name: "フタ付きゴミ箱（キッチン・卓上）",
+        category: "life",
+        intro: ["生ゴミや小さな包装紙の一時置きに。フタがあると臭いと見た目の両方がマシになります。"],
+        scenes: ["キッチンカウンター", "デスク横", "車内のゴミ"],
+        caution: ["容量と洗いやすさ。密閉しすぎると臭いがこもることも"],
+        rakutenSearchKeyword: "ゴミ箱 フタ付き キッチン 卓上"
+      },
+      {
+        name: "突っ張り棚・洗面台下収納",
+        category: "life",
+        intro: ["洗面台下や冷蔵庫横など、デッドスペースを棚に変える。生活導線の「置き場不足」に効きます。"],
+        scenes: ["洗面台下", "冷蔵庫横", "トイレの小物"],
+        caution: ["幅・高さ・耐荷重。湿気のある場所は素材を選ぶ"],
+        rakutenSearchKeyword: "突っ張り棚 洗面台 下 収納"
       }
+    ],
+    conclusionParagraphs: [
+      "10個全部は不要です。鍵・配線・収納のどれか一つから入れると、生活の段取りが変わりやすいです。気になったものは楽天で価格とレビューを確認してから選んでください。"
     ]
   },
   {
@@ -2444,8 +2533,10 @@ siteNav?.addEventListener("click", () => {
   siteNav?.classList.remove("open");
 });
 
-window.addEventListener("hashchange", renderRoute);
-window.addEventListener("DOMContentLoaded", renderRoute);
+if (app) {
+  window.addEventListener("hashchange", renderRoute);
+  window.addEventListener("DOMContentLoaded", renderRoute);
+}
 
 function getCategory(id) {
   return categories.find((category) => category.id === id);
@@ -2841,6 +2932,7 @@ function renderConclusionRelated(article) {
 }
 
 function renderRoute() {
+  if (!app) return;
   const hash = window.location.hash || "#/";
   const [path, queryString = ""] = hash.slice(1).split("?");
   const params = new URLSearchParams(queryString);
@@ -2857,7 +2949,7 @@ function renderRoute() {
     renderHome();
   }
 
-  app.focus({ preventScroll: true });
+  app?.focus({ preventScroll: true });
   window.scrollTo({ top: 0, behavior: "auto" });
 }
 

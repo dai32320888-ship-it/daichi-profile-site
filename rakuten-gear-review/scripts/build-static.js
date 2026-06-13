@@ -36,13 +36,28 @@ vm.runInContext(
 const {
   categories,
   products,
-  articles,
+  articles: baseArticles,
   placeholderImage,
   rakutenAffiliateUrl,
   rakutenSearchAffiliateUrl,
   getCategory,
   getArticleCardImageUrl
 } = sandbox.__DATA__;
+
+const extraPath = path.join(root, "data", "extra-articles.json");
+const extraArticles = fs.existsSync(extraPath) ? JSON.parse(fs.readFileSync(extraPath, "utf8")) : [];
+const seenIds = new Set(baseArticles.map((a) => a.id));
+const articles = [...baseArticles];
+for (const extra of extraArticles) {
+  if (!seenIds.has(extra.id)) {
+    articles.push(extra);
+    seenIds.add(extra.id);
+  }
+}
+
+const REDIRECT_ARTICLES = {
+  "nintendo-switch-2-rakuten": "nintendo-switch-2-rakuten-jp-model"
+};
 
 const AUTHOR_PEN_NAME = "だるい装備レビュー編集部";
 const CONTACT_X_URL = "https://x.com/darui_tsubushi";
@@ -210,10 +225,10 @@ function layout({ title, description, canonical, body, structuredData, ogType = 
       <button class="menu-button" id="menuButton" type="button" aria-label="メニューを開く">☰</button>
       <nav class="site-nav" id="siteNav" aria-label="メインナビゲーション">
         <a href="../../index.html">トップ</a>
-        <a href="../../index.html#/articles">記事一覧</a>
-        <a href="../../index.html#/category/training">筋トレ装備</a>
-        <a href="../../index.html#/category/disaster">防災装備</a>
-        <a href="../../index.html#/profile">プロフィール</a>
+        <a href="../../index.html#articles">記事一覧</a>
+        <a href="../../category/training.html">筋トレ装備</a>
+        <a href="../../category/disaster.html">防災装備</a>
+        <a href="../../index.html#profile">プロフィール</a>
       </nav>
     </header>
     <main>${body}</main>
@@ -306,7 +321,68 @@ function layoutHome({ title, description, canonical, body, structuredData }) {
       })();
     </script>
     <script src="./a8-browser-data.js" defer></script>
-    <script src="./app.js" defer></script>
+  </body>
+</html>
+`;
+}
+
+function layoutCategory({ title, description, canonical, body, structuredData }) {
+  const ogImageAbs = `${CANONICAL_BASE_URL}/images/og-default.png`;
+  return `<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${esc(title)}</title>
+    <meta name="description" content="${esc(description)}" />
+    <link rel="canonical" href="${canonical}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="${esc(title)}" />
+    <meta property="og:description" content="${esc(description)}" />
+    <meta property="og:url" content="${canonical}" />
+    <meta property="og:site_name" content="元自衛官の楽天装備レビュー" />
+    <meta property="og:image" content="${ogImageAbs}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">${JSON.stringify(structuredData)}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">装</span>
+        <span>
+          <strong>元自衛官の楽天装備レビュー</strong>
+          <small>暮らしをラクにする装備品レビュー</small>
+        </span>
+      </a>
+      <button class="menu-button" id="menuButton" type="button" aria-label="メニューを開く">☰</button>
+      <nav class="site-nav" id="siteNav" aria-label="メインナビゲーション">
+        <a href="../index.html">トップ</a>
+        <a href="../index.html#articles">記事一覧</a>
+        <a href="../index.html#categories">カテゴリ</a>
+        <a href="../index.html#profile">プロフィール</a>
+      </nav>
+    </header>
+    <main>${body}</main>
+    <footer class="site-footer">
+      <div>
+        <strong>元自衛官の楽天装備レビュー</strong>
+        <p>当サイトはアフィリエイト広告を利用しています。価格・在庫・レビューはリンク先の楽天市場で最新情報をご確認ください。</p>
+      </div>
+      <a href="../index.html">トップへ戻る</a>
+    </footer>
+    <script>
+      (function () {
+        var btn = document.getElementById("menuButton");
+        var nav = document.getElementById("siteNav");
+        if (btn && nav) {
+          btn.addEventListener("click", function () { nav.classList.toggle("open"); });
+          nav.addEventListener("click", function (e) {
+            if (e.target.tagName === "A") nav.classList.remove("open");
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
 `;
@@ -511,7 +587,7 @@ function renderArticle(article) {
         <h3>同じカテゴリの記事</h3>
         <p>${esc(catDesc)}</p>
         <div class="section-actions">
-          <a class="button secondary button--inline-sm" href="../../index.html#/category/${esc(article.category)}">${esc(catLabel)}を見る</a>
+          <a class="button secondary button--inline-sm" href="../../category/${esc(article.category)}.html">${esc(catLabel)}を見る</a>
         </div>
       </div>
     </aside>
@@ -539,7 +615,77 @@ function renderArticle(article) {
   );
 }
 
-articles.forEach(renderArticle);
+articles.forEach((article) => {
+  if (REDIRECT_ARTICLES[article.id]) return;
+  renderArticle(article);
+});
+
+function writeArticleRedirects() {
+  for (const [fromId, toId] of Object.entries(REDIRECT_ARTICLES)) {
+    const dir = path.join(root, "article", fromId);
+    fs.mkdirSync(dir, { recursive: true });
+    const canonical = `${CANONICAL_BASE_URL}/article/${toId}/`;
+    const target = `../${toId}/`;
+    fs.writeFileSync(
+      path.join(dir, "index.html"),
+      `<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0; url=${target}" />
+    <link rel="canonical" href="${canonical}" />
+    <title>リダイレクト中…</title>
+    <script>location.replace("${target}");</script>
+  </head>
+  <body><p><a href="${target}">記事へ移動</a></p></body>
+</html>`,
+      "utf8"
+    );
+  }
+}
+
+writeArticleRedirects();
+
+function writeCategoryPages() {
+  const catDir = path.join(root, "category");
+  fs.mkdirSync(catDir, { recursive: true });
+  for (const cat of categories) {
+    const catArticles = [...articles]
+      .filter((a) => a.category === cat.id && !REDIRECT_ARTICLES[a.id])
+      .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+    const cards = catArticles.map((a) => renderArticleCardHtml(a, `../article/${a.id}/`)).join("");
+    const canonical = `${CANONICAL_BASE_URL}/category/${cat.id}.html`;
+    const body = `
+      <section class="page-hero">
+        <p class="eyebrow">${esc(cat.name)}</p>
+        <h1>${esc(cat.name)}の記事一覧</h1>
+        <p class="lead">${esc(cat.description || "")}</p>
+        <p class="article-meta">${catArticles.length}記事</p>
+      </section>
+      <section class="section">
+        <div class="article-grid">${cards || "<p>記事を準備中です。</p>"}</div>
+      </section>`;
+    fs.writeFileSync(
+      path.join(catDir, `${cat.id}.html`),
+      layoutCategory({
+        title: `${cat.name} | 元自衛官の楽天装備レビュー`,
+        description: cat.description || `${cat.name}カテゴリの装備レビュー記事一覧`,
+        canonical,
+        body,
+        structuredData: {
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: `${cat.name}の記事一覧`,
+          description: cat.description,
+          url: canonical
+        }
+      }),
+      "utf8"
+    );
+  }
+}
+
+writeCategoryPages();
 
 function writeHomeIndex() {
   const canonical = `${CANONICAL_BASE_URL}/`;
@@ -547,34 +693,59 @@ function writeHomeIndex() {
   const description =
     "元自衛官の視点で、寮生活・一人暮らし・車・バイク・デスク周り・防災・日用品に役立つ楽天商品を紹介する装備レビューブログです。";
 
-  const featured = [...articles].sort((a, b) => String(b.date || "").localeCompare(String(a.date || ""))).slice(0, 12);
+  const sorted = [...articles]
+    .filter((a) => !REDIRECT_ARTICLES[a.id])
+    .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+  const featured = sorted.slice(0, 12);
   const articleCards = featured
     .map((a) => renderArticleCardHtml(a, `./article/${a.id}/`))
     .join("");
 
   const categoryCards = categories
     .map((cat) => {
-      const count = articles.filter((a) => a.category === cat.id).length;
-      return `<article class="category-card">
-        <div class="category-card__body">
-          <h3>${esc(cat.name)}</h3>
-          <p>${esc(cat.description || "")}</p>
-          <div class="article-meta">${esc(count)}記事</div>
-        </div>
-      </article>`;
+      const count = articles.filter((a) => a.category === cat.id && !REDIRECT_ARTICLES[a.id]).length;
+      return `<a class="category-card category-button" href="./category/${esc(cat.id)}.html">
+        <span>${esc(cat.name)}</span>
+        <small>${esc(cat.description || "")}</small>
+        <div class="article-meta">${esc(count)}記事</div>
+      </a>`;
     })
     .join("");
 
-  const allArticleLinks = [...articles]
-    .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
+  const allArticleLinks = sorted
     .map((a) => `<li><a href="./article/${esc(a.id)}/">${esc(a.title)}</a> <span class="article-meta">${esc(a.date || "")}</span></li>`)
     .join("");
 
   const body = `
     <section class="hero">
-      <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">元自衛官目線の装備レビュー</p>
         <h1>暮らしをラクにする装備レビュー</h1>
-        <p>元自衛官の目線で、楽天市場で探しやすい生活用品・防災グッズ・車載アイテム・デスク周り用品を整理して紹介します。</p>
+        <p class="lead">元自衛官の目線で、楽天市場で探しやすい生活用品・防災グッズ・車載アイテム・デスク周り用品を整理して紹介します。</p>
+        <div class="hero-site-summary" aria-label="このサイトの案内">
+          <p><strong>テーマ</strong>　日用品・防災・車内・デスク周りなど、生活導線に効く装備の整理とレビューです。</p>
+          <p><strong>向いている人</strong>　一人暮らし・寮生活、防災の備え、車・バイク利用、在宅で作業環境を整えたい人。</p>
+        </div>
+        <ul class="trust-badges" aria-label="主なテーマ">
+          <li>防災</li><li>整頓</li><li>車内</li><li>一人暮らし</li><li>生活改善</li>
+        </ul>
+        <p class="ad-notice">当サイトはアフィリエイト広告を利用しています。</p>
+        <div class="hero-actions">
+          <a class="button" href="#articles">記事を読む</a>
+          <a class="button secondary" href="./category/disaster.html">防災装備を見る</a>
+        </div>
+      </div>
+      <div class="hero-panel" aria-label="装備レビューの概要">
+        <div class="hero-panel-inner">
+          <span class="panel-label">FIELD NOTES</span>
+          <strong>買う前に、用途・置き場所・使う頻度を見る。</strong>
+          <p>生活導線に入るものだけが、本当に使える装備になります。</p>
+          <div class="stats">
+            <div class="stat"><b>${sorted.length}</b><small>レビュー記事</small></div>
+            <div class="stat"><b>${products.length}</b><small>商品カード</small></div>
+            <div class="stat"><b>${categories.length}</b><small>カテゴリ</small></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -631,7 +802,13 @@ function writeHomeIndex() {
 
 writeHomeIndex();
 
-const urls = [`${SITEMAP_BASE_URL}/`, ...articles.map((article) => `${SITEMAP_BASE_URL}/article/${article.id}/`)];
+const sitemapArticles = articles.filter((a) => !REDIRECT_ARTICLES[a.id]);
+const categoryUrls = categories.map((cat) => `${SITEMAP_BASE_URL}/category/${cat.id}.html`);
+const urls = [
+  `${SITEMAP_BASE_URL}/`,
+  ...categoryUrls,
+  ...sitemapArticles.map((article) => `${SITEMAP_BASE_URL}/article/${article.id}/`)
+];
 const lastmod = new Date().toISOString().slice(0, 10);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -658,5 +835,5 @@ const itemList = {
 };
 
 fs.writeFileSync(path.join(root, "structured-data.json"), JSON.stringify(itemList, null, 2), "utf8");
-console.log(`Generated ${articles.length} article pages and sitemap.xml`);
+console.log(`Generated ${sitemapArticles.length} article pages, ${categories.length} category pages, and sitemap.xml`);
 
