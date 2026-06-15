@@ -87,6 +87,11 @@ function appendFragments(src, newFragments) {
   return before + escaped.join("") + after;
 }
 
+function a8matKey(html) {
+  const m = html.match(/a8mat=([^"&\s]+)/);
+  return m ? m[1] : "";
+}
+
 function main() {
   if (!fs.existsSync(inboxDir)) {
     fs.mkdirSync(inboxDir, { recursive: true });
@@ -104,30 +109,52 @@ function main() {
     return;
   }
 
+  const creativesSrc = fs.readFileSync(creativesPath, "utf8");
+  const existing = parseCreativesSource(creativesSrc);
+  const existingKeys = new Set(existing.fragments.map(a8matKey).filter(Boolean));
+
   const entries = [];
+  const skipped = [];
   for (const file of files) {
     const raw = JSON.parse(fs.readFileSync(path.join(inboxDir, file), "utf8"));
     const html = normalizeHtml(raw.html);
     validateA8Html(html);
+    const key = a8matKey(html);
+    if (key && existingKeys.has(key)) {
+      skipped.push({ file, label: raw.label || file, key });
+      console.log(`  SKIP ${file}（取込済み: ${key.slice(0, 20)}…）`);
+      continue;
+    }
+    if (key) existingKeys.add(key);
     entries.push({ file, label: raw.label || file, categories: raw.categories || [], slots: raw.slots || {}, html });
     console.log(`  OK ${file} → ${raw.label || file} [${(raw.categories || []).join(",")}]`);
   }
 
-  if (dryRun) {
-    console.log(`\nDry run: ${entries.length} 件を追加予定`);
+  const processedDir = path.join(inboxDir, "processed");
+  fs.mkdirSync(processedDir, { recursive: true });
+  const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+  for (const entry of skipped) {
+    if (!dryRun) {
+      fs.renameSync(path.join(inboxDir, entry.file), path.join(processedDir, `${stamp}-skip-${entry.file}`));
+    }
+  }
+
+  if (!entries.length) {
+    console.log(skipped.length ? `\n新規0件（${skipped.length}件は既存と同じため processed へ移動）` : "\ninbox に新規 .json がありません。");
     return;
   }
 
-  let src = fs.readFileSync(creativesPath, "utf8");
-  const parsed = parseCreativesSource(src);
-  const startIndex = parsed.fragments.length;
+  if (dryRun) {
+    console.log(`\nDry run: ${entries.length} 件を追加予定（skip ${skipped.length}）`);
+    return;
+  }
+
+  let src = creativesSrc;
+  const startIndex = existing.fragments.length;
   src = appendFragments(src, entries.map((e) => e.html));
   src = patchCategoryMaps(src, entries, startIndex);
   fs.writeFileSync(creativesPath, src, "utf8");
 
-  const processedDir = path.join(inboxDir, "processed");
-  fs.mkdirSync(processedDir, { recursive: true });
-  const stamp = new Date().toISOString().replace(/[:.]/g, "-");
   for (const entry of entries) {
     fs.renameSync(path.join(inboxDir, entry.file), path.join(processedDir, `${stamp}-${entry.file}`));
   }

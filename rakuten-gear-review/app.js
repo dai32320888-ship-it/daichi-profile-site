@@ -31,7 +31,7 @@ const CONTACT_X_HANDLE = "@darui_tsubushi";
 const ARTICLE_DISCLOSURE_TEXT =
   "本ページには広告・アフィリエイトリンクが含まれます。紹介内容は、読者が比較しやすいように整理しています。";
 
-const RAKUTEN_AFFILIATE_PATH = "53663d8f.6b4c8828.53663d90.626681b4";
+const RAKUTEN_AFFILIATE_PATH = "53663d8f.6b4c8828.53663d90.626681b4"; // affiliate/central-config.js と同期
 
 function rakutenAffiliateUrl(rakutenProductUrl) {
   return `https://hb.afl.rakuten.co.jp/ichiba/${RAKUTEN_AFFILIATE_PATH}/?pc=${encodeURIComponent(rakutenProductUrl)}&link_type=hybrid_url`;

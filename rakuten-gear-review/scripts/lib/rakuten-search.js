@@ -1,12 +1,14 @@
-const RAKUTEN_AFFILIATE_PATH = "53663d8f.6b4c8828.53663d90.626681b4";
+const path = require("path");
+const { RAKUTEN } = require(path.join(__dirname, "..", "..", "..", "affiliate", "central-config"));
+
+const RAKUTEN_AFFILIATE_PATH = RAKUTEN.affiliatePath;
 
 function rakutenAffiliateUrl(rakutenProductUrl) {
-  return `https://hb.afl.rakuten.co.jp/ichiba/${RAKUTEN_AFFILIATE_PATH}/?pc=${encodeURIComponent(rakutenProductUrl)}&link_type=hybrid_url`;
+  return RAKUTEN.productUrl(rakutenProductUrl);
 }
 
 function rakutenSearchAffiliateUrl(keyword) {
-  const url = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword)}/`;
-  return rakutenAffiliateUrl(url);
+  return RAKUTEN.searchUrl(keyword);
 }
 
 function decodeBuffer(buf, charsetHint) {
