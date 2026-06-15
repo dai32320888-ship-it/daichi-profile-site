@@ -106,15 +106,37 @@ function cleanProductName(name) {
     .slice(0, 80);
 }
 
-function parseProductPage(html) {
-  const rawName =
-    firstMatch(html, [/"@type"\s*:\s*"Product"[^}]*"name"\s*:\s*"([^"]{4,160})"/i]) ||
+function collectProductNameCandidates(html) {
+  const out = [];
+  const push = (raw) => {
+    const c = cleanProductName(raw);
+    if (c && !out.includes(c)) out.push(c);
+  };
+  for (const m of html.matchAll(/"@type"\s*:\s*"Product"[^}]*"name"\s*:\s*"([^"]{4,200})"/gi)) {
+    push(m[1]);
+  }
+  push(
     firstMatch(html, [
       /<meta[^>]+property="og:title"[^>]+content="([^"]+)"/i,
       /<meta[^>]+content="([^"]+)"[^>]+property="og:title"/i,
+      /itemprop="name"[^>]+content="([^"]+)"/i,
+      /<h1[^>]*>([^<]{4,200})<\/h1>/i,
+      /<span[^>]+class="[^"]*item-name[^"]*"[^>]*>([^<]{4,200})</i,
       /<title>([^<]{4,200})<\/title>/i
-    ]);
-  const name = displayProductName(rawName, "商品");
+    ])
+  );
+  return out;
+}
+
+function extractProductName(html, fallback = "商品") {
+  for (const candidate of collectProductNameCandidates(html)) {
+    if (!isBadProductName(candidate)) return candidate;
+  }
+  return displayProductName("", fallback);
+}
+
+function parseProductPage(html, keywordFallback = "商品") {
+  const name = extractProductName(html, keywordFallback);
 
   const priceRaw = firstMatch(html, [
     /"price"\s*:\s*"?(\d+)"/,
@@ -220,9 +242,9 @@ async function searchTopProducts(keyword, limit = 3) {
   return hits;
 }
 
-async function fetchProductDetails(productUrl) {
+async function fetchProductDetails(productUrl, keywordFallback = "商品") {
   const itemHtml = await fetchText(productUrl);
-  const details = parseProductPage(itemHtml);
+  const details = parseProductPage(itemHtml, keywordFallback);
   return {
     productUrl,
     affiliateUrl: rakutenAffiliateUrl(productUrl),
@@ -268,6 +290,8 @@ module.exports = {
   searchProductsForArticle,
   fetchProductDetails,
   parseProductPage,
+  collectProductNameCandidates,
+  extractProductName,
   cleanProductName,
   displayProductName,
   isBadProductName,

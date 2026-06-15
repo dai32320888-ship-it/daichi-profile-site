@@ -9,6 +9,8 @@
     "auto:article": "node scripts/auto-rakuten-article.js --seed --max=1",
     "auto:article:dry": "node scripts/auto-rakuten-article.js --seed --max=1 --dry-run",
     "enrich:auto": "node scripts/enrich-auto-articles.js",
+    "fix:picks": "node scripts/fix-bad-pick-names.js",
+    "health": "node scripts/site-health-check.js",
     "import:a8": "node scripts/import-a8-inbox.js",
     "queue:seed": "node scripts/seed-article-queue.js"
   }
