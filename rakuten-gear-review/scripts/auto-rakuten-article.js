@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /**
- * キューから1件（既定）取り出し → 楽天検索で商品URL取得 → extra-articles.json に追記
- * 用法: node scripts/auto-rakuten-article.js [--max=1] [--dry-run] [--seed]
+ * キューから記事生成 → 楽天3商品取得 → 比較・スペック・使用例つき本文
  */
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
-const { searchProducts } = require("./lib/rakuten-search");
+const { searchProductsForArticle } = require("./lib/rakuten-search");
+const { buildArticleFromQueue } = require("./lib/article-content");
 
 const root = path.resolve(__dirname, "..");
 const queuePath = path.join(root, "data", "article-queue.json");
@@ -37,78 +37,6 @@ function loadExistingIds() {
   return ids;
 }
 
-function categoryName(id) {
-  const names = { life: "生活装備", "pc-ai": "PC・AI作業環境", training: "筋トレ装備", bike: "バイク旅装備", disaster: "防災装備", solo: "一人暮らし準備", car: "車・移動装備", game: "ゲーム機・周辺" };
-  return names[id] || "装備";
-}
-
-function buildArticle(queueItem, products) {
-  const date = todayInJapan();
-  const ym = date.slice(0, 7);
-  const picks = products
-    .filter((p) => p.productUrl && !p.error)
-    .slice(0, 3)
-    .map((p, i) => ({
-      name: p.name.slice(0, 80),
-      category: queueItem.category,
-      intro: [`${queueItem.angle}の候補${i + 1}。楽天の商品ページで価格・レビュー・在庫を確認してから選んでください。`],
-      scenes: [`${queueItem.angle}を整えたいとき`, "比較検討のたたき台", "定位置づけの候補"],
-      caution: ["サイズ・素材・レビュー件数は必ず商品ページで確認", "体感には個人差があります"],
-      rakutenProductUrl: p.productUrl,
-      affiliateUrl: p.affiliateUrl,
-      imageUrl: p.imageUrl || undefined
-    }));
-
-  while (picks.length < 3) {
-    const kw = queueItem.keywords[picks.length] || queueItem.keywords[0];
-    picks.push({
-      name: kw,
-      category: queueItem.category,
-      intro: [`「${kw}」で楽天を検索したときの候補です。商品によって仕様が違うので、ページで絞り込んでください。`],
-      scenes: [queueItem.angle, "候補を広く見たいとき"],
-      caution: ["検索結果の上位から自分の条件に合うか確認"],
-      rakutenSearchKeyword: kw
-    });
-  }
-
-  return {
-    id: queueItem.id,
-    title: queueItem.title,
-    category: queueItem.category,
-    date,
-    readTime: `${6 + picks.length}分`,
-    summary: queueItem.summary,
-    introParagraphs: [
-      `${queueItem.angle}は、買う前に「どの場面で使うか」を決めておくと失敗しにくいです。元自衛官目線では、派手さより毎日の導線に入るかを優先します。`,
-      `この記事では楽天市場で探しやすい候補を${picks.length}つに整理しました。価格・在庫・レビューはリンク先で最新情報を確認してください。`
-    ],
-    forAudience: [`${queueItem.angle}を整えたい人`, `${categoryName(queueItem.category)}に関心がある人`, "楽天で比較しながら選びたい人"],
-    body: [
-      {
-        heading: `${queueItem.angle}を選ぶときの基準`,
-        paragraphs: [
-          "まず置き場所と使用頻度を決めます。毎日使わないものは、たとえ評価が高くても優先度は下がります。",
-          "次に、サイズ・重量・お手入れのしやすさを商品ページで確認します。写真だけで決めないのが鉄則です。"
-        ],
-        bullets: ["用途を1行で言えるか", "毎日の導線に入るか", "レビューで失敗例がないか"]
-      },
-      {
-        heading: "楽天で比較するときのチェックリスト",
-        paragraphs: [
-          "送料・クーポン・ポイントはタイミングで変わります。気になった商品は一度カートに入れて、総額を比較するのが確実です。",
-          "似た商品が複数あるときは、レビュー件数と星の内訳（特に低評価の理由）を読むと見極めやすくなります。"
-        ]
-      }
-    ],
-    picks,
-    conclusionParagraphs: [
-      `${queueItem.angle}は全部一度に揃えなくて大丈夫です。候補の中で一番つらい場面に効きそうなものから1つ入れるのが続きやすいです。`
-    ],
-    relatedArticleIds: [],
-    _auto: { sourcePostId: queueItem.sourcePostId, generatedAt: new Date().toISOString(), month: ym }
-  };
-}
-
 function appendLog(entry) {
   const log = fs.existsSync(logPath) ? JSON.parse(fs.readFileSync(logPath, "utf8")) : [];
   log.push(entry);
@@ -116,13 +44,8 @@ function appendLog(entry) {
 }
 
 async function main() {
-  if (args.includes("--seed")) {
-    require("./seed-article-queue.js");
-  }
-
-  if (!fs.existsSync(queuePath)) {
-    require("./seed-article-queue.js");
-  }
+  if (args.includes("--seed")) require("./seed-article-queue.js");
+  if (!fs.existsSync(queuePath)) require("./seed-article-queue.js");
 
   const queue = JSON.parse(fs.readFileSync(queuePath, "utf8"));
   const existing = loadExistingIds();
@@ -136,36 +59,32 @@ async function main() {
   let created = 0;
 
   for (const item of pending.slice(0, maxCount)) {
+    const keyword = item.keywords?.[0] || item.angle;
     console.log(`\n→ ${item.id}: ${item.title}`);
-    const products = await searchProducts(item.keywords.slice(0, 3));
-    const okProducts = products.filter((p) => p.productUrl);
-    console.log(`  Rakuten hits: ${okProducts.length}/${item.keywords.length}`);
+    const products = await searchProductsForArticle(keyword);
+    const okProducts = products.filter((p) => p.productUrl && !p.error);
+    console.log(`  Rakuten hits: ${okProducts.length} products`);
 
-    const article = buildArticle(item, products);
-    const { _auto, ...clean } = article;
+    const article = buildArticleFromQueue({ ...item, date: todayInJapan() }, products);
+    const meta = { sourcePostId: item.sourcePostId, generatedAt: new Date().toISOString(), version: 2 };
 
     if (dryRun) {
-      console.log("  [dry-run]", clean.id, clean.picks.map((p) => p.rakutenProductUrl || p.rakutenSearchKeyword).join(", "));
+      console.log(`  [dry-run] picks: ${article.picks.length}, body sections: ${article.body.length}, read: ${article.readTime}`);
       continue;
     }
 
-    extra.push(clean);
+    extra.push(article);
     item.status = "done";
     item.publishedAt = todayInJapan();
-    item.articleUrl = `/article/${clean.id}/`;
-    appendLog({ id: clean.id, title: clean.title, date: clean.date, products: okProducts.length, ..._auto });
+    item.articleUrl = `/article/${article.id}/`;
+    appendLog({ id: article.id, title: article.title, date: article.date, products: okProducts.length, ...meta });
     created++;
   }
 
   if (!dryRun && created > 0) {
     fs.writeFileSync(extraPath, JSON.stringify(extra, null, 2), "utf8");
     fs.writeFileSync(queuePath, JSON.stringify(queue, null, 2), "utf8");
-    const fetch = require("child_process").spawnSync(process.execPath, [path.join(__dirname, "fetch-rakuten-images.js")], {
-      cwd: root,
-      encoding: "utf8"
-    });
-    console.log(fetch.status === 0 ? "  fetch-rakuten-images: OK" : "  fetch-rakuten-images: partial");
-    console.log(`Created ${created} article(s) → extra-articles.json`);
+    console.log(`Created ${created} rich article(s) → extra-articles.json`);
   }
 }
 

@@ -30,65 +30,163 @@ function firstMatch(html, patterns) {
 }
 
 function decodeHtml(text) {
-  return String(text)
+  return String(text || "")
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'");
+    .replace(/&#039;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .trim();
 }
 
-async function searchFirstProduct(keyword) {
-  const searchUrl = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword)}/`;
-  const html = await fetchText(searchUrl);
+function isBadProductName(name) {
+  if (!name || name === "商品" || name.length < 3) return true;
+  if (/獲得予定|javascript|�|^\?+$/.test(name)) return true;
+  if (/元自衛官目線|楽天で失敗|：楽天/.test(name)) return true;
+  if (/^[\x00-\x08\x0e-\x1f]+$/.test(name)) return true;
+  return false;
+}
 
-  const productUrl = firstMatch(html, [
-    /href="(https:\/\/item\.rakuten\.co\.jp\/[^"?#]+\/)"[^>]*class="[^"]*title/,
-    /href="(https:\/\/item\.rakuten\.co\.jp\/[^"?#]+\/)"/,
-    /data-item-url="(https:\/\/item\.rakuten\.co\.jp\/[^"?#]+\/)"/
-  ]);
-  if (!productUrl) return null;
+function displayProductName(raw, fallback, index = 0) {
+  const cleaned = cleanProductName(raw);
+  if (!isBadProductName(cleaned)) return cleaned;
+  const base = cleanProductName(fallback) || "候補商品";
+  if (base.length > 40) return index > 0 ? `${base.slice(0, 28)}…（候補${index + 1}）` : base.slice(0, 36);
+  return index > 0 ? `${base}（候補${index + 1}）` : base;
+}
 
-  const nameFromSearch = decodeHtml(
+function cleanProductName(name) {
+  return decodeHtml(name)
+    .replace(/\s*[|｜\-–—].*$/, "")
+    .replace(/【[^】]{0,40}】/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 80);
+}
+
+function parseProductPage(html) {
+  const rawName =
+    firstMatch(html, [/"@type"\s*:\s*"Product"[^}]*"name"\s*:\s*"([^"]{4,160})"/i]) ||
     firstMatch(html, [
-      new RegExp(`href="${productUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"[^>]*>([^<]{4,120})<`, "i"),
-      /class="[^"]*title[^"]*"[^>]*>([^<]{4,120})</
-    ]) || keyword
+      /<meta[^>]+property="og:title"[^>]+content="([^"]+)"/i,
+      /<meta[^>]+content="([^"]+)"[^>]+property="og:title"/i,
+      /<title>([^<]{4,200})<\/title>/i
+    ]);
+  const name = displayProductName(rawName, "商品");
+
+  const priceRaw = firstMatch(html, [
+    /"price"\s*:\s*"?(\d+)"/,
+    /itemprop="price"\s+content="(\d+)"/,
+    /(?:通常価格|販売価格|価格)[^0-9]{0,20}(\d{1,3}(?:,\d{3})*)/
+  ]).replace(/,/g, "");
+  const price = priceRaw ? Number(priceRaw) : null;
+
+  const reviewCount = Number(
+    firstMatch(html, [/reviewCount["\s:]+(\d+)/i, /(\d+)\s*件のレビュー/, /レビュー\s*[（(](\d+)[)）]/]) || 0
   );
 
-  let imageUrl = firstMatch(html, [
-    /src="(https:\/\/thumbnail\.image\.rakuten\.co\.jp\/[^"]+\?_ex=240x240)"/,
-    /src="(https:\/\/tshop\.r10s\.jp\/[^"]+)"/
-  ]);
+  const rating = firstMatch(html, [/ratingValue["\s:]+([\d.]+)/i, /([1-5]\.\d)\s*(?:点|\/)/]);
 
-  let name = nameFromSearch || keyword;
-
-  if (!imageUrl) {
-    const itemHtml = await fetchText(productUrl);
-    imageUrl = firstMatch(itemHtml, [
-      /<meta[^>]+property="og:image"[^>]+content="([^"]+)"/i,
-      /<meta[^>]+content="([^"]+)"[^>]+property="og:image"/i,
-      /"image":"(https:\\\/\\\/[^"]+)"/
+  const description = decodeHtml(
+    firstMatch(html, [
+      /<meta[^>]+property="og:description"[^>]+content="([^"]+)"/i,
+      /<meta[^>]+name="description"[^>]+content="([^"]+)"/i
     ])
-      .replace(/\\u002F/g, "/")
-      .replace(/\\\//g, "/");
-    const nameFromItem = decodeHtml(
-      firstMatch(itemHtml, [/<meta[^>]+property="og:title"[^>]+content="([^"]+)"/i, /<title>([^<]{4,120})<\/title>/])
-    );
-    if (nameFromItem) name = nameFromItem;
+  ).slice(0, 220);
+
+  const specs = [];
+  for (const m of html.matchAll(/<th[^>]*>([^<]{1,30})<\/th>\s*<td[^>]*>([^<]{1,100})<\/td>/gi)) {
+    const label = decodeHtml(m[1]);
+    const value = decodeHtml(m[2]);
+    if (label && value && !/javascript|script/i.test(label)) specs.push({ label, value });
+    if (specs.length >= 6) break;
   }
+
+  if (specs.length < 3) {
+    const bullets = [...html.matchAll(/<li[^>]*>([^<]{10,90})<\/li>/gi)]
+      .map((x) => decodeHtml(x[1]))
+      .filter((t) => !/cookie|ログイン|カート|送料無料ライン/i.test(t))
+      .slice(0, 4);
+    bullets.forEach((b, i) => specs.push({ label: `商品の特徴${i + 1}`, value: b }));
+  }
+
+  let imageUrl = firstMatch(html, [
+    /<meta[^>]+property="og:image"[^>]+content="([^"]+)"/i,
+    /"image":"(https:\\\/\\\/[^"]+)"/
+  ])
+    .replace(/\\u002F/g, "/")
+    .replace(/\\\//g, "/");
 
   if (imageUrl && !imageUrl.includes("_ex=")) {
     imageUrl = imageUrl.includes("?") ? `${imageUrl}&_ex=240x240` : `${imageUrl}?_ex=240x240`;
   }
 
+  return { name, price, reviewCount, rating, description, specs, imageUrl };
+}
+
+function extractProductUrls(html, limit = 1) {
+  const urls = [];
+  const seen = new Set();
+  for (const m of html.matchAll(/href="(https:\/\/item\.rakuten\.co\.jp\/[^"?#]+\/)"/g)) {
+    const url = m[1];
+    if (seen.has(url)) continue;
+    seen.add(url);
+    urls.push(url);
+    if (urls.length >= limit) break;
+  }
+  return urls;
+}
+
+async function searchFirstProduct(keyword) {
+  const hits = await searchTopProducts(keyword, 1);
+  return hits[0] || null;
+}
+
+async function searchTopProducts(keyword, limit = 3) {
+  const searchUrl = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword)}/`;
+  const html = await fetchText(searchUrl);
+  const productUrls = extractProductUrls(html, limit);
+  if (!productUrls.length) return [];
+
+  const hits = [];
+  for (const productUrl of productUrls) {
+    try {
+      const itemHtml = await fetchText(productUrl);
+      const details = parseProductPage(itemHtml);
+      let imageUrl = details.imageUrl;
+      if (imageUrl && !imageUrl.includes("_ex=")) {
+        imageUrl = imageUrl.includes("?") ? `${imageUrl}&_ex=240x240` : `${imageUrl}?_ex=240x240`;
+      }
+      hits.push({
+        keyword,
+        name: displayProductName(details.name, keyword, hits.length),
+        productUrl,
+        imageUrl: imageUrl || "",
+        affiliateUrl: rakutenAffiliateUrl(productUrl),
+        searchAffiliateUrl: rakutenSearchAffiliateUrl(keyword),
+        price: details.price,
+        reviewCount: details.reviewCount,
+        rating: details.rating,
+        description: details.description,
+        specs: details.specs
+      });
+      await new Promise((r) => setTimeout(r, 600));
+    } catch {
+      /* skip failed item */
+    }
+  }
+  return hits;
+}
+
+async function fetchProductDetails(productUrl) {
+  const itemHtml = await fetchText(productUrl);
+  const details = parseProductPage(itemHtml);
   return {
-    keyword,
-    name: name || keyword,
     productUrl,
-    imageUrl: imageUrl || "",
     affiliateUrl: rakutenAffiliateUrl(productUrl),
-    searchAffiliateUrl: rakutenSearchAffiliateUrl(keyword)
+    ...details,
+    imageUrl: details.imageUrl || ""
   };
 }
 
@@ -109,10 +207,27 @@ async function searchProducts(keywords, delayMs = 900) {
   return out;
 }
 
+async function searchProductsForArticle(keyword, delayMs = 900) {
+  try {
+    const hits = await searchTopProducts(keyword, 3);
+    if (hits.length >= 2) return hits;
+  } catch {
+    /* fall through */
+  }
+  return searchProducts([keyword, `${keyword} 人気`, `${keyword} おすすめ`], delayMs);
+}
+
 module.exports = {
   RAKUTEN_AFFILIATE_PATH,
   rakutenAffiliateUrl,
   rakutenSearchAffiliateUrl,
   searchFirstProduct,
-  searchProducts
+  searchTopProducts,
+  searchProducts,
+  searchProductsForArticle,
+  fetchProductDetails,
+  parseProductPage,
+  cleanProductName,
+  displayProductName,
+  isBadProductName
 };

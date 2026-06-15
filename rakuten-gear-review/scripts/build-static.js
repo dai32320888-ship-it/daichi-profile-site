@@ -432,19 +432,36 @@ function renderPickBlock(pick, index) {
   const caution = pick.caution?.length
     ? `<h3 class="pick-subheading">注意点</h3><ul>${pick.caution.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>`
     : "";
+  const specs = pick.specs?.length
+    ? `<h3 class="pick-subheading">スペック・商品情報</h3><ul class="pick-specs">${pick.specs.map((s) => `<li>${esc(typeof s === "string" ? s : `${s.label}：${s.value}`)}</li>`).join("")}</ul>`
+    : "";
+  const usage = pick.usageExamples?.length
+    ? `<h3 class="pick-subheading">使用例</h3><ul class="pick-usage">${pick.usageExamples.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>`
+    : "";
+  const comparison = pick.comparisonNote
+    ? `<p class="pick-comparison"><strong>他候補との違い：</strong>${esc(pick.comparisonNote)}</p>`
+    : "";
+  const verdict = pick.verdict
+    ? `<p class="pick-verdict"><strong>こんな人向け：</strong>${esc(pick.verdict)}</p>`
+    : "";
+  const roleBadge = pick.role ? `<span class="pick-role-badge">${esc(pick.role)}</span>` : "";
   const title = url
     ? `<h2><a class="pick-title-link" href="${esc(url)}" target="_blank" rel="nofollow sponsored noopener noreferrer">${esc(pick.name)}</a></h2>`
     : `<h2>${esc(pick.name)}</h2>`;
 
   return `
     <section class="pick-block article-section" id="pick-${index}">
-      <div class="pick-kicker">ピック ${index}</div>
+      <div class="pick-kicker">ピック ${index}${roleBadge ? ` ${roleBadge}` : ""}</div>
       ${title}
       <div class="pick-layout">
         ${mediaOpen}<img src="${esc(imgSrc)}" alt="${esc(pick.name)}" loading="lazy" decoding="async" />${mediaClose}
         <div class="pick-body">
           <div class="product-category">${esc(catName)}</div>
           ${intros}
+          ${specs}
+          ${usage}
+          ${comparison}
+          ${verdict}
           ${scenes}
           ${caution}
           ${btn}
