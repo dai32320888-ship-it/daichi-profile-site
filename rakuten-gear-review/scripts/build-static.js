@@ -144,6 +144,54 @@ function esc(value) {
     .replaceAll('"', "&quot;");
 }
 
+function loadPromotionConfig() {
+  const promoPath = path.join(root, "data", "promotion.json");
+  if (!fs.existsSync(promoPath)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(promoPath, "utf8"));
+  } catch {
+    return {};
+  }
+}
+
+function rssHeadLink(feedHref) {
+  return `<link rel="alternate" type="application/rss+xml" title="元自衛官の楽天装備レビュー" href="${esc(feedHref)}" />`;
+}
+
+function renderPromotionFooter(topHref) {
+  const promo = loadPromotionConfig();
+  const badges = [];
+  if (promo.blogmura?.cid) {
+    badges.push(
+      `<a href="https://blogmura.com/ranking/in?p_cid=${esc(promo.blogmura.cid)}" target="_blank" rel="noopener noreferrer"><img src="https://blogmura.com/img/blogmura_ranking_banner_01.gif" width="117" height="31" alt="にほんブログ村 ブログランキング"></a>`
+    );
+  } else {
+    badges.push(
+      `<a class="promo-badge" href="https://mypage.blogmura.com/signup" target="_blank" rel="noopener noreferrer">にほんブログ村</a>`
+    );
+  }
+  if (promo.with2?.hash) {
+    badges.push(
+      `<a href="https://blog.with2.net/link/?hash=${esc(promo.with2.hash)}" target="_blank" rel="noopener noreferrer"><img src="https://blog.with2.net/img/banner/banner_80.gif" width="80" height="15" alt="人気ブログランキング"></a>`
+    );
+  } else {
+    badges.push(
+      `<a class="promo-badge" href="https://blog.with2.net/join" target="_blank" rel="noopener noreferrer">人気ブログランキング</a>`
+    );
+  }
+  const badgeHtml = `<div class="promo-badges" aria-label="ブログランキング">${badges.join("")}</div>`;
+  const feedHref = `${topHref}feed.xml`;
+  return `<footer class="site-footer">
+      <div class="site-footer__main">
+        <strong>元自衛官の楽天装備レビュー</strong>
+        <p>当サイトはアフィリエイト広告を利用しています。価格・在庫・レビューはリンク先の楽天市場で最新情報をご確認ください。</p>
+        ${badgeHtml}
+        <p class="promo-feed"><a href="${esc(feedHref)}">RSS</a></p>
+      </div>
+      <a href="${esc(topHref)}">トップへ戻る</a>
+    </footer>`;
+}
+
 function categoryName(id) {
   return categories.find((category) => category.id === id)?.name || "";
 }
@@ -210,6 +258,7 @@ function layout({ title, description, canonical, body, structuredData, ogType = 
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="${ogImageAbs}" />
+    ${rssHeadLink("../../feed.xml")}
     <link rel="stylesheet" href="../../styles.css" />
     <script type="application/ld+json">${JSON.stringify(structuredData)}</script>
   </head>
@@ -232,13 +281,7 @@ function layout({ title, description, canonical, body, structuredData, ogType = 
       </nav>
     </header>
     <main>${body}</main>
-    <footer class="site-footer">
-      <div>
-        <strong>元自衛官の楽天装備レビュー</strong>
-        <p>当サイトはアフィリエイト広告を利用しています。価格・在庫・レビューはリンク先の楽天市場で最新情報をご確認ください。</p>
-      </div>
-      <a href="../../index.html">トップへ戻る</a>
-    </footer>
+    ${renderPromotionFooter("../../")}
     <script>
       (function () {
         var btn = document.getElementById("menuButton");
@@ -278,6 +321,7 @@ function layoutHome({ title, description, canonical, body, structuredData }) {
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="${ogImageAbs}" />
+    ${rssHeadLink("./feed.xml")}
     <link rel="stylesheet" href="./styles.css" />
     <script type="application/ld+json">${JSON.stringify(structuredData)}</script>
   </head>
@@ -299,13 +343,7 @@ function layoutHome({ title, description, canonical, body, structuredData }) {
       </nav>
     </header>
     <main>${body}</main>
-    <footer class="site-footer">
-      <div>
-        <strong>元自衛官の楽天装備レビュー</strong>
-        <p>当サイトはアフィリエイト広告を利用しています。価格・在庫・レビューはリンク先の楽天市場で最新情報をご確認ください。</p>
-      </div>
-      <a href="./">先頭へ戻る</a>
-    </footer>
+    ${renderPromotionFooter("./")}
     <script>
       (function () {
         var btn = document.getElementById("menuButton");
@@ -343,6 +381,7 @@ function layoutCategory({ title, description, canonical, body, structuredData })
     <meta property="og:site_name" content="元自衛官の楽天装備レビュー" />
     <meta property="og:image" content="${ogImageAbs}" />
     <meta name="twitter:card" content="summary_large_image" />
+    ${rssHeadLink("../feed.xml")}
     <link rel="stylesheet" href="../styles.css" />
     <script type="application/ld+json">${JSON.stringify(structuredData)}</script>
   </head>
@@ -364,13 +403,7 @@ function layoutCategory({ title, description, canonical, body, structuredData })
       </nav>
     </header>
     <main>${body}</main>
-    <footer class="site-footer">
-      <div>
-        <strong>元自衛官の楽天装備レビュー</strong>
-        <p>当サイトはアフィリエイト広告を利用しています。価格・在庫・レビューはリンク先の楽天市場で最新情報をご確認ください。</p>
-      </div>
-      <a href="../index.html">トップへ戻る</a>
-    </footer>
+    ${renderPromotionFooter("../")}
     <script>
       (function () {
         var btn = document.getElementById("menuButton");
@@ -836,6 +869,36 @@ ${urls
 `;
 
 fs.writeFileSync(path.join(root, "sitemap.xml"), sitemap, "utf8");
+
+const feedItems = [...sitemapArticles]
+  .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
+  .slice(0, 30)
+  .map((article) => {
+    const link = `${CANONICAL_BASE_URL}/article/${article.id}/`;
+    const pubDate = article.date ? new Date(`${article.date}T09:00:00+09:00`).toUTCString() : new Date().toUTCString();
+    return `    <item>
+      <title>${esc(article.title)}</title>
+      <link>${link}</link>
+      <guid isPermaLink="true">${link}</guid>
+      <pubDate>${pubDate}</pubDate>
+      <description>${esc(article.summary || article.title)}</description>
+    </item>`;
+  })
+  .join("\n");
+
+const feed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>元自衛官の楽天装備レビュー</title>
+    <link>${CANONICAL_BASE_URL}/</link>
+    <description>元自衛官の視点で、寮生活・一人暮らし・車・バイク・デスク周り・防災・日用品に役立つ楽天商品を紹介する装備レビューブログです。</description>
+    <language>ja</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+${feedItems}
+  </channel>
+</rss>
+`;
+fs.writeFileSync(path.join(root, "feed.xml"), feed, "utf8");
 
 const robots = `User-agent: *\nAllow: /\n\nSitemap: ${SITEMAP_BASE_URL}/sitemap.xml\n`;
 fs.writeFileSync(path.join(root, "robots.txt"), robots, "utf8");
