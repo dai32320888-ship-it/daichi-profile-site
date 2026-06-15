@@ -1,0 +1,35 @@
+{
+  "enabled": true,
+  "affiliatePath": "53663d8f.6b4c8828.53663d90.626681b4",
+  "banners": {
+    "point": {
+      "html": "",
+      "note": "楽天管理画面「ポイント企画バナー」→ HTMLを data/rakuten-widgets-inbox/point.html に貼る → npm run rakuten:widgets:import"
+    },
+    "season": {
+      "html": "",
+      "note": "楽天管理画面「季節特集バナー」→ HTMLを data/rakuten-widgets-inbox/season.html に貼る → npm run rakuten:widgets:import"
+    }
+  },
+  "motion": {
+    "homeWide": {
+      "items": "ranking",
+      "desktopSize": "728x200",
+      "mobileSize": "320x48",
+      "autoMode": "on",
+      "recommend": "on"
+    },
+    "sidebar": {
+      "items": "ctsmatch",
+      "size": "300x160",
+      "autoMode": "on",
+      "recommend": "on"
+    }
+  },
+  "placements": {
+    "homeCampaignRow": ["banners.point", "banners.season"],
+    "homeAfterCategories": ["motion.homeWide"],
+    "articleSidebar": ["motion.sidebar"],
+    "articleFoot": ["banners.point"]
+  }
+}

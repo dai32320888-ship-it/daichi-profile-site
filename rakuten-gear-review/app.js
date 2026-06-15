@@ -2770,6 +2770,18 @@ function normalizeParagraphs(value) {
   return Array.isArray(value) ? value : [value];
 }
 
+function renderRakutenWidgetHtml(placementName) {
+  if (typeof window === "undefined" || !window.__rakutenWidgets?.enabled) return "";
+  return window.__rakutenWidgets.placement(placementName) || "";
+}
+
+function renderRakutenHomeSections() {
+  if (typeof window === "undefined" || !window.__rakutenWidgets?.enabled) return "";
+  const campaign = window.__rakutenWidgets.homeCampaignSection?.() || "";
+  const motion = window.__rakutenWidgets.homeMotionSection?.() || "";
+  return `${campaign}${motion}`;
+}
+
 function renderA8EmbedFragment(index) {
   let html = "";
   if (typeof window !== "undefined" && window.__a8?.fragmentHtml) {
@@ -3043,6 +3055,7 @@ function renderHome() {
         ${categories.map(renderCategoryButton).join("")}
       </div>
     </section>
+    ${renderRakutenHomeSections()}
     ${renderA8TopRecommendSection()}
     <section class="section">
       <div class="section-head">
@@ -3198,12 +3211,14 @@ function renderArticle(id) {
           ${bodySections}
           ${picksSection}
           ${catalogSummary}
+          ${renderRakutenWidgetHtml("articleFoot")}
           ${renderA8FootArticleSlot(article)}
           ${renderConclusionRelated(article)}
         </div>
       </article>
       <aside class="sidebar">
         ${renderProfileBox()}
+        ${renderRakutenWidgetHtml("articleSidebar")}
         ${renderA8SidebarSlot(article)}
         <div class="profile-box">
           <h3>同じカテゴリの記事</h3>

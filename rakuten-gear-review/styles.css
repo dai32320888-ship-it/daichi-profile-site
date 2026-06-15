@@ -1262,6 +1262,95 @@ a.product-media:focus-visible img {
   }
 }
 
+.rakuten-widget-section {
+  margin-top: 0;
+}
+
+.rakuten-widget-banner-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.rakuten-widget-slot {
+  position: relative;
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.rakuten-widget-slot--sidebar {
+  margin: 0 0 16px;
+  padding: 14px;
+}
+
+.rakuten-widget-slot--wide {
+  margin: 0;
+}
+
+.rakuten-widget-slot__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.rakuten-widget-slot__badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: var(--rakuten);
+  color: #fff;
+}
+
+.rakuten-widget-slot__title {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.rakuten-widget-slot__title--sm {
+  font-size: 0.95rem;
+}
+
+.rakuten-widget-slot__lead {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.rakuten-widget-slot__embed {
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.rakuten-widget-embed {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.rakuten-widget-embed iframe,
+.rakuten-widget-slot__embed img {
+  max-width: 100%;
+  height: auto;
+}
+
+.rakuten-widget-embed--responsive {
+  min-height: 52px;
+}
+
+@media (max-width: 720px) {
+  .rakuten-widget-banner-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .trust-badges {
   display: flex;
   flex-wrap: wrap;

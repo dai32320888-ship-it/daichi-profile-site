@@ -1,0 +1,24 @@
+/* auto-generated — do not edit. Run: node scripts/build-rakuten-widgets-browser.js */
+(function () {
+  const PLACEMENTS = {
+  "homeCampaignRow": "",
+  "homeAfterCategories": "<aside class=\"rakuten-widget-slot rakuten-widget-slot--wide\" aria-label=\"楽天の売れ筋\">\n      <div class=\"rakuten-widget-slot__head\">\n        <span class=\"rakuten-widget-slot__badge\" aria-hidden=\"true\">PR</span>\n        <h2 class=\"rakuten-widget-slot__title\">楽天の売れ筋</h2>\n      </div>\n      <p class=\"rakuten-widget-slot__lead\">楽天市場ランキング（自動更新）</p>\n      <div class=\"rakuten-widget-slot__embed\"><div class=\"rakuten-widget-embed rakuten-widget-embed--responsive\"><script>(function(){var w=window.innerWidth||document.documentElement.clientWidth;var cfg=w>728?\"rakuten_design=\\\"slide\\\";rakuten_affiliateId=\\\"53663d8f.6b4c8828.53663d90.626681b4\\\";rakuten_items=\\\"ranking\\\";rakuten_genreId=\\\"0\\\";rakuten_size=\\\"728x200\\\";rakuten_target=\\\"_blank\\\";rakuten_theme=\\\"gray\\\";rakuten_border=\\\"off\\\";rakuten_auto_mode=\\\"on\\\";rakuten_genre_title=\\\"off\\\";rakuten_recommend=\\\"on\\\";rakuten_ts=\\\"1781532925877\\\"\":\"rakuten_design=\\\"slide\\\";rakuten_affiliateId=\\\"53663d8f.6b4c8828.53663d90.626681b4\\\";rakuten_items=\\\"ranking\\\";rakuten_genreId=\\\"0\\\";rakuten_size=\\\"320x48\\\";rakuten_target=\\\"_blank\\\";rakuten_theme=\\\"gray\\\";rakuten_border=\\\"off\\\";rakuten_auto_mode=\\\"on\\\";rakuten_genre_title=\\\"off\\\";rakuten_recommend=\\\"on\\\";rakuten_ts=\\\"1781532925877\\\"\";document.write('<script type=\"text/javascript\">'+cfg+';<\\/script>');document.write('<script type=\"text/javascript\" src=\"https://xml.affiliate.rakuten.co.jp/widget/js/rakuten_widget.js?20230106\"><\\/script>');})();</script></div></div>\n    </aside>",
+  "articleSidebar": "<aside class=\"rakuten-widget-slot rakuten-widget-slot--sidebar\" aria-label=\"あなたへのおすすめ\">\n      <div class=\"rakuten-widget-slot__head\">\n        <span class=\"rakuten-widget-slot__badge\" aria-hidden=\"true\">PR</span>\n        <h3 class=\"rakuten-widget-slot__title rakuten-widget-slot__title--sm\">あなたへのおすすめ</h3>\n      </div>\n      <p class=\"rakuten-widget-slot__lead\">閲覧履歴に合わせた商品（自動更新）</p>\n      <div class=\"rakuten-widget-slot__embed\"><div class=\"rakuten-widget-embed\"><script type=\"text/javascript\">rakuten_design=\"slide\";rakuten_affiliateId=\"53663d8f.6b4c8828.53663d90.626681b4\";rakuten_items=\"ctsmatch\";rakuten_genreId=\"0\";rakuten_size=\"300x160\";rakuten_target=\"_blank\";rakuten_theme=\"gray\";rakuten_border=\"off\";rakuten_auto_mode=\"on\";rakuten_genre_title=\"off\";rakuten_recommend=\"on\";rakuten_ts=\"1781532925877\";</script><script type=\"text/javascript\" src=\"https://xml.affiliate.rakuten.co.jp/widget/js/rakuten_widget.js?20230106\"></script></div></div>\n    </aside>",
+  "articleFoot": "",
+  "homeCampaignSection": "",
+  "homeMotionSection": "<section class=\"section rakuten-widget-section\" aria-label=\"楽天おすすめ商品\">\n      <aside class=\"rakuten-widget-slot rakuten-widget-slot--wide\" aria-label=\"楽天の売れ筋\">\n      <div class=\"rakuten-widget-slot__head\">\n        <span class=\"rakuten-widget-slot__badge\" aria-hidden=\"true\">PR</span>\n        <h2 class=\"rakuten-widget-slot__title\">楽天の売れ筋</h2>\n      </div>\n      <p class=\"rakuten-widget-slot__lead\">楽天市場ランキング（自動更新）</p>\n      <div class=\"rakuten-widget-slot__embed\"><div class=\"rakuten-widget-embed rakuten-widget-embed--responsive\"><script>(function(){var w=window.innerWidth||document.documentElement.clientWidth;var cfg=w>728?\"rakuten_design=\\\"slide\\\";rakuten_affiliateId=\\\"53663d8f.6b4c8828.53663d90.626681b4\\\";rakuten_items=\\\"ranking\\\";rakuten_genreId=\\\"0\\\";rakuten_size=\\\"728x200\\\";rakuten_target=\\\"_blank\\\";rakuten_theme=\\\"gray\\\";rakuten_border=\\\"off\\\";rakuten_auto_mode=\\\"on\\\";rakuten_genre_title=\\\"off\\\";rakuten_recommend=\\\"on\\\";rakuten_ts=\\\"1781532925877\\\"\":\"rakuten_design=\\\"slide\\\";rakuten_affiliateId=\\\"53663d8f.6b4c8828.53663d90.626681b4\\\";rakuten_items=\\\"ranking\\\";rakuten_genreId=\\\"0\\\";rakuten_size=\\\"320x48\\\";rakuten_target=\\\"_blank\\\";rakuten_theme=\\\"gray\\\";rakuten_border=\\\"off\\\";rakuten_auto_mode=\\\"on\\\";rakuten_genre_title=\\\"off\\\";rakuten_recommend=\\\"on\\\";rakuten_ts=\\\"1781532925877\\\"\";document.write('<script type=\"text/javascript\">'+cfg+';<\\/script>');document.write('<script type=\"text/javascript\" src=\"https://xml.affiliate.rakuten.co.jp/widget/js/rakuten_widget.js?20230106\"><\\/script>');})();</script></div></div>\n    </aside>\n    </section>",
+  "enabled": true
+};
+  window.__rakutenWidgets = {
+    enabled: PLACEMENTS.enabled,
+    placement(name) {
+      return PLACEMENTS[name] || "";
+    },
+    homeCampaignSection() {
+      return PLACEMENTS.homeCampaignSection || "";
+    },
+    homeMotionSection() {
+      return PLACEMENTS.homeMotionSection || "";
+    }
+  };
+})();

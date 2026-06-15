@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "node scripts/build-a8-browser-data.js && node scripts/build-static.js",
+    "build": "node scripts/build-a8-browser-data.js && node scripts/build-rakuten-widgets-browser.js && node scripts/build-static.js",
+    "rakuten:widgets:import": "node scripts/import-rakuten-widgets-inbox.js",
     "dev": "node server.js",
     "auto:article": "node scripts/auto-rakuten-article.js --seed --max=1",
     "auto:article:dry": "node scripts/auto-rakuten-article.js --seed --max=1 --dry-run",

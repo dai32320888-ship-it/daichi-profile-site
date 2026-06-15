@@ -2,8 +2,15 @@
 const path = require("path");
 const vm = require("vm");
 const { midArticleSlot, footArticleSlot, sidebarSlot } = require("./a8-ad-slots");
+const {
+  loadConfig: loadRakutenWidgetsConfig,
+  renderPlacement: renderRakutenPlacement,
+  renderHomeCampaignSection,
+  renderHomeMotionSection
+} = require("./rakuten-widgets");
 
 const root = path.resolve(__dirname, "..");
+const rakutenWidgetsConfig = loadRakutenWidgetsConfig(root);
 const DEFAULT_SITE_URL = "https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review";
 const SITE_URL = (process.env.SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
 const CANONICAL_BASE_URL = (process.env.CANONICAL_BASE_URL || SITE_URL).replace(/\/+$/, "");
@@ -383,6 +390,7 @@ function layoutHome({ title, description, canonical, body, structuredData }) {
         }
       })();
     </script>
+    <script src="./rakuten-widgets-browser.js" defer></script>
     <script src="./a8-browser-data.js" defer></script>
   </body>
 </html>
@@ -651,12 +659,14 @@ function renderArticle(article) {
         ${bodySections}
         ${picksSection}
         ${catalogSummary}
+        ${renderRakutenPlacement(rakutenWidgetsConfig, "articleFoot")}
         ${footArticleSlot(article)}
         ${renderConclusionRelated(article)}
       </div>
     </article>
     <aside class="sidebar">
       ${renderStaticProfileBox()}
+      ${renderRakutenPlacement(rakutenWidgetsConfig, "articleSidebar")}
       ${sidebarSlot(article)}
       <div class="profile-box">
         <h3>同じカテゴリの記事</h3>
@@ -833,6 +843,9 @@ function writeHomeIndex() {
       </div>
       <div class="category-grid">${categoryCards}</div>
     </section>
+
+    ${renderHomeCampaignSection(rakutenWidgetsConfig)}
+    ${renderHomeMotionSection(rakutenWidgetsConfig)}
 
     <section class="section" id="articles">
       <div class="section-head">
