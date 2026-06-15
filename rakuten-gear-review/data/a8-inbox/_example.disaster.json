@@ -1,0 +1,10 @@
+{
+  "label": "例：防災備蓄プログラム名（これはサンプル・取り込まない）",
+  "categories": ["disaster"],
+  "slots": {
+    "mid": true,
+    "foot": true,
+    "sidebar": false
+  },
+  "html": "ここにA8管理画面の「素材をコピー」全文を貼る。ファイル名を example 以外に変えて使う。"
+}

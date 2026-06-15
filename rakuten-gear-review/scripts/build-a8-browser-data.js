@@ -12,6 +12,9 @@ const body = `(function () {
   const midMap = ${JSON.stringify(reg.midMap)};
   const footMap = ${JSON.stringify(reg.footMap)};
   const sidebarMap = ${JSON.stringify(reg.sidebarMap)};
+  const categoryMid = ${JSON.stringify(reg.categoryMid)};
+  const categoryFoot = ${JSON.stringify(reg.categoryFoot)};
+  const categorySidebar = ${JSON.stringify(reg.categorySidebar)};
   const homePool = ${JSON.stringify(reg.homePool)};
   const listPool = ${JSON.stringify(reg.listPool)};
   const n = RAW_FRAGMENTS.length;
@@ -36,16 +39,24 @@ const body = `(function () {
     return clampIndex(pool[fallbackIndex(seed) % pool.length]);
   }
 
-  function midCreativeIndex(articleId) {
-    const id = String(articleId);
-    return midMap[id] !== undefined ? clampIndex(midMap[id]) : fallbackIndex(\`\${id}:mid\`);
+  function categoryIndex(map, categoryId) {
+    if (categoryId && map[categoryId] !== undefined) return clampIndex(map[categoryId]);
+    return null;
   }
 
-  function footCreativeIndex(articleId) {
+  function midCreativeIndex(articleId, categoryId) {
     const id = String(articleId);
-    const mid = midCreativeIndex(id);
+    if (midMap[id] !== undefined) return clampIndex(midMap[id]);
+    const byCat = categoryIndex(categoryMid, categoryId);
+    if (byCat !== null) return byCat;
+    return fallbackIndex(\`\${id}:mid\`);
+  }
+
+  function footCreativeIndex(articleId, categoryId) {
+    const id = String(articleId);
+    const mid = midCreativeIndex(id, categoryId);
     let v =
-      footMap[id] !== undefined ? clampIndex(footMap[id]) : fallbackIndex(\`\${id}:foot\`);
+      footMap[id] !== undefined ? clampIndex(footMap[id]) : (categoryIndex(categoryFoot, categoryId) ?? fallbackIndex(\`\${id}:foot\`));
     let guard = 0;
     while (v === mid && guard < n + 2) {
       v = clampIndex(v + 1);
@@ -54,9 +65,12 @@ const body = `(function () {
     return v;
   }
 
-  function sidebarCreativeIndex(articleId) {
+  function sidebarCreativeIndex(articleId, categoryId) {
     const id = String(articleId);
-    return sidebarMap[id] !== undefined ? clampIndex(sidebarMap[id]) : fallbackIndex(\`\${id}:sidebar\`);
+    if (sidebarMap[id] !== undefined) return clampIndex(sidebarMap[id]);
+    const byCat = categoryIndex(categorySidebar, categoryId);
+    if (byCat !== null) return byCat;
+    return fallbackIndex(\`\${id}:sidebar\`);
   }
 
   function sidebarCreativeIndexForList(seed) {
@@ -75,8 +89,8 @@ const body = `(function () {
       return (RAW_FRAGMENTS[idx] || "").trim();
     },
     homeTopPool: homePool,
-    midUsesMatsukiyo(articleId) {
-      return midCreativeIndex(articleId) === 5;
+    midUsesMatsukiyo(articleId, categoryId) {
+      return midCreativeIndex(articleId, categoryId) === 5;
     }
   };
 })();\n`;

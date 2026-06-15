@@ -1,4 +1,4 @@
-const { cleanProductName, displayProductName, isBadProductName } = require("./rakuten-search");
+const { cleanProductName, displayProductName, isBadProductName, hasMojibake } = require("./rakuten-search");
 
 const CATEGORY_LABELS = {
   life: "生活装備",
@@ -31,7 +31,10 @@ function formatReview(product) {
 }
 
 function pickSpecsList(product, angle) {
-  const fromPage = (product.specs || []).slice(0, 5).map((s) => `${s.label}：${s.value}`);
+  const fromPage = (product.specs || [])
+    .slice(0, 5)
+    .map((s) => `${s.label}：${s.value}`)
+    .filter((line) => !hasMojibake(line));
   const fallback = [
     `用途：${angle}向けの候補`,
     `価格帯：${formatPrice(product.price)}`,
@@ -68,7 +71,8 @@ function buildComparisonNote(product, siblings, role, index) {
 }
 
 function angleHint(product) {
-  return product.description ? `${product.description.slice(0, 40)}… ` : "";
+  const desc = product.description ? product.description.slice(0, 40) : "";
+  return desc && !hasMojibake(desc) ? `${desc}… ` : "";
 }
 
 function buildVerdict(product, role, angle) {

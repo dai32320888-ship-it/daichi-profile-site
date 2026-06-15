@@ -56,7 +56,8 @@ for (const extra of extraArticles) {
 }
 
 const REDIRECT_ARTICLES = {
-  "nintendo-switch-2-rakuten": "nintendo-switch-2-rakuten-jp-model"
+  "nintendo-switch-2-rakuten": "nintendo-switch-2-rakuten-jp-model",
+  "auto-p004-防災-リュック-コンパクト": "auto-p014-防災-リュック-コンパクト"
 };
 
 const AUTHOR_PEN_NAME = "だるい装備レビュー編集部";
@@ -65,15 +66,39 @@ const CONTACT_X_HANDLE = "@darui_tsubushi";
 const ARTICLE_DISCLOSURE_TEXT =
   "本ページには広告・アフィリエイトリンクが含まれます。紹介内容は、読者が比較しやすいように整理しています。";
 
+function articleTopicKey(article) {
+  const fromTitle = article.title?.match(/「([^」]+)」/)?.[1]?.trim();
+  if (fromTitle) return fromTitle;
+  return String(article.id)
+    .replace(/^auto-p\d+-/, "")
+    .replace(/-/g, " ");
+}
+
+function dedupeArticlesByTopic(articleList) {
+  const seen = new Set();
+  const out = [];
+  for (const article of articleList) {
+    const key = articleTopicKey(article);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(article);
+  }
+  return out;
+}
+
 function resolveRelatedArticleIds(article, maxRelated = 3) {
   const out = [];
   const seen = new Set();
+  const topicSeen = new Set([articleTopicKey(article)]);
   const pushId = (id) => {
     if (out.length >= maxRelated) return;
     if (id === article.id) return;
     const a = articles.find((x) => x.id === id);
     if (!a || seen.has(id)) return;
+    const topic = articleTopicKey(a);
+    if (topicSeen.has(topic)) return;
     seen.add(id);
+    topicSeen.add(topic);
     out.push(id);
   };
   for (const id of article.relatedArticleIds || []) pushId(id);
@@ -743,9 +768,11 @@ function writeHomeIndex() {
   const description =
     "元自衛官の視点で、寮生活・一人暮らし・車・バイク・デスク周り・防災・日用品に役立つ楽天商品を紹介する装備レビューブログです。";
 
-  const sorted = [...articles]
-    .filter((a) => !REDIRECT_ARTICLES[a.id])
-    .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+  const sorted = dedupeArticlesByTopic(
+    [...articles]
+      .filter((a) => !REDIRECT_ARTICLES[a.id])
+      .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
+  );
   const featured = sorted.slice(0, 12);
   const articleCards = featured
     .map((a) => renderArticleCardHtml(a, `./article/${a.id}/`))
@@ -870,6 +897,10 @@ ${urls
 
 fs.writeFileSync(path.join(root, "sitemap.xml"), sitemap, "utf8");
 
+function cdataFeedText(value) {
+  return `<![CDATA[${String(value || "").replace(/\]\]>/g, "]]]]><![CDATA[>")}]]>`;
+}
+
 const feedItems = [...sitemapArticles]
   .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
   .slice(0, 30)
@@ -877,11 +908,11 @@ const feedItems = [...sitemapArticles]
     const link = `${CANONICAL_BASE_URL}/article/${article.id}/`;
     const pubDate = article.date ? new Date(`${article.date}T09:00:00+09:00`).toUTCString() : new Date().toUTCString();
     return `    <item>
-      <title>${esc(article.title)}</title>
+      <title>${cdataFeedText(article.title)}</title>
       <link>${link}</link>
       <guid isPermaLink="true">${link}</guid>
       <pubDate>${pubDate}</pubDate>
-      <description>${esc(article.summary || article.title)}</description>
+      <description>${cdataFeedText(article.summary || article.title)}</description>
     </item>`;
   })
   .join("\n");

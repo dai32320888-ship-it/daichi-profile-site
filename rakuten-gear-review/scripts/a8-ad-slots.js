@@ -30,23 +30,23 @@ function embedLive(fragmentIndex) {
   return `<div class="a8-ad-slot__embed-inner a8-ad-slot__embed-inner--live">${html}</div>`;
 }
 
-function midLeadText(articleId) {
+function midLeadText(article) {
   const base =
     "この記事の商品と相性がよさそうなものを、あとで見返せるようにまとめています。";
-  return a8.midUsesMatsukiyo(articleId)
+  return a8.midUsesMatsukiyo(article.id, article.category)
     ? `${base}かさばる日用品は、オンライン条件も一度見ておくと手間が分散しやすいです。`
     : base;
 }
 
 function midArticleSlot(article) {
-  const fragmentIndex = a8.midCreativeIndex(article.id);
+  const fragmentIndex = a8.midCreativeIndex(article.id, article.category);
   return `
     <aside class="a8-ad-slot a8-ad-slot--inline" aria-label="関連する広告リンク">
       <div class="a8-ad-slot__head">
         <span class="a8-ad-slot__badge" aria-hidden="true">PR</span>
         <h2 class="a8-ad-slot__title">ついでにチェックしたい便利アイテム</h2>
       </div>
-      <p class="a8-ad-slot__lead">${midLeadText(article.id)}</p>
+      <p class="a8-ad-slot__lead">${midLeadText(article)}</p>
       <div class="a8-ad-slot__embed">
         ${embedLive(fragmentIndex)}
       </div>
@@ -55,7 +55,7 @@ function midArticleSlot(article) {
 }
 
 function footArticleSlot(article) {
-  const fragmentIndex = a8.footCreativeIndex(article.id);
+  const fragmentIndex = a8.footCreativeIndex(article.id, article.category);
   return `
     <aside class="a8-ad-slot a8-ad-slot--inline" aria-label="比較用の広告リンク">
       <div class="a8-ad-slot__head">
@@ -92,7 +92,7 @@ function topRecommendSlot() {
 }
 
 function sidebarSlot(article) {
-  const fragmentIndex = a8.sidebarCreativeIndex(article.id);
+  const fragmentIndex = a8.sidebarCreativeIndex(article.id, article.category);
   return `
     <div class="a8-ad-slot a8-ad-slot--sidebar" role="region" aria-label="関連広告">
       <div class="a8-ad-slot__head">

@@ -9,6 +9,34 @@ function rakutenSearchAffiliateUrl(keyword) {
   return rakutenAffiliateUrl(url);
 }
 
+function decodeBuffer(buf, charsetHint) {
+  const hint = String(charsetHint || "utf-8")
+    .toLowerCase()
+    .replace(/_/g, "-")
+    .replace(/"/g, "");
+  const map = {
+    "utf-8": "utf-8",
+    "euc-jp": "euc-jp",
+    "shift-jis": "shift_jis",
+    "shiftjis": "shift_jis",
+    "windows-31j": "shift_jis",
+    sjis: "shift_jis"
+  };
+  const enc = map[hint] || "utf-8";
+  try {
+    return new TextDecoder(enc).decode(buf);
+  } catch {
+    return buf.toString("utf8");
+  }
+}
+
+function hasMojibake(text) {
+  const s = String(text || "");
+  if (!s) return false;
+  if (s.includes("\uFFFD")) return true;
+  return /ʡ|ޥ|Ǻ|֥|̾|¥|Ê|Ë|Ì|Î|Ï|å|¤|¼|½|¾/.test(s);
+}
+
 async function fetchText(url) {
   const res = await fetch(url, {
     headers: {
@@ -18,7 +46,17 @@ async function fetchText(url) {
     redirect: "follow"
   });
   if (!res.ok) throw new Error(`${res.status} ${url}`);
-  return res.text();
+  const buf = Buffer.from(await res.arrayBuffer());
+  let charset = "";
+  const ct = res.headers.get("content-type") || "";
+  const ctm = ct.match(/charset=([^;\s]+)/i);
+  if (ctm) charset = ctm[1].replace(/"/g, "");
+  if (!charset) {
+    const head = buf.slice(0, 5000).toString("ascii");
+    const meta = head.match(/charset\s*=\s*["']?([^"'\s>]+)/i);
+    if (meta) charset = meta[1];
+  }
+  return decodeBuffer(buf, charset);
 }
 
 function firstMatch(html, patterns) {
@@ -44,6 +82,7 @@ function isBadProductName(name) {
   if (!name || name === "商品" || name.length < 3) return true;
   if (/獲得予定|javascript|�|^\?+$/.test(name)) return true;
   if (/元自衛官目線|楽天で失敗|：楽天/.test(name)) return true;
+  if (hasMojibake(name)) return true;
   if (/^[\x00-\x08\x0e-\x1f]+$/.test(name)) return true;
   return false;
 }
@@ -229,5 +268,6 @@ module.exports = {
   parseProductPage,
   cleanProductName,
   displayProductName,
-  isBadProductName
+  isBadProductName,
+  hasMojibake
 };

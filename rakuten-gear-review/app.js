@@ -2654,15 +2654,60 @@ function getArticleCardImageUrl(article) {
   return url;
 }
 
+function articleTopicKey(article) {
+  const fromTitle = article.title?.match(/「([^」]+)」/)?.[1]?.trim();
+  if (fromTitle) return fromTitle;
+  return String(article.id)
+    .replace(/^auto-p\d+-/, "")
+    .replace(/-/g, " ");
+}
+
+function dedupeArticlesByTopic(articleList) {
+  const seen = new Set();
+  const out = [];
+  for (const article of articleList) {
+    const key = articleTopicKey(article);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(article);
+  }
+  return out;
+}
+
+function pickBalancedProducts(allProducts, max = 6) {
+  const byCat = new Map();
+  for (const product of allProducts) {
+    const cat = product.category || "life";
+    if (!byCat.has(cat)) byCat.set(cat, []);
+    byCat.get(cat).push(product);
+  }
+  const cats = [...byCat.keys()];
+  const out = [];
+  let round = 0;
+  while (out.length < max && cats.some((c) => (byCat.get(c) || []).length > round)) {
+    for (const cat of cats) {
+      const list = byCat.get(cat) || [];
+      if (list[round]) out.push(list[round]);
+      if (out.length >= max) break;
+    }
+    round += 1;
+  }
+  return out;
+}
+
 function resolveRelatedArticleIds(article, maxRelated = 3) {
   const out = [];
   const seen = new Set();
+  const topicSeen = new Set([articleTopicKey(article)]);
   const pushId = (id) => {
     if (out.length >= maxRelated) return;
     if (id === article.id) return;
     const a = articles.find((x) => x.id === id);
     if (!a || seen.has(id)) return;
+    const topic = articleTopicKey(a);
+    if (topicSeen.has(topic)) return;
     seen.add(id);
+    topicSeen.add(topic);
     out.push(id);
   };
   for (const id of article.relatedArticleIds || []) pushId(id);
@@ -2738,24 +2783,24 @@ function renderA8EmbedFragment(index) {
   return `<div class="a8-ad-slot__embed-inner a8-ad-slot__embed-inner--live">${html}</div>`;
 }
 
-function renderA8MidLead(articleId) {
+function renderA8MidLead(article) {
   const base =
     "この記事の商品と相性がよさそうなものを、あとで見返せるようにまとめています。";
-  if (typeof window !== "undefined" && window.__a8?.midUsesMatsukiyo?.(articleId)) {
+  if (typeof window !== "undefined" && window.__a8?.midUsesMatsukiyo?.(article.id, article.category)) {
     return `${base}かさばる日用品は、オンライン条件も一度見ておくと手間が分散しやすいです。`;
   }
   return base;
 }
 
 function renderA8MidArticleSlot(article) {
-  const ix = window.__a8 ? window.__a8.midCreativeIndex(article.id) : 0;
+  const ix = window.__a8 ? window.__a8.midCreativeIndex(article.id, article.category) : 0;
   return `
     <aside class="a8-ad-slot a8-ad-slot--inline" aria-label="関連する広告リンク">
       <div class="a8-ad-slot__head">
         <span class="a8-ad-slot__badge" aria-hidden="true">PR</span>
         <h2 class="a8-ad-slot__title">ついでにチェックしたい便利アイテム</h2>
       </div>
-      <p class="a8-ad-slot__lead">${renderA8MidLead(article.id)}</p>
+      <p class="a8-ad-slot__lead">${renderA8MidLead(article)}</p>
       <div class="a8-ad-slot__embed">
         ${renderA8EmbedFragment(ix)}
       </div>
@@ -2764,7 +2809,7 @@ function renderA8MidArticleSlot(article) {
 }
 
 function renderA8FootArticleSlot(article) {
-  const ix = window.__a8 ? window.__a8.footCreativeIndex(article.id) : 0;
+  const ix = window.__a8 ? window.__a8.footCreativeIndex(article.id, article.category) : 0;
   return `
     <aside class="a8-ad-slot a8-ad-slot--inline" aria-label="比較用の広告リンク">
       <div class="a8-ad-slot__head">
@@ -2802,7 +2847,7 @@ function renderA8TopRecommendSection() {
 }
 
 function renderA8SidebarSlot(article) {
-  const ix = window.__a8 ? window.__a8.sidebarCreativeIndex(article.id) : 0;
+  const ix = window.__a8 ? window.__a8.sidebarCreativeIndex(article.id, article.category) : 0;
   return `
     <div class="a8-ad-slot a8-ad-slot--sidebar" role="region" aria-label="関連広告">
       <div class="a8-ad-slot__head">
@@ -3008,7 +3053,7 @@ function renderHome() {
         <a class="button secondary button--inline-sm" href="#/articles">記事一覧へ</a>
       </div>
       <div class="article-grid">
-        ${sortArticlesNewestFirst(articles).slice(0, 6).map(renderArticleCard).join("")}
+        ${dedupeArticlesByTopic(sortArticlesNewestFirst(articles)).slice(0, 6).map(renderArticleCard).join("")}
       </div>
     </section>
     <section class="section">
@@ -3019,7 +3064,7 @@ function renderHome() {
         </div>
       </div>
       <div class="product-grid">
-        ${products.slice(0, 6).map(renderProductCard).join("")}
+        ${pickBalancedProducts(products, 6).map(renderProductCard).join("")}
       </div>
     </section>
     ${renderProfileBox()}
