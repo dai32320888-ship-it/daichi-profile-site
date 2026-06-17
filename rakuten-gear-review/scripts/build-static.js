@@ -212,12 +212,21 @@ function renderPromotionFooter(topHref) {
     );
   }
   const badgeHtml = `<div class="promo-badges" aria-label="ブログランキング">${badges.join("")}</div>`;
+  const blogParts = promo.blogmura?.blogParts;
+  const blogPartsHtml =
+    promo.blogmura?.cid && blogParts
+      ? `<div class="promo-blogparts" aria-label="にほんブログ村">
+        <div class="blogmura-blogparts" data-chid="${esc(promo.blogmura.cid)}" data-category="${esc(blogParts.category || "0")}" data-type="${esc(blogParts.type || "pv")}"></div>
+        <script src="https://blogparts.blogmura.com/js/parts_view.js" defer></script>
+      </div>`
+      : "";
   const feedHref = `${topHref}feed.xml`;
   return `<footer class="site-footer">
       <div class="site-footer__main">
         <strong>元自衛官の楽天装備レビュー</strong>
         <p>当サイトはアフィリエイト広告を利用しています。価格・在庫・レビューはリンク先の楽天市場で最新情報をご確認ください。</p>
         ${badgeHtml}
+        ${blogPartsHtml}
         <p class="promo-feed"><a href="${esc(feedHref)}">RSS</a></p>
       </div>
       <a href="${esc(topHref)}">トップへ戻る</a>
