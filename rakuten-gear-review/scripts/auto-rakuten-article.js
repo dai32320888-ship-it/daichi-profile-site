@@ -24,17 +24,58 @@ function todayInJapan() {
   return `${v.year}-${v.month}-${v.day}`;
 }
 
-function loadExistingIds() {
-  const ids = new Set();
+const TARGET_PER_CATEGORY = 20;
+
+function loadExistingArticles() {
   const appSource = fs.readFileSync(appPath, "utf8");
   const sandbox = { console, window: {}, document: { querySelector() {} }, URLSearchParams, encodeURIComponent, String };
   vm.createContext(sandbox);
   vm.runInContext(`${appSource}\nthis.__D__ = { articles };`, sandbox);
-  sandbox.__D__.articles.forEach((a) => ids.add(a.id));
+  const all = [...sandbox.__D__.articles];
   if (fs.existsSync(extraPath)) {
-    JSON.parse(fs.readFileSync(extraPath, "utf8")).forEach((a) => ids.add(a.id));
+    all.push(...JSON.parse(fs.readFileSync(extraPath, "utf8")));
   }
-  return ids;
+  return all;
+}
+
+function loadExistingIds() {
+  return new Set(loadExistingArticles().map((a) => a.id));
+}
+
+function articleTopicKey(article) {
+  const fromTitle = article.title?.match(/「([^」]+)」/)?.[1]?.trim();
+  if (fromTitle) return fromTitle;
+  return String(article.id)
+    .replace(/^auto-p\d+-/, "")
+    .replace(/^gap-[^-]+-/, "")
+    .replace(/-/g, " ");
+}
+
+function countByCategory(articleList) {
+  const counts = {};
+  const seen = new Set();
+  for (const article of articleList) {
+    const key = `${article.category}::${articleTopicKey(article)}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    counts[article.category] = (counts[article.category] || 0) + 1;
+  }
+  return counts;
+}
+
+function pickBalancedPending(queue, existing) {
+  const pending = queue.items.filter((i) => i.status === "pending" && !existing.has(i.id));
+  const existingTopics = new Set(
+    loadExistingArticles().map((a) => `${a.category}::${articleTopicKey(a)}`)
+  );
+  const filtered = pending.filter((i) => !existingTopics.has(`${i.category}::${i.angle || i.keywords?.[0] || ""}`));
+  const counts = countByCategory(loadExistingArticles());
+  return filtered.sort((a, b) => {
+    const gapA = TARGET_PER_CATEGORY - (counts[a.category] || 0);
+    const gapB = TARGET_PER_CATEGORY - (counts[b.category] || 0);
+    if (gapB !== gapA) return gapB - gapA;
+    return 0;
+  });
 }
 
 function appendLog(entry) {
@@ -49,7 +90,7 @@ async function main() {
 
   const queue = JSON.parse(fs.readFileSync(queuePath, "utf8"));
   const existing = loadExistingIds();
-  const pending = queue.items.filter((i) => i.status === "pending" && !existing.has(i.id));
+  const pending = pickBalancedPending(queue, existing);
   if (!pending.length) {
     console.log("No pending queue items");
     return;

@@ -12,6 +12,8 @@
     "fix:picks": "node scripts/fix-bad-pick-names.js",
     "health": "node scripts/site-health-check.js",
     "import:a8": "node scripts/import-a8-inbox.js",
-    "queue:seed": "node scripts/seed-article-queue.js"
+    "queue:seed": "node scripts/seed-article-queue.js",
+    "queue:gaps": "node scripts/seed-category-gaps.js",
+    "batch:articles": "node scripts/batch-generate-articles.js --max=20"
   }
 }
