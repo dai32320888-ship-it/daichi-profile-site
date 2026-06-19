@@ -230,8 +230,11 @@ function rssHeadLink(feedHref) {
 }
 
 function faviconHead(href) {
-  return `<link rel="icon" href="${href}favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="${href}favicon.svg" />`;
+  return `<link rel="icon" href="${href}favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="${href}favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="${href}favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="${href}apple-touch-icon.png" />
+    <link rel="icon" href="${href}favicon.svg" type="image/svg+xml" />`;
 }
 
 function renderPromotionFooter(topHref) {

@@ -156,8 +156,11 @@ function esc(value) {
 }
 
 function seoHead({ title, description, url, type = "website", iconHref = "./" }) {
-  return `<link rel="icon" href="${iconHref}favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="${iconHref}favicon.svg" />
+  return `<link rel="icon" href="${iconHref}favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="${iconHref}favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="${iconHref}favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="${iconHref}apple-touch-icon.png" />
+  <link rel="icon" href="${iconHref}favicon.svg" type="image/svg+xml" />
   <link rel="canonical" href="${esc(url)}" />
   <meta property="og:type" content="${type}" />
   <meta property="og:title" content="${esc(title)}" />
