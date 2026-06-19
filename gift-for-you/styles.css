@@ -342,3 +342,32 @@ fieldset {
   .button { width: 100%; }
   .article-body { border-left: 0; border-right: 0; }
 }
+
+.experience-box, .summary-box {
+  margin: 20px 0;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff8fb;
+}
+
+.experience-box { border-left: 4px solid var(--accent, #e91e8c); }
+
+.lead { font-size: 1.05rem; color: var(--ink); }
+
+.article-link--pillar { border: 2px solid #f3c4dc; }
+
+.promo-badges { margin-top: 12px; }
+
+.site-footer-gift .footer-main { display: grid; gap: 10px; }
+
+.faq-box .faq-item {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.faq-box summary { cursor: pointer; font-weight: 600; }
+
+.category-detail-list li { margin-bottom: 8px; }

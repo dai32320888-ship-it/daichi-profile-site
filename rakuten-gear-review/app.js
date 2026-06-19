@@ -24,7 +24,7 @@ const CATEGORY_THUMB_FILES = {
 };
 
 const SITE_URL = "https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review";
-const AUTHOR_PEN_NAME = "だるい装備レビュー編集部";
+const AUTHOR_PEN_NAME = "だいち（元自衛官）";
 /** X（旧Twitter）プロフィール。リンクは profile-contact で使用 */
 const CONTACT_X_URL = "https://x.com/darui_tsubushi";
 const CONTACT_X_HANDLE = "@darui_tsubushi";

@@ -94,12 +94,44 @@ for (const extra of extraArticles) {
   }
 }
 
+const STRATEGY_PATH = path.join(root, "data", "site-strategy.json");
+const siteStrategy = fs.existsSync(STRATEGY_PATH) ? JSON.parse(fs.readFileSync(STRATEGY_PATH, "utf8")) : {};
+const BASE_ARTICLE_IDS = new Set(baseArticles.map((a) => a.id));
+const PILLAR_ARTICLE_IDS = new Set(siteStrategy.pillarArticleIds || []);
+const PRIMARY_PILLARS = siteStrategy.primaryPillars || [];
+const PILLAR_ENHANCEMENTS = siteStrategy.pillarEnhancements || {};
+const HUB_INTROS = siteStrategy.hubIntros || {};
+
+function isThinAutoArticleId(id) {
+  return /^(auto-p\d+-|gap-)/.test(String(id || ""));
+}
+
+function isIndexableArticle(article) {
+  if (!article?.id || REDIRECT_ARTICLES[article.id]) return false;
+  if (article.indexable === false) return false;
+  if (article.indexable === true || PILLAR_ARTICLE_IDS.has(article.id) || BASE_ARTICLE_IDS.has(article.id)) {
+    return true;
+  }
+  return !isThinAutoArticleId(article.id);
+}
+
+function getPillarEnhancement(articleId) {
+  return PILLAR_ENHANCEMENTS[articleId] || null;
+}
+
+function articleById(id) {
+  return articles.find((a) => a.id === id);
+}
+
 const REDIRECT_ARTICLES = {
   "nintendo-switch-2-rakuten": "nintendo-switch-2-rakuten-jp-model",
   "auto-p004-防災-リュック-コンパクト": "auto-p014-防災-リュック-コンパクト"
 };
 
-const AUTHOR_PEN_NAME = "だるい装備レビュー編集部";
+const AUTHOR_PEN_NAME = siteStrategy.author?.name || "だいち（元自衛官）";
+const AUTHOR_SHORT_BIO =
+  siteStrategy.author?.shortBio ||
+  "元自衛官。一人暮らし・防災・デスク周りの装備を、実使用ベースで整理しています。";
 const CONTACT_X_URL = "https://x.com/darui_tsubushi";
 const CONTACT_X_HANDLE = "@darui_tsubushi";
 const ARTICLE_DISCLOSURE_TEXT =
@@ -185,18 +217,81 @@ function renderArticleToc(article) {
 }
 
 function renderStaticProfileBox() {
+  const paras = siteStrategy.author?.profileParagraphs || [
+    AUTHOR_SHORT_BIO,
+    "商品は楽天市場で実際に探し、比較しやすい形に整理しています。価格・在庫・口コミはリンク先で最新を確認してください。"
+  ];
   return `<section class="profile-box">
       <div class="profile-head">
-        <div class="avatar">元</div>
+        <div class="avatar">だ</div>
         <div>
           <h3>運営者・${esc(AUTHOR_PEN_NAME)}</h3>
-          <div class="article-meta">元自衛官の経験を、装備選びの基準にしています</div>
+          <div class="article-meta">${esc(AUTHOR_SHORT_BIO)}</div>
         </div>
       </div>
-      <p>このサイトは、元自衛官の運営者が、生活・防災・車内・デスク周りで「実際に使いやすそうか」を重視して商品を整理するレビューサイトです。高すぎる物や見た目だけの商品ではなく、日常でラクになるか、備えとして役立つかを基準に紹介しています。</p>
-      <p><strong>このサイトの目的：</strong>楽天市場で迷いやすいカテゴリを、用途・置き場所・頻度で分けて、比較しやすい形にまとめることです。</p>
-      <p><strong>読者への約束：</strong>価格・在庫・レビューは必ず商品ページで確かめてくださいとお伝えします。PRやアフィリエイトの利用も、記事冒頭・広告枠で明示します。</p>
+      ${paras.map((p) => `<p>${esc(p)}</p>`).join("")}
       <p class="profile-contact">更新情報・誤記のご指摘：<a href="${esc(CONTACT_X_URL)}" target="_blank" rel="me noopener noreferrer">${esc(CONTACT_X_HANDLE)}</a>（X）</p>
+      <p class="profile-contact">関連：<a href="${esc(CHANNELS.gift.base)}/">プレゼントふぉーゆー</a></p>
+    </section>`;
+}
+
+function renderSiteNavLinks(topHref) {
+  const hub = (slug) => `${topHref}hub/${slug}.html`;
+  return `<a href="${topHref}">トップ</a>
+        <a href="${hub("disaster")}">防災ガイド</a>
+        <a href="${hub("solo")}">一人暮らし</a>
+        <a href="${hub("pc-ai")}">デスク・在宅</a>
+        <a href="${topHref}#articles">記事一覧</a>
+        <a href="${topHref}#profile">プロフィール</a>`;
+}
+
+function renderPillarExperienceBlock(articleId) {
+  const enh = getPillarEnhancement(articleId);
+  if (!enh?.experienceParagraphs?.length) return "";
+  const title = enh.experienceTitle || "元自衛官の実体験";
+  const paras = enh.experienceParagraphs.map((p) => `<p>${esc(p)}</p>`).join("");
+  return `<div class="summary-box experience-box"><h2>${esc(title)}</h2>${paras}</div>`;
+}
+
+function renderPillarFaqBlock(articleId) {
+  const faq = getPillarEnhancement(articleId)?.faq;
+  if (!faq?.length) return "";
+  const items = faq
+    .map(
+      (item) =>
+        `<details class="faq-item"><summary>${esc(item.q)}</summary><p>${esc(item.a)}</p></details>`
+    )
+    .join("");
+  return `<div class="summary-box faq-box"><h2>よくある質問</h2>${items}</div>`;
+}
+
+function renderHomePillarSection() {
+  if (!PRIMARY_PILLARS.length) return "";
+  const cards = PRIMARY_PILLARS.map((pillar) => {
+    const hubHref = `./${pillar.hubPath.replace(/^hub\//, "hub/")}`;
+    const featured = (pillar.featuredArticleIds || [])
+      .slice(0, 3)
+      .map((id) => articleById(id))
+      .filter(Boolean)
+      .map(
+        (a) =>
+          `<li><a href="./article/${esc(a.id)}/">${esc(a.title)}</a></li>`
+      )
+      .join("");
+    return `<article class="pillar-card">
+      <p class="eyebrow">${esc(pillar.label)}</p>
+      <h3><a href="${esc(hubHref)}">${esc(pillar.tagline)}</a></h3>
+      <p>${esc(pillar.description)}</p>
+      <ul class="pillar-card-links">${featured}</ul>
+      <a class="button secondary button--inline-sm" href="${esc(hubHref)}">ガイドを読む</a>
+    </article>`;
+  }).join("");
+  return `<section class="section pillar-section" id="pillars">
+      <div class="section-head">
+        <h2>3つの柱から読む</h2>
+        <p>防災・一人暮らし・デスク周り。上位ブログと同じく、悩み単位で深く読める入口です。</p>
+      </div>
+      <div class="pillar-grid">${cards}</div>
     </section>`;
 }
 
@@ -327,8 +422,9 @@ function productUrl(product) {
   return product.affiliateUrl || product.rakutenProductUrl || "";
 }
 
-function layout({ title, description, canonical, body, structuredData, ogType = "article", ogImage }) {
+function layout({ title, description, canonical, body, structuredData, ogType = "article", ogImage, robots }) {
   const ogImageAbs = ogImage || DEFAULT_OG_IMAGE;
+  const robotsMeta = robots ? `<meta name="robots" content="${esc(robots)}" />` : "";
   return `<!doctype html>
 <html lang="ja">
   <head>
@@ -336,6 +432,7 @@ function layout({ title, description, canonical, body, structuredData, ogType = 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}" />
+    ${robotsMeta}
     ${faviconHead("../../")}
     <link rel="canonical" href="${canonical}" />
     <meta property="og:type" content="${esc(ogType)}" />
@@ -363,11 +460,7 @@ function layout({ title, description, canonical, body, structuredData, ogType = 
       </a>
       <button class="menu-button" id="menuButton" type="button" aria-label="メニューを開く">☰</button>
       <nav class="site-nav" id="siteNav" aria-label="メインナビゲーション">
-        <a href="../../index.html">トップ</a>
-        <a href="../../index.html#articles">記事一覧</a>
-        <a href="../../category/training.html">筋トレ装備</a>
-        <a href="../../category/disaster.html">防災装備</a>
-        <a href="../../index.html#profile">プロフィール</a>
+        ${renderSiteNavLinks("../../")}
       </nav>
     </header>
     <main>${body}</main>
@@ -427,10 +520,7 @@ function layoutHome({ title, description, canonical, body, structuredData }) {
       </a>
       <button class="menu-button" id="menuButton" type="button" aria-label="メニューを開く">☰</button>
       <nav class="site-nav" id="siteNav" aria-label="メインナビゲーション">
-        <a href="./">トップ</a>
-        <a href="#articles">記事一覧</a>
-        <a href="#categories">カテゴリ</a>
-        <a href="#profile">プロフィール</a>
+        ${renderSiteNavLinks("./")}
       </nav>
     </header>
     <main>${body}</main>
@@ -489,10 +579,7 @@ function layoutCategory({ title, description, canonical, body, structuredData })
       </a>
       <button class="menu-button" id="menuButton" type="button" aria-label="メニューを開く">☰</button>
       <nav class="site-nav" id="siteNav" aria-label="メインナビゲーション">
-        <a href="../index.html">トップ</a>
-        <a href="../index.html#articles">記事一覧</a>
-        <a href="../index.html#categories">カテゴリ</a>
-        <a href="../index.html#profile">プロフィール</a>
+        ${renderSiteNavLinks("../")}
       </nav>
     </header>
     <main>${body}</main>
@@ -534,7 +621,8 @@ function renderArticleIntroAudience(article) {
     ? `<div class="summary-box audience-box"><h2>この記事はこんな人向け</h2><ul>${article.forAudience.map((t) => `<li>${esc(t)}</li>`).join("")}</ul></div>`
     : "";
   const introBlock = intro ? `<div class="article-intro">${intro}</div>` : "";
-  return `${introBlock}${audience}`;
+  const experience = renderPillarExperienceBlock(article.id);
+  return `${introBlock}${experience}${audience}`;
 }
 
 function renderPickBlock(pick, index) {
@@ -723,6 +811,7 @@ function renderArticle(article) {
         ${renderRakutenPlacement(rakutenWidgetsConfig, "articleFoot")}
         ${footArticleSlot(article)}
         ${renderConclusionRelated(article)}
+        ${renderPillarFaqBlock(article.id)}
       </div>
     </article>
     <aside class="sidebar">
@@ -746,6 +835,7 @@ function renderArticle(article) {
       description: metaDesc,
       canonical,
       ogImage: resolveArticleOgImage(article),
+      robots: isIndexableArticle(article) ? undefined : "noindex, follow",
       body,
       structuredData: {
         "@context": "https://schema.org",
@@ -797,18 +887,29 @@ writeArticleRedirects();
 function writeCategoryPages() {
   const catDir = path.join(root, "category");
   fs.mkdirSync(catDir, { recursive: true });
+  const primaryIds = new Set(PRIMARY_PILLARS.map((p) => p.id));
   for (const cat of categories) {
     const catArticles = [...articles]
       .filter((a) => a.category === cat.id && !REDIRECT_ARTICLES[a.id])
       .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
-    const cards = catArticles.map((a) => renderArticleCardHtml(a, `../article/${a.id}/`)).join("");
+    const pillarFirst = [...catArticles].sort((a, b) => {
+      const aP = PILLAR_ARTICLE_IDS.has(a.id) ? 0 : 1;
+      const bP = PILLAR_ARTICLE_IDS.has(b.id) ? 0 : 1;
+      if (aP !== bP) return aP - bP;
+      return String(b.date || "").localeCompare(String(a.date || ""));
+    });
+    const cards = pillarFirst.map((a) => renderArticleCardHtml(a, `../article/${a.id}/`)).join("");
     const canonical = `${CANONICAL_BASE_URL}/category/${cat.id}.html`;
+    const hubBanner = primaryIds.has(cat.id)
+      ? `<div class="hub-banner"><p>おすすめ：<a href="../hub/${cat.id}.html">${esc(cat.name)}ガイド（柱記事まとめ）</a>から読むと迷いにくいです。</p></div>`
+      : "";
     const body = `
       <section class="page-hero">
         <p class="eyebrow">${esc(cat.name)}</p>
         <h1>${esc(cat.name)}の記事一覧</h1>
         <p class="lead">${esc(cat.description || "")}</p>
         <p class="article-meta">${catArticles.length}記事</p>
+        ${hubBanner}
       </section>
       <section class="section">
         <div class="article-grid">${cards || "<p>記事を準備中です。</p>"}</div>
@@ -835,25 +936,90 @@ function writeCategoryPages() {
 
 writeCategoryPages();
 
+function writeHubPages() {
+  const hubDir = path.join(root, "hub");
+  fs.mkdirSync(hubDir, { recursive: true });
+  for (const pillar of PRIMARY_PILLARS) {
+    const intro = HUB_INTROS[pillar.id] || {};
+    const featuredArticles = (pillar.featuredArticleIds || []).map((id) => articleById(id)).filter(Boolean);
+    const cards = featuredArticles.map((a) => renderArticleCardHtml(a, `../article/${a.id}/`)).join("");
+    const catArticles = articles
+      .filter((a) => a.category === pillar.id && isIndexableArticle(a))
+      .slice(0, 12)
+      .map((a) => renderArticleCardHtml(a, `../article/${a.id}/`))
+      .join("");
+    const canonical = `${CANONICAL_BASE_URL}/hub/${pillar.id}.html`;
+    const body = `
+      <section class="page-hero hub-hero">
+        <p class="eyebrow">${esc(pillar.label)}</p>
+        <h1>${esc(intro.title || `${pillar.label}ガイド`)}</h1>
+        <p class="lead">${esc(intro.lead || pillar.description)}</p>
+        <div class="hero-actions">
+          <a class="button" href="../category/${esc(pillar.id)}.html">カテゴリ一覧へ</a>
+          <a class="button secondary" href="../index.html#pillars">3つの柱に戻る</a>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-head"><h2>まず読む柱記事</h2><p>${esc(AUTHOR_PEN_NAME)}が手直しした、体験談付きのおすすめ記事です。</p></div>
+        <div class="article-grid">${cards}</div>
+      </section>
+      <section class="section">
+        <div class="section-head"><h2>関連記事</h2></div>
+        <div class="article-grid">${catArticles || "<p>準備中です。</p>"}</div>
+      </section>
+      <section class="section" id="profile">${renderStaticProfileBox()}</section>`;
+    fs.writeFileSync(
+      path.join(hubDir, `${pillar.id}.html`),
+      layoutCategory({
+        title: `${intro.title || pillar.label + "ガイド"} | 元自衛官の楽天装備レビュー`,
+        description: intro.lead || pillar.description,
+        canonical,
+        body,
+        structuredData: {
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: intro.title || pillar.label,
+          description: intro.lead || pillar.description,
+          url: canonical
+        }
+      }),
+      "utf8"
+    );
+  }
+}
+
+writeHubPages();
+
 function writeHomeIndex() {
   const canonical = `${CANONICAL_BASE_URL}/`;
   const title = "元自衛官の楽天装備レビュー";
   const description =
-    "元自衛官の視点で、寮生活・一人暮らし・車・バイク・デスク周り・防災・日用品に役立つ楽天商品を紹介する装備レビューブログです。";
+    "元自衛官・だいちが、一人暮らし・防災・デスク周りの装備を実体験ベースで整理。楽天市場で失敗しにくい選び方と柱記事10本。";
 
-  const sorted = dedupeArticlesByTopic(
+  const indexable = dedupeArticlesByTopic(
     [...articles]
-      .filter((a) => !REDIRECT_ARTICLES[a.id])
+      .filter((a) => !REDIRECT_ARTICLES[a.id] && isIndexableArticle(a))
       .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
   );
-  const featured = sorted.slice(0, 12);
-  const articleCards = featured
-    .map((a) => renderArticleCardHtml(a, `./article/${a.id}/`))
-    .join("");
+  const pillarFeatured = (siteStrategy.pillarArticleIds || []).map((id) => articleById(id)).filter(Boolean);
+  const featuredIds = new Set(pillarFeatured.map((a) => a.id));
+  const featured = [...pillarFeatured, ...indexable.filter((a) => !featuredIds.has(a.id)).slice(0, 6)].slice(0, 12);
+  const articleCards = featured.map((a) => renderArticleCardHtml(a, `./article/${a.id}/`)).join("");
 
-  const categoryCards = categories
+  const secondaryCategories = categories.filter((cat) => !PRIMARY_PILLARS.some((p) => p.id === cat.id));
+  const primaryCategoryCards = PRIMARY_PILLARS.map((pillar) => {
+    const cat = categories.find((c) => c.id === pillar.id);
+    if (!cat) return "";
+    const count = articles.filter((a) => a.category === cat.id && isIndexableArticle(a)).length;
+    return `<a class="category-card category-button category-card--primary" href="./hub/${esc(pillar.id)}.html">
+        <span>${esc(cat.name)}</span>
+        <small>${esc(pillar.tagline)}</small>
+        <div class="article-meta">${esc(count)}記事 · ガイドあり</div>
+      </a>`;
+  }).join("");
+  const secondaryCategoryCards = secondaryCategories
     .map((cat) => {
-      const count = articles.filter((a) => a.category === cat.id && !REDIRECT_ARTICLES[a.id]).length;
+      const count = articles.filter((a) => a.category === cat.id && isIndexableArticle(a)).length;
       return `<a class="category-card category-button" href="./category/${esc(cat.id)}.html">
         <span>${esc(cat.name)}</span>
         <small>${esc(cat.description || "")}</small>
@@ -862,27 +1028,27 @@ function writeHomeIndex() {
     })
     .join("");
 
-  const allArticleLinks = sorted
+  const allArticleLinks = indexable
     .map((a) => `<li><a href="./article/${esc(a.id)}/">${esc(a.title)}</a> <span class="article-meta">${esc(a.date || "")}</span></li>`)
     .join("");
 
   const body = `
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">元自衛官目線の装備レビュー</p>
+        <p class="eyebrow">${esc(AUTHOR_PEN_NAME)}</p>
         <h1>暮らしをラクにする装備レビュー</h1>
-        <p class="lead">元自衛官の目線で、楽天市場で探しやすい生活用品・防災グッズ・車載アイテム・デスク周り用品を整理して紹介します。</p>
+        <p class="lead">防災・一人暮らし・デスク周りの3本柱。元自衛官の実体験で、楽天市場の装備選びを迷いにくくします。</p>
         <div class="hero-site-summary" aria-label="このサイトの案内">
-          <p><strong>テーマ</strong>　日用品・防災・車内・デスク周りなど、生活導線に効く装備の整理とレビューです。</p>
-          <p><strong>向いている人</strong>　一人暮らし・寮生活、防災の備え、車・バイク利用、在宅で作業環境を整えたい人。</p>
+          <p><strong>向いている人</strong>　一人暮らし・ワンルーム、防災の備え、在宅でデスクを整えたい人。</p>
+          <p><strong>読み方</strong>　下の「3つの柱」→ 柱記事10本 → カテゴリ一覧の順がおすすめです。</p>
         </div>
         <ul class="trust-badges" aria-label="主なテーマ">
-          <li>防災</li><li>整頓</li><li>車内</li><li>一人暮らし</li><li>生活改善</li>
+          <li>防災</li><li>一人暮らし</li><li>デスク</li><li>体験談</li><li>比較表</li>
         </ul>
         <p class="ad-notice">当サイトはアフィリエイト広告を利用しています。</p>
         <div class="hero-actions">
-          <a class="button" href="#articles">記事を読む</a>
-          <a class="button secondary" href="./category/disaster.html">防災装備を見る</a>
+          <a class="button" href="#pillars">3つの柱から読む</a>
+          <a class="button secondary" href="./hub/disaster.html">防災ガイド</a>
         </div>
       </div>
       <div class="hero-panel" aria-label="装備レビューの概要">
@@ -891,20 +1057,22 @@ function writeHomeIndex() {
           <strong>買う前に、用途・置き場所・使う頻度を見る。</strong>
           <p>生活導線に入るものだけが、本当に使える装備になります。</p>
           <div class="stats">
-            <div class="stat"><b>${sorted.length}</b><small>レビュー記事</small></div>
-            <div class="stat"><b>${products.length}</b><small>商品カード</small></div>
-            <div class="stat"><b>${categories.length}</b><small>カテゴリ</small></div>
+            <div class="stat"><b>${indexable.length}</b><small>公開記事（SEO）</small></div>
+            <div class="stat"><b>${pillarFeatured.length}</b><small>柱記事</small></div>
+            <div class="stat"><b>3</b><small>テーマ</small></div>
           </div>
         </div>
       </div>
     </section>
 
+    ${renderHomePillarSection()}
+
     <section class="section" id="categories">
       <div class="section-head">
         <h2>カテゴリから探す</h2>
-        <p>生活、PC作業、筋トレ、旅、防災。一人暮らしの装備選びを迷いにくくします。</p>
+        <p>防災・一人暮らし・デスクを主軸に、その他の装備もカテゴリから探せます。</p>
       </div>
-      <div class="category-grid">${categoryCards}</div>
+      <div class="category-grid">${primaryCategoryCards}${secondaryCategoryCards}</div>
     </section>
 
     ${renderHomeCampaignSection(rakutenWidgetsConfig)}
@@ -912,16 +1080,16 @@ function writeHomeIndex() {
 
     <section class="section" id="articles">
       <div class="section-head">
-        <h2>新着記事</h2>
-        <p>装備選びの考え方と、記事内で紹介している商品をまとめています。</p>
+        <h2>柱記事・おすすめ</h2>
+        <p>体験談とFAQ付きの柱記事を優先表示。詳細は各記事で比較表を確認してください。</p>
       </div>
       <div class="article-grid">${articleCards}</div>
     </section>
 
     <section class="section" aria-label="記事一覧（HTML）">
       <div class="section-head">
-        <h2>記事一覧</h2>
-        <p>GoogleがJavaScriptを実行できない場合でもクロールできるよう、HTMLのリンク一覧を併設しています。</p>
+        <h2>記事一覧（SEO公開分）</h2>
+        <p>検索エンジン向けに公開している記事のみ掲載しています。</p>
       </div>
       <ul class="plain-link-list">${allArticleLinks}</ul>
     </section>
@@ -955,10 +1123,12 @@ function writeHomeIndex() {
 
 writeHomeIndex();
 
-const sitemapArticles = articles.filter((a) => !REDIRECT_ARTICLES[a.id]);
+const sitemapArticles = articles.filter((a) => !REDIRECT_ARTICLES[a.id] && isIndexableArticle(a));
+const hubUrls = PRIMARY_PILLARS.map((p) => `${SITEMAP_BASE_URL}/hub/${p.id}.html`);
 const categoryUrls = categories.map((cat) => `${SITEMAP_BASE_URL}/category/${cat.id}.html`);
 const urls = [
   `${SITEMAP_BASE_URL}/`,
+  ...hubUrls,
   ...categoryUrls,
   ...sitemapArticles.map((article) => `${SITEMAP_BASE_URL}/article/${article.id}/`)
 ];

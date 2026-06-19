@@ -137,6 +137,29 @@ for (const article of articles) {
   }
 }
 
+const pillarContentPath = path.join(siteRoot, "data", "gift-pillar-content.json");
+const giftStrategy = fs.existsSync(pillarContentPath)
+  ? JSON.parse(fs.readFileSync(pillarContentPath, "utf8"))
+  : {};
+const PILLAR_SLUGS = new Set(giftStrategy.pillarSlugs || []);
+const PILLAR_DETAILS = giftStrategy.pillars || {};
+
+for (const article of articles) {
+  const extra = PILLAR_DETAILS[article.slug];
+  if (!extra) continue;
+  if (extra.intro) article.intro = extra.intro;
+  if (extra.points) article.points = extra.points;
+  if (extra.mistakes) article.mistakes = extra.mistakes;
+  article.experience = extra.experience || "";
+  article.comparisonNote = extra.comparisonNote || "";
+  article.faq = extra.faq || [];
+  article.isPillar = true;
+}
+
+function isGiftIndexable(slug) {
+  return PILLAR_SLUGS.has(slug);
+}
+
 const gearBlogUrl = "https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/";
 
 function todayInJapan() {
@@ -155,8 +178,9 @@ function esc(value) {
     .replace(/"/g, "&quot;");
 }
 
-function seoHead({ title, description, url, type = "website", iconHref = "./" }) {
-  return `<link rel="icon" href="${iconHref}favicon.ico" sizes="any" />
+function seoHead({ title, description, url, type = "website", iconHref = "./", robots }) {
+  const robotsMeta = robots ? `<meta name="robots" content="${esc(robots)}" />` : "";
+  return `${robotsMeta}<link rel="icon" href="${iconHref}favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="${iconHref}favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="${iconHref}favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="${iconHref}apple-touch-icon.png" />
@@ -199,24 +223,84 @@ function staticProductCards(productIds) {
 }
 
 function staticArticleBody(article) {
+  const experienceBlock = article.experience
+    ? `<div class="summary-box experience-box"><h2>選び方の実体験</h2><p>${esc(article.experience)}</p></div>`
+    : "";
+  const comparisonBlock = article.comparisonNote
+    ? `<div class="summary-box"><h2>カテゴリの使い分け</h2><p>${esc(article.comparisonNote)}</p></div>`
+    : "";
+  const faqBlock =
+    article.faq?.length
+      ? `<div class="summary-box faq-box"><h2>よくある質問</h2>${article.faq
+          .map(
+            (item) =>
+              `<details class="faq-item"><summary>${esc(item.q)}</summary><p>${esc(item.a)}</p></details>`
+          )
+          .join("")}</div>`
+      : "";
+  const categoryDetails = article.products
+    .map((id) => productById[id])
+    .filter(Boolean)
+    .map(
+      (item) =>
+        `<li><strong>${esc(item.name)}</strong> — ${esc(item.reason)}（${esc(item.budget)}）</li>`
+    )
+    .join("");
   return `<p class="breadcrumb"><a href="../../">ホーム</a> &gt; 記事 &gt; ${esc(article.title)}</p>
     <p class="eyebrow">広告を含みます</p>
     <h1>${esc(article.title)}</h1>
-    <p>${esc(article.intro)}</p>
+    <p class="lead">${esc(article.intro)}</p>
+    ${experienceBlock}
     <h2>選び方のポイント</h2>
     <ul>${article.points.map((point) => `<li>${esc(point)}</li>`).join("")}</ul>
-    <h2>おすすめカテゴリ5つ</h2>
-    <ul>${article.categories.map((category) => `<li>${esc(category)}</li>`).join("")}</ul>
+    ${comparisonBlock}
+    <h2>おすすめカテゴリ5つ（詳細）</h2>
+    <ul class="category-detail-list">${categoryDetails}</ul>
     <h2>失敗しやすいプレゼント</h2>
     <ul>${article.mistakes.map((mistake) => `<li>${esc(mistake)}</li>`).join("")}</ul>
-    <h2>商品リンク用カード</h2>
+    <h2>楽天で探す（商品カード）</h2>
     <div class="product-grid">${staticProductCards(article.products)}</div>
+    ${faqBlock}
     <h2>まとめ</h2>
-    <p>${esc(article.title.replace("おすすめ", ""))}は、相手との距離感、予算、持ち帰りやすさをそろえて考えると選びやすくなります。迷ったときは、実用的なものや消えものから候補を絞るのがおすすめです。</p>`;
+    <p>${esc(article.title.replace("おすすめ", ""))}は、相手との距離感・予算・渡す場面をそろえて考えると選びやすくなります。迷ったら上のカテゴリから1つに絞り、楽天リンクで最新価格を確認してください。</p>
+    <p>生活装備のプレゼント候補は <a href="${gearBlogUrl}">元自衛官の楽天装備レビュー</a> も参考にできます。</p>`;
+}
+
+function renderGiftFooter(topHref = "./") {
+  const promo = giftStrategy.promotion?.blogmura || {};
+  const blogmura =
+    promo.cid
+      ? `<a href="https://blogmura.com/ranking/in?p_cid=${esc(promo.cid)}" target="_blank" rel="noopener noreferrer"><img src="https://blogmura.com/img/blogmura_ranking_banner_01.gif" width="117" height="31" alt="にほんブログ村 ブログランキング"></a>`
+      : `<a class="promo-badge" href="https://mypage.blogmura.com/signup" target="_blank" rel="noopener noreferrer">にほんブログ村（登録はこちら）</a>`;
+  const blogParts =
+    promo.cid && promo.blogParts
+      ? `<div class="promo-blogparts"><div class="blogmura-blogparts" data-chid="${esc(promo.cid)}" data-category="${esc(promo.blogParts.category || "0")}" data-type="${esc(promo.blogParts.type || "pv")}"></div><script src="https://blogparts.blogmura.com/js/parts_view.js" defer></script></div>`
+      : "";
+  return `<footer class="footer site-footer-gift">
+    <div class="footer-main">
+      <p><a href="${topHref}#about">このサイトについて</a> · <a href="${gearBlogUrl}">元自衛官の楽天装備レビュー</a></p>
+      <div class="promo-badges">${blogmura}</div>
+      ${blogParts}
+    </div>
+  </footer>`;
+}
+
+function staticPillarLinksHtml() {
+  return articles
+    .filter((a) => isGiftIndexable(a.slug))
+    .map(
+      (article) => `<a class="article-link article-link--pillar" href="article/${article.slug}/">
+      <h3>${esc(article.title)}</h3>
+      <p>${esc(article.description)}</p>
+      <span>柱記事を読む</span>
+    </a>`
+    )
+    .join("");
 }
 
 function staticArticleLinksHtml() {
   return articles
+    .filter((a) => isGiftIndexable(a.slug))
     .map(
       (article) => `<a class="article-link" href="article/${article.slug}/">
       <h3>${esc(article.title)}</h3>
@@ -372,13 +456,13 @@ function articleHtml(article) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(article.title)}｜プレゼントふぉーゆー</title>
   <meta name="description" content="${esc(article.description)}">
-  ${seoHead({ title: article.title, description: article.description, url: pageUrl, type: "article", iconHref: "../../" })}
+  ${seoHead({ title: article.title, description: article.description, url: pageUrl, type: "article", iconHref: "../../", robots: isGiftIndexable(article.slug) ? undefined : "noindex, follow" })}
   <link rel="stylesheet" href="../../styles.css">
 </head>
 <body class="article-page" data-article="${article.slug}">
   <header class="site-header"><a class="brand" href="../../">プレゼントふぉーゆー</a><nav class="nav"><a href="../../#diagnosis">診断する</a><a href="../../#articles">記事</a><a href="../../#about">このサイトについて</a></nav></header>
-  <main class="section article-layout"><article class="article-body" id="articleContent" data-static="1">${staticArticleBody(article)}</article><aside class="side-links" id="sideLinks"><strong>関連記事</strong>${related}</aside></main>
-  <footer class="footer"><a href="../../#about">このサイトについて</a><a href="${gearBlogUrl}">元自衛官の楽天装備レビュー</a><a href="../../#about">免責事項</a></footer>
+  <main class="section article-layout"><article class="article-body" id="articleContent" data-static="1">${staticArticleBody(article)}</article><aside class="side-links" id="sideLinks"><strong>柱記事</strong>${articles.filter((a) => isGiftIndexable(a.slug) && a.slug !== article.slug).map((a) => `<a href="../${a.slug}/">${esc(a.title)}</a>`).join("")}</aside></main>
+  ${renderGiftFooter("../../")}
   <script src="../../app.js"></script>
 </body>
 </html>
@@ -415,10 +499,10 @@ function indexHtml() {
         <p class="eyebrow">広告を含みます</p>
         <h1>プレゼントふぉーゆー</h1>
         <p class="lead">相手・予算・シーンを選ぶだけ。失敗しにくいプレゼントを提案します。</p>
-        <p class="description">誕生日、退職祝い、取引先への手土産、ちょっとしたお礼まで。相手に合わせた無難でセンスのいい贈り物を探せます。</p>
+        <p class="description">誕生日、退職祝い、取引先への手土産、ちょっとしたお礼まで。柱記事5本に体験談・FAQを追加し、上位サイト並みの深さで読めます。</p>
         <div class="hero-actions">
           <a class="button primary" href="#diagnosis">プレゼント診断を始める</a>
-          <a class="button ghost" href="#articles">記事から探す</a>
+          <a class="button ghost" href="#pillars">柱記事5本</a>
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
@@ -491,11 +575,20 @@ function indexHtml() {
       <div id="results" class="results" aria-live="polite"></div>
     </section>
 
+    <section id="pillars" class="section">
+      <div class="section-heading">
+        <p class="breadcrumb">ホーム &gt; 柱記事</p>
+        <h2>まず読む柱記事5本</h2>
+        <p>体験談・FAQ・カテゴリ詳細付き。検索流入の受け皿になる記事です。</p>
+      </div>
+      <div class="article-grid">${staticPillarLinksHtml()}</div>
+    </section>
+
     <section id="articles" class="section soft">
       <div class="section-heading">
         <p class="breadcrumb">ホーム &gt; 記事一覧</p>
-        <h2>プレゼント選びの記事</h2>
-        <p>よくあるシーン別に、選び方と避けたいポイントをまとめています。</p>
+        <h2>プレゼント選びの記事（SEO公開分）</h2>
+        <p>柱記事5本を中心に公開。その他の記事は順次厚文化予定です。</p>
       </div>
       <div class="article-grid" id="articleList" data-static="1">${staticArticleLinksHtml()}</div>
     </section>
@@ -514,11 +607,7 @@ function indexHtml() {
     </section>
   </main>
 
-  <footer class="footer">
-    <a href="#about">このサイトについて</a>
-    <a href="${gearBlogUrl}">元自衛官の楽天装備レビュー</a>
-    <a href="#about">免責事項</a>
-  </footer>
+  ${renderGiftFooter("./")}
 
   <script src="app.js"></script>
 </body>
@@ -527,11 +616,12 @@ function indexHtml() {
 }
 
 function sitemapXml() {
+  const indexableArticles = articles.filter((a) => isGiftIndexable(a.slug));
   const urls = [
     { loc: baseUrl, priority: "1.0", changefreq: "weekly" },
-    ...articles.map((article) => ({
+    ...indexableArticles.map((article) => ({
       loc: `${baseUrl}${articlePath(article.slug)}`,
-      priority: "0.8",
+      priority: "0.9",
       changefreq: "monthly"
     }))
   ];
@@ -552,9 +642,10 @@ function updateRootSitemap() {
   let xml = fs.readFileSync(rootSitemapPath, "utf8");
   xml = xml.replace(/\s*<url>\s*<loc>https:\/\/dai32320888-ship-it\.github\.io\/daichi-profile-site\/gift-for-you\/[\s\S]*?<\/url>/g, "");
   xml = xml.replace(/\s*<url>\s*<loc>https:\/\/dai32320888-ship-it\.github\.io\/daichi-profile-site\/gift-for-you\/article\/[\s\S]*?<\/url>/g, "");
+  const indexableArticles = articles.filter((a) => isGiftIndexable(a.slug));
   const entries = [
     { loc: baseUrl, priority: "0.9" },
-    ...articles.map((article) => ({ loc: `${baseUrl}${articlePath(article.slug)}`, priority: "0.7" }))
+    ...indexableArticles.map((article) => ({ loc: `${baseUrl}${articlePath(article.slug)}`, priority: "0.8" }))
   ].map((url) => `  <url>
     <loc>${url.loc}</loc>
     <lastmod>${lastMod}</lastmod>
