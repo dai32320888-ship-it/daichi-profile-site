@@ -10,6 +10,7 @@ const {
 } = require("./rakuten-widgets");
 
 const root = path.resolve(__dirname, "..");
+const { CHANNELS } = require(path.join(root, "..", "affiliate", "central-config"));
 const rakutenWidgetsConfig = loadRakutenWidgetsConfig(root);
 const DEFAULT_SITE_URL = "https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review";
 const SITE_URL = (process.env.SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
@@ -263,6 +264,7 @@ function renderPromotionFooter(topHref) {
       <div class="site-footer__main">
         <strong>元自衛官の楽天装備レビュー</strong>
         <p>当サイトはアフィリエイト広告を利用しています。価格・在庫・レビューはリンク先の楽天市場で最新情報をご確認ください。</p>
+        <p class="related-sites">関連サイト: <a href="${esc(CHANNELS.gift.base)}/">プレゼントふぉーゆー</a></p>
         ${badgeHtml}
         ${blogPartsHtml}
         <p class="promo-feed"><a href="${esc(feedHref)}">RSS</a></p>

@@ -137,6 +137,91 @@ for (const article of articles) {
   }
 }
 
+const gearBlogUrl = "https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/";
+
+function todayInJapan() {
+  const p = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+  const v = Object.fromEntries(p.map((x) => [x.type, x.value]));
+  return `${v.year}-${v.month}-${v.day}`;
+}
+
+const lastMod = todayInJapan();
+
+function esc(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function seoHead({ title, description, url, type = "website" }) {
+  return `<link rel="canonical" href="${esc(url)}" />
+  <meta property="og:type" content="${type}" />
+  <meta property="og:title" content="${esc(title)}" />
+  <meta property="og:description" content="${esc(description)}" />
+  <meta property="og:url" content="${esc(url)}" />
+  <meta property="og:site_name" content="プレゼントふぉーゆー" />
+  <meta name="twitter:card" content="summary" />
+  <script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": type === "article" ? "Article" : "WebSite",
+    name: title,
+    description,
+    url
+  })}</script>`;
+}
+
+function staticProductCards(productIds) {
+  const items = productIds.map((id) => productById[id]).filter(Boolean);
+  const list = items.length ? items : products.slice(0, 5);
+  return list
+    .map(
+      (item) => `<article class="product-card">
+      <h3>${esc(item.name)}</h3>
+      <p>${esc(item.reason)}</p>
+      <div class="meta">
+        <span><strong>向いている相手:</strong> ${esc(item.target)}</span>
+        <span><strong>予算目安:</strong> ${esc(item.budget)}</span>
+      </div>
+      <div class="card-actions">
+        <a class="button shop" href="${esc(item.rakutenUrl)}" rel="nofollow sponsored noopener noreferrer" target="_blank">楽天で見る</a>
+        <a class="button detail" href="${esc(item.detailUrl)}">詳しく見る</a>
+      </div>
+    </article>`
+    )
+    .join("");
+}
+
+function staticArticleBody(article) {
+  return `<p class="breadcrumb"><a href="../../">ホーム</a> &gt; 記事 &gt; ${esc(article.title)}</p>
+    <p class="eyebrow">広告を含みます</p>
+    <h1>${esc(article.title)}</h1>
+    <p>${esc(article.intro)}</p>
+    <h2>選び方のポイント</h2>
+    <ul>${article.points.map((point) => `<li>${esc(point)}</li>`).join("")}</ul>
+    <h2>おすすめカテゴリ5つ</h2>
+    <ul>${article.categories.map((category) => `<li>${esc(category)}</li>`).join("")}</ul>
+    <h2>失敗しやすいプレゼント</h2>
+    <ul>${article.mistakes.map((mistake) => `<li>${esc(mistake)}</li>`).join("")}</ul>
+    <h2>商品リンク用カード</h2>
+    <div class="product-grid">${staticProductCards(article.products)}</div>
+    <h2>まとめ</h2>
+    <p>${esc(article.title.replace("おすすめ", ""))}は、相手との距離感、予算、持ち帰りやすさをそろえて考えると選びやすくなります。迷ったときは、実用的なものや消えものから候補を絞るのがおすすめです。</p>`;
+}
+
+function staticArticleLinksHtml() {
+  return articles
+    .map(
+      (article) => `<a class="article-link" href="article/${article.slug}/">
+      <h3>${esc(article.title)}</h3>
+      <p>${esc(article.description)}</p>
+      <span>記事を読む</span>
+    </a>`
+    )
+    .join("");
+}
+
 function jsString(value) {
   return JSON.stringify(value, null, 2);
 }
@@ -214,7 +299,7 @@ function setupDiagnosis() {
 
 function renderArticleList() {
   const list = document.querySelector("#articleList");
-  if (!list) return;
+  if (!list || list.dataset.static === "1") return;
   list.innerHTML = articles.map((article) => \`
     <a class="article-link" href="article/\${article.slug}/">
       <h3>\${article.title}</h3>
@@ -231,7 +316,7 @@ function renderArticlePage() {
   const article = articles.find((item) => item.slug === slug);
   const container = document.querySelector("#articleContent");
   const side = document.querySelector("#sideLinks");
-  if (!article || !container) return;
+  if (!article || !container || container.dataset.static === "1") return;
   const relatedProducts = article.products.map((id) => productById[id]).filter(Boolean);
   const fallbackProducts = relatedProducts.length ? relatedProducts : productCards.slice(0, 5);
 
@@ -269,20 +354,168 @@ renderArticlePage();
 }
 
 function articleHtml(article) {
+  const pageUrl = `${baseUrl}${articlePath(article.slug)}`;
+  const related = articles
+    .filter((item) => item.slug !== article.slug)
+    .slice(0, 8)
+    .map((item) => `<a href="../${item.slug}/">${esc(item.title)}</a>`)
+    .join("");
   return `<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${article.title}｜プレゼントふぉーゆー</title>
-  <meta name="description" content="${article.description}">
+  <title>${esc(article.title)}｜プレゼントふぉーゆー</title>
+  <meta name="description" content="${esc(article.description)}">
+  ${seoHead({ title: article.title, description: article.description, url: pageUrl, type: "article" })}
   <link rel="stylesheet" href="../../styles.css">
 </head>
 <body class="article-page" data-article="${article.slug}">
   <header class="site-header"><a class="brand" href="../../">プレゼントふぉーゆー</a><nav class="nav"><a href="../../#diagnosis">診断する</a><a href="../../#articles">記事</a><a href="../../#about">このサイトについて</a></nav></header>
-  <main class="section article-layout"><article class="article-body" id="articleContent"></article><aside class="side-links" id="sideLinks"></aside></main>
-  <footer class="footer"><a href="../../#about">このサイトについて</a><a href="../../#about">広告掲載について</a><a href="../../#about">プライバシーポリシー</a><a href="../../#about">お問い合わせ</a><a href="../../#about">免責事項</a></footer>
+  <main class="section article-layout"><article class="article-body" id="articleContent" data-static="1">${staticArticleBody(article)}</article><aside class="side-links" id="sideLinks"><strong>関連記事</strong>${related}</aside></main>
+  <footer class="footer"><a href="../../#about">このサイトについて</a><a href="${gearBlogUrl}">元自衛官の楽天装備レビュー</a><a href="../../#about">免責事項</a></footer>
   <script src="../../app.js"></script>
+</body>
+</html>
+`;
+}
+
+function indexHtml() {
+  const title = "プレゼントふぉーゆー｜相手・予算・シーンで選ぶプレゼント診断";
+  const description = "相手・予算・シーンを選ぶだけで、誕生日、退職祝い、手土産、お礼などに合う失敗しにくいプレゼントカテゴリを提案する診断風サイトです。";
+  return `<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${title}</title>
+  <meta name="description" content="${esc(description)}">
+  ${seoHead({ title: "プレゼントふぉーゆー", description, url: baseUrl })}
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="プレゼントふぉーゆー トップ">プレゼントふぉーゆー</a>
+    <nav class="nav" aria-label="主要ナビゲーション">
+      <a href="#diagnosis">診断する</a>
+      <a href="#articles">記事</a>
+      <a href="#about">このサイトについて</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="breadcrumb">ホーム</p>
+        <p class="eyebrow">広告を含みます</p>
+        <h1>プレゼントふぉーゆー</h1>
+        <p class="lead">相手・予算・シーンを選ぶだけ。失敗しにくいプレゼントを提案します。</p>
+        <p class="description">誕生日、退職祝い、取引先への手土産、ちょっとしたお礼まで。相手に合わせた無難でセンスのいい贈り物を探せます。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#diagnosis">プレゼント診断を始める</a>
+          <a class="button ghost" href="#articles">記事から探す</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="gift-stack">
+          <span class="gift-card card-one"></span>
+          <span class="gift-card card-two"></span>
+          <span class="gift-card card-three"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="diagnosis" class="section">
+      <div class="section-heading">
+        <p class="breadcrumb">ホーム &gt; プレゼント診断</p>
+        <h2>条件を選んでおすすめを見る</h2>
+        <p>迷いやすい条件だけを選ぶ、かんたんな診断フォームです。</p>
+      </div>
+
+      <form class="diagnosis-card" id="giftForm">
+        <div class="form-grid">
+          <label>贈る相手
+            <select name="recipient" required>
+              <option value="">選択してください</option>
+              <option>彼女</option><option>彼氏</option><option>友達</option><option>親</option><option>祖父母</option><option>上司</option><option>取引先</option><option>同僚</option><option>後輩</option>
+            </select>
+          </label>
+          <label>性別
+            <select name="gender" required>
+              <option value="">選択してください</option>
+              <option>男性</option><option>女性</option><option>どちらでも</option><option>不明</option>
+            </select>
+          </label>
+          <label>年齢
+            <select name="age" required>
+              <option value="">選択してください</option>
+              <option>10代</option><option>20代</option><option>30代</option><option>40代</option><option>50代</option><option>60代以上</option>
+            </select>
+          </label>
+          <label>予算
+            <select name="budget" required>
+              <option value="">選択してください</option>
+              <option>1,000円以内</option><option>3,000円以内</option><option>5,000円以内</option><option>10,000円以内</option><option>それ以上</option>
+            </select>
+          </label>
+          <label>シーン
+            <select name="scene" required>
+              <option value="">選択してください</option>
+              <option>誕生日</option><option>退職祝い</option><option>引っ越し祝い</option><option>結婚祝い</option><option>出産祝い</option><option>お礼</option><option>謝罪</option><option>取引先への手土産</option><option>帰省土産</option>
+            </select>
+          </label>
+          <label>雰囲気
+            <select name="mood" required>
+              <option value="">選択してください</option>
+              <option>おしゃれ</option><option>無難</option><option>高級感</option><option>面白い</option><option>実用的</option><option>消えもの</option><option>センス良く見える</option>
+            </select>
+          </label>
+        </div>
+        <fieldset>
+          <legend>避けたいもの</legend>
+          <div class="check-grid">
+            <label><input type="checkbox" name="avoid" value="食べ物NG"> 食べ物NG</label>
+            <label><input type="checkbox" name="avoid" value="香りものNG"> 香りものNG</label>
+            <label><input type="checkbox" name="avoid" value="高すぎるものNG"> 高すぎるものNG</label>
+            <label><input type="checkbox" name="avoid" value="個性的すぎるものNG"> 個性的すぎるものNG</label>
+          </div>
+        </fieldset>
+        <button class="button primary wide" type="submit">おすすめを表示する</button>
+      </form>
+
+      <div id="results" class="results" aria-live="polite"></div>
+    </section>
+
+    <section id="articles" class="section soft">
+      <div class="section-heading">
+        <p class="breadcrumb">ホーム &gt; 記事一覧</p>
+        <h2>プレゼント選びの記事</h2>
+        <p>よくあるシーン別に、選び方と避けたいポイントをまとめています。</p>
+      </div>
+      <div class="article-grid" id="articleList" data-static="1">${staticArticleLinksHtml()}</div>
+    </section>
+
+    <section id="about" class="section about">
+      <div>
+        <p class="breadcrumb">ホーム &gt; このサイトについて</p>
+        <h2>このサイトについて</h2>
+        <p>プレゼントふぉーゆーは、贈る相手やシーンに合わせて「外しにくい候補」を探すためのプレゼント相談サイトです。掲載リンクには広告が含まれる場合があります。</p>
+        <p>関連サイト: <a href="${gearBlogUrl}">元自衛官の楽天装備レビュー</a></p>
+      </div>
+      <div class="notice">
+        <strong>広告表記</strong>
+        <p>当サイトはアフィリエイト広告を利用しています。商品購入前には、販売ページで価格・在庫・送料・レビュー・返品条件をご確認ください。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="#about">このサイトについて</a>
+    <a href="${gearBlogUrl}">元自衛官の楽天装備レビュー</a>
+    <a href="#about">免責事項</a>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
 `;
@@ -301,7 +534,7 @@ function sitemapXml() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((url) => `  <url>
     <loc>${url.loc}</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>${lastMod}</lastmod>
     <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>
   </url>`).join("\n")}
@@ -319,7 +552,7 @@ function updateRootSitemap() {
     ...articles.map((article) => ({ loc: `${baseUrl}${articlePath(article.slug)}`, priority: "0.7" }))
   ].map((url) => `  <url>
     <loc>${url.loc}</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>${lastMod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>${url.priority}</priority>
   </url>`).join("\n");
@@ -327,6 +560,7 @@ function updateRootSitemap() {
   fs.writeFileSync(rootSitemapPath, xml, "utf8");
 }
 
+fs.writeFileSync(path.join(siteRoot, "index.html"), indexHtml(), "utf8");
 fs.writeFileSync(path.join(siteRoot, "app.js"), appJs(), "utf8");
 for (const article of articles) {
   const dir = path.join(siteRoot, "article", article.slug);

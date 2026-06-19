@@ -2056,7 +2056,7 @@ function setupDiagnosis() {
 
 function renderArticleList() {
   const list = document.querySelector("#articleList");
-  if (!list) return;
+  if (!list || list.dataset.static === "1") return;
   list.innerHTML = articles.map((article) => `
     <a class="article-link" href="article/${article.slug}/">
       <h3>${article.title}</h3>
@@ -2073,7 +2073,7 @@ function renderArticlePage() {
   const article = articles.find((item) => item.slug === slug);
   const container = document.querySelector("#articleContent");
   const side = document.querySelector("#sideLinks");
-  if (!article || !container) return;
+  if (!article || !container || container.dataset.static === "1") return;
   const relatedProducts = article.products.map((id) => productById[id]).filter(Boolean);
   const fallbackProducts = relatedProducts.length ? relatedProducts : productCards.slice(0, 5);
 
