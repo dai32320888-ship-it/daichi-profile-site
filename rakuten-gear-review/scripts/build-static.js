@@ -229,6 +229,11 @@ function rssHeadLink(feedHref) {
   return `<link rel="alternate" type="application/rss+xml" title="元自衛官の楽天装備レビュー" href="${esc(feedHref)}" />`;
 }
 
+function faviconHead(href) {
+  return `<link rel="icon" href="${href}favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="${href}favicon.svg" />`;
+}
+
 function renderPromotionFooter(topHref) {
   const promo = loadPromotionConfig();
   const badges = [];
@@ -328,6 +333,7 @@ function layout({ title, description, canonical, body, structuredData, ogType = 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}" />
+    ${faviconHead("../../")}
     <link rel="canonical" href="${canonical}" />
     <meta property="og:type" content="${esc(ogType)}" />
     <meta property="og:title" content="${esc(title)}" />
@@ -391,6 +397,7 @@ function layoutHome({ title, description, canonical, body, structuredData }) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}" />
+    ${faviconHead("./")}
     <link rel="canonical" href="${canonical}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${esc(title)}" />
@@ -455,6 +462,7 @@ function layoutCategory({ title, description, canonical, body, structuredData })
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}" />
+    ${faviconHead("../")}
     <link rel="canonical" href="${canonical}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${esc(title)}" />

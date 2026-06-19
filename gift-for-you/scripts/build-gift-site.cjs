@@ -155,8 +155,10 @@ function esc(value) {
     .replace(/"/g, "&quot;");
 }
 
-function seoHead({ title, description, url, type = "website" }) {
-  return `<link rel="canonical" href="${esc(url)}" />
+function seoHead({ title, description, url, type = "website", iconHref = "./" }) {
+  return `<link rel="icon" href="${iconHref}favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="${iconHref}favicon.svg" />
+  <link rel="canonical" href="${esc(url)}" />
   <meta property="og:type" content="${type}" />
   <meta property="og:title" content="${esc(title)}" />
   <meta property="og:description" content="${esc(description)}" />
@@ -367,7 +369,7 @@ function articleHtml(article) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(article.title)}｜プレゼントふぉーゆー</title>
   <meta name="description" content="${esc(article.description)}">
-  ${seoHead({ title: article.title, description: article.description, url: pageUrl, type: "article" })}
+  ${seoHead({ title: article.title, description: article.description, url: pageUrl, type: "article", iconHref: "../../" })}
   <link rel="stylesheet" href="../../styles.css">
 </head>
 <body class="article-page" data-article="${article.slug}">
