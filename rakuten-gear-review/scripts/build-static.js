@@ -51,6 +51,37 @@ const {
   getArticleCardImageUrl
 } = sandbox.__DATA__;
 
+const DEFAULT_OG_IMAGE = `${CANONICAL_BASE_URL}/images/og-default.png`;
+
+function normalizeThumbUrl(url) {
+  if (!url || String(url).startsWith("data:")) return "";
+  let u = String(url).trim();
+  if (u.includes("shop.r10s.jp") || u.includes("thumbnail.image.rakuten.co.jp")) {
+    u = u.replace(/_ex=\d+x\d+/, "_ex=480x480");
+    if (!u.includes("_ex=")) u += `${u.includes("?") ? "&" : "?"}_ex=480x480`;
+  }
+  return u;
+}
+
+/** 記事ごとのサムネ（pick → product → カード用URL） */
+function resolveArticleThumbUrl(article) {
+  const pickImg = (article.picks || []).map((p) => p.imageUrl).find(Boolean);
+  if (pickImg) return normalizeThumbUrl(pickImg);
+  const firstProduct = (article.productIds || [])
+    .map((id) => products.find((p) => p.id === id))
+    .find(Boolean);
+  if (firstProduct?.imageUrl) return normalizeThumbUrl(firstProduct.imageUrl);
+  const card = getArticleCardImageUrl(article);
+  if (card && !card.includes("/images/thumb-") && !card.includes("og-default")) {
+    return normalizeThumbUrl(card);
+  }
+  return card ? normalizeThumbUrl(card) : "";
+}
+
+function resolveArticleOgImage(article) {
+  return resolveArticleThumbUrl(article) || DEFAULT_OG_IMAGE;
+}
+
 const extraPath = path.join(root, "data", "extra-articles.json");
 const extraArticles = fs.existsSync(extraPath) ? JSON.parse(fs.readFileSync(extraPath, "utf8")) : [];
 const seenIds = new Set(baseArticles.map((a) => a.id));
@@ -176,6 +207,13 @@ function esc(value) {
     .replaceAll('"', "&quot;");
 }
 
+function sanitizeEmbedHtml(html) {
+  return String(html || "").replace(/<img\b([^>]*?)>/gi, (full, attrs) => {
+    if (/\balt\s*=/.test(attrs)) return full;
+    return `<img${attrs} alt="楽天アフィリエイト">`;
+  });
+}
+
 function loadPromotionConfig() {
   const promoPath = path.join(root, "data", "promotion.json");
   if (!fs.existsSync(promoPath)) return {};
@@ -279,8 +317,8 @@ function productUrl(product) {
   return product.affiliateUrl || product.rakutenProductUrl || "";
 }
 
-function layout({ title, description, canonical, body, structuredData, ogType = "article" }) {
-  const ogImageAbs = `${CANONICAL_BASE_URL}/images/og-default.png`;
+function layout({ title, description, canonical, body, structuredData, ogType = "article", ogImage }) {
+  const ogImageAbs = ogImage || DEFAULT_OG_IMAGE;
   return `<!doctype html>
 <html lang="ja">
   <head>
@@ -343,7 +381,7 @@ function layout({ title, description, canonical, body, structuredData, ogType = 
 }
 
 function layoutHome({ title, description, canonical, body, structuredData }) {
-  const ogImageAbs = `${CANONICAL_BASE_URL}/images/og-default.png`;
+  const ogImageAbs = DEFAULT_OG_IMAGE;
   return `<!doctype html>
 <html lang="ja">
   <head>
@@ -407,7 +445,7 @@ function layoutHome({ title, description, canonical, body, structuredData }) {
 }
 
 function layoutCategory({ title, description, canonical, body, structuredData }) {
-  const ogImageAbs = `${CANONICAL_BASE_URL}/images/og-default.png`;
+  const ogImageAbs = DEFAULT_OG_IMAGE;
   return `<!doctype html>
 <html lang="ja">
   <head>
@@ -553,12 +591,13 @@ function renderArticleBodySectionsWithMidAd(article) {
   return sections
     .map((section, idx) => {
       const paras = section.paragraphs || [];
-      const raw =
+      const raw = sanitizeEmbedHtml(
         typeof section.rawHtml === "string"
           ? section.rawHtml
           : typeof section.embedHtml === "string"
             ? section.embedHtml
-            : "";
+            : ""
+      );
       const chunk = `<section class="article-section" id="section-${idx}">${section.heading ? `<h2>${esc(section.heading)}</h2>` : ""}${paras.map((p) => `<p>${esc(p)}</p>`).join("")}${section.bullets?.length ? `<ul>${section.bullets.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>` : ""}${raw ? `<div class="article-embed">${raw}</div>` : ""}</section>`;
       const bridge = idx + 1 === midAfter ? midArticleSlot(article) : "";
       return chunk + bridge;
@@ -693,12 +732,14 @@ function renderArticle(article) {
       title: `${article.title} | 元自衛官の楽天装備レビュー`,
       description: metaDesc,
       canonical,
+      ogImage: resolveArticleOgImage(article),
       body,
       structuredData: {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         headline: article.title,
         description: metaDesc,
+        image: resolveArticleOgImage(article),
         datePublished: article.date,
         dateModified: article.date,
         author: { "@type": "Person", name: AUTHOR_PEN_NAME, url: `${CANONICAL_BASE_URL}/` },
@@ -929,18 +970,24 @@ const feedItems = [...sitemapArticles]
   .map((article) => {
     const link = `${CANONICAL_BASE_URL}/article/${article.id}/`;
     const pubDate = article.date ? new Date(`${article.date}T09:00:00+09:00`).toUTCString() : new Date().toUTCString();
+    const thumb = resolveArticleThumbUrl(article);
+    const summary = article.summary || article.title;
+    const descBody = thumb ? `<img src="${thumb}" alt="" />\n${summary}` : summary;
+    const mediaLines = thumb
+      ? `      <media:thumbnail url="${esc(thumb)}" />\n      <enclosure url="${esc(thumb)}" type="image/jpeg" length="0" />\n`
+      : "";
     return `    <item>
       <title>${cdataFeedText(article.title)}</title>
       <link>${link}</link>
       <guid isPermaLink="true">${link}</guid>
       <pubDate>${pubDate}</pubDate>
-      <description>${cdataFeedText(article.summary || article.title)}</description>
-    </item>`;
+      <description>${cdataFeedText(descBody)}</description>
+${mediaLines}    </item>`;
   })
   .join("\n");
 
 const feed = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>元自衛官の楽天装備レビュー</title>
     <link>${CANONICAL_BASE_URL}/</link>

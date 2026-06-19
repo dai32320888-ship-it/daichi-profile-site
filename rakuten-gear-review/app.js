@@ -78,6 +78,28 @@ const products = [
     searchKeyword: "tower キーフック"
   },
   {
+    id: "umbrella-case-mmode",
+    name: "吸水傘ケース",
+    category: "life",
+    description: "雨の日に折りたたみ傘をバッグへ入れても、水滴で中身が濡れにくい。",
+    recommendedFor: "雨の日にカバンが濡れるのが嫌な人",
+    imageUrl: "https://shop.r10s.jp/m-mode/cabinet/11868500/m031.jpg?_ex=240x240",
+    affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/m-mode/m031/"),
+    rakutenProductUrl: "https://item.rakuten.co.jp/m-mode/m031/",
+    searchKeyword: "吸水 傘ケース"
+  },
+  {
+    id: "compression-ashuklun",
+    name: "圧しゅくるん 圧縮袋",
+    category: "solo",
+    description: "掃除機不要・押すだけで衣類や布団を圧縮。ワンルームのクローゼット向き。",
+    recommendedFor: "収納が少なく季節服がパンパンの人",
+    imageUrl: "https://shop.r10s.jp/gold/winwinproduct/ashuklun/ashuklun.jpg?_ex=240x240",
+    affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/winwinproduct/ashuklun/"),
+    rakutenProductUrl: "https://item.rakuten.co.jp/winwinproduct/ashuklun/",
+    searchKeyword: "圧しゅくるん 圧縮袋"
+  },
+  {
     id: "cable-tray",
     name: "ケーブルトレー デスク下",
     category: "pc-ai",
@@ -455,6 +477,63 @@ const articles = [
           "収納ボックスは大きさより、使わない時に邪魔にならないかが大事です。狭い部屋では、畳める装備が強いです。"
         ],
         bullets: ["玄関に鍵の定位置を作る", "衣類と日用品をざっくり分ける", "床に物を置かない仕組みを作る"]
+      }
+    ]
+  },
+  {
+    id: "solo-daily-three-gear",
+    title: "一人暮らしの毎日ラク3点｜傘・収納・玄関",
+    category: "solo",
+    date: "2026-06-19",
+    readTime: "6分",
+    summary: "雨の日のカバン、クローゼットの季節服、帰宅後の鍵置き。レビュー多めの3点だけに絞った。",
+    hideProductCatalog: true,
+    relatedArticleIds: ["solo-first-room-gear", "rakuten-gear-how-to-choose", "auto-p007-吸水-傘ケース-折りたたみ"],
+    introParagraphs: [
+      "一人暮らしで効く装備は、派手な便利グッズより「毎日触るか」が勝負です。今回はROOMでも紹介している3点に絞り、失敗しにくい選び方だけまとめます。",
+      "傘ケース・圧縮袋・玄関キーフック。どれも1000円前後から始められて、生活の小さなストレスを一つずつ消してくれます。"
+    ],
+    forAudience: ["雨の日にカバンが濡れるのが嫌な人", "クローゼットがパンパンの一人暮らし", "帰宅後に鍵を探す人"],
+    body: [
+      {
+        heading: "3点の選び方",
+        paragraphs: [
+          "傘ケースは吸水素材とサイズ感、圧縮袋は掃除機要否とセット枚数、キーフックはマグネットが効く面かを先に確認します。",
+          "レビュー件数が多い商品ほど、失敗パターンがコメントに出やすいので、低評価だけ先に読むのがおすすめです。"
+        ],
+        bullets: ["毎日使う導線に入るか", "レビュー件数と低評価を確認", "置き場所・サイズを先に決める"]
+      }
+    ],
+    picks: [
+      {
+        name: "吸水傘ケース",
+        category: "life",
+        intro: ["雨の日、折りたたみ傘をそのままバッグに入れると中身が濡れる。吸水ケースなら水滴を吸ってカバンを守れる。"],
+        scenes: ["通勤・通学の雨の日", "折りたたみ傘の持ち運び", "カバンの中身を濡らしたくない人"],
+        caution: ["傘のサイズとケースの対応を確認", "色は写真と実物で差が出ることも"],
+        rakutenProductUrl: "https://item.rakuten.co.jp/m-mode/m031/",
+        affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/m-mode/m031/"),
+        imageUrl: "https://shop.r10s.jp/m-mode/cabinet/11868500/m031.jpg?_ex=240x240"
+      },
+      {
+        name: "圧しゅくるん 圧縮袋",
+        category: "solo",
+        intro: ["ワンルームは収納が足りない。掃除機不要で押すだけ圧縮できる袋は、季節服の服替えが一気にラクになる。"],
+        scenes: ["冬服・布団の保管", "クローゼットの整理", "引っ越し前の荷造り"],
+        caution: ["衣類の素材によっては圧縮しすぎ注意", "セット枚数とサイズを用途に合わせる"],
+        rakutenProductUrl: "https://item.rakuten.co.jp/winwinproduct/ashuklun/",
+        affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/winwinproduct/ashuklun/"),
+        imageUrl: "https://shop.r10s.jp/gold/winwinproduct/ashuklun/ashuklun.jpg?_ex=240x240"
+      },
+      {
+        name: "tower マグネットキーフック",
+        category: "life",
+        intro: ["帰宅後の鍵・イヤホン・小物を一箇所に。玄関が整うと、翌朝の出かけ準備も速くなる。"],
+        scenes: ["玄関ドアの鍵置き", "印鑑・マスクの定位置", "小物の一時置き"],
+        caution: ["マグネットが効く面か確認（木扉は不可のことが多い）"],
+        rakutenProductUrl: "https://item.rakuten.co.jp/roomy/ymz19aug12h28/",
+        affiliateUrl: rakutenAffiliateUrl("https://item.rakuten.co.jp/roomy/ymz19aug12h28/"),
+        imageUrl: "https://thumbnail.image.rakuten.co.jp/@0_mall/roomy/cabinet/500cart_all/500cart_11g/p5-4/ymz1082-mv01c-0_gt01.jpg?_ex=240x240"
       }
     ]
   },

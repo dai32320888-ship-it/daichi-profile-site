@@ -80,6 +80,32 @@ function decodeHtml(text) {
     .trim();
 }
 
+function parseRating(html) {
+  const fromJson = firstMatch(html, [
+    /"ratingValue"\s*:\s*"?([\d.]+)"?/i,
+    /itemprop="ratingValue"\s+content="([\d.]+)"/i
+  ]);
+  if (fromJson) {
+    const r = parseFloat(fromJson);
+    if (r >= 2 && r <= 5) return String(r);
+  }
+  const fromText = firstMatch(html, [
+    /平均評価[^0-9]{0,16}([2-5]\.\d)/,
+    /レビュー[^0-9]{0,24}([2-5]\.\d)\s*点/,
+    /([2-5]\.\d)\s*\/\s*5\s*点?/
+  ]);
+  if (fromText) {
+    const r = parseFloat(fromText);
+    if (r >= 2 && r <= 5) return String(r);
+  }
+  return "";
+}
+
+function isValidRating(rating) {
+  const r = parseFloat(rating);
+  return !Number.isNaN(r) && r >= 2 && r <= 5;
+}
+
 function isBadProductName(name) {
   if (!name || name === "商品" || name.length < 3) return true;
   if (/獲得予定|javascript|�|^\?+$/.test(name)) return true;
@@ -149,7 +175,7 @@ function parseProductPage(html, keywordFallback = "商品") {
     firstMatch(html, [/reviewCount["\s:]+(\d+)/i, /(\d+)\s*件のレビュー/, /レビュー\s*[（(](\d+)[)）]/]) || 0
   );
 
-  const rating = firstMatch(html, [/ratingValue["\s:]+([\d.]+)/i, /([1-5]\.\d)\s*(?:点|\/)/]);
+  const rating = parseRating(html);
 
   const description = decodeHtml(
     firstMatch(html, [
@@ -295,5 +321,7 @@ module.exports = {
   cleanProductName,
   displayProductName,
   isBadProductName,
-  hasMojibake
+  hasMojibake,
+  isValidRating,
+  parseRating
 };

@@ -1,4 +1,4 @@
-const { cleanProductName, displayProductName, isBadProductName, hasMojibake } = require("./rakuten-search");
+const { cleanProductName, displayProductName, isBadProductName, hasMojibake, isValidRating } = require("./rakuten-search");
 
 const CATEGORY_LABELS = {
   life: "生活装備",
@@ -26,7 +26,7 @@ function formatPrice(price) {
 
 function formatReview(product) {
   if (!product.reviewCount) return "レビュー件数は商品ページで確認";
-  const rating = product.rating ? ` / 評価${product.rating}` : "";
+  const rating = isValidRating(product.rating) ? ` / 評価${product.rating}` : "";
   return `レビュー${product.reviewCount.toLocaleString("ja-JP")}件${rating}`;
 }
 
