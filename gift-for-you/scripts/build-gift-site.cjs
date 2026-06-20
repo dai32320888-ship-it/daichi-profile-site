@@ -156,8 +156,12 @@ for (const article of articles) {
   article.isPillar = true;
 }
 
-function isGiftIndexable(slug) {
+function isGiftPillar(slug) {
   return PILLAR_SLUGS.has(slug);
+}
+
+function giftSitemapPriority(slug) {
+  return isGiftPillar(slug) ? "0.9" : "0.6";
 }
 
 const gearBlogUrl = "https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/";
@@ -287,7 +291,7 @@ function renderGiftFooter(topHref = "./") {
 
 function staticPillarLinksHtml() {
   return articles
-    .filter((a) => isGiftIndexable(a.slug))
+    .filter((a) => isGiftPillar(a.slug))
     .map(
       (article) => `<a class="article-link article-link--pillar" href="article/${article.slug}/">
       <h3>${esc(article.title)}</h3>
@@ -299,13 +303,17 @@ function staticPillarLinksHtml() {
 }
 
 function staticArticleLinksHtml() {
-  return articles
-    .filter((a) => isGiftIndexable(a.slug))
+  const sorted = [...articles].sort((a, b) => {
+    const aP = isGiftPillar(a.slug) ? 0 : 1;
+    const bP = isGiftPillar(b.slug) ? 0 : 1;
+    return aP - bP;
+  });
+  return sorted
     .map(
-      (article) => `<a class="article-link" href="article/${article.slug}/">
+      (article) => `<a class="article-link${isGiftPillar(article.slug) ? " article-link--pillar" : ""}" href="article/${article.slug}/">
       <h3>${esc(article.title)}</h3>
       <p>${esc(article.description)}</p>
-      <span>記事を読む</span>
+      <span>${isGiftPillar(article.slug) ? "柱記事" : "記事を読む"}</span>
     </a>`
     )
     .join("");
@@ -456,12 +464,12 @@ function articleHtml(article) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(article.title)}｜プレゼントふぉーゆー</title>
   <meta name="description" content="${esc(article.description)}">
-  ${seoHead({ title: article.title, description: article.description, url: pageUrl, type: "article", iconHref: "../../", robots: isGiftIndexable(article.slug) ? undefined : "noindex, follow" })}
+  ${seoHead({ title: article.title, description: article.description, url: pageUrl, type: "article", iconHref: "../../" })}
   <link rel="stylesheet" href="../../styles.css">
 </head>
 <body class="article-page" data-article="${article.slug}">
   <header class="site-header"><a class="brand" href="../../">プレゼントふぉーゆー</a><nav class="nav"><a href="../../#diagnosis">診断する</a><a href="../../#articles">記事</a><a href="../../#about">このサイトについて</a></nav></header>
-  <main class="section article-layout"><article class="article-body" id="articleContent" data-static="1">${staticArticleBody(article)}</article><aside class="side-links" id="sideLinks"><strong>柱記事</strong>${articles.filter((a) => isGiftIndexable(a.slug) && a.slug !== article.slug).map((a) => `<a href="../${a.slug}/">${esc(a.title)}</a>`).join("")}</aside></main>
+  <main class="section article-layout"><article class="article-body" id="articleContent" data-static="1">${staticArticleBody(article)}</article><aside class="side-links" id="sideLinks"><strong>関連記事</strong>${articles.filter((a) => a.slug !== article.slug).slice(0, 10).map((a) => `<a href="../${a.slug}/">${esc(a.title)}</a>`).join("")}</aside></main>
   ${renderGiftFooter("../../")}
   <script src="../../app.js"></script>
 </body>
@@ -587,8 +595,8 @@ function indexHtml() {
     <section id="articles" class="section soft">
       <div class="section-heading">
         <p class="breadcrumb">ホーム &gt; 記事一覧</p>
-        <h2>プレゼント選びの記事（SEO公開分）</h2>
-        <p>柱記事5本を中心に公開。その他の記事は順次厚文化予定です。</p>
+        <h2>プレゼント選びの記事（全${articles.length}本）</h2>
+        <p>柱記事5本を厚く書いています。ピンク枠がおすすめの入口です。</p>
       </div>
       <div class="article-grid" id="articleList" data-static="1">${staticArticleLinksHtml()}</div>
     </section>
@@ -616,12 +624,11 @@ function indexHtml() {
 }
 
 function sitemapXml() {
-  const indexableArticles = articles.filter((a) => isGiftIndexable(a.slug));
   const urls = [
     { loc: baseUrl, priority: "1.0", changefreq: "weekly" },
-    ...indexableArticles.map((article) => ({
+    ...articles.map((article) => ({
       loc: `${baseUrl}${articlePath(article.slug)}`,
-      priority: "0.9",
+      priority: giftSitemapPriority(article.slug),
       changefreq: "monthly"
     }))
   ];
@@ -642,10 +649,9 @@ function updateRootSitemap() {
   let xml = fs.readFileSync(rootSitemapPath, "utf8");
   xml = xml.replace(/\s*<url>\s*<loc>https:\/\/dai32320888-ship-it\.github\.io\/daichi-profile-site\/gift-for-you\/[\s\S]*?<\/url>/g, "");
   xml = xml.replace(/\s*<url>\s*<loc>https:\/\/dai32320888-ship-it\.github\.io\/daichi-profile-site\/gift-for-you\/article\/[\s\S]*?<\/url>/g, "");
-  const indexableArticles = articles.filter((a) => isGiftIndexable(a.slug));
   const entries = [
     { loc: baseUrl, priority: "0.9" },
-    ...indexableArticles.map((article) => ({ loc: `${baseUrl}${articlePath(article.slug)}`, priority: "0.8" }))
+    ...articles.map((article) => ({ loc: `${baseUrl}${articlePath(article.slug)}`, priority: giftSitemapPriority(article.slug) }))
   ].map((url) => `  <url>
     <loc>${url.loc}</loc>
     <lastmod>${lastMod}</lastmod>

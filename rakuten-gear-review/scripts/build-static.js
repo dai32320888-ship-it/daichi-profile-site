@@ -106,13 +106,25 @@ function isThinAutoArticleId(id) {
   return /^(auto-p\d+-|gap-)/.test(String(id || ""));
 }
 
-function isIndexableArticle(article) {
-  if (!article?.id || REDIRECT_ARTICLES[article.id]) return false;
-  if (article.indexable === false) return false;
-  if (article.indexable === true || PILLAR_ARTICLE_IDS.has(article.id) || BASE_ARTICLE_IDS.has(article.id)) {
-    return true;
-  }
-  return !isThinAutoArticleId(article.id);
+function isPublishedArticle(article) {
+  return Boolean(article?.id && !REDIRECT_ARTICLES[article.id] && article.indexable !== false);
+}
+
+/** sitemap / feed の優先度。表示件数には使わない */
+function articleSeoPriority(article) {
+  if (PILLAR_ARTICLE_IDS.has(article.id)) return "0.9";
+  if (BASE_ARTICLE_IDS.has(article.id) || article.indexable === true) return "0.8";
+  if (isThinAutoArticleId(article.id)) return "0.5";
+  return "0.7";
+}
+
+function sortArticlesForDisplay(list) {
+  return [...list].sort((a, b) => {
+    const aP = PILLAR_ARTICLE_IDS.has(a.id) ? 0 : 1;
+    const bP = PILLAR_ARTICLE_IDS.has(b.id) ? 0 : 1;
+    if (aP !== bP) return aP - bP;
+    return String(b.date || "").localeCompare(String(a.date || ""));
+  });
 }
 
 function getPillarEnhancement(articleId) {
@@ -835,7 +847,7 @@ function renderArticle(article) {
       description: metaDesc,
       canonical,
       ogImage: resolveArticleOgImage(article),
-      robots: isIndexableArticle(article) ? undefined : "noindex, follow",
+      robots: undefined,
       body,
       structuredData: {
         "@context": "https://schema.org",
@@ -889,16 +901,10 @@ function writeCategoryPages() {
   fs.mkdirSync(catDir, { recursive: true });
   const primaryIds = new Set(PRIMARY_PILLARS.map((p) => p.id));
   for (const cat of categories) {
-    const catArticles = [...articles]
-      .filter((a) => a.category === cat.id && !REDIRECT_ARTICLES[a.id])
-      .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
-    const pillarFirst = [...catArticles].sort((a, b) => {
-      const aP = PILLAR_ARTICLE_IDS.has(a.id) ? 0 : 1;
-      const bP = PILLAR_ARTICLE_IDS.has(b.id) ? 0 : 1;
-      if (aP !== bP) return aP - bP;
-      return String(b.date || "").localeCompare(String(a.date || ""));
-    });
-    const cards = pillarFirst.map((a) => renderArticleCardHtml(a, `../article/${a.id}/`)).join("");
+    const catArticles = sortArticlesForDisplay(
+      articles.filter((a) => a.category === cat.id && isPublishedArticle(a))
+    );
+    const cards = catArticles.map((a) => renderArticleCardHtml(a, `../article/${a.id}/`)).join("");
     const canonical = `${CANONICAL_BASE_URL}/category/${cat.id}.html`;
     const hubBanner = primaryIds.has(cat.id)
       ? `<div class="hub-banner"><p>おすすめ：<a href="../hub/${cat.id}.html">${esc(cat.name)}ガイド（柱記事まとめ）</a>から読むと迷いにくいです。</p></div>`
@@ -943,9 +949,9 @@ function writeHubPages() {
     const intro = HUB_INTROS[pillar.id] || {};
     const featuredArticles = (pillar.featuredArticleIds || []).map((id) => articleById(id)).filter(Boolean);
     const cards = featuredArticles.map((a) => renderArticleCardHtml(a, `../article/${a.id}/`)).join("");
-    const catArticles = articles
-      .filter((a) => a.category === pillar.id && isIndexableArticle(a))
-      .slice(0, 12)
+    const catArticleCards = sortArticlesForDisplay(
+      articles.filter((a) => a.category === pillar.id && isPublishedArticle(a))
+    )
       .map((a) => renderArticleCardHtml(a, `../article/${a.id}/`))
       .join("");
     const canonical = `${CANONICAL_BASE_URL}/hub/${pillar.id}.html`;
@@ -965,7 +971,7 @@ function writeHubPages() {
       </section>
       <section class="section">
         <div class="section-head"><h2>関連記事</h2></div>
-        <div class="article-grid">${catArticles || "<p>準備中です。</p>"}</div>
+        <div class="article-grid">${catArticleCards || "<p>準備中です。</p>"}</div>
       </section>
       <section class="section" id="profile">${renderStaticProfileBox()}</section>`;
     fs.writeFileSync(
@@ -996,21 +1002,19 @@ function writeHomeIndex() {
   const description =
     "元自衛官・だいちが、一人暮らし・防災・デスク周りの装備を実体験ベースで整理。楽天市場で失敗しにくい選び方と柱記事10本。";
 
-  const indexable = dedupeArticlesByTopic(
-    [...articles]
-      .filter((a) => !REDIRECT_ARTICLES[a.id] && isIndexableArticle(a))
-      .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
-  );
+  const published = sortArticlesForDisplay(articles.filter(isPublishedArticle));
+  const totalPublished = published.length;
   const pillarFeatured = (siteStrategy.pillarArticleIds || []).map((id) => articleById(id)).filter(Boolean);
   const featuredIds = new Set(pillarFeatured.map((a) => a.id));
-  const featured = [...pillarFeatured, ...indexable.filter((a) => !featuredIds.has(a.id)).slice(0, 6)].slice(0, 12);
+  const featured = [...pillarFeatured, ...published.filter((a) => !featuredIds.has(a.id)).slice(0, 6)].slice(0, 12);
   const articleCards = featured.map((a) => renderArticleCardHtml(a, `./article/${a.id}/`)).join("");
+  const latestCards = published.slice(0, 12).map((a) => renderArticleCardHtml(a, `./article/${a.id}/`)).join("");
 
   const secondaryCategories = categories.filter((cat) => !PRIMARY_PILLARS.some((p) => p.id === cat.id));
   const primaryCategoryCards = PRIMARY_PILLARS.map((pillar) => {
     const cat = categories.find((c) => c.id === pillar.id);
     if (!cat) return "";
-    const count = articles.filter((a) => a.category === cat.id && isIndexableArticle(a)).length;
+    const count = articles.filter((a) => a.category === cat.id && isPublishedArticle(a)).length;
     return `<a class="category-card category-button category-card--primary" href="./hub/${esc(pillar.id)}.html">
         <span>${esc(cat.name)}</span>
         <small>${esc(pillar.tagline)}</small>
@@ -1019,7 +1023,7 @@ function writeHomeIndex() {
   }).join("");
   const secondaryCategoryCards = secondaryCategories
     .map((cat) => {
-      const count = articles.filter((a) => a.category === cat.id && isIndexableArticle(a)).length;
+      const count = articles.filter((a) => a.category === cat.id && isPublishedArticle(a)).length;
       return `<a class="category-card category-button" href="./category/${esc(cat.id)}.html">
         <span>${esc(cat.name)}</span>
         <small>${esc(cat.description || "")}</small>
@@ -1028,7 +1032,7 @@ function writeHomeIndex() {
     })
     .join("");
 
-  const allArticleLinks = indexable
+  const allArticleLinks = dedupeArticlesByTopic(published)
     .map((a) => `<li><a href="./article/${esc(a.id)}/">${esc(a.title)}</a> <span class="article-meta">${esc(a.date || "")}</span></li>`)
     .join("");
 
@@ -1057,9 +1061,9 @@ function writeHomeIndex() {
           <strong>買う前に、用途・置き場所・使う頻度を見る。</strong>
           <p>生活導線に入るものだけが、本当に使える装備になります。</p>
           <div class="stats">
-            <div class="stat"><b>${indexable.length}</b><small>公開記事（SEO）</small></div>
+            <div class="stat"><b>${totalPublished}</b><small>レビュー記事</small></div>
             <div class="stat"><b>${pillarFeatured.length}</b><small>柱記事</small></div>
-            <div class="stat"><b>3</b><small>テーマ</small></div>
+            <div class="stat"><b>${categories.length}</b><small>カテゴリ</small></div>
           </div>
         </div>
       </div>
@@ -1086,10 +1090,18 @@ function writeHomeIndex() {
       <div class="article-grid">${articleCards}</div>
     </section>
 
+    <section class="section">
+      <div class="section-head">
+        <h2>新着記事</h2>
+        <p>全${totalPublished}記事から最新。カテゴリ一覧にもすべて掲載しています。</p>
+      </div>
+      <div class="article-grid">${latestCards}</div>
+    </section>
+
     <section class="section" aria-label="記事一覧（HTML）">
       <div class="section-head">
-        <h2>記事一覧（SEO公開分）</h2>
-        <p>検索エンジン向けに公開している記事のみ掲載しています。</p>
+        <h2>記事一覧</h2>
+        <p>GoogleがJavaScriptを実行できない場合でもクロールできるよう、HTMLのリンク一覧を併設しています。</p>
       </div>
       <ul class="plain-link-list">${allArticleLinks}</ul>
     </section>
@@ -1123,9 +1135,22 @@ function writeHomeIndex() {
 
 writeHomeIndex();
 
-const sitemapArticles = articles.filter((a) => !REDIRECT_ARTICLES[a.id] && isIndexableArticle(a));
+const sitemapArticles = articles.filter(isPublishedArticle);
 const hubUrls = PRIMARY_PILLARS.map((p) => `${SITEMAP_BASE_URL}/hub/${p.id}.html`);
 const categoryUrls = categories.map((cat) => `${SITEMAP_BASE_URL}/category/${cat.id}.html`);
+
+function sitemapPriorityForUrl(url) {
+  if (url.endsWith("/rakuten-gear-review/")) return "1.0";
+  if (url.includes("/hub/")) return "0.95";
+  if (url.includes("/category/")) return "0.85";
+  const m = url.match(/\/article\/([^/]+)\//);
+  if (m) {
+    const article = articleById(m[1]);
+    if (article) return articleSeoPriority(article);
+  }
+  return "0.8";
+}
+
 const urls = [
   `${SITEMAP_BASE_URL}/`,
   ...hubUrls,
@@ -1136,7 +1161,10 @@ const lastmod = new Date().toISOString().slice(0, 10);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
-  .map((url) => `  <url>\n    <loc>${url}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${url.endsWith("/rakuten-gear-review/") ? "1.0" : "0.8"}</priority>\n  </url>`)
+  .map(
+    (url) =>
+      `  <url>\n    <loc>${url}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${sitemapPriorityForUrl(url)}</priority>\n  </url>`
+  )
   .join("\n")}
 </urlset>
 `;
