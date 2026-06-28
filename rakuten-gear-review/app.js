@@ -207,7 +207,7 @@ const articles = [
     category: "life",
     date: "2026-05-03",
     readTime: "12分",
-    summary: "玄関、デスク、収納、キッチンまわりを整えて、毎日の小さなストレスを減らす装備を10つに絞って紹介します。",
+    summary: "玄関、デスク、収納、キッチンまわりを整えて、毎日の小さなストレスを減らす装備を10個に絞って紹介します。",
     hideProductCatalog: true,
     relatedArticleIds: ["heavy-household-online-stock", "dorm-solo-storage", "messy-room-cleanup-7"],
     introParagraphs: [
