@@ -5,7 +5,8 @@
   "scripts": {
     "repair": "node scripts/repair-static-site.cjs",
     "audit": "node scripts/audit-static-site.cjs",
-    "build": "npm run repair && npm run audit",
+    "audit:images": "node scripts/audit-image-assets.cjs",
+    "build": "npm run repair && npm run audit && npm run audit:images",
     "dev": "node server.js"
   }
 }

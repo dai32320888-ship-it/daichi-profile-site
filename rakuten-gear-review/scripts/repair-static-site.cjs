@@ -4,7 +4,10 @@ const path = require("path");
 const root = path.resolve(__dirname, "..");
 const articleRoot = path.join(root, "article");
 const indexPath = path.join(root, "index.html");
+const fallbackImagePath = path.join(root, "images", "og-default.png");
 const textExtensions = new Set([".html", ".js", ".json", ".xml", ".md"]);
+const IMAGE_FALLBACK_ONERROR =
+  "this.onerror=null;this.src=this.dataset.fallback||'./images/og-default.png';this.classList.add('image-fallback');";
 
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -85,6 +88,42 @@ function fixSiteCopy() {
   return changed;
 }
 
+function relativeFallbackFor(file) {
+  return path.relative(path.dirname(file), fallbackImagePath).replace(/\\/g, "/");
+}
+
+function withImageFallbackAttributes(tag, fallbackUrl) {
+  let next = tag;
+  const escapedFallback = escapeHtml(fallbackUrl);
+  if (!/\sdata-fallback=/.test(next)) {
+    next = next.replace(/\s*\/?>$/, ` data-fallback="${escapedFallback}"$&`);
+  }
+  if (/\sonerror=/.test(next)) {
+    next = next.replace(/\sonerror="[^"]*"/, ` onerror="${IMAGE_FALLBACK_ONERROR}"`);
+  } else {
+    next = next.replace(/\s*\/?>$/, ` onerror="${IMAGE_FALLBACK_ONERROR}"$&`);
+  }
+  return next;
+}
+
+function fixImageFallbacks() {
+  const changed = [];
+  const files = walk(root).filter((file) => path.extname(file) === ".html");
+  for (const file of files) {
+    const fallbackUrl = relativeFallbackFor(file);
+    const html = read(file);
+    const next = html.replace(/<img\b[^>]*>/g, (tag, offset) => {
+      const context = html.slice(Math.max(0, offset - 700), offset);
+      const isContentImage =
+        /class="[^"]*\barticle-thumb\b[^"]*"/.test(context) ||
+        /class="[^"]*\bproduct-media\b[^"]*"/.test(context);
+      return isContentImage ? withImageFallbackAttributes(tag, fallbackUrl) : tag;
+    });
+    if (writeIfChanged(file, next)) changed.push(path.relative(root, file));
+  }
+  return changed;
+}
+
 function parseArticle(dirName) {
   const file = path.join(articleRoot, dirName, "index.html");
   const html = read(file);
@@ -106,7 +145,7 @@ function renderArticleCard(article) {
   const pickLabel = article.pickCount > 0 ? `${article.pickCount}ピック` : "レビュー";
   return `<article class="article-card">
       <a class="article-thumb article-thumb--photo" href="${escapeHtml(href)}">
-        <img src="${escapeHtml(article.ogImage)}" alt="${escapeHtml(`${article.title}（${article.category}）`)}" width="640" height="360" loading="lazy" decoding="async" onerror="this.onerror=null;var p=this.closest('.article-thumb');this.remove();if(p)p.classList.remove('article-thumb--photo');" />
+        <img src="${escapeHtml(article.ogImage)}" alt="${escapeHtml(`${article.title}（${article.category}）`)}" width="640" height="360" loading="lazy" decoding="async" data-fallback="./images/og-default.png" onerror="${IMAGE_FALLBACK_ONERROR}" />
         <span class="article-thumb__meta">
           <span>${escapeHtml(article.category)}</span>
           <strong>${escapeHtml(pickLabel)}</strong>
@@ -178,6 +217,7 @@ function repairHomeLatestSection() {
 }
 
 const copyFiles = fixSiteCopy();
+const imageFallbackFiles = fixImageFallbacks();
 const latest = repairHomeLatestSection();
 
-console.log(JSON.stringify({ copyFiles, latest }, null, 2));
+console.log(JSON.stringify({ copyFiles, imageFallbackFiles, latest }, null, 2));

@@ -3393,7 +3393,7 @@ function renderCategoryButton(category) {
 }
 
 const ARTICLE_THUMB_ONERROR =
-  "this.onerror=null;var p=this.closest('.article-thumb');this.remove();if(p)p.classList.remove('article-thumb--photo');";
+  "this.onerror=null;this.src=this.dataset.fallback||'images/og-default.png';this.classList.add('image-fallback');";
 
 function renderArticleCard(article, options = {}) {
   const category = getCategory(article.category);
@@ -3403,7 +3403,7 @@ function renderArticleCard(article, options = {}) {
   const thumbClass = thumbUrl ? "article-thumb article-thumb--photo" : "article-thumb";
   const altText = `${article.title}（${category.name}）`;
   const thumbImg = thumbUrl
-    ? `<img src="${escapeHtml(thumbUrl)}" alt="${escapeHtml(altText)}" width="640" height="360" loading="lazy" decoding="async" onerror="${ARTICLE_THUMB_ONERROR}" />`
+    ? `<img src="${escapeHtml(thumbUrl)}" alt="${escapeHtml(altText)}" width="640" height="360" loading="lazy" decoding="async" data-fallback="images/og-default.png" onerror="${ARTICLE_THUMB_ONERROR}" />`
     : "";
 
   return `
@@ -3436,7 +3436,7 @@ function renderProductCard(product) {
   return `
     <article class="product-card">
       <a class="product-media" ${productUrl ? `href="${productUrl}" target="_blank" rel="nofollow sponsored noopener noreferrer"` : ""} aria-label="${product.name}">
-        <img src="${imageUrl}" alt="${product.name}" loading="lazy" />
+        <img src="${imageUrl}" alt="${product.name}" loading="lazy" decoding="async" data-fallback="images/og-default.png" onerror="${ARTICLE_THUMB_ONERROR}" />
       </a>
       <div class="product-content">
         <div class="product-category">${category.name}</div>

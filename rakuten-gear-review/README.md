@@ -25,11 +25,12 @@ https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/
 ```powershell
 npm run repair
 npm run audit
+npm run audit:images
 npm run build
 npm run dev
 ```
 
-`npm run build` は `repair` と `audit` を順に実行します。記事を追加・修正した後は、このコマンドでトップページの新着順、記事数、サイト内リンク、canonical、OGP、JSON-LD、PR表記を確認してください。
+`npm run build` は `repair`、`audit`、`audit:images` を順に実行します。記事を追加・修正した後は、このコマンドでトップページの新着順、記事数、サイト内リンク、canonical、OGP、JSON-LD、PR表記、画像フォールバックを確認してください。
 
 ローカル確認:
 
@@ -50,6 +51,7 @@ http://127.0.0.1:5173/
 - canonical / OGP / JSON-LD が壊れていない
 - `sitemap.xml` と `feed.xml` が更新されている
 - ローカルリンク切れがない
+- 記事カード・商品カードの画像に `data-fallback` と `onerror` が入っている
 
 ## 注意
 
