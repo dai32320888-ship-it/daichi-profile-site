@@ -2600,6 +2600,49 @@ const articles = [
   }
 ];
 
+const EXTRA_ARTICLES_PATH = "data/extra-articles.json";
+const REDIRECT_ARTICLE_IDS = new Set(["auto-p004-防災-リュック-コンパクト"]);
+
+let extraArticlesLoaded = false;
+
+function mergeExtraArticles(extraArticles) {
+  if (!Array.isArray(extraArticles)) return 0;
+  const seen = new Set(articles.map((article) => article.id));
+  let added = 0;
+  for (const article of extraArticles) {
+    if (!article || !article.id || seen.has(article.id)) continue;
+    articles.push(article);
+    seen.add(article.id);
+    added += 1;
+  }
+  return added;
+}
+
+async function loadExtraArticles() {
+  if (extraArticlesLoaded || typeof fetch !== "function") return 0;
+  extraArticlesLoaded = true;
+  try {
+    const response = await fetch(`${EXTRA_ARTICLES_PATH}?v=20260628`, { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return mergeExtraArticles(await response.json());
+  } catch (error) {
+    console.warn("[rakuten-gear-review] extra article data could not be loaded", error);
+    return 0;
+  }
+}
+
+function visibleArticleCount() {
+  return displayArticles().length;
+}
+
+function displayArticles() {
+  return articles.filter((article) => !REDIRECT_ARTICLE_IDS.has(article.id));
+}
+
+function initApp() {
+  loadExtraArticles().finally(renderRoute);
+}
+
 const app = document.querySelector("#app");
 const menuButton = document.querySelector("#menuButton");
 const siteNav = document.querySelector("#siteNav");
@@ -2614,7 +2657,7 @@ siteNav?.addEventListener("click", () => {
 
 if (app) {
   window.addEventListener("hashchange", renderRoute);
-  window.addEventListener("DOMContentLoaded", renderRoute);
+  window.addEventListener("DOMContentLoaded", initApp);
 }
 
 function getCategory(id) {
@@ -3116,7 +3159,7 @@ function renderHome() {
           <strong>買う前に、用途・置き場所・使う頻度を見る。</strong>
           <p>生活導線に入るものだけが、本当に使える装備になります。</p>
           <div class="stats">
-            <div class="stat"><b>${articles.length}</b><small>レビュー記事</small></div>
+            <div class="stat"><b>${visibleArticleCount()}</b><small>レビュー記事</small></div>
             <div class="stat"><b>${products.length}</b><small>商品カード</small></div>
             <div class="stat"><b>${categories.length}</b><small>カテゴリ</small></div>
           </div>
@@ -3145,7 +3188,7 @@ function renderHome() {
         <a class="button secondary button--inline-sm" href="#/articles">記事一覧へ</a>
       </div>
       <div class="article-grid">
-        ${dedupeArticlesByTopic(sortArticlesNewestFirst(articles)).slice(0, 6).map(renderArticleCard).join("")}
+        ${sortArticlesNewestFirst(displayArticles()).slice(0, 6).map(renderArticleCard).join("")}
       </div>
     </section>
     <section class="section">
@@ -3166,7 +3209,7 @@ function renderHome() {
 function renderArticleList({ categoryId = "", query = "" } = {}) {
   const normalized = query.trim().toLowerCase();
   const category = getCategory(categoryId);
-  const filteredArticles = articles.filter((article) => {
+  const filteredArticles = displayArticles().filter((article) => {
     const matchesCategory = categoryId ? article.category === categoryId : true;
     const categoryName = getCategory(article.category)?.name || "";
     const haystack = `${article.title} ${article.summary} ${categoryName}`.toLowerCase();

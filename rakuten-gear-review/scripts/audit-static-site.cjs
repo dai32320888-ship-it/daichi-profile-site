@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const articleRoot = path.join(root, "article");
@@ -67,12 +68,66 @@ function auditLocalLinks() {
   return { files: files.length, bad };
 }
 
+function auditAppData() {
+  const appSource = read(path.join(root, "app.js"));
+  const sandbox = {
+    console: { log() {}, warn() {}, error() {} },
+    window: { addEventListener() {}, location: { hash: "" }, scrollTo() {} },
+    document: {
+      querySelector() {
+        return {
+          addEventListener() {},
+          focus() {},
+          classList: { toggle() {}, remove() {} }
+        };
+      }
+    },
+    URLSearchParams,
+    encodeURIComponent,
+    String
+  };
+  vm.createContext(sandbox);
+  vm.runInContext(
+    `${appSource}
+this.__AUDIT__ = { articles, mergeExtraArticles, displayArticles, visibleArticleCount };`,
+    sandbox
+  );
+
+  const extra = JSON.parse(read(path.join(root, "data", "extra-articles.json")));
+  const baseCount = sandbox.__AUDIT__.articles.length;
+  const added = sandbox.__AUDIT__.mergeExtraArticles(extra);
+  return {
+    baseArticles: baseCount,
+    extraArticles: extra.length,
+    addedFromExtra: added,
+    mergedArticles: sandbox.__AUDIT__.articles.length,
+    displayArticles: sandbox.__AUDIT__.displayArticles().length,
+    visibleArticles: sandbox.__AUDIT__.visibleArticleCount()
+  };
+}
+
+function auditAffiliateDisclosure() {
+  const missing = [];
+  const files = walk(articleRoot, (file) => file.endsWith("index.html"));
+  for (const file of files) {
+    const html = read(file);
+    if (html.includes('http-equiv="refresh"')) continue;
+    const rel = path.relative(root, file);
+    if (!html.includes('class="ad-notice"') || !html.includes('class="article-disclosure"')) {
+      missing.push(rel);
+    }
+  }
+  return { checked: files.length, missing };
+}
+
 const latestDates = extractLatestDates();
 const sitemap = read(path.join(root, "sitemap.xml"));
 const feed = read(path.join(root, "feed.xml"));
 const articleDirs = fs.readdirSync(articleRoot, { withFileTypes: true }).filter((entry) => entry.isDirectory()).length;
 const metadata = auditMetadata();
 const links = auditLocalLinks();
+const appData = auditAppData();
+const affiliateDisclosure = auditAffiliateDisclosure();
 
 const report = {
   articleDirs,
@@ -81,12 +136,20 @@ const report = {
   sitemapUrls: [...sitemap.matchAll(/<loc>/g)].length,
   sitemapUniqueUrls: new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])).size,
   feedItems: [...feed.matchAll(/<item>/g)].length,
+  appData,
+  affiliateDisclosure,
   metadata,
   links
 };
 
 console.log(JSON.stringify(report, null, 2));
 
-if (!report.latestDatesNewestFirst || metadata.issues.length || links.bad.length) {
+if (
+  !report.latestDatesNewestFirst ||
+  metadata.issues.length ||
+  links.bad.length ||
+  appData.visibleArticles !== 203 ||
+  affiliateDisclosure.missing.length
+) {
   process.exitCode = 1;
 }

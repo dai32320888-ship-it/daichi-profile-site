@@ -46,7 +46,9 @@ function fixJapaneseCounters() {
   const changed = [];
   for (const file of walk(root)) {
     const current = read(file);
-    const next = current.replaceAll("10つ", "10個");
+    const next = current
+      .replaceAll("10つ", "10個")
+      .replace(/元自衛官目線で選ぶ「([^」]+)」：楽天で失敗しにくい選び方/g, "「$1」楽天で失敗しにくい選び方｜元自衛官の確認メモ");
     if (writeIfChanged(file, next)) changed.push(path.relative(root, file));
   }
   return changed;

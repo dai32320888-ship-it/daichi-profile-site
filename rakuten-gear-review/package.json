@@ -1,0 +1,11 @@
+{
+  "name": "rakuten-gear-review-blog",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "repair": "node scripts/repair-static-site.cjs",
+    "audit": "node scripts/audit-static-site.cjs",
+    "build": "npm run repair && npm run audit",
+    "dev": "node server.js"
+  }
+}
