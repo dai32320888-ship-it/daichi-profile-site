@@ -42,13 +42,36 @@ function stripTags(value) {
   return value.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 }
 
-function fixJapaneseCounters() {
+const REDIRECT_ARTICLE_IDS = new Set(["auto-p004-防災-リュック-コンパクト"]);
+
+function applyCopyFixes(text) {
+  return text
+    .replaceAll("10つ", "10個")
+    .replace(/元自衛官目線で選ぶ「([^」]+)」：楽天で失敗しにくい選び方/g, "「$1」楽天で失敗しにくい選び方｜元自衛官の確認メモ")
+    .replaceAll(
+      "この記事では楽天市場の候補3つを、価格帯・口コミ・使用例つきで比較しました。気になったものはリンク先で最新価格と在庫を確認してください。",
+      "楽天市場で候補3件を、価格帯・口コミ・使いどころ付きで比較しました。気になるものはリンク先で最新価格と在庫を確認してください。"
+    )
+    .replace(
+      /([^。\n]+?)は3つ全部いらない。コスパ重視→バランス型→こだわり派の順で、自分の使用頻度に合う1つを選ぶのが続きやすいです。/g,
+      "$1は3候補すべて必要なわけではありません。コスパ重視・バランス型・こだわり派の順で、いちばん困っている場面に効く1つから選ぶと続きやすいです。"
+    )
+    .replaceAll("を買う前に決める3つのこと", "を選ぶ前に押さえる3点")
+    .replaceAll("今回ピックアップする3つ", "今回ピックアップする3点")
+    .replaceAll("コスパ重視→バランス型→こだわり派", "コスパ重視・バランス型・こだわり派")
+    .replaceAll("最初の7つから整える", "最初の7選から整える")
+    .replaceAll("7つに絞", "7選に絞")
+    .replaceAll("7つにし", "7点にし")
+    .replaceAll("効く7つ", "効く7選")
+    .replaceAll("回る7つ", "回る7選")
+    .replaceAll("土台を7つ", "土台を7点");
+}
+
+function fixSiteCopy() {
   const changed = [];
   for (const file of walk(root)) {
     const current = read(file);
-    const next = current
-      .replaceAll("10つ", "10個")
-      .replace(/元自衛官目線で選ぶ「([^」]+)」：楽天で失敗しにくい選び方/g, "「$1」楽天で失敗しにくい選び方｜元自衛官の確認メモ");
+    const next = applyCopyFixes(current);
     if (writeIfChanged(file, next)) changed.push(path.relative(root, file));
   }
   return changed;
@@ -91,9 +114,14 @@ function renderArticleCard(article) {
 function repairHomeLatestSection() {
   const articles = fs
     .readdirSync(articleRoot, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(articleRoot, entry.name, "index.html")))
+    .filter(
+      (entry) =>
+        entry.isDirectory() &&
+        !REDIRECT_ARTICLE_IDS.has(entry.name) &&
+        fs.existsSync(path.join(articleRoot, entry.name, "index.html"))
+    )
     .map((entry) => parseArticle(entry.name))
-    .filter((article) => article.title && article.summary && article.ogImage);
+    .filter((article) => article.title && article.summary && article.ogImage && !/http-equiv="refresh"/i.test(read(path.join(articleRoot, article.id, "index.html"))));
 
   articles.sort((a, b) => {
     const byDate = b.date.localeCompare(a.date);
@@ -124,7 +152,7 @@ function repairHomeLatestSection() {
   return { changed, articleCount: articles.length, latest: articles.slice(0, 12).map((a) => `${a.date} ${a.id}`) };
 }
 
-const counterFiles = fixJapaneseCounters();
+const copyFiles = fixSiteCopy();
 const latest = repairHomeLatestSection();
 
-console.log(JSON.stringify({ counterFiles, latest }, null, 2));
+console.log(JSON.stringify({ copyFiles, latest }, null, 2));
