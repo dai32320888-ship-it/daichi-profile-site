@@ -27,7 +27,7 @@ function parseEntries(xml) {
   return entries;
 }
 
-function mergeRootSitemap() {
+function buildMergedUrls() {
   const rakuten = parseEntries(read(RAKUTEN_SITEMAP));
   const gift = parseEntries(read(GIFT_SITEMAP));
   const byLoc = new Map();
@@ -43,7 +43,33 @@ function mergeRootSitemap() {
     byLoc.set(entry.loc, entry);
   }
 
-  const urls = [...byLoc.values()];
+  return { urls: [...byLoc.values()], rakutenCount: rakuten.length, giftCount: gift.length };
+}
+
+function checkRootSitemap() {
+  const { urls, rakutenCount, giftCount } = buildMergedUrls();
+  const root = parseEntries(read(ROOT_SITEMAP));
+  const expectedLocs = new Set(urls.map((url) => url.loc));
+  const rootLocs = root.map((url) => url.loc);
+  const rootSet = new Set(rootLocs);
+  const missingInRoot = [...expectedLocs].filter((loc) => !rootSet.has(loc));
+  const staleInRoot = rootLocs.filter((loc) => !expectedLocs.has(loc));
+  const countDiff = Math.abs(root.length - urls.length);
+
+  return {
+    rakutenCount,
+    giftCount,
+    rootCount: root.length,
+    expectedCount: urls.length,
+    countDiff,
+    match: countDiff === 0 && missingInRoot.length === 0 && staleInRoot.length === 0,
+    missingInRoot: missingInRoot.slice(0, 20),
+    staleInRoot: staleInRoot.slice(0, 20),
+  };
+}
+
+function mergeRootSitemap() {
+  const { urls, rakutenCount, giftCount } = buildMergedUrls();
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
@@ -60,11 +86,17 @@ ${urls
 `;
 
   fs.writeFileSync(ROOT_SITEMAP, xml, "utf8");
-  return { urlCount: urls.length, rakutenCount: rakuten.length, giftCount: gift.length };
+  return { urlCount: urls.length, rakutenCount, giftCount };
 }
 
 if (require.main === module) {
-  console.log(JSON.stringify(mergeRootSitemap(), null, 2));
+  if (process.argv.includes("--check")) {
+    const result = checkRootSitemap();
+    console.log(JSON.stringify(result, null, 2));
+    if (!result.match) process.exitCode = 1;
+  } else {
+    console.log(JSON.stringify(mergeRootSitemap(), null, 2));
+  }
 }
 
-module.exports = { mergeRootSitemap, parseEntries };
+module.exports = { mergeRootSitemap, parseEntries, checkRootSitemap, buildMergedUrls };
