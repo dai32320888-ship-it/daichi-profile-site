@@ -474,10 +474,7 @@ h3 {
   padding: 0;
   align-items: stretch;
   justify-content: stretch;
-  background:
-    linear-gradient(160deg, rgba(16, 18, 20, 0.08), rgba(16, 18, 20, 0.38)),
-    url("./images/og-default.png") center / cover no-repeat,
-    var(--surface-soft);
+  background: var(--surface-soft);
   /* 隕ｪ縺ｮ蟷・↓蜷医ｏ縺帙※譫繧貞崋螳夲ｼ育ｵｶ蟇ｾ驟咲ｽｮ縺ｮ逕ｻ蜒上□縺代〒縺ｯ鬮倥＆縺御ｸ榊ｮ牙ｮ壹↓縺ｪ繧翫√き繝ｼ繝蛾俣縺ｧ縺壹ｌ繧・☆縺・ｼ・*/
   aspect-ratio: 16 / 9;
   min-height: 0;
@@ -589,10 +586,7 @@ h3 {
   height: 218px;
   place-items: center;
   border-bottom: 1px solid var(--line);
-  background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.72), rgba(244, 244, 242, 0.88)),
-    url("./images/og-default.png") center / cover no-repeat,
-    var(--surface-soft);
+  background: var(--surface-soft);
   overflow: hidden;
   transition: background 0.18s ease, box-shadow 0.18s ease;
 }

@@ -207,7 +207,7 @@ const articles = [
     category: "life",
     date: "2026-05-03",
     readTime: "12分",
-    summary: "玄関、デスク、収納、キッチンまわりを整えて、毎日の小さなストレスを減らす装備を10個に絞って紹介します。",
+    summary: "玄関、デスク、収納、キッチンまわりを整えて、毎日の小さなストレスを減らす装備を10つに絞って紹介します。",
     hideProductCatalog: true,
     relatedArticleIds: ["heavy-household-online-stock", "dorm-solo-storage", "messy-room-cleanup-7"],
     introParagraphs: [
@@ -631,11 +631,11 @@ const articles = [
     "category": "solo",
     "date": "2026-05-04",
     "readTime": "9分",
-    "summary": "狭い部屋でも「探す・散らかす・眠れない」を減らす、地味に効く装備を7選に絞って紹介します。",
+    "summary": "狭い部屋でも「探す・散らかす・眠れない」を減らす、地味に効く装備を7つに絞って紹介します。",
     "productIds": [],
     "introParagraphs": [
       "寮生活は、派手なインテリアより先に「生活導線」が崩れます。床に物が落ちる、鍵が見つからない、充電が足りない。こういう小さな詰まりが積み上がると、気分まで荒れます。",
-      "元自衛官目線だと、装備選びはシンプルです。置けるか、続けられるか、壊れにくいか。今回はその三つが揃いやすいものだけを7点にしました。"
+      "元自衛官目線だと、装備選びはシンプルです。置けるか、続けられるか、壊れにくいか。今回はその三つが揃いやすいものだけを7つにしました。"
     ],
     "forAudience": [
       "単身赴任・入隊・学生寮など、狭い部屋で生活している男向け",
@@ -963,7 +963,7 @@ const articles = [
     "category": "bike",
     "date": "2026-05-04",
     "readTime": "9分",
-    "summary": "大型装備より先に効く、携帯しやすい安心小物を7選に絞りました。",
+    "summary": "大型装備より先に効く、携帯しやすい安心小物を7つに絞りました。",
     "productIds": [],
     "introParagraphs": [
       "バイクは荷重制限がきついので、持ち歩くほど「軽くて効く」ものが強いです。ツーリング中に困るのは、だいたい雨・冷え・電源・小さな故障のどれかです。",
@@ -1126,7 +1126,7 @@ const articles = [
     "category": "pc-ai",
     "date": "2026-05-04",
     "readTime": "9分",
-    "summary": "ケーブルと小物と紙。男のデスクはここから崩れるので、先に止める道具を7点にしました。",
+    "summary": "ケーブルと小物と紙。男のデスクはここから崩れるので、先に止める道具を7つにしました。",
     "productIds": [],
     "introParagraphs": [
       "デスクは作業の拠点です。散らかる原因はだいたい同じで、配線、文房具、紙、充電、飲み物です。",
@@ -1288,7 +1288,7 @@ const articles = [
     "category": "life",
     "date": "2026-05-04",
     "readTime": "9分",
-    "summary": "気合いより仕組み。続く人はハードルを下げています。地味に効く7選です。",
+    "summary": "気合いより仕組み。続く人はハードルを下げています。地味に効く7つです。",
     "productIds": [],
     "introParagraphs": [
       "片付けが続かないのは性格じゃなくて設計の問題であることが多いです。面倒な工程が一つでもあると、疲れた日に破綻します。",
@@ -1457,7 +1457,7 @@ const articles = [
     "category": "disaster",
     "date": "2026-05-04",
     "readTime": "10分",
-    "summary": "派手な備蓄より先に、生活が止まらないための土台を7選に絞りました。",
+    "summary": "派手な備蓄より先に、生活が止まらないための土台を7つに絞りました。",
     "productIds": [],
     "introParagraphs": [
       "防災は「買って終わり」になりやすいですが、現場は運用です。暗い・喉が渇く・トイレ・連絡が詰まると判断力が落ちます。",
@@ -1786,7 +1786,7 @@ const articles = [
     "category": "solo",
     "date": "2026-05-04",
     "readTime": "10分",
-    "summary": "インテリアより先に「生活が止まらないセット」。ガサツでも回る7選に絞りました。",
+    "summary": "インテリアより先に「生活が止まらないセット」。ガサツでも回る7つに絞りました。",
     "productIds": [],
     "introParagraphs": [
       "一人暮らし初日に困るのは、だいたいゴミ袋・トイレットペーパー・照明・寝具・掃除道具のどれかです。",
@@ -2244,7 +2244,7 @@ const articles = [
     "category": "life",
     "date": "2026-05-04",
     "readTime": "9分",
-    "summary": "荷物は減らすほど移動がラクになる。出張と旅行の両方に効く7選です。",
+    "summary": "荷物は減らすほど移動がラクになる。出張と旅行の両方に効く7つです。",
     "productIds": [],
     "introParagraphs": [
       "出張は「荷物が増えるほど判断が鈍る」タイプの負荷が乗ります。旅行も同じで、持ち歩く重量はできるだけ減らしたいです。",
@@ -2600,49 +2600,6 @@ const articles = [
   }
 ];
 
-const EXTRA_ARTICLES_PATH = "data/extra-articles.json";
-const REDIRECT_ARTICLE_IDS = new Set(["auto-p004-防災-リュック-コンパクト"]);
-
-let extraArticlesLoaded = false;
-
-function mergeExtraArticles(extraArticles) {
-  if (!Array.isArray(extraArticles)) return 0;
-  const seen = new Set(articles.map((article) => article.id));
-  let added = 0;
-  for (const article of extraArticles) {
-    if (!article || !article.id || seen.has(article.id)) continue;
-    articles.push(article);
-    seen.add(article.id);
-    added += 1;
-  }
-  return added;
-}
-
-async function loadExtraArticles() {
-  if (extraArticlesLoaded || typeof fetch !== "function") return 0;
-  extraArticlesLoaded = true;
-  try {
-    const response = await fetch(`${EXTRA_ARTICLES_PATH}?v=20260628`, { cache: "no-store" });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return mergeExtraArticles(await response.json());
-  } catch (error) {
-    console.warn("[rakuten-gear-review] extra article data could not be loaded", error);
-    return 0;
-  }
-}
-
-function visibleArticleCount() {
-  return displayArticles().length;
-}
-
-function displayArticles() {
-  return articles.filter((article) => !REDIRECT_ARTICLE_IDS.has(article.id));
-}
-
-function initApp() {
-  loadExtraArticles().finally(renderRoute);
-}
-
 const app = document.querySelector("#app");
 const menuButton = document.querySelector("#menuButton");
 const siteNav = document.querySelector("#siteNav");
@@ -2657,7 +2614,7 @@ siteNav?.addEventListener("click", () => {
 
 if (app) {
   window.addEventListener("hashchange", renderRoute);
-  window.addEventListener("DOMContentLoaded", initApp);
+  window.addEventListener("DOMContentLoaded", renderRoute);
 }
 
 function getCategory(id) {
@@ -3159,7 +3116,7 @@ function renderHome() {
           <strong>買う前に、用途・置き場所・使う頻度を見る。</strong>
           <p>生活導線に入るものだけが、本当に使える装備になります。</p>
           <div class="stats">
-            <div class="stat"><b>${visibleArticleCount()}</b><small>レビュー記事</small></div>
+            <div class="stat"><b>${articles.length}</b><small>レビュー記事</small></div>
             <div class="stat"><b>${products.length}</b><small>商品カード</small></div>
             <div class="stat"><b>${categories.length}</b><small>カテゴリ</small></div>
           </div>
@@ -3188,7 +3145,7 @@ function renderHome() {
         <a class="button secondary button--inline-sm" href="#/articles">記事一覧へ</a>
       </div>
       <div class="article-grid">
-        ${sortArticlesNewestFirst(displayArticles()).slice(0, 6).map(renderArticleCard).join("")}
+        ${dedupeArticlesByTopic(sortArticlesNewestFirst(articles)).slice(0, 6).map(renderArticleCard).join("")}
       </div>
     </section>
     <section class="section">
@@ -3209,7 +3166,7 @@ function renderHome() {
 function renderArticleList({ categoryId = "", query = "" } = {}) {
   const normalized = query.trim().toLowerCase();
   const category = getCategory(categoryId);
-  const filteredArticles = displayArticles().filter((article) => {
+  const filteredArticles = articles.filter((article) => {
     const matchesCategory = categoryId ? article.category === categoryId : true;
     const categoryName = getCategory(article.category)?.name || "";
     const haystack = `${article.title} ${article.summary} ${categoryName}`.toLowerCase();
@@ -3393,7 +3350,7 @@ function renderCategoryButton(category) {
 }
 
 const ARTICLE_THUMB_ONERROR =
-  "this.onerror=null;this.src=this.dataset.fallback||'images/og-default.png';this.classList.add('image-fallback');";
+  "this.onerror=null;var p=this.closest('.article-thumb');this.remove();if(p)p.classList.remove('article-thumb--photo');";
 
 function renderArticleCard(article, options = {}) {
   const category = getCategory(article.category);
@@ -3403,7 +3360,7 @@ function renderArticleCard(article, options = {}) {
   const thumbClass = thumbUrl ? "article-thumb article-thumb--photo" : "article-thumb";
   const altText = `${article.title}（${category.name}）`;
   const thumbImg = thumbUrl
-    ? `<img src="${escapeHtml(thumbUrl)}" alt="${escapeHtml(altText)}" width="640" height="360" loading="lazy" decoding="async" data-fallback="images/og-default.png" onerror="${ARTICLE_THUMB_ONERROR}" />`
+    ? `<img src="${escapeHtml(thumbUrl)}" alt="${escapeHtml(altText)}" width="640" height="360" loading="lazy" decoding="async" onerror="${ARTICLE_THUMB_ONERROR}" />`
     : "";
 
   return `
@@ -3436,7 +3393,7 @@ function renderProductCard(product) {
   return `
     <article class="product-card">
       <a class="product-media" ${productUrl ? `href="${productUrl}" target="_blank" rel="nofollow sponsored noopener noreferrer"` : ""} aria-label="${product.name}">
-        <img src="${imageUrl}" alt="${product.name}" loading="lazy" decoding="async" data-fallback="images/og-default.png" onerror="${ARTICLE_THUMB_ONERROR}" />
+        <img src="${imageUrl}" alt="${product.name}" loading="lazy" />
       </a>
       <div class="product-content">
         <div class="product-category">${category.name}</div>
