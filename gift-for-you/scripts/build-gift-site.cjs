@@ -352,7 +352,7 @@ function renderProducts(items, container) {
       </div>
       <div class="card-actions">
         <a class="button shop" href="\${item.rakutenUrl}" rel="nofollow sponsored">楽天で見る</a>
-        \${item.a8Url && item.a8Url !== "#" ? \`<a class="button shop" href="\${item.a8Url}" rel="nofollow sponsored">A8で見る</a>\` : ""}
+        \${item.a8Url && item.a8Url !== "#" ? \`<a class="button shop" href="\${item.a8Url}" rel="nofollow sponsored">提携ショップで見る</a>\` : ""}
         <a class="button detail" href="\${detailHref(item.detailUrl)}">詳しく見る</a>
       </div>
     </article>

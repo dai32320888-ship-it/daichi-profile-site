@@ -207,7 +207,7 @@ const articles = [
     category: "life",
     date: "2026-05-03",
     readTime: "12分",
-    summary: "玄関、デスク、収納、キッチンまわりを整えて、毎日の小さなストレスを減らす装備を10つに絞って紹介します。",
+    summary: "玄関、デスク、収納、キッチンまわりを整えて、毎日の小さなストレスを減らす装備を10個に絞って紹介します。",
     hideProductCatalog: true,
     relatedArticleIds: ["heavy-household-online-stock", "dorm-solo-storage", "messy-room-cleanup-7"],
     introParagraphs: [
@@ -631,11 +631,11 @@ const articles = [
     "category": "solo",
     "date": "2026-05-04",
     "readTime": "9分",
-    "summary": "狭い部屋でも「探す・散らかす・眠れない」を減らす、地味に効く装備を7つに絞って紹介します。",
+    "summary": "狭い部屋でも「探す・散らかす・眠れない」を減らす、地味に効く装備を7選に絞って紹介します。",
     "productIds": [],
     "introParagraphs": [
       "寮生活は、派手なインテリアより先に「生活導線」が崩れます。床に物が落ちる、鍵が見つからない、充電が足りない。こういう小さな詰まりが積み上がると、気分まで荒れます。",
-      "元自衛官目線だと、装備選びはシンプルです。置けるか、続けられるか、壊れにくいか。今回はその三つが揃いやすいものだけを7つにしました。"
+      "元自衛官目線だと、装備選びはシンプルです。置けるか、続けられるか、壊れにくいか。今回はその三つが揃いやすいものだけを7点にしました。"
     ],
     "forAudience": [
       "単身赴任・入隊・学生寮など、狭い部屋で生活している男向け",
@@ -963,7 +963,7 @@ const articles = [
     "category": "bike",
     "date": "2026-05-04",
     "readTime": "9分",
-    "summary": "大型装備より先に効く、携帯しやすい安心小物を7つに絞りました。",
+    "summary": "大型装備より先に効く、携帯しやすい安心小物を7選に絞りました。",
     "productIds": [],
     "introParagraphs": [
       "バイクは荷重制限がきついので、持ち歩くほど「軽くて効く」ものが強いです。ツーリング中に困るのは、だいたい雨・冷え・電源・小さな故障のどれかです。",
@@ -1126,7 +1126,7 @@ const articles = [
     "category": "pc-ai",
     "date": "2026-05-04",
     "readTime": "9分",
-    "summary": "ケーブルと小物と紙。男のデスクはここから崩れるので、先に止める道具を7つにしました。",
+    "summary": "ケーブルと小物と紙。男のデスクはここから崩れるので、先に止める道具を7点にしました。",
     "productIds": [],
     "introParagraphs": [
       "デスクは作業の拠点です。散らかる原因はだいたい同じで、配線、文房具、紙、充電、飲み物です。",
@@ -1288,7 +1288,7 @@ const articles = [
     "category": "life",
     "date": "2026-05-04",
     "readTime": "9分",
-    "summary": "気合いより仕組み。続く人はハードルを下げています。地味に効く7つです。",
+    "summary": "気合いより仕組み。続く人はハードルを下げています。地味に効く7選です。",
     "productIds": [],
     "introParagraphs": [
       "片付けが続かないのは性格じゃなくて設計の問題であることが多いです。面倒な工程が一つでもあると、疲れた日に破綻します。",
@@ -1457,7 +1457,7 @@ const articles = [
     "category": "disaster",
     "date": "2026-05-04",
     "readTime": "10分",
-    "summary": "派手な備蓄より先に、生活が止まらないための土台を7つに絞りました。",
+    "summary": "派手な備蓄より先に、生活が止まらないための土台を7選に絞りました。",
     "productIds": [],
     "introParagraphs": [
       "防災は「買って終わり」になりやすいですが、現場は運用です。暗い・喉が渇く・トイレ・連絡が詰まると判断力が落ちます。",
@@ -1786,7 +1786,7 @@ const articles = [
     "category": "solo",
     "date": "2026-05-04",
     "readTime": "10分",
-    "summary": "インテリアより先に「生活が止まらないセット」。ガサツでも回る7つに絞りました。",
+    "summary": "インテリアより先に「生活が止まらないセット」。ガサツでも回る7選に絞りました。",
     "productIds": [],
     "introParagraphs": [
       "一人暮らし初日に困るのは、だいたいゴミ袋・トイレットペーパー・照明・寝具・掃除道具のどれかです。",
@@ -2244,7 +2244,7 @@ const articles = [
     "category": "life",
     "date": "2026-05-04",
     "readTime": "9分",
-    "summary": "荷物は減らすほど移動がラクになる。出張と旅行の両方に効く7つです。",
+    "summary": "荷物は減らすほど移動がラクになる。出張と旅行の両方に効く7選です。",
     "productIds": [],
     "introParagraphs": [
       "出張は「荷物が増えるほど判断が鈍る」タイプの負荷が乗ります。旅行も同じで、持ち歩く重量はできるだけ減らしたいです。",
@@ -3112,7 +3112,7 @@ function renderHome() {
       </div>
       <div class="hero-panel" aria-label="装備レビューの概要">
         <div class="hero-panel-inner">
-          <span class="panel-label">FIELD NOTES</span>
+          <span class="panel-label">現場メモ</span>
           <strong>買う前に、用途・置き場所・使う頻度を見る。</strong>
           <p>生活導線に入るものだけが、本当に使える装備になります。</p>
           <div class="stats">
@@ -3427,7 +3427,7 @@ function renderProfileBox() {
       <p>このサイトは、元自衛官の運営者が、生活・防災・車内・デスク周りで「実際に使いやすそうか」を重視して商品を整理するレビューサイトです。高すぎる物や見た目だけの商品ではなく、日常でラクになるか、備えとして役立つかを基準に紹介しています。</p>
       <p><strong>このサイトの目的：</strong>楽天市場で迷いやすいカテゴリを、用途・置き場所・頻度で分けて、比較しやすい形にまとめることです。</p>
       <p><strong>読者への約束：</strong>価格・在庫・レビューは必ず商品ページで確かめてくださいとお伝えします。PRやアフィリエイトの利用も、記事冒頭・広告枠で明示します。</p>
-      <p class="profile-contact">更新情報・誤記のご指摘：<a href="${escapeHtml(CONTACT_X_URL)}" target="_blank" rel="me noopener noreferrer">${escapeHtml(CONTACT_X_HANDLE)}</a>（X）</p>
+      <p class="profile-contact">更新情報・誤記のご指摘：<a href="${escapeHtml(CONTACT_X_URL)}" target="_blank" rel="me noopener noreferrer">${escapeHtml(CONTACT_X_HANDLE)}</a>（旧Twitter）</p>
     </section>
   `;
 }
