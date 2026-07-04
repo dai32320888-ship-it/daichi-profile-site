@@ -75,7 +75,10 @@ function applyCopyFixes(text) {
     .replaceAll("回る7つ", "回る7選")
     .replaceAll("土台を7つ", "土台を7点")
     .replaceAll("户外用品", "アウトドア用品")
-    .replaceAll("戶外用品", "アウトドア用品");
+    .replaceAll("戶外用品", "アウトドア用品")
+    .replaceAll("FIELD NOTES", "現場メモ")
+    .replaceAll(">RSS</a>", ">更新フィード</a>")
+    .replaceAll("（X）", "（旧Twitter）");
 }
 
 function fixSiteCopy() {
