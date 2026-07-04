@@ -182,9 +182,13 @@ function esc(value) {
     .replace(/"/g, "&quot;");
 }
 
-function seoHead({ title, description, url, type = "website", iconHref = "./", robots }) {
+function seoHead({ title, description, url, type = "website", iconHref = "./", robots, feedHref }) {
   const robotsMeta = robots ? `<meta name="robots" content="${esc(robots)}" />` : "";
-  return `${robotsMeta}<link rel="icon" href="${iconHref}favicon.ico" sizes="any" />
+  const feedLink = feedHref
+    ? `<link rel="alternate" type="application/rss+xml" title="プレゼントふぉーゆー" href="${esc(feedHref)}" />`
+    : "";
+  return `${robotsMeta}${feedLink}
+  <link rel="icon" href="${iconHref}favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="${iconHref}favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="${iconHref}favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="${iconHref}apple-touch-icon.png" />
@@ -487,7 +491,7 @@ function indexHtml() {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title}</title>
   <meta name="description" content="${esc(description)}">
-  ${seoHead({ title: "プレゼントふぉーゆー", description, url: baseUrl })}
+  ${seoHead({ title: "プレゼントふぉーゆー", description, url: baseUrl, feedHref: "./feed.xml" })}
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -644,23 +648,42 @@ ${urls.map((url) => `  <url>
 `;
 }
 
-function updateRootSitemap() {
-  const rootSitemapPath = path.join(repoRoot, "sitemap.xml");
-  let xml = fs.readFileSync(rootSitemapPath, "utf8");
-  xml = xml.replace(/\s*<url>\s*<loc>https:\/\/dai32320888-ship-it\.github\.io\/daichi-profile-site\/gift-for-you\/[\s\S]*?<\/url>/g, "");
-  xml = xml.replace(/\s*<url>\s*<loc>https:\/\/dai32320888-ship-it\.github\.io\/daichi-profile-site\/gift-for-you\/article\/[\s\S]*?<\/url>/g, "");
-  const entries = [
-    { loc: baseUrl, priority: "0.9" },
-    ...articles.map((article) => ({ loc: `${baseUrl}${articlePath(article.slug)}`, priority: giftSitemapPriority(article.slug) }))
-  ].map((url) => `  <url>
-    <loc>${url.loc}</loc>
-    <lastmod>${lastMod}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>${url.priority}</priority>
-  </url>`).join("\n");
-  xml = xml.replace("</urlset>", `${entries}\n</urlset>`);
-  fs.writeFileSync(rootSitemapPath, xml, "utf8");
+function cdataFeedText(value) {
+  return `<![CDATA[${String(value || "").replace(/\]\]>/g, "]]]]><![CDATA[>")}]]>`;
 }
+
+function feedXml() {
+  const items = [...articles]
+    .reverse()
+    .slice(0, 30)
+    .map((article) => {
+      const link = `${baseUrl}${articlePath(article.slug)}`;
+      const pubDate = new Date(`${lastMod}T09:00:00+09:00`).toUTCString();
+      return `    <item>
+      <title>${cdataFeedText(article.title)}</title>
+      <link>${link}</link>
+      <guid isPermaLink="true">${link}</guid>
+      <pubDate>${pubDate}</pubDate>
+      <description>${cdataFeedText(article.description)}</description>
+    </item>`;
+    })
+    .join("\n");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>プレゼントふぉーゆー</title>
+    <link>${baseUrl}</link>
+    <description>相手・予算・シーンから失敗しにくいプレゼント候補を探せる診断風サイトです。</description>
+    <language>ja</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+${items}
+  </channel>
+</rss>
+`;
+}
+
+const { mergeRootSitemap } = require(path.join(repoRoot, "scripts", "sync-root-sitemap.cjs"));
 
 fs.writeFileSync(path.join(siteRoot, "index.html"), indexHtml(), "utf8");
 fs.writeFileSync(path.join(siteRoot, "app.js"), appJs(), "utf8");
@@ -670,6 +693,7 @@ for (const article of articles) {
   fs.writeFileSync(path.join(dir, "index.html"), articleHtml(article), "utf8");
 }
 fs.writeFileSync(path.join(siteRoot, "sitemap.xml"), sitemapXml(), "utf8");
-updateRootSitemap();
+fs.writeFileSync(path.join(siteRoot, "feed.xml"), feedXml(), "utf8");
+mergeRootSitemap();
 
 console.log(`Generated ${articles.length} articles and ${products.length} product cards.`);

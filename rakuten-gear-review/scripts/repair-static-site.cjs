@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "..");
+const repoRoot = path.resolve(root, "..");
 const articleRoot = path.join(root, "article");
 const indexPath = path.join(root, "index.html");
 const fallbackImagePath = path.join(root, "images", "og-default.png");
@@ -48,7 +49,10 @@ function stripTags(value) {
     .trim();
 }
 
-const REDIRECT_ARTICLE_IDS = new Set(["auto-p004-防災-リュック-コンパクト"]);
+const REDIRECT_ARTICLE_IDS = new Set([
+  "auto-p004-防災-リュック-コンパクト",
+  "nintendo-switch-2-rakuten",
+]);
 
 function applyCopyFixes(text) {
   return text
@@ -160,13 +164,19 @@ function renderArticleCard(article) {
     </article>`;
 }
 
+function feedSlugRank() {
+  const feed = read(path.join(root, "feed.xml"));
+  const slugs = [...feed.matchAll(/\/article\/([^/]+)\//g)].map((m) => m[1]);
+  return new Map(slugs.map((slug, index) => [slug, index]));
+}
+
 function repairHomeLatestSection() {
+  const rank = feedSlugRank();
   const articles = fs
     .readdirSync(articleRoot, { withFileTypes: true })
     .filter(
       (entry) =>
         entry.isDirectory() &&
-        !REDIRECT_ARTICLE_IDS.has(entry.name) &&
         fs.existsSync(path.join(articleRoot, entry.name, "index.html")),
     )
     .map((entry) => parseArticle(entry.name))
@@ -175,20 +185,32 @@ function repairHomeLatestSection() {
         article.title &&
         article.summary &&
         article.ogImage &&
+        !REDIRECT_ARTICLE_IDS.has(article.id) &&
         !/http-equiv="refresh"/i.test(read(path.join(articleRoot, article.id, "index.html"))),
     );
 
   articles.sort((a, b) => {
     const byDate = b.date.localeCompare(a.date);
-    return byDate || a.title.localeCompare(b.title, "ja");
+    if (byDate !== 0) return byDate;
+    const aRank = rank.has(a.id) ? rank.get(a.id) : 9999;
+    const bRank = rank.has(b.id) ? rank.get(b.id) : 9999;
+    return aRank - bRank;
   });
+
+  const articleCount = fs
+    .readdirSync(articleRoot, { withFileTypes: true })
+    .filter(
+      (entry) =>
+        entry.isDirectory() &&
+        fs.existsSync(path.join(articleRoot, entry.name, "index.html")),
+    ).length;
 
   let html = read(indexPath);
   html = html.replace(
     /<div class="stat"><b>\d+<\/b><small>レビュー記事<\/small><\/div>/,
-    `<div class="stat"><b>${articles.length}</b><small>レビュー記事</small></div>`,
+    `<div class="stat"><b>${articleCount}</b><small>レビュー記事</small></div>`,
   );
-  html = html.replace(/全\d+記事から最新。/, `全${articles.length}記事から最新。`);
+  html = html.replace(/全\d+記事から最新。/, `全${articleCount}記事から最新。`);
 
   const h2Pos = html.indexOf("<h2>新着記事</h2>");
   if (h2Pos === -1) throw new Error("Could not find latest section heading in index.html");
@@ -201,7 +223,7 @@ function repairHomeLatestSection() {
   const latestSection = `    <section class="section">
       <div class="section-head">
         <h2>新着記事</h2>
-        <p>全${articles.length}記事から最新。カテゴリ一覧にもすべて掲載しています。</p>
+        <p>全${articleCount}記事から最新。カテゴリ一覧にもすべて掲載しています。</p>
       </div>
       <div class="article-grid">${articles.slice(0, 12).map(renderArticleCard).join("")}</div>
     </section>`;
@@ -211,13 +233,16 @@ function repairHomeLatestSection() {
   const changed = writeIfChanged(indexPath, next);
   return {
     changed,
-    articleCount: articles.length,
+    articleCount,
     latest: articles.slice(0, 12).map((a) => `${a.date} ${a.id}`),
   };
 }
 
+const { mergeRootSitemap } = require(path.join(repoRoot, "scripts", "sync-root-sitemap.cjs"));
+
 const copyFiles = fixSiteCopy();
 const imageFallbackFiles = fixImageFallbacks();
 const latest = repairHomeLatestSection();
+const rootSitemap = mergeRootSitemap();
 
-console.log(JSON.stringify({ copyFiles, imageFallbackFiles, latest }, null, 2));
+console.log(JSON.stringify({ copyFiles, imageFallbackFiles, latest, rootSitemap }, null, 2));
