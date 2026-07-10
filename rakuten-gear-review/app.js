@@ -2604,12 +2604,17 @@ const app = document.querySelector("#app");
 const menuButton = document.querySelector("#menuButton");
 const siteNav = document.querySelector("#siteNav");
 
+function setMenuOpen(isOpen) {
+  siteNav?.classList.toggle("open", isOpen);
+  menuButton?.setAttribute("aria-expanded", String(isOpen));
+}
+
 menuButton?.addEventListener("click", () => {
-  siteNav?.classList.toggle("open");
+  setMenuOpen(!siteNav?.classList.contains("open"));
 });
 
 siteNav?.addEventListener("click", () => {
-  siteNav?.classList.remove("open");
+  setMenuOpen(false);
 });
 
 if (app) {
