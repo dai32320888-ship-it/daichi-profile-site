@@ -257,17 +257,27 @@ function repairHomeLatestSection() {
       <div class="article-grid">${articles.slice(0, 12).map(renderArticleCard).join("")}</div>
     </section>`;
 
-  // Remove current latest section, then place it just before 柱記事 (#articles) so 新着がすぐ見える。
+  // Remove current latest section, then place it just after hero / before pillars so スマホでもすぐ見える。
   let withoutLatest =
     html.slice(0, sectionStart) + html.slice(sectionEnd + sectionEndMarker.length);
+  const pillarsPos = withoutLatest.search(
+    /<section[^>]*\bid=["']pillars["']|<section class="section pillar-section"/,
+  );
   const articlesMarker = withoutLatest.indexOf('<section class="section" id="articles">');
+  let insertAt = -1;
+  if (pillarsPos !== -1) {
+    insertAt = withoutLatest.lastIndexOf("<section", pillarsPos);
+  } else if (articlesMarker !== -1) {
+    insertAt = articlesMarker;
+  }
+
   let next;
-  if (articlesMarker !== -1) {
+  if (insertAt !== -1) {
     next =
-      withoutLatest.slice(0, articlesMarker) +
+      withoutLatest.slice(0, insertAt) +
       latestSection +
       "\n\n" +
-      withoutLatest.slice(articlesMarker);
+      withoutLatest.slice(insertAt);
   } else if (sectionStart <= withoutLatest.length) {
     next =
       withoutLatest.slice(0, Math.min(sectionStart, withoutLatest.length)) +
