@@ -139,16 +139,45 @@ function parseArticle(dirName) {
   const meta = stripTags(firstMatch(html, /<p class="article-meta">([\s\S]*?)<\/p>/));
   const date = meta.match(/\d{4}-\d{2}-\d{2}/)?.[0] || "1970-01-01";
   const readTime = meta.split("・")[1]?.trim() || "読了目安 9分";
-  const ogImage = firstMatch(html, /<meta property="og:image" content="([^"]+)"/);
+  const ogImage =
+    firstMatch(html, /<meta property="og:image" content="([^"]+)"/) ||
+    firstMatch(html, /property="og:image"[\s\S]{0,160}?content="([^"]+)"/);
   const pickCount = (html.match(/class="pick-block article-section"/g) || []).length;
   return { id: dirName, title, summary, category, date, readTime, ogImage, pickCount };
+}
+
+function todayInJapan() {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const v = Object.fromEntries(parts.map((p) => [p.type, p.value]));
+  return `${v.year}-${v.month}-${v.day}`;
+}
+
+function isRecentArticle(dateStr, withinDays = 14) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr || "")) return false;
+  const today = todayInJapan();
+  const t = Date.parse(`${today}T00:00:00+09:00`);
+  const d = Date.parse(`${dateStr}T00:00:00+09:00`);
+  if (Number.isNaN(t) || Number.isNaN(d)) return false;
+  const diffDays = (t - d) / 86400000;
+  return diffDays >= 0 && diffDays <= withinDays;
 }
 
 function renderArticleCard(article) {
   const href = `./article/${article.id}/`;
   const pickLabel = article.pickCount > 0 ? `${article.pickCount}ピック` : "レビュー";
-  return `<article class="article-card">
-      <a class="article-thumb article-thumb--photo" href="${escapeHtml(href)}">
+  const newBadge = isRecentArticle(article.date)
+    ? `\n        <span class="article-new-badge" aria-label="新着">NEW</span>`
+    : "";
+  const metaExtra = isRecentArticle(article.date)
+    ? ` <span class="article-meta-new">新着</span>`
+    : "";
+  return `<article class="article-card${isRecentArticle(article.date) ? " article-card--new" : ""}">
+      <a class="article-thumb article-thumb--photo" href="${escapeHtml(href)}">${newBadge}
         <img src="${escapeHtml(article.ogImage)}" alt="${escapeHtml(`${article.title}（${article.category}）`)}" width="640" height="360" loading="lazy" decoding="async" data-fallback="./images/og-default.png" onerror="${IMAGE_FALLBACK_ONERROR}" />
         <span class="article-thumb__meta">
           <span>${escapeHtml(article.category)}</span>
@@ -156,7 +185,7 @@ function renderArticleCard(article) {
         </span>
       </a>
       <div class="article-body">
-        <div class="article-meta">${escapeHtml(article.date)} ・ ${escapeHtml(article.readTime)}</div>
+        <div class="article-meta">${escapeHtml(article.date)} ・ ${escapeHtml(article.readTime)}${metaExtra}</div>
         <h3><a class="article-title-link" href="${escapeHtml(href)}">${escapeHtml(article.title)}</a></h3>
         <p>${escapeHtml(article.summary)}</p>
         <a class="button secondary button--inline-sm" href="${escapeHtml(href)}">記事を読む</a>
@@ -220,7 +249,7 @@ function repairHomeLatestSection() {
   if (sectionStart === -1 || sectionEnd === -1)
     throw new Error("Could not locate latest section bounds");
 
-  const latestSection = `    <section class="section">
+  const latestSection = `    <section class="section" id="latest">
       <div class="section-head">
         <h2>新着記事</h2>
         <p>全${articleCount}記事から最新。カテゴリ一覧にもすべて掲載しています。</p>
@@ -228,8 +257,45 @@ function repairHomeLatestSection() {
       <div class="article-grid">${articles.slice(0, 12).map(renderArticleCard).join("")}</div>
     </section>`;
 
-  const next =
-    html.slice(0, sectionStart) + latestSection + html.slice(sectionEnd + sectionEndMarker.length);
+  // Remove current latest section, then place it just before 柱記事 (#articles) so 新着がすぐ見える。
+  let withoutLatest =
+    html.slice(0, sectionStart) + html.slice(sectionEnd + sectionEndMarker.length);
+  const articlesMarker = withoutLatest.indexOf('<section class="section" id="articles">');
+  let next;
+  if (articlesMarker !== -1) {
+    next =
+      withoutLatest.slice(0, articlesMarker) +
+      latestSection +
+      "\n\n" +
+      withoutLatest.slice(articlesMarker);
+  } else if (sectionStart <= withoutLatest.length) {
+    next =
+      withoutLatest.slice(0, Math.min(sectionStart, withoutLatest.length)) +
+      latestSection +
+      withoutLatest.slice(Math.min(sectionStart, withoutLatest.length));
+  } else {
+    next = withoutLatest + "\n" + latestSection;
+  }
+
+  // HTMLクロール用リンク一覧の先頭へ最新記事を差し込む
+  const newest = articles[0];
+  if (newest) {
+    const linkItem = `<li><a href="./article/${newest.id}/">${escapeHtml(newest.title)}</a> <span class="article-meta">${escapeHtml(newest.date)}</span></li>`;
+    const escapedId = newest.id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    next = next.replace(
+      new RegExp(
+        `<li><a href="\\./article/${escapedId}/">[\\s\\S]*?</li>`,
+      ),
+      "",
+    );
+    if (next.includes('<ul class="plain-link-list">')) {
+      next = next.replace(
+        /<ul class="plain-link-list">/,
+        `<ul class="plain-link-list">${linkItem}`,
+      );
+    }
+  }
+
   const changed = writeIfChanged(indexPath, next);
   return {
     changed,

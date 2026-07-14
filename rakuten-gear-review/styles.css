@@ -506,6 +506,41 @@ h3 {
   transform: scale(1.04);
 }
 
+.article-new-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.2em;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--rakuten);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  box-shadow: 0 8px 18px rgba(191, 0, 0, 0.28);
+  pointer-events: none;
+}
+
+.article-meta-new {
+  display: inline-flex;
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--olive-soft);
+  color: var(--olive-dark);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.article-card--new {
+  outline: 1px solid rgba(191, 0, 0, 0.18);
+}
+
 .article-thumb__meta {
   position: relative;
   z-index: 2;

@@ -63,10 +63,10 @@ function auditMetadata() {
     const rel = path.relative(root, file);
     if (UTILITY_HTML.has(rel) || html.includes('http-equiv="refresh"')) continue;
     if (!html.includes("<title")) issues.push(`missing title: ${rel}`);
-    if (!html.includes('<meta name="description"')) issues.push(`missing description: ${rel}`);
+    if (!/name=["']description["']/.test(html)) issues.push(`missing description: ${rel}`);
     if (!html.includes("<h1")) issues.push(`missing h1: ${rel}`);
-    if (!html.includes('<link rel="canonical"')) issues.push(`missing canonical: ${rel}`);
-    if (!html.includes('<meta property="og:title"')) issues.push(`missing og:title: ${rel}`);
+    if (!/rel=["']canonical["']/.test(html)) issues.push(`missing canonical: ${rel}`);
+    if (!/property=["']og:title["']/.test(html)) issues.push(`missing og:title: ${rel}`);
     if (/noindex/i.test(html)) issues.push(`contains noindex: ${rel}`);
     for (const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
       try {
