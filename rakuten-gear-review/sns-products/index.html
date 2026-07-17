@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>動画で紹介したおすすめ商品 | 元自衛官の楽天装備レビュー</title>
+    <meta name="description" content="Instagram・TikTok・YouTube Shortsで紹介した商品をまとめています。" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/sns-products/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="動画で紹介したおすすめ商品 | 元自衛官の楽天装備レビュー" />
+    <meta property="og:description" content="Instagram・TikTok・YouTube Shortsで紹介した商品をまとめています。" />
+    <meta property="og:url" content="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/sns-products/" />
+    <meta property="og:site_name" content="元自衛官の楽天装備レビュー" />
+    <meta property="og:image" content="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/og-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="alternate" type="application/rss+xml" title="元自衛官の楽天装備レビュー" href="../feed.xml" />
+    <link rel="stylesheet" href="../styles.css" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"動画で紹介したおすすめ商品","description":"Instagram・TikTok・YouTube Shortsで紹介した商品をまとめています。","url":"https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/sns-products/"}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../">
+        <span class="brand-mark">装</span>
+        <span>
+          <strong>元自衛官の楽天装備レビュー</strong>
+          <small>暮らしをラクにする装備品レビュー</small>
+        </span>
+      </a>
+      <button class="menu-button" id="menuButton" type="button" aria-label="メニューを開く" aria-controls="siteNav" aria-expanded="false">☰</button>
+      <nav class="site-nav" id="siteNav" aria-label="メインナビゲーション">
+        <a href="../">トップ</a>
+        <a href="../hub/disaster.html">防災ガイド</a>
+        <a href="../hub/solo.html">一人暮らし</a>
+        <a href="../hub/pc-ai.html">デスク・在宅</a>
+        <a href="./" aria-current="page">動画で紹介した商品</a>
+        <a href="../#articles">記事一覧</a>
+        <a href="../#profile">プロフィール</a>
+      </nav>
+    </header>
+    <main>
+      <section class="page-hero sns-page-hero">
+        <p class="eyebrow">SNSで紹介</p>
+        <h1>動画で紹介したおすすめ商品</h1>
+        <p class="lead">Instagram・TikTok・YouTube Shortsで紹介した商品をまとめています。</p>
+        <p class="sns-page-note">動画で見た商品を、あとからすぐ楽天市場で確認できる一覧です。価格・レビュー・在庫はリンク先でご確認ください。</p>
+        <p class="ad-notice">※本ページにはアフィリエイト広告を含みます。</p>
+      </section>
+
+      <section class="section" id="sns-latest">
+        <div class="section-head">
+          <h2>最新の紹介商品</h2>
+          <p>直近の動画で紹介した商品です。</p>
+        </div>
+        <div class="product-grid sns-product-grid" id="latestProducts"></div>
+        <noscript><p>商品を見るにはJavaScriptを有効にしてください。</p></noscript>
+      </section>
+
+      <section class="section" id="sns-past">
+        <div class="section-head">
+          <h2>過去に紹介した商品一覧</h2>
+          <p>商品が増えたらカテゴリ別に整理して掲載します。</p>
+        </div>
+        <div class="sns-category-nav" id="categoryNav" aria-label="商品カテゴリ"></div>
+        <div id="pastProducts">
+          <div class="summary-box"><p>過去に紹介した商品は、順次このページに追加していきます。</p></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__main">
+        <strong>元自衛官の楽天装備レビュー</strong>
+        <p>当サイトはアフィリエイト広告を利用しています。価格・在庫・レビューはリンク先の楽天市場で最新情報をご確認ください。</p>
+        <p class="promo-feed"><a href="../feed.xml">RSS</a></p>
+      </div>
+      <a href="../">トップへ戻る</a>
+    </footer>
+
+    <script src="../sns-products-data.js"></script>
+    <script>
+      (function () {
+        var btn = document.getElementById("menuButton");
+        var nav = document.getElementById("siteNav");
+        if (btn && nav) {
+          function setMenuOpen(open) {
+            nav.classList.toggle("open", open);
+            btn.setAttribute("aria-expanded", String(open));
+          }
+          btn.addEventListener("click", function () {
+            setMenuOpen(!nav.classList.contains("open"));
+          });
+          nav.addEventListener("click", function (event) {
+            if (event.target.tagName === "A") setMenuOpen(false);
+          });
+        }
+
+        var categories = window.SNS_PRODUCT_CATEGORIES || [];
+        var products = (window.SNS_PRODUCTS || []).slice().sort(function (a, b) {
+          return Number(a.sortOrder || 0) - Number(b.sortOrder || 0);
+        });
+        var categoryNames = {};
+        categories.forEach(function (category) {
+          categoryNames[category.id] = category.name;
+          var chip = document.createElement("span");
+          chip.className = "sns-category-chip";
+          chip.textContent = category.name;
+          document.getElementById("categoryNav").appendChild(chip);
+        });
+
+        function makeProductCard(product) {
+          var card = document.createElement("article");
+          card.className = "product-card sns-product-card";
+
+          var media = document.createElement("a");
+          media.className = "product-media";
+          media.href = product.affiliateUrl;
+          media.target = "_blank";
+          media.rel = "nofollow sponsored noopener";
+          var image = document.createElement("img");
+          image.src = product.imageUrl;
+          image.alt = product.name + "の商品画像";
+          image.width = 640;
+          image.height = 420;
+          image.loading = "lazy";
+          image.decoding = "async";
+          media.appendChild(image);
+
+          var content = document.createElement("div");
+          content.className = "product-content";
+          var category = document.createElement("div");
+          category.className = "product-category";
+          category.textContent = categoryNames[product.category] || "その他";
+          var title = document.createElement("h3");
+          title.textContent = product.name;
+          var intro = document.createElement("p");
+          intro.className = "sns-product-intro";
+          intro.textContent = product.intro;
+          var source = document.createElement("p");
+          source.className = "sns-product-source";
+          source.textContent = "紹介：" + product.snsSource;
+          var actions = document.createElement("div");
+          actions.className = "sns-product-actions";
+          var rakuten = document.createElement("a");
+          rakuten.className = "button rakuten";
+          rakuten.href = product.affiliateUrl;
+          rakuten.target = "_blank";
+          rakuten.rel = "nofollow sponsored noopener";
+          rakuten.textContent = "楽天市場で見る";
+          actions.appendChild(rakuten);
+
+          content.append(category, title, intro, source, actions);
+          card.append(media, content);
+          return card;
+        }
+
+        products.filter(function (product) {
+          return product.isLatest;
+        }).forEach(function (product) {
+          document.getElementById("latestProducts").appendChild(makeProductCard(product));
+        });
+      })();
+    </script>
+  </body>
+</html>
