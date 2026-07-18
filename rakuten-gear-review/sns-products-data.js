@@ -3,6 +3,7 @@
  * 商品を追加するときはこのファイルを編集してください。
  */
 const SNS_PRODUCT_CATEGORIES = [
+  { id: "car-goods", name: "車・カー用品" },
   { id: "summer-goods", name: "夏用品" },
   { id: "sleep-health", name: "睡眠・健康" },
   { id: "solo-living", name: "一人暮らし" },
@@ -12,6 +13,20 @@ const SNS_PRODUCT_CATEGORIES = [
 ];
 
 const SNS_PRODUCTS = [
+  {
+    id: "affiliate-003-car-sunshade",
+    name: "車用 傘型サンシェード",
+    category: "car-goods",
+    intro:
+      "UV対策と多層素材を採用した、傘型の車用サンシェード。使わないときはコンパクトに収納できる点が特徴です。",
+    snsSource: "Instagram・TikTok・YouTube Shorts（車用傘型サンシェード紹介動画）",
+    imageUrl: "../images/sns/umbrella-car-sunshade.png",
+    imageAlt: "傘型車用サンシェードの商品画像",
+    affiliateUrl: "https://a.r10.to/hPfjua",
+    articleUrl: "../article/umbrella-car-sunshade/",
+    isLatest: true,
+    sortOrder: 1,
+  },
   {
     id: "affiliate-002-cooling-handfan",
     name: "冷却プレート付きハンディファン",
@@ -23,8 +38,8 @@ const SNS_PRODUCTS = [
     imageAlt: "冷却プレート付きハンディファンの商品画像",
     affiliateUrl: "https://a.r10.to/hYGsti",
     articleUrl: "../article/cooling-plate-handheld-fan/",
-    isLatest: true,
-    sortOrder: 1,
+    isLatest: false,
+    sortOrder: 2,
   },
   {
     id: "mouth-breathing-tape",
@@ -38,7 +53,7 @@ const SNS_PRODUCTS = [
     affiliateUrl: "https://a.r10.to/hP4tQy",
     articleUrl: "../article/mouth-tape-sleep/",
     isLatest: false,
-    sortOrder: 2,
+    sortOrder: 3,
   },
 ];
 
