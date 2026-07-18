@@ -3,6 +3,7 @@
  * 商品を追加するときはこのファイルを編集してください。
  */
 const SNS_PRODUCT_CATEGORIES = [
+  { id: "work-outdoor", name: "作業・アウトドア" },
   { id: "car-goods", name: "車・カー用品" },
   { id: "summer-goods", name: "夏用品" },
   { id: "sleep-health", name: "睡眠・健康" },
@@ -14,6 +15,20 @@ const SNS_PRODUCT_CATEGORIES = [
 
 const SNS_PRODUCTS = [
   {
+    id: "affiliate-004-cooling-fan-vest",
+    name: "ペルチェ冷却プレート付きファンベスト",
+    category: "work-outdoor",
+    intro:
+      "ファンと背中の冷却プレートを搭載し、ベスト・バッテリー・コントローラーなどがセットになった暑い季節向けの商品。",
+    snsSource: "Instagram・TikTok・YouTube Shorts（ペルチェ冷却プレート付きファンベスト紹介動画）",
+    imageUrl: "../images/sns/peltier-cooling-fan-vest.png",
+    imageAlt: "ペルチェ冷却プレート付きファンベストのフルセット",
+    affiliateUrl: "https://a.r10.to/hgHoSA",
+    articleUrl: "../article/peltier-cooling-fan-vest/",
+    isLatest: true,
+    sortOrder: 1,
+  },
+  {
     id: "affiliate-003-car-sunshade",
     name: "車用 傘型サンシェード",
     category: "car-goods",
@@ -24,22 +39,21 @@ const SNS_PRODUCTS = [
     imageAlt: "傘型車用サンシェードの商品画像",
     affiliateUrl: "https://a.r10.to/hPfjua",
     articleUrl: "../article/umbrella-car-sunshade/",
-    isLatest: true,
-    sortOrder: 1,
+    isLatest: false,
+    sortOrder: 2,
   },
   {
     id: "affiliate-002-cooling-handfan",
     name: "冷却プレート付きハンディファン",
     category: "summer-goods",
-    intro:
-      "最大120段階の風量調整と冷却プレートを搭載した、夏の外出向けハンディファン。",
+    intro: "最大120段階の風量調整と冷却プレートを搭載した、夏の外出向けハンディファン。",
     snsSource: "Instagram・TikTok・YouTube Shorts（冷却プレート付きハンディファン紹介動画）",
     imageUrl: "../images/sns/cooling-plate-handheld-fan.png",
     imageAlt: "冷却プレート付きハンディファンの商品画像",
     affiliateUrl: "https://a.r10.to/hYGsti",
     articleUrl: "../article/cooling-plate-handheld-fan/",
     isLatest: false,
-    sortOrder: 2,
+    sortOrder: 3,
   },
   {
     id: "mouth-breathing-tape",
@@ -53,7 +67,7 @@ const SNS_PRODUCTS = [
     affiliateUrl: "https://a.r10.to/hP4tQy",
     articleUrl: "../article/mouth-tape-sleep/",
     isLatest: false,
-    sortOrder: 3,
+    sortOrder: 4,
   },
 ];
 
