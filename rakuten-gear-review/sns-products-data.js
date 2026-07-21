@@ -15,6 +15,20 @@ const SNS_PRODUCT_CATEGORIES = [
 
 const SNS_PRODUCTS = [
   {
+    id: "affiliate-005-electric-air-pump",
+    name: "車・バイク・自転車対応 電動空気入れ",
+    category: "car-goods",
+    intro:
+      "空気圧を設定して使える、自動停止タイプの電動空気入れ。車・バイク・自転車などに対応し、4モード切替やType-C充電などが案内されている便利グッズ。",
+    snsSource: "Instagram・YouTube Shorts（車・バイク・自転車対応 電動空気入れ紹介動画）",
+    imageUrl: "../images/sns/car-bike-electric-air-pump.png",
+    imageAlt: "車・バイク・自転車対応 電動空気入れの商品画像",
+    affiliateUrl: "https://a.r10.to/h56Azn",
+    articleUrl: "../article/car-bike-electric-air-pump/",
+    isLatest: true,
+    sortOrder: 1,
+  },
+  {
     id: "affiliate-004-cooling-fan-vest",
     name: "ペルチェ冷却プレート付きファンベスト",
     category: "work-outdoor",
@@ -25,8 +39,8 @@ const SNS_PRODUCTS = [
     imageAlt: "ペルチェ冷却プレート付きファンベストのフルセット",
     affiliateUrl: "https://a.r10.to/hgHoSA",
     articleUrl: "../article/peltier-cooling-fan-vest/",
-    isLatest: true,
-    sortOrder: 1,
+    isLatest: false,
+    sortOrder: 2,
   },
   {
     id: "affiliate-003-car-sunshade",
@@ -40,7 +54,7 @@ const SNS_PRODUCTS = [
     affiliateUrl: "https://a.r10.to/hPfjua",
     articleUrl: "../article/umbrella-car-sunshade/",
     isLatest: false,
-    sortOrder: 2,
+    sortOrder: 3,
   },
   {
     id: "affiliate-002-cooling-handfan",
@@ -53,7 +67,7 @@ const SNS_PRODUCTS = [
     affiliateUrl: "https://a.r10.to/hYGsti",
     articleUrl: "../article/cooling-plate-handheld-fan/",
     isLatest: false,
-    sortOrder: 3,
+    sortOrder: 4,
   },
   {
     id: "mouth-breathing-tape",
@@ -67,7 +81,7 @@ const SNS_PRODUCTS = [
     affiliateUrl: "https://a.r10.to/hP4tQy",
     articleUrl: "../article/mouth-tape-sleep/",
     isLatest: false,
-    sortOrder: 4,
+    sortOrder: 5,
   },
 ];
 
