@@ -15,6 +15,21 @@ const SNS_PRODUCT_CATEGORIES = [
 
 const SNS_PRODUCTS = [
   {
+    id: "affiliate-006-car-seat-cooler",
+    name: "車用シートクーラー",
+    category: "car-goods",
+    intro:
+      "車のシートに後付けできる、送風タイプのシートクーラー。夏の通勤や長距離運転で気になる人向けのカー用品。",
+    snsSource: "Instagram・YouTube Shorts（車用シートクーラー紹介動画）",
+    imageUrl: "../images/sns/car-seat-cooler.png",
+    imageAlt: "車内に装着した車用シートクーラーの写真",
+    affiliateUrl:
+      "https://hb.afl.rakuten.co.jp/ichiba/56482d4b.e627640c.56482d4c.5236d6de/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkjtrust%2Fzd05%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjQwMHg0MDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9",
+    articleUrl: "../article/car-seat-cooler/",
+    isLatest: true,
+    sortOrder: 1,
+  },
+  {
     id: "affiliate-005-electric-air-pump",
     name: "車・バイク・自転車対応 電動空気入れ",
     category: "car-goods",
@@ -25,8 +40,8 @@ const SNS_PRODUCTS = [
     imageAlt: "車・バイク・自転車対応 電動空気入れの商品画像",
     affiliateUrl: "https://a.r10.to/h56Azn",
     articleUrl: "../article/car-bike-electric-air-pump/",
-    isLatest: true,
-    sortOrder: 1,
+    isLatest: false,
+    sortOrder: 2,
   },
   {
     id: "affiliate-004-cooling-fan-vest",
@@ -40,7 +55,7 @@ const SNS_PRODUCTS = [
     affiliateUrl: "https://a.r10.to/hgHoSA",
     articleUrl: "../article/peltier-cooling-fan-vest/",
     isLatest: false,
-    sortOrder: 2,
+    sortOrder: 3,
   },
   {
     id: "affiliate-003-car-sunshade",
@@ -54,7 +69,7 @@ const SNS_PRODUCTS = [
     affiliateUrl: "https://a.r10.to/hPfjua",
     articleUrl: "../article/umbrella-car-sunshade/",
     isLatest: false,
-    sortOrder: 3,
+    sortOrder: 4,
   },
   {
     id: "affiliate-002-cooling-handfan",
@@ -67,7 +82,7 @@ const SNS_PRODUCTS = [
     affiliateUrl: "https://a.r10.to/hYGsti",
     articleUrl: "../article/cooling-plate-handheld-fan/",
     isLatest: false,
-    sortOrder: 4,
+    sortOrder: 5,
   },
   {
     id: "mouth-breathing-tape",
@@ -81,7 +96,7 @@ const SNS_PRODUCTS = [
     affiliateUrl: "https://a.r10.to/hP4tQy",
     articleUrl: "../article/mouth-tape-sleep/",
     isLatest: false,
-    sortOrder: 5,
+    sortOrder: 6,
   },
 ];
 
