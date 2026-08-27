@@ -1,0 +1,21 @@
+{
+  "name": "daichi-profile-site",
+  "user": "ubuntu",
+  "install": "npm install --prefix rakuten-gear-review --no-audit --no-fund",
+  "terminals": [
+    {
+      "name": "root-site",
+      "command": "python3 -m http.server 8000 --bind 127.0.0.1",
+      "description": "リポジトリ全体を配信する静的サーバー。トップの自己紹介サイト（/）、gift-for-you（/gift-for-you/）、rakuten-gear-review（/rakuten-gear-review/）を http://127.0.0.1:8000 で確認できます。"
+    },
+    {
+      "name": "rakuten-dev",
+      "command": "cd rakuten-gear-review && npm run dev",
+      "description": "rakuten-gear-review の開発サーバー（node server.js）。http://127.0.0.1:5173 で楽天装備レビューのサイトを単体表示します。"
+    }
+  ],
+  "ports": [
+    { "name": "root-site", "port": 8000 },
+    { "name": "rakuten-dev", "port": 5173 }
+  ]
+}
