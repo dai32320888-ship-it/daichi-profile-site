@@ -41,5 +41,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, "127.0.0.1", () => {
-  console.log(`元自衛官の楽天装備レビュー: http://127.0.0.1:${port}`);
+  console.log(`置くだけ家電ラボ: http://127.0.0.1:${port}`);
 });

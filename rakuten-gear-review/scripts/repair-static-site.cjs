@@ -59,7 +59,7 @@ function applyCopyFixes(text) {
     .replaceAll("10つ", "10個")
     .replace(
       /元自衛官目線で選ぶ「([^」]+)」：楽天で失敗しにくい選び方/g,
-      "「$1」楽天で失敗しにくい選び方｜元自衛官の確認メモ",
+      "「$1」楽天で失敗しにくい選び方｜購入前チェック",
     )
     .replaceAll(
       "この記事では楽天市場の候補3つを、価格帯・口コミ・使用例つきで比較しました。気になったものはリンク先で最新価格と在庫を確認してください。",
@@ -199,6 +199,13 @@ function feedSlugRank() {
   return new Map(slugs.map((slug, index) => [slug, index]));
 }
 
+const APPLIANCE_SLUG_RE =
+  /掃除機|ロボット掃除|ハンディクリーナー|空気清浄|加湿器|スチーマー|ヒーター|電気毛布|毛布|電子レンジ|炊飯器|冷却|ハンディファン|扇風機|車載|インバーター|クーラーボックス|冷風機|暖房機|保冷剤|冷感タオル|cooling-plate|summer-heat-ranking/;
+
+function isIndexableArticleId(id) {
+  return APPLIANCE_SLUG_RE.test(id);
+}
+
 function repairHomeLatestSection() {
   const rank = feedSlugRank();
   const articles = fs
@@ -219,6 +226,9 @@ function repairHomeLatestSection() {
     );
 
   articles.sort((a, b) => {
+    const aIdx = isIndexableArticleId(a.id) ? 0 : 1;
+    const bIdx = isIndexableArticleId(b.id) ? 0 : 1;
+    if (aIdx !== bIdx) return aIdx - bIdx;
     const byDate = b.date.localeCompare(a.date);
     if (byDate !== 0) return byDate;
     const aRank = rank.has(a.id) ? rank.get(a.id) : 9999;
@@ -235,11 +245,13 @@ function repairHomeLatestSection() {
     ).length;
 
   let html = read(indexPath);
-  html = html.replace(
-    /<div class="stat"><b>\d+<\/b><small>レビュー記事<\/small><\/div>/,
-    `<div class="stat"><b>${articleCount}</b><small>レビュー記事</small></div>`,
-  );
-  html = html.replace(/全\d+記事から最新。/, `全${articleCount}記事から最新。`);
+  if (!html.includes("掲載記事（全件保持）")) {
+    html = html.replace(
+      /<div class="stat"><b>\d+<\/b><small>[^<]+<\/small><\/div>/,
+      `<div class="stat"><b>${articleCount}</b><small>比較記事</small></div>`,
+    );
+    html = html.replace(/全\d+記事から最新[^<]*/, `全${articleCount}記事から最新（家電テーマの記事を優先掲載）。カテゴリ一覧にもすべて掲載しています。`);
+  }
 
   const h2Pos = html.indexOf("<h2>新着記事</h2>");
   if (h2Pos === -1) throw new Error("Could not find latest section heading in index.html");
@@ -252,21 +264,22 @@ function repairHomeLatestSection() {
   const latestSection = `    <section class="section" id="latest">
       <div class="section-head">
         <h2>新着記事</h2>
-        <p>全${articleCount}記事から最新。カテゴリ一覧にもすべて掲載しています。</p>
+        <p>全${articleCount}記事から最新（家電テーマの記事を優先掲載）。カテゴリ一覧にもすべて掲載しています。</p>
       </div>
       <div class="article-grid">${articles.slice(0, 12).map(renderArticleCard).join("")}</div>
     </section>`;
 
-  // Remove current latest section, then place it just after hero / before pillars so スマホでもすぐ見える。
+  // Remove current latest section, then place it after featured/themes when possible.
   let withoutLatest =
     html.slice(0, sectionStart) + html.slice(sectionEnd + sectionEndMarker.length);
-  const pillarsPos = withoutLatest.search(
-    /<section[^>]*\bid=["']pillars["']|<section class="section pillar-section"/,
+  const themesPos = withoutLatest.search(
+    /<section[^>]*\bid=["']themes["']|<section[^>]*\bid=["']pillars["']|<section class="section pillar-section"/,
   );
   const articlesMarker = withoutLatest.indexOf('<section class="section" id="articles">');
   let insertAt = -1;
-  if (pillarsPos !== -1) {
-    insertAt = withoutLatest.lastIndexOf("<section", pillarsPos);
+  if (themesPos !== -1) {
+    insertAt = withoutLatest.indexOf("</section>", themesPos) + "</section>".length;
+    while (insertAt < withoutLatest.length && /\s/.test(withoutLatest[insertAt])) insertAt += 1;
   } else if (articlesMarker !== -1) {
     insertAt = articlesMarker;
   }

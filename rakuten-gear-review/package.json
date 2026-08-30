@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "rebrand": "node scripts/rebrand-appliance-lab.cjs",
     "repair": "node scripts/repair-static-site.cjs",
     "audit": "node scripts/audit-static-site.cjs",
     "audit:images": "node scripts/audit-image-assets.cjs",
-    "build": "npm run repair && npm run audit && npm run audit:images",
+    "build": "npm run rebrand && npm run repair && npm run audit && npm run audit:images",
     "dev": "node server.js"
   }
 }

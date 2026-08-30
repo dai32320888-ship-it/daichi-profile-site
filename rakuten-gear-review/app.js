@@ -24,7 +24,7 @@ const CATEGORY_THUMB_FILES = {
 };
 
 const SITE_URL = "https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review";
-const AUTHOR_PEN_NAME = "だいち（元自衛官）";
+const AUTHOR_PEN_NAME = "置くだけ家電ラボ編集部";
 /** X（旧Twitter）プロフィール。リンクは profile-contact で使用 */
 const CONTACT_X_URL = "https://x.com/darui_tsubushi";
 const CONTACT_X_HANDLE = "@darui_tsubushi";
@@ -43,7 +43,7 @@ function rakutenSearchAffiliateUrl(keyword) {
 }
 
 function placeholderImage(label, categoryId) {
-  const category = getCategory(categoryId)?.name || "装備レビュー";
+  const category = getCategory(categoryId)?.name || "家電比較";
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
       <rect width="640" height="420" fill="#f4f4f2"/>
@@ -203,7 +203,7 @@ const products = [
 const articles = [
   {
     id: "life-useful-goods-10",
-    title: "元自衛官が選ぶ、生活がラクになる楽天便利グッズ10選",
+    title: "編集部おすすめの生活がラクになる楽天便利グッズ10選",
     category: "life",
     date: "2026-05-03",
     readTime: "12分",
@@ -211,7 +211,7 @@ const articles = [
     hideProductCatalog: true,
     relatedArticleIds: ["heavy-household-online-stock", "dorm-solo-storage", "messy-room-cleanup-7"],
     introParagraphs: [
-      "便利グッズは、買った瞬間のテンションより一週間後に効いてくるかが大事です。元自衛官目線では、すぐ使える・場所を取らない・壊れにくい、この三つが揃うと生活の段取りが整います。",
+      "便利グッズは、買った瞬間のテンションより一週間後に効いてくるかが大事です。購入前の確認では、すぐ使える・場所を取らない・壊れにくい、この三つが揃うと生活の段取りが整います。",
       "今回は玄関・机・収納に加え、キッチンや掃除の導線まで含めた10ピックです。全部揃えなくても、つらいところから1つ入れるのが続きやすいです。"
     ],
     forAudience: ["毎朝鍵や小物を探している人", "配線や収納がごちゃついている人", "一人暮らしで生活導線を整えたい人"],
@@ -455,7 +455,7 @@ const articles = [
         heading: "家トレ装備は少数精鋭でいい",
         paragraphs: [
           "家トレは道具を増やしすぎると部屋が狭くなり、続ける気力も削られます。最初は可変式ダンベルと懸垂バーのように、できる種目が多い装備から選ぶのが堅いです。",
-          "元自衛官目線でも、継続できる訓練環境を作ることが一番大事です。出すのが面倒な装備は、強くても出番が減ります。"
+          "購入前の観点でも、継続できる訓練環境を作ることが一番大事です。出すのが面倒な装備は、強くても出番が減ります。"
         ],
         bullets: ["置き場所を先に決める", "重量を伸ばせる道具を選ぶ", "設置先の強度を確認する"]
       }
@@ -627,7 +627,7 @@ const articles = [
   },
   {
     "id": "dorm-life-useful-7",
-    "title": "元自衛官が選ぶ、寮生活で本当に助かる便利グッズ7選",
+    "title": "編集部おすすめの寮生活で本当に助かる便利グッズ7選",
     "category": "solo",
     "date": "2026-05-04",
     "readTime": "9分",
@@ -635,7 +635,7 @@ const articles = [
     "productIds": [],
     "introParagraphs": [
       "寮生活は、派手なインテリアより先に「生活導線」が崩れます。床に物が落ちる、鍵が見つからない、充電が足りない。こういう小さな詰まりが積み上がると、気分まで荒れます。",
-      "元自衛官目線だと、装備選びはシンプルです。置けるか、続けられるか、壊れにくいか。今回はその三つが揃いやすいものだけを7点にしました。"
+      "目線だと、装備選びはシンプルです。置けるか、続けられるか、壊れにくいか。今回はその三つが揃いやすいものだけを7点にしました。"
     ],
     "forAudience": [
       "単身赴任・入隊・学生寮など、狭い部屋で生活している男向け",
@@ -810,7 +810,7 @@ const articles = [
     "forAudience": [
       "通勤が長い、週末にドライブやキャンプ行きがちな人",
       "車内をあまり綺麗にできないが、最低限は整えたい人",
-      "積載の段取りをシンプルにしたい元自衛官系の思考が好きな人"
+      "積載の段取りをシンプルにしたい系の思考が好きな人"
     ],
     "body": [],
     "picks": [
@@ -1292,7 +1292,7 @@ const articles = [
     "productIds": [],
     "introParagraphs": [
       "片付けが続かないのは性格じゃなくて設計の問題であることが多いです。面倒な工程が一つでもあると、疲れた日に破綻します。",
-      "元自衛官っぽく言うと、整備は「毎回同じ手順で短く終わる」ことが大事です。今回はその手順を短くする道具側です。"
+      "っぽく言うと、整備は「毎回同じ手順で短く終わる」ことが大事です。今回はその手順を短くする道具側です。"
     ],
     "forAudience": [
       "片付けは嫌いだが、部屋はそれなりに見せたい人",
@@ -1623,7 +1623,7 @@ const articles = [
     "productIds": [],
     "introParagraphs": [
       "楽天は選択肢が多いので、探しているうちに疲れます。疲れると勢いで買って、サイズ違いで終わりがちです。",
-      "元自衛官っぽく言うと、装備は「現物の置き場所」と「運用」が先。ページのテンションは後でいいです。"
+      "っぽく言うと、装備は「現物の置き場所」と「運用」が先。ページのテンションは後でいいです。"
     ],
     "forAudience": [
       "ネット通販は慣れてないが、楽天で生活用品を揃えたい人",
@@ -1944,7 +1944,7 @@ const articles = [
   },
   {
     "id": "recovery-gear-ex-sdf",
-    "title": "元自衛官目線で選ぶ、疲れを残さないリカバリーグッズ",
+    "title": "疲れを残さないリカバリーグッズの選び方",
     "category": "training",
     "date": "2026-05-04",
     "readTime": "16分",
@@ -2248,7 +2248,7 @@ const articles = [
     "productIds": [],
     "introParagraphs": [
       "出張は「荷物が増えるほど判断が鈍る」タイプの負荷が乗ります。旅行も同じで、持ち歩く重量はできるだけ減らしたいです。",
-      "元自衛官目線だと、移動装備は兼用が強い。一回の用途しかないものは最後に回します。"
+      "目線だと、移動装備は兼用が強い。一回の用途しかないものは最後に回します。"
     ],
     "forAudience": [
       "国内出張が多い人",
@@ -2402,7 +2402,7 @@ const articles = [
   },
   {
     "id": "nuuca-nuucasleep-guest-disaster",
-    "title": "元自衛官の寝袋論：来客・防災・移動で「眠れる状態」を用意する話",
+    "title": "来客・防災向け寝袋の選び方：来客・防災・移動で「眠れる状態」を用意する話",
     "category": "disaster",
     "date": "2026-05-06",
     "readTime": "5分",
@@ -2411,7 +2411,7 @@ const articles = [
     "introParagraphs": [
       "現役時代、寝袋は「かっこいい装備」というより、翌日ちゃんと動けるかの土台でした。防寒が甘いだけじゃなくて、寝返り、汗、埃、身の回りの気持ち悪さが積み上がると、判断が鈍る。これは野外でも室内でも同じで、いざという夜に「布団がない」「寝袋が古い」は、冷静さまで削ります。",
       "隊を離れてからは、その癖がそのまま来客・防災・車中泊に転がってきました。だからこそ、用途が分散しやすい寝具は「季節幅」「置き場」「洗える」の三点を先に見るようにしています。",
-      "この記事で紹介する Nuuca「ヌーカスリープ」は、自分が実際に試したレビュー記事ではなく、商品ページ・仕様・レビューを前提に自分の整理のために載せているピックです。購入前は必ず最新の価格・在庫・レビューでご判断ください。"
+      "この記事で紹介する Nuuca「ヌーカスリープ」は、自分が実際に試した比較記事ではなく、商品ページ・仕様・レビューを前提に自分の整理のために載せているピックです。購入前は必ず最新の価格・在庫・レビューでご判断ください。"
     ],
     "forAudience": [
       "防災の寝具だけ先延ばしにしがちな人",
@@ -2929,7 +2929,7 @@ function renderA8TopRecommendSection() {
       <div class="section-head">
         <div>
           <h2>だるい生活を少しラクにするおすすめ</h2>
-          <p>元自衛官目線で、日常・寮生活・デスク周り・車内で使いやすそうなものを中心に紹介します。</p>
+          <p>購入前の観点で、日常・寮生活・デスク周り・車内で使いやすそうなものを中心に紹介します。</p>
         </div>
         <span class="a8-ad-slot__badge a8-ad-slot__badge--section" aria-hidden="true">PR</span>
       </div>
@@ -3098,9 +3098,9 @@ function renderHome() {
   app.innerHTML = `
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">元自衛官目線の装備レビュー</p>
-        <h1>暮らしをラクにする装備レビュー</h1>
-        <p class="lead">元自衛官の目線で、楽天市場で探しやすい生活用品・防災グッズ・車載アイテム・デスク周り用品を整理して紹介します。</p>
+        <p class="eyebrow">目線の家電比較</p>
+        <h1>置くだけで暮らしをラクにする家電比較</h1>
+        <p class="lead">の目線で、楽天市場で探しやすい生活用品・防災グッズ・車載アイテム・デスク周り用品を整理して紹介します。</p>
         <div class="hero-site-summary" aria-label="このサイトの案内">
           <p><strong>テーマ</strong>　日用品・防災・車内・デスク周りなど、生活導線に効く装備の整理とレビューです。</p>
           <p><strong>向いている人</strong>　一人暮らし・寮生活、防災の備え、車・バイク利用、在宅で作業環境を整えたい人。</p>
@@ -3115,13 +3115,13 @@ function renderHome() {
           <a class="button secondary" href="#/category/disaster">防災装備を見る</a>
         </div>
       </div>
-      <div class="hero-panel" aria-label="装備レビューの概要">
+      <div class="hero-panel" aria-label="家電比較の概要">
         <div class="hero-panel-inner">
-          <span class="panel-label">FIELD NOTES</span>
+          <span class="panel-label">SIZE CHECK</span>
           <strong>買う前に、用途・置き場所・使う頻度を見る。</strong>
           <p>生活導線に入るものだけが、本当に使える装備になります。</p>
           <div class="stats">
-            <div class="stat"><b>${articles.length}</b><small>レビュー記事</small></div>
+            <div class="stat"><b>${articles.length}</b><small>比較記事</small></div>
             <div class="stat"><b>${products.length}</b><small>商品カード</small></div>
             <div class="stat"><b>${categories.length}</b><small>カテゴリ</small></div>
           </div>
@@ -3183,7 +3183,7 @@ function renderArticleList({ categoryId = "", query = "" } = {}) {
     <section class="page-hero">
       <p class="eyebrow">${category ? "カテゴリ" : "記事一覧"}</p>
       <h1>${category ? category.name : "記事一覧"}</h1>
-      <p class="lead">${category ? category.description : "キーワード検索とカテゴリで、必要な装備レビューを探せます。"}</p>
+      <p class="lead">${category ? category.description : "キーワード検索とカテゴリで、必要な家電比較を探せます。"}</p>
       <p class="ad-notice">当サイトはアフィリエイト広告を利用しています。</p>
       <form class="search-panel" id="searchForm">
         <input id="searchInput" type="search" value="${escapeHtml(query)}" placeholder="例：収納、防災、バイク、筋トレ" aria-label="記事を検索" />
@@ -3320,8 +3320,8 @@ function renderProfilePage() {
   app.innerHTML = `
     <section class="page-hero">
       <p class="eyebrow">運営について</p>
-      <h1>暮らしをラクにする装備レビュー</h1>
-      <p class="lead">元自衛官の運営者が、生活・防災・車内・デスク周りで実際に使いやすいかを基準に、楽天市場の商品を整理して紹介しています。</p>
+      <h1>置くだけで暮らしをラクにする家電比較</h1>
+      <p class="lead">の運営者が、生活・防災・車内・デスク周りで実際に使いやすいかを基準に、楽天市場の商品を整理して紹介しています。</p>
       <p class="ad-notice">当サイトはアフィリエイト広告を利用しています。</p>
     </section>
     <section class="section">
@@ -3426,10 +3426,10 @@ function renderProfileBox() {
         <div class="avatar">元</div>
         <div>
           <h3>運営者・${escapeHtml(AUTHOR_PEN_NAME)}</h3>
-          <div class="article-meta">元自衛官の経験を、装備選びの基準にしています</div>
+          <div class="article-meta">の経験を、装備選びの基準にしています</div>
         </div>
       </div>
-      <p>このサイトは、元自衛官の運営者が、生活・防災・車内・デスク周りで「実際に使いやすそうか」を重視して商品を整理するレビューサイトです。高すぎる物や見た目だけの商品ではなく、日常でラクになるか、備えとして役立つかを基準に紹介しています。</p>
+      <p>このサイトは、の運営者が、生活・防災・車内・デスク周りで「実際に使いやすそうか」を重視して商品を整理するレビューサイトです。高すぎる物や見た目だけの商品ではなく、日常でラクになるか、備えとして役立つかを基準に紹介しています。</p>
       <p><strong>このサイトの目的：</strong>楽天市場で迷いやすいカテゴリを、用途・置き場所・頻度で分けて、比較しやすい形にまとめることです。</p>
       <p><strong>読者への約束：</strong>価格・在庫・レビューは必ず商品ページで確かめてくださいとお伝えします。PRやアフィリエイトの利用も、記事冒頭・広告枠で明示します。</p>
       <p class="profile-contact">更新情報・誤記のご指摘：<a href="${escapeHtml(CONTACT_X_URL)}" target="_blank" rel="me noopener noreferrer">${escapeHtml(CONTACT_X_HANDLE)}</a>（X）</p>

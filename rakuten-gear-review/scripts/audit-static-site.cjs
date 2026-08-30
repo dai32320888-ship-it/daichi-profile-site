@@ -55,19 +55,31 @@ function extractFeedLinks(feedXml) {
   return [...feedXml.matchAll(/<link>([^<]+)<\/link>/g)].map((m) => m[1]).slice(1);
 }
 
+const NOINDEX_ALLOWED = new Set([
+  "hub/disaster.html",
+  "hub/pc-ai.html",
+  "category/disaster.html",
+  "category/training.html",
+  "category/game.html",
+  "category/bike.html",
+  "category/pc-ai.html",
+]);
+
 function auditMetadata() {
   const issues = [];
   const files = walk(root, (file) => file.endsWith(".html"));
   for (const file of files) {
     const html = read(file);
-    const rel = path.relative(root, file);
+    const rel = path.relative(root, file).replace(/\\/g, "/");
     if (UTILITY_HTML.has(rel) || html.includes('http-equiv="refresh"')) continue;
     if (!html.includes("<title")) issues.push(`missing title: ${rel}`);
     if (!/name=["']description["']/.test(html)) issues.push(`missing description: ${rel}`);
     if (!html.includes("<h1")) issues.push(`missing h1: ${rel}`);
     if (!/rel=["']canonical["']/.test(html)) issues.push(`missing canonical: ${rel}`);
     if (!/property=["']og:title["']/.test(html)) issues.push(`missing og:title: ${rel}`);
-    if (/noindex/i.test(html)) issues.push(`contains noindex: ${rel}`);
+    if (/noindex/i.test(html) && !rel.startsWith("article/") && !NOINDEX_ALLOWED.has(rel)) {
+      issues.push(`contains noindex: ${rel}`);
+    }
     for (const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
       try {
         JSON.parse(match[1]);
@@ -132,11 +144,20 @@ function auditCanonical(articleIds) {
     if (REDIRECT_ARTICLE_IDS.has(id)) continue;
     const html = read(path.join(articleRoot, id, "index.html"));
     if (/http-equiv="refresh"/i.test(html)) continue;
-    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1] || "";
+    const canonical =
+      html.match(/rel=["']canonical["'][^>]*href=["']([^"']+)["']/i)?.[1] ||
+      html.match(/<link rel="canonical" href="([^"]+)"/)?.[1] ||
+      "";
     const expected = `${SITE_BASE}/article/${id}/`;
     if (canonical !== expected) issues.push(`${id}: ${canonical}`);
   }
   return issues;
+}
+
+function isIndexableArticle(id) {
+  return /掃除機|ロボット掃除|ハンディクリーナー|空気清浄|加湿器|スチーマー|ヒーター|電気毛布|毛布|電子レンジ|炊飯器|冷却|ハンディファン|扇風機|車載|インバーター|クーラーボックス|冷風機|暖房機|保冷剤|冷感タオル|cooling-plate|summer-heat-ranking/.test(
+    id,
+  );
 }
 
 function auditSitemap(articleIds) {
@@ -145,7 +166,8 @@ function auditSitemap(articleIds) {
   const rootSitemap = read(path.join(repoRoot, "sitemap.xml"));
   const rootUrls = parseSitemapUrls(rootSitemap);
   const rakutenRootUrls = rootUrls.filter((url) => url.includes("/rakuten-gear-review/"));
-  const articleUrls = articleIds.map((id) => `${SITE_BASE}/article/${id}/`);
+  const indexableIds = articleIds.filter(isIndexableArticle);
+  const articleUrls = indexableIds.map((id) => `${SITE_BASE}/article/${id}/`);
   const missingInSite = articleUrls.filter((url) => !siteUrls.has(url));
   const missingInRoot = articleUrls.filter((url) => !rootUrls.includes(url));
   const staleRoot = rakutenRootUrls.filter((url) => !siteUrls.has(url));
@@ -177,7 +199,7 @@ function auditFeed(feedXml) {
 
 function auditArticleCountDisplay(articleIds) {
   const index = read(path.join(root, "index.html"));
-  const statMatch = index.match(/<div class="stat"><b>(\d+)<\/b><small>レビュー記事<\/small><\/div>/);
+  const statMatch = index.match(/<div class="stat"><b>(\d+)<\/b><small>掲載記事/);
   const textMatch = index.match(/全(\d+)記事から最新/);
   const articleCount = articleIds.length;
   return {

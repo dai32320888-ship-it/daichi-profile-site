@@ -1,83 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>元自衛官の楽天装備レビュー</title>
+    <title>置くだけ家電ラボ</title>
     <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/</link>
-    <description>元自衛官の視点で、寮生活・一人暮らし・車・バイク・デスク周り・防災・日用品に役立つ楽天商品を紹介する装備レビューブログです。</description>
+    <description>賃貸やワンルームでも導入しやすい家電を、サイズ・騒音・消費電力・手入れのしやすさで比較。ロボット掃除機・空気清浄機・加湿器・衣類スチーマー・足元ヒーター・車載家電など。</description>
     <language>ja</language>
-    <lastBuildDate>Mon, 03 Aug 2026 09:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2026 00:00:00 GMT</lastBuildDate>
     <item>
-      <title><![CDATA[車用シートクーラーを紹介｜夏の運転中の背中・座面の蒸れ対策に]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/car-seat-cooler/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/car-seat-cooler/</guid>
-      <pubDate>Mon, 03 Aug 2026 01:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/car-seat-cooler/03_installed_photo.png" alt="" />
-車用シートクーラーの特徴を商品ページ情報から整理。送風構造、風量調整、自動機能、購入前に確認したい対応電圧や給電方法を紹介します。]]></description>
-      <media:thumbnail url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/car-seat-cooler/03_installed_photo.png" />
-      <enclosure url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/car-seat-cooler/03_installed_photo.png" type="image/png" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[車・バイク・自転車に使える電動空気入れを紹介｜自動停止タイプをチェック]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/car-bike-electric-air-pump/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/car-bike-electric-air-pump/</guid>
-      <pubDate>Tue, 21 Jul 2026 01:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/car-bike-electric-air-pump/03_product_main.png" alt="" />
-車・バイク・自転車に使える電動空気入れの特徴を商品ページ情報から整理。空気圧設定、自動停止、付属品、購入前に確認したい対応バルブや仕様を紹介します。]]></description>
-      <media:thumbnail url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/car-bike-electric-air-pump/03_product_main.png" />
-      <enclosure url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/car-bike-electric-air-pump/03_product_main.png" type="image/png" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[ペルチェ冷却プレート付きファンベストを紹介｜屋外作業や釣りの暑さ対策に]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/peltier-cooling-fan-vest/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/peltier-cooling-fan-vest/</guid>
-      <pubDate>Sat, 18 Jul 2026 01:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/peltier-cooling-fan-vest/01_full_set.png" alt="" />
-ペルチェ冷却プレート付きファンベストの特徴を商品ページ情報から整理。セット内容、ファンと冷却プレートの仕組み、購入前に確認したいサイズや稼働時間を紹介します。]]></description>
-      <media:thumbnail url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/peltier-cooling-fan-vest/01_full_set.png" />
-      <enclosure url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/peltier-cooling-fan-vest/01_full_set.png" type="image/png" length="0" />
-    </item>
-        <item>
-      <title><![CDATA[UVカット率99%の傘型車用サンシェードを紹介｜夏の車内の日差し対策に]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/umbrella-car-sunshade/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/umbrella-car-sunshade/</guid>
-      <pubDate>Sat, 18 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/umbrella-car-sunshade/scene-cta-hero.png" alt="" />
-傘のように開いて使える車用サンシェードの特徴を商品ページ情報から整理。夏の車内の日差し対策や、購入前に確認したいサイズ・設置方法を紹介します。]]></description>
-      <media:thumbnail url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/umbrella-car-sunshade/scene-cta-hero.png" />
-      <enclosure url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/umbrella-car-sunshade/scene-cta-hero.png" type="image/png" length="0" />
-    </item>
-        <item>
       <title><![CDATA[夏の外出に便利？120段階・冷却プレート付きハンディファンを紹介]]></title>
       <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/cooling-plate-handheld-fan/</link>
       <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/cooling-plate-handheld-fan/</guid>
       <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/cooling-plate-handheld-fan/scene-cta-hero.png" alt="" />
-冷却プレート付きハンディファンの特徴を商品ページの情報から整理。風量調整、持ち歩きやすさ、購入前に確認したいポイントを紹介します。]]></description>
-      <media:thumbnail url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/cooling-plate-handheld-fan/scene-cta-hero.png" />
-      <enclosure url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/articles/cooling-plate-handheld-fan/scene-cta-hero.png" type="image/png" length="0" />
-    </item>
-        <item>
-      <title><![CDATA[寝るときの口閉じテープおすすめ5選｜ハーランドも実践？選び方と注意点]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/mouth-tape-sleep/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/mouth-tape-sleep/</guid>
-      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/evo-inc/cabinet/item/07089650/mouthtape-s5.jpg?_ex=480x480" alt="" />
-寝るときに使う口閉じテープの選び方とおすすめ商品を紹介。ハーランドの睡眠習慣としても話題ですが、使用前に知っておきたい注意点があります。肌への優しさ、通気性、形状、枚数を比較します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/evo-inc/cabinet/item/07089650/mouthtape-s5.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/evo-inc/cabinet/item/07089650/mouthtape-s5.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-<item>
-      <title><![CDATA[「一人暮らし フライパン 一人用」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-フライパン-一人用/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-フライパン-一人用/</guid>
-      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/irisplaza-r/cabinet/11073544/12782397/12918968/114383.jpg?_ex=480x480" alt="" />
-一人暮らしシーンで使える「一人暮らし フライパン 一人用」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/irisplaza-r/cabinet/11073544/12782397/12918968/114383.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/irisplaza-r/cabinet/11073544/12782397/12918968/114383.jpg?_ex=480x480" type="image/jpeg" length="0" />
+      <description><![CDATA[<img src="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/og-default.png" alt="" />
+夏の外出で普通のハンディファンだけでは物足りない人向けに、冷却プレート付きモデルの特徴を商品ページの情報から整理します。購入前比較ではありません。]]></description>
+      <media:thumbnail url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/og-default.png" />
+      <enclosure url="https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/images/og-default.png" type="image/jpeg" length="0" />
     </item>
     <item>
-      <title><![CDATA[「一人暮らし 空気清浄機 小型」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
+      <title><![CDATA[「一人暮らし 空気清浄機 小型」楽天で失敗しにくい選び方｜購入前チェック]]></title>
       <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-空気清浄機-小型/</link>
       <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-空気清浄機-小型/</guid>
       <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
@@ -87,227 +27,7 @@
       <enclosure url="https://shop.r10s.jp/digitalcafe/cabinet/11795545/11795547/djhq002-a.jpg?_ex=480x480" type="image/jpeg" length="0" />
     </item>
     <item>
-      <title><![CDATA[「防災 アルミブランケット」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-disaster-防災-アルミブランケット/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-disaster-防災-アルミブランケット/</guid>
-      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/yukaiya/cabinet/eq/eq-24-01-01i.jpg?_ex=480x480" alt="" />
-防災シーンで使える「防災 アルミブランケット」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/yukaiya/cabinet/eq/eq-24-01-01i.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/yukaiya/cabinet/eq/eq-24-01-01i.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「防災 乾パン」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-disaster-防災-乾パン/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-disaster-防災-乾パン/</guid>
-      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/aichi12/cabinet/img_2/t-260w2401-rm.jpg?_ex=480x480" alt="" />
-防災シーンで使える「防災 乾パン」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/aichi12/cabinet/img_2/t-260w2401-rm.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/aichi12/cabinet/img_2/t-260w2401-rm.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「除湿剤 クローゼット」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-life-除湿剤-クローゼット/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-life-除湿剤-クローゼット/</guid>
-      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/itanaga/cabinet/10628614/10644748/1--10.jpg?_ex=480x480" alt="" />
-生活シーンで使える「除湿剤 クローゼット」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/itanaga/cabinet/10628614/10644748/1--10.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/itanaga/cabinet/10628614/10644748/1--10.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「浴室 鏡 曇り止め」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-life-浴室-鏡-曇り止め/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-life-浴室-鏡-曇り止め/</guid>
-      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/shopkurano/cabinet/kuranosalesam/s-mh0827-21a-10.jpg?_ex=480x480" alt="" />
-生活シーンで使える「浴室 鏡 曇り止め」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/shopkurano/cabinet/kuranosalesam/s-mh0827-21a-10.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/shopkurano/cabinet/kuranosalesam/s-mh0827-21a-10.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「キッチン 三角コーナー ゴミ袋」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-life-キッチン-三角コーナー-ゴミ袋/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-life-キッチン-三角コーナー-ゴミ袋/</guid>
-      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/shopmarna/cabinet/item_top/k4/k821.jpg?_ex=480x480" alt="" />
-生活シーンで使える「キッチン 三角コーナー ゴミ袋」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/shopmarna/cabinet/item_top/k4/k821.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/shopmarna/cabinet/item_top/k4/k821.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「マウス 静音 ワイヤレス」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-pc-ai-マウス-静音-ワイヤレス/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-pc-ai-マウス-静音-ワイヤレス/</guid>
-      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/logicool/cabinet/expl/mice/m220gr/m220gr_s_.jpg?_ex=480x480" alt="" />
-デスク・在宅シーンで使える「マウス 静音 ワイヤレス」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/logicool/cabinet/expl/mice/m220gr/m220gr_s_.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/logicool/cabinet/expl/mice/m220gr/m220gr_s_.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「バランスボール 55cm」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-training-バランスボール-55cm/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-training-バランスボール-55cm/</guid>
-      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/yiprefer/cabinet/tra/tra-077_01.jpg?_ex=480x480" alt="" />
-筋トレシーンで使える「バランスボール 55cm」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/yiprefer/cabinet/tra/tra-077_01.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/yiprefer/cabinet/tra/tra-077_01.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「バイク レインカバー シート」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-bike-バイク-レインカバー-シート/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-bike-バイク-レインカバー-シート/</guid>
-      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/good-item/cabinet/06842618/compass1565342521.jpg?_ex=480x480" alt="" />
-バイク旅シーンで使える「バイク レインカバー シート」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/good-item/cabinet/06842618/compass1565342521.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/good-item/cabinet/06842618/compass1565342521.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「ドリンクホルダー 隙間リング」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p071-ドリンクホルダー-隙間リング/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p071-ドリンクホルダー-隙間リング/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/hohoemimarket/cabinet/y61/10714268/y6113981.jpg?_ex=480x480" alt="" />
-生活シーンで使える「ドリンクホルダー 隙間リング」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/hohoemimarket/cabinet/y61/10714268/y6113981.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/hohoemimarket/cabinet/y61/10714268/y6113981.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「ハンドクリーム さらさら」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p073-ハンドクリーム-さらさら/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p073-ハンドクリーム-さらさら/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/crystal-planet/cabinet/nolcorp_img/005/oajon8901_01.jpg?_ex=480x480" alt="" />
-生活シーンで使える「ハンドクリーム さらさら」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/crystal-planet/cabinet/nolcorp_img/005/oajon8901_01.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/crystal-planet/cabinet/nolcorp_img/005/oajon8901_01.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「付箋 メモ デスク」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p075-付箋-メモ-デスク/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p075-付箋-メモ-デスク/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/gold/ravillage/SKU/kakeru/kake_top.jpg?_ex=480x480" alt="" />
-生活シーンで使える「付箋 メモ デスク」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/gold/ravillage/SKU/kakeru/kake_top.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/gold/ravillage/SKU/kakeru/kake_top.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「足元ライト 間接照明」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p077-足元ライト-間接照明/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p077-足元ライト-間接照明/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/auc-risecreation/cabinet/product/top-2/y0699_01a.jpg?_ex=480x480" alt="" />
-生活シーンで使える「足元ライト 間接照明」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/auc-risecreation/cabinet/product/top-2/y0699_01a.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/auc-risecreation/cabinet/product/top-2/y0699_01a.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「傘立て 吸水 トレー」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p079-傘立て-吸水-トレー/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p079-傘立て-吸水-トレー/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/andne/cabinet/neo/neo-269.jpg?_ex=480x480" alt="" />
-生活シーンで使える「傘立て 吸水 トレー」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/andne/cabinet/neo/neo-269.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/andne/cabinet/neo/neo-269.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「靴 汚れ シート」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p080-靴-汚れ-シート/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p080-靴-汚れ-シート/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/unifree/cabinet/12187119/01.jpg?_ex=480x480" alt="" />
-生活シーンで使える「靴 汚れ シート」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/unifree/cabinet/12187119/01.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/unifree/cabinet/12187119/01.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「スポンジホルダー 浮かせる」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p084-スポンジホルダー-浮かせる/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p084-スポンジホルダー-浮かせる/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/angers/cabinet/item_main0064/151678.jpg?_ex=480x480" alt="" />
-生活シーンで使える「スポンジホルダー 浮かせる」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/angers/cabinet/item_main0064/151678.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/angers/cabinet/item_main0064/151678.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「コインケース 車」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p085-コインケース-車/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p085-コインケース-車/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/shop-calm/cabinet/img20/ca-1499-w.jpg?_ex=480x480" alt="" />
-生活シーンで使える「コインケース 車」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/shop-calm/cabinet/img20/ca-1499-w.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/shop-calm/cabinet/img20/ca-1499-w.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「加湿器 小型 卓上」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p088-加湿器-小型-卓上/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p088-加湿器-小型-卓上/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/dailycompass/cabinet/products/07624559/1-6.jpg?_ex=480x480" alt="" />
-生活シーンで使える「加湿器 小型 卓上」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/dailycompass/cabinet/products/07624559/1-6.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/dailycompass/cabinet/products/07624559/1-6.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「薄手 手袋」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p089-薄手-手袋/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p089-薄手-手袋/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/meebee/cabinet/09212435/09212436/top.jpg?_ex=480x480" alt="" />
-生活シーンで使える「薄手 手袋」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/meebee/cabinet/09212435/09212436/top.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/meebee/cabinet/09212435/09212436/top.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「車 サングラス ホルダー」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車-サングラス-ホルダー/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車-サングラス-ホルダー/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/auto1direct/cabinet/11931131/a1270_ranking_002.jpg?_ex=480x480" alt="" />
-車載シーンで使える「車 サングラス ホルダー」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/auto1direct/cabinet/11931131/a1270_ranking_002.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/auto1direct/cabinet/11931131/a1270_ranking_002.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「防災 ラジオ スマホ充電」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-disaster-防災-ラジオ-スマホ充電/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-disaster-防災-ラジオ-スマホ充電/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/kyohaya/cabinet/item/jkrab1/jkrab1_01_10off.jpg?_ex=480x480" alt="" />
-シーンで使える「防災 ラジオ スマホ充電」を整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/kyohaya/cabinet/item/jkrab1/jkrab1_01_10off.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/kyohaya/cabinet/item/jkrab1/jkrab1_01_10off.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「腹筋 ローラー 膝当て」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-training-腹筋-ローラー-膝当て/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-training-腹筋-ローラー-膝当て/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/bens-roots/cabinet/n20260221073747/b0fftczhfg-1.jpg?_ex=480x480" alt="" />
-シーンで使える「腹筋 ローラー 膝当て」を整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/bens-roots/cabinet/n20260221073747/b0fftczhfg-1.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/bens-roots/cabinet/n20260221073747/b0fftczhfg-1.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「Switch 有機EL フィルム」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-game-switch-oled-フィルム/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-game-switch-oled-フィルム/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/forthon/cabinet/product/sku1/r243/r243_1.jpg?_ex=480x480" alt="" />
-シーンで使える「Switch 有機EL フィルム」を整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/forthon/cabinet/product/sku1/r243/r243_1.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/forthon/cabinet/product/sku1/r243/r243_1.jpg?_ex=480x480" type="image/jpeg" length="0" />
-    </item>
-    <item>
-      <title><![CDATA[「ノートPC 冷却パッド 静音」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
+      <title><![CDATA[「ノートPC 冷却パッド 静音」楽天で失敗しにくい選び方｜購入前チェック]]></title>
       <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-pc-ai-ノートpc-冷却パッド-静音/</link>
       <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-pc-ai-ノートpc-冷却パッド-静音/</guid>
       <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
@@ -317,54 +37,154 @@
       <enclosure url="https://shop.r10s.jp/vaps/cabinet/image44/4580566433468_1.jpg?_ex=480x480" type="image/jpeg" length="0" />
     </item>
     <item>
-      <title><![CDATA[「一人暮らし カーテン 丈」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-カーテン-丈/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-カーテン-丈/</guid>
+      <title><![CDATA[「加湿器 小型 卓上」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p088-加湿器-小型-卓上/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p088-加湿器-小型-卓上/</guid>
       <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/lgcity/cabinet/09181167/imgrc0087570055.jpg?_ex=480x480" alt="" />
-一人暮らしシーンで使える「一人暮らし カーテン 丈」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/lgcity/cabinet/09181167/imgrc0087570055.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/lgcity/cabinet/09181167/imgrc0087570055.jpg?_ex=480x480" type="image/jpeg" length="0" />
+      <description><![CDATA[<img src="https://shop.r10s.jp/dailycompass/cabinet/products/07624559/1-6.jpg?_ex=480x480" alt="" />
+生活シーンで使える「加湿器 小型 卓上」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/dailycompass/cabinet/products/07624559/1-6.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/dailycompass/cabinet/products/07624559/1-6.jpg?_ex=480x480" type="image/jpeg" length="0" />
     </item>
     <item>
-      <title><![CDATA[「車 シート隙間 収納」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車-シート隙間-収納/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車-シート隙間-収納/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/outletruckruck/cabinet/2024/9/240919/czysacz01255.jpg?_ex=480x480" alt="" />
-車載シーンで使える「車 シート隙間 収納」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/outletruckruck/cabinet/2024/9/240919/czysacz01255.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/outletruckruck/cabinet/2024/9/240919/czysacz01255.jpg?_ex=480x480" type="image/jpeg" length="0" />
+      <title><![CDATA[「衣類スチーマー」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p048-衣類スチーマー/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p048-衣類スチーマー/</guid>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/sommelier/cabinet/0000/default/s1/t-fal-335_s1.jpg?_ex=480x480" alt="" />
+生活シーンで使える「衣類スチーマー」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/sommelier/cabinet/0000/default/s1/t-fal-335_s1.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/sommelier/cabinet/0000/default/s1/t-fal-335_s1.jpg?_ex=480x480" type="image/jpeg" length="0" />
     </item>
     <item>
-      <title><![CDATA[「一人暮らし 食器セット 1人」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-1/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-1/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/low-ya/cabinet/item_cart/sundries/02/jf54c_01.jpg?_ex=480x480" alt="" />
-一人暮らしシーンで使える「一人暮らし 食器セット 1人」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/low-ya/cabinet/item_cart/sundries/02/jf54c_01.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/low-ya/cabinet/item_cart/sundries/02/jf54c_01.jpg?_ex=480x480" type="image/jpeg" length="0" />
+      <title><![CDATA[「一人暮らし 電子レンジ 小型」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-電子レンジ-小型/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-電子レンジ-小型/</guid>
+      <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/comfee-kitchen/cabinet/07627576/11741710/1.jpg?_ex=480x480" alt="" />
+一人暮らしシーンで使える「一人暮らし 電子レンジ 小型」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/comfee-kitchen/cabinet/07627576/11741710/1.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/comfee-kitchen/cabinet/07627576/11741710/1.jpg?_ex=480x480" type="image/jpeg" length="0" />
     </item>
     <item>
-      <title><![CDATA[「車 トランク ネット」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車-トランク-ネット/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車-トランク-ネット/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/bederu/cabinet/zaka/1600/za1606.jpg?_ex=480x480" alt="" />
-車載シーンで使える「車 トランク ネット」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/bederu/cabinet/zaka/1600/za1606.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/bederu/cabinet/zaka/1600/za1606.jpg?_ex=480x480" type="image/jpeg" length="0" />
+      <title><![CDATA[「一人暮らし 炊飯器 1合」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-炊飯器-1合/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-炊飯器-1合/</guid>
+      <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/apricot-r/cabinet/ladonna3/3950-1760.jpg?_ex=480x480" alt="" />
+一人暮らしシーンで使える「一人暮らし 炊飯器 1合」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/apricot-r/cabinet/ladonna3/3950-1760.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/apricot-r/cabinet/ladonna3/3950-1760.jpg?_ex=480x480" type="image/jpeg" length="0" />
     </item>
     <item>
-      <title><![CDATA[「一人暮らし 突っ張り棚」楽天で失敗しにくい選び方｜元自衛官の確認メモ]]></title>
-      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-突っ張り棚/</link>
-      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-solo-一人暮らし-突っ張り棚/</guid>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<img src="https://shop.r10s.jp/rack-kan/cabinet/tasha71/7140811main.jpg?_ex=480x480" alt="" />
-一人暮らしシーンで使える「一人暮らし 突っ張り棚」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
-      <media:thumbnail url="https://shop.r10s.jp/rack-kan/cabinet/tasha71/7140811main.jpg?_ex=480x480" />
-      <enclosure url="https://shop.r10s.jp/rack-kan/cabinet/tasha71/7140811main.jpg?_ex=480x480" type="image/jpeg" length="0" />
+      <title><![CDATA[「ゲーム 冷却ファン ノートPC」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-game-ゲーム-冷却ファン-ノートPC/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-game-ゲーム-冷却ファン-ノートPC/</guid>
+      <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/emuland-store/cabinet/11099822/34988605_2.jpg?_ex=480x480" alt="" />
+ゲームシーンで使える「ゲーム 冷却ファン ノートPC」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/emuland-store/cabinet/11099822/34988605_2.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/emuland-store/cabinet/11099822/34988605_2.jpg?_ex=480x480" type="image/jpeg" length="0" />
+    </item>
+    <item>
+      <title><![CDATA[「車載 クーラーボックス 12V」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車載-クーラーボックス-12V/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車載-クーラーボックス-12V/</guid>
+      <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/farson/cabinet/10310220/imgrc0125591436.jpg?_ex=480x480" alt="" />
+車載シーンで使える「車載 クーラーボックス 12V」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/farson/cabinet/10310220/imgrc0125591436.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/farson/cabinet/10310220/imgrc0125591436.jpg?_ex=480x480" type="image/jpeg" length="0" />
+    </item>
+    <item>
+      <title><![CDATA[「車載 インバーター 100V」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車載-インバーター-100V/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車載-インバーター-100V/</guid>
+      <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/lvyuan/cabinet/13280373/imgrc0104436169.jpg?_ex=480x480" alt="" />
+車載シーンで使える「車載 インバーター 100V」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/lvyuan/cabinet/13280373/imgrc0104436169.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/lvyuan/cabinet/13280373/imgrc0104436169.jpg?_ex=480x480" type="image/jpeg" length="0" />
+    </item>
+    <item>
+      <title><![CDATA[「車 寒さ対策 ヒーター」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車-寒さ対策-ヒーター/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-car-車-寒さ対策-ヒーター/</guid>
+      <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/relaxa-from2/cabinet/seikatsu/10228531/heatpad_mat/imgrc0109156169.jpg?_ex=480x480" alt="" />
+車載シーンで使える「車 寒さ対策 ヒーター」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/relaxa-from2/cabinet/seikatsu/10228531/heatpad_mat/imgrc0109156169.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/relaxa-from2/cabinet/seikatsu/10228531/heatpad_mat/imgrc0109156169.jpg?_ex=480x480" type="image/jpeg" length="0" />
+    </item>
+    <item>
+      <title><![CDATA[「バイク 冷却ベスト 夏」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-bike-バイク-冷却ベスト-夏/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/gap-bike-バイク-冷却ベスト-夏/</guid>
+      <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/amuskin/cabinet/jian0101/amus72zbr5uu5.jpg?_ex=480x480" alt="" />
+バイクシーンで使える「バイク 冷却ベスト 夏」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/amuskin/cabinet/jian0101/amus72zbr5uu5.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/amuskin/cabinet/jian0101/amus72zbr5uu5.jpg?_ex=480x480" type="image/jpeg" length="0" />
+    </item>
+    <item>
+      <title><![CDATA[「足元ヒーター デスク」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p024-足元ヒーター-デスク/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p024-足元ヒーター-デスク/</guid>
+      <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/ginzahonjin/cabinet/12155694/imgrc0121336441.jpg?_ex=480x480" alt="" />
+生活シーンで使える「足元ヒーター デスク」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/ginzahonjin/cabinet/12155694/imgrc0121336441.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/ginzahonjin/cabinet/12155694/imgrc0121336441.jpg?_ex=480x480" type="image/jpeg" length="0" />
+    </item>
+    <item>
+      <title><![CDATA[「電気毛布」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p023-電気毛布/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p023-電気毛布/</guid>
+      <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/lifejoy-shop/cabinet/12974530/12987708/imgrc0117467998.jpg?_ex=480x480" alt="" />
+生活シーンで使える「電気毛布」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/lifejoy-shop/cabinet/12974530/12987708/imgrc0117467998.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/lifejoy-shop/cabinet/12974530/12987708/imgrc0117467998.jpg?_ex=480x480" type="image/jpeg" length="0" />
+    </item>
+    <item>
+      <title><![CDATA[「ロボット掃除機 一人暮らし」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p018-ロボット掃除機-一人暮らし/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p018-ロボット掃除機-一人暮らし/</guid>
+      <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/airrobo/cabinet/11888073/p20-g50.jpg?_ex=480x480" alt="" />
+生活シーンで使える「ロボット掃除機 一人暮らし」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/airrobo/cabinet/11888073/p20-g50.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/airrobo/cabinet/11888073/p20-g50.jpg?_ex=480x480" type="image/jpeg" length="0" />
+    </item>
+    <item>
+      <title><![CDATA[「ハンディクリーナー 小型」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p017-ハンディクリーナー-小型/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p017-ハンディクリーナー-小型/</guid>
+      <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/momonoya/cabinet/09399122/imgrc0082440386.jpg?_ex=480x480" alt="" />
+一人暮らしシーンで使える「ハンディクリーナー 小型」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/momonoya/cabinet/09399122/imgrc0082440386.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/momonoya/cabinet/09399122/imgrc0082440386.jpg?_ex=480x480" type="image/jpeg" length="0" />
+    </item>
+    <item>
+      <title><![CDATA[「ロボット掃除機 一人暮らし」楽天で失敗しにくい選び方｜購入前チェック]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p008-ロボット掃除機-一人暮らし/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/auto-p008-ロボット掃除機-一人暮らし/</guid>
+      <pubDate>Sun, 14 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://shop.r10s.jp/airrobo/cabinet/11888073/p20-g50.jpg?_ex=480x480" alt="" />
+生活シーンで使える「ロボット掃除機 一人暮らし」を、用途・置き場所・続けやすさの観点で整理します。]]></description>
+      <media:thumbnail url="https://shop.r10s.jp/airrobo/cabinet/11888073/p20-g50.jpg?_ex=480x480" />
+      <enclosure url="https://shop.r10s.jp/airrobo/cabinet/11888073/p20-g50.jpg?_ex=480x480" type="image/jpeg" length="0" />
+    </item>
+    <item>
+      <title><![CDATA[夏の外作業・車載に置きたい暑さ対策装備：保冷剤・冷感タオル・遮光グッズ]]></title>
+      <link>https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/summer-heat-ranking-gear-202606/</link>
+      <guid isPermaLink="true">https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review/article/summer-heat-ranking-gear-202606/</guid>
+      <pubDate>Sat, 13 Jun 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<img src="https://thumbnail.image.rakuten.co.jp/@mall/decori/cabinet/12282578/imgrc0096993936.jpg?_ex=480x480" alt="" />
+外作業、車移動、買い物帰りに使いやすい暑さ対策装備を、持ち運び・保冷・日差し対策で整理します。]]></description>
+      <media:thumbnail url="https://thumbnail.image.rakuten.co.jp/@mall/decori/cabinet/12282578/imgrc0096993936.jpg?_ex=480x480" />
+      <enclosure url="https://thumbnail.image.rakuten.co.jp/@mall/decori/cabinet/12282578/imgrc0096993936.jpg?_ex=480x480" type="image/jpeg" length="0" />
     </item>
   </channel>
 </rss>
