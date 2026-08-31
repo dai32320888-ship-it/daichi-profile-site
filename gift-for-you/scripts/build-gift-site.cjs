@@ -271,7 +271,7 @@ function staticArticleBody(article) {
     ${faqBlock}
     <h2>まとめ</h2>
     <p>${esc(article.title.replace("おすすめ", ""))}は、相手との距離感・予算・渡す場面をそろえて考えると選びやすくなります。迷ったら上のカテゴリから1つに絞り、楽天リンクで最新価格を確認してください。</p>
-    <p>生活装備のプレゼント候補は <a href="${gearBlogUrl}">元自衛官の楽天装備レビュー</a> も参考にできます。</p>`;
+    <p>省スペース家電のプレゼント候補は <a href="${gearBlogUrl}">置くだけ家電ラボ</a> も参考にできます。</p>`;
 }
 
 function renderGiftFooter(topHref = "./") {
@@ -286,7 +286,7 @@ function renderGiftFooter(topHref = "./") {
       : "";
   return `<footer class="footer site-footer-gift">
     <div class="footer-main">
-      <p><a href="${topHref}#about">このサイトについて</a> · <a href="${gearBlogUrl}">元自衛官の楽天装備レビュー</a></p>
+      <p><a href="${topHref}#about">このサイトについて</a> · <a href="${gearBlogUrl}">置くだけ家電ラボ</a></p>
       <div class="promo-badges">${blogmura}</div>
       ${blogParts}
     </div>
@@ -610,7 +610,7 @@ function indexHtml() {
         <p class="breadcrumb">ホーム &gt; このサイトについて</p>
         <h2>このサイトについて</h2>
         <p>プレゼントふぉーゆーは、贈る相手やシーンに合わせて「外しにくい候補」を探すためのプレゼント相談サイトです。掲載リンクには広告が含まれる場合があります。</p>
-        <p>関連サイト: <a href="${gearBlogUrl}">元自衛官の楽天装備レビュー</a></p>
+        <p>関連サイト: <a href="${gearBlogUrl}">置くだけ家電ラボ</a></p>
       </div>
       <div class="notice">
         <strong>広告表記</strong>

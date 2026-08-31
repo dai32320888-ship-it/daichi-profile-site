@@ -6,6 +6,8 @@ const repoRoot = path.resolve(root, "..");
 const articleRoot = path.join(root, "article");
 const giftRoot = path.join(repoRoot, "gift-for-you");
 const SITE_BASE = "https://dai32320888-ship-it.github.io/daichi-profile-site/rakuten-gear-review";
+const SOURCE_NOTICE =
+  "公式情報・販売ページ・提供画像をもとに、仕様と購入前の確認点を整理しています。実際に購入・使用したレビューではありません。";
 const REDIRECT_ARTICLE_IDS = new Set([
   "auto-p004-防災-リュック-コンパクト",
   "nintendo-switch-2-rakuten",
@@ -110,6 +112,7 @@ function auditLocalLinks() {
 
 function auditAffiliateDisclosure() {
   const missing = [];
+  const missingSourceNotice = [];
   const files = walk(articleRoot, (file) => file.endsWith("index.html"));
   for (const file of files) {
     const html = read(file);
@@ -118,8 +121,11 @@ function auditAffiliateDisclosure() {
     if (!html.includes('class="ad-notice"') || !html.includes('class="article-disclosure"')) {
       missing.push(rel);
     }
+    if (!html.includes('class="article-source-notice"') || !html.includes(SOURCE_NOTICE)) {
+      missingSourceNotice.push(rel);
+    }
   }
-  return { checked: files.length, missing };
+  return { checked: files.length, missing, missingSourceNotice };
 }
 
 function auditBrokenSlugs(articleIds) {
@@ -155,9 +161,40 @@ function auditCanonical(articleIds) {
 }
 
 function isIndexableArticle(id) {
-  return /掃除機|ロボット掃除|ハンディクリーナー|空気清浄|加湿器|スチーマー|ヒーター|電気毛布|毛布|電子レンジ|炊飯器|冷却|ハンディファン|扇風機|車載|インバーター|クーラーボックス|冷風機|暖房機|保冷剤|冷感タオル|cooling-plate|summer-heat-ranking/.test(
-    id,
-  );
+  if (/^gap-(?:game|pc-ai)-/.test(id)) return false;
+  return /掃除機|ロボット掃除|ハンディクリーナー|空気清浄|加湿器|スチーマー|ヒーター|電気毛布|毛布|電子レンジ|炊飯器|冷却|ハンディファン|扇風機|車載|インバーター|クーラーボックス|冷風機|暖房機|保冷剤|冷感タオル|cooling-plate|summer-heat-ranking|^(?:car-seat-cooler|car-bike-electric-air-pump|peltier-cooling-fan-vest)$/.test(id);
+}
+
+function auditLegacyBranding() {
+  const forbidden = [
+    "元自衛官",
+    "自衛官時代",
+    "元自衛官目線",
+    "軍装備",
+    "自衛官経験",
+    "元自衛官の楽天装備レビュー",
+  ];
+  const extensions = new Set([".html", ".js", ".cjs", ".json", ".xml", ".md", ".txt", ".tsv", ".svg"]);
+  const ignored = new Set([
+    "scripts/rebrand-appliance-lab.cjs",
+    "scripts/audit-static-site.cjs",
+  ]);
+  const hits = [];
+  for (const file of walk(root, (f) => extensions.has(path.extname(f)))) {
+    const rel = path.relative(root, file).replace(/\\/g, "/");
+    if (ignored.has(rel)) continue;
+    const content = read(file);
+    for (const phrase of forbidden) {
+      if (content.includes(phrase)) hits.push(`${rel}: ${phrase}`);
+    }
+  }
+  for (const file of walk(giftRoot, (f) => extensions.has(path.extname(f)))) {
+    const content = read(file);
+    if (content.includes("元自衛官の楽天装備レビュー")) {
+      hits.push(`${path.relative(repoRoot, file).replace(/\\/g, "/")}: cross-site legacy name`);
+    }
+  }
+  return hits;
 }
 
 function auditSitemap(articleIds) {
@@ -252,6 +289,7 @@ const canonicalIssues = auditCanonical(articleIds);
 const articleCount = auditArticleCountDisplay(articleIds);
 const legacySlugRefs = auditLegacySlugReferences();
 const giftFeed = auditGiftFeed();
+const legacyBranding = auditLegacyBranding();
 
 const warnings = [];
 const errors = [];
@@ -269,6 +307,10 @@ if (!feedAudit.feedMatchesIndexTop5) warnings.push("feed top5 does not match ind
 if (metadata.issues.length) errors.push(...metadata.issues.slice(0, 20));
 if (links.bad.length) errors.push(...links.bad.slice(0, 20));
 if (affiliateDisclosure.missing.length) errors.push(`missing disclosure: ${affiliateDisclosure.missing.length}`);
+if (affiliateDisclosure.missingSourceNotice.length) {
+  errors.push(`missing source notice: ${affiliateDisclosure.missingSourceNotice.length}`);
+}
+if (legacyBranding.length) errors.push(`legacy branding remains: ${legacyBranding.length}`);
 if (canonicalIssues.length) errors.push(...canonicalIssues.slice(0, 10));
 if (!latestDates.length) errors.push("latest section missing");
 if (latestDates.length && !latestDates.every((date, index) => index === 0 || latestDates[index - 1] >= date)) {
@@ -286,6 +328,7 @@ const report = {
   sitemap: sitemapAudit,
   feed: feedAudit,
   giftFeed,
+  legacyBrandingCount: legacyBranding.length,
   affiliateDisclosure,
   metadata: { files: metadata.files, issueCount: metadata.issues.length },
   links: { files: links.files, badCount: links.bad.length },

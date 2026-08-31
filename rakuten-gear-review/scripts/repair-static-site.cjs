@@ -57,10 +57,6 @@ const REDIRECT_ARTICLE_IDS = new Set([
 function applyCopyFixes(text) {
   return text
     .replaceAll("10つ", "10個")
-    .replace(
-      /元自衛官目線で選ぶ「([^」]+)」：楽天で失敗しにくい選び方/g,
-      "「$1」楽天で失敗しにくい選び方｜購入前チェック",
-    )
     .replaceAll(
       "この記事では楽天市場の候補3つを、価格帯・口コミ・使用例つきで比較しました。気になったものはリンク先で最新価格と在庫を確認してください。",
       "楽天市場で候補3件を、価格帯・口コミ・使いどころ付きで比較しました。気になるものはリンク先で最新価格と在庫を確認してください。",
@@ -134,7 +130,7 @@ function parseArticle(dirName) {
   const title = stripTags(firstMatch(html, /<h1>([\s\S]*?)<\/h1>/));
   const summary = stripTags(firstMatch(html, /<p class="lead">([\s\S]*?)<\/p>/));
   const category = stripTags(
-    firstMatch(html, /<p class="eyebrow">([\s\S]*?)<\/p>/, "装備レビュー"),
+    firstMatch(html, /<p class="eyebrow">([\s\S]*?)<\/p>/, "家電比較"),
   );
   const meta = stripTags(firstMatch(html, /<p class="article-meta">([\s\S]*?)<\/p>/));
   const date = meta.match(/\d{4}-\d{2}-\d{2}/)?.[0] || "1970-01-01";
@@ -201,9 +197,13 @@ function feedSlugRank() {
 
 const APPLIANCE_SLUG_RE =
   /掃除機|ロボット掃除|ハンディクリーナー|空気清浄|加湿器|スチーマー|ヒーター|電気毛布|毛布|電子レンジ|炊飯器|冷却|ハンディファン|扇風機|車載|インバーター|クーラーボックス|冷風機|暖房機|保冷剤|冷感タオル|cooling-plate|summer-heat-ranking/;
+const APPLIANCE_SLUG_ALLOW_RE =
+  /^(?:car-seat-cooler|car-bike-electric-air-pump|peltier-cooling-fan-vest)$/;
+const OFF_THEME_SLUG_RE = /^gap-(?:game|pc-ai)-/;
 
 function isIndexableArticleId(id) {
-  return APPLIANCE_SLUG_RE.test(id);
+  if (OFF_THEME_SLUG_RE.test(id)) return false;
+  return APPLIANCE_SLUG_RE.test(id) || APPLIANCE_SLUG_ALLOW_RE.test(id);
 }
 
 function repairHomeLatestSection() {

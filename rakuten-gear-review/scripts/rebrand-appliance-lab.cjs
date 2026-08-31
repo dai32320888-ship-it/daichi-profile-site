@@ -18,6 +18,9 @@ const DISCLOSURE =
 
 const APPLIANCE_SLUG_RE =
   /掃除機|ロボット掃除|ハンディクリーナー|空気清浄|加湿器|スチーマー|ヒーター|電気毛布|毛布|電子レンジ|炊飯器|冷却|ハンディファン|扇風機|車載|インバーター|クーラーボックス|冷風機|暖房機|保冷剤|冷感タオル|cooling-plate|summer-heat-ranking/;
+const APPLIANCE_SLUG_ALLOW_RE =
+  /^(?:car-seat-cooler|car-bike-electric-air-pump|peltier-cooling-fan-vest)$/;
+const OFF_THEME_SLUG_RE = /^gap-(?:game|pc-ai)-/;
 
 const FEATURED_SLUGS = [
   "auto-p018-ロボット掃除機-一人暮らし",
@@ -46,7 +49,17 @@ const NOINDEX_STATIC = new Set([
   "category/pc-ai.html",
 ]);
 
-const textExtensions = new Set([".html", ".js", ".json", ".xml", ".md", ".css"]);
+const textExtensions = new Set([
+  ".html",
+  ".js",
+  ".json",
+  ".xml",
+  ".md",
+  ".css",
+  ".txt",
+  ".tsv",
+  ".svg",
+]);
 
 function walk(dir, predicate, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -77,8 +90,8 @@ function listArticleIds() {
 }
 
 function isIndexableArticle(id) {
-  if (APPLIANCE_SLUG_RE.test(id)) return true;
-  return false;
+  if (OFF_THEME_SLUG_RE.test(id)) return false;
+  return APPLIANCE_SLUG_RE.test(id) || APPLIANCE_SLUG_ALLOW_RE.test(id);
 }
 
 function applyBrandingText(text) {
@@ -162,10 +175,12 @@ function upsertRobotsMeta(html, noindex) {
     if (robotsRe.test(html)) {
       return html.replace(robotsRe, tag);
     }
-    return html.replace(
+    const withViewport = html.replace(
       /<meta\s+name=["']viewport["'][^>]*>/i,
       (m) => `${m}\n    ${tag}`,
     );
+    if (withViewport !== html) return withViewport;
+    return html.replace(/<\/head>/i, `    ${tag}\n  </head>`);
   }
   if (robotsRe.test(html)) {
     return html.replace(robotsRe, "");
@@ -449,8 +464,8 @@ function updateIndexHtml(articleIds, indexableCount) {
   }
 
   html = html.replace(
-    /<p>全\d+記事から最新/,
-    `<p>全${articleIds.length}記事から最新（家電テーマの記事を優先掲載）。カテゴリ一覧にもすべて掲載しています。`,
+    /<p>全\d+記事から最新[^<]*<\/p>/,
+    `<p>全${articleIds.length}記事から最新（家電テーマの記事を優先掲載）。カテゴリ一覧にもすべて掲載しています。</p>`,
   );
 
   const profileBlock = `<section class="profile-box">

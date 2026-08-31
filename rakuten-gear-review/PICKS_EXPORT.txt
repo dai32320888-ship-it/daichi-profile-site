@@ -1,5 +1,5 @@
 # 追加分70ピック: article_id<TAB>#<TAB>pick_name<TAB>rakutenSearchKeyword (app.js picks[] and same)
-# Open from: 01_アフィリエイト/元自衛官の楽天装備レビュー/PICKS_EXPORT.txt
+# Open from: 01_アフィリエイト/置くだけ家電ラボ/PICKS_EXPORT.txt
 
 dorm-life-useful-7	#1	折りたたみ収納ボックス（衣類・日用品）	折りたたみ 収納ボックス
 dorm-life-useful-7	#2	マグネット式の小物フック（鍵・工具）	マグネット フック 強力
